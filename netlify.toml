@@ -1,7 +1,6 @@
-# Simplified Netlify configuration following Storyblok best practices
+# Production-ready Netlify configuration for Next.js 15 + Storyblok
 [build]
   command = "npm ci && npm run build"
-  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "18.17.0"
@@ -20,3 +19,8 @@
   for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Edge function registration
+[[edge_functions]]
+  path = "/*"
+  function = "theme"
