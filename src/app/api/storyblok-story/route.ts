@@ -22,9 +22,10 @@ export async function GET(request: NextRequest) {
     const url = `https://api.storyblok.com/v2/cdn/stories/${uuid}?token=${token}&version=${version}&find_by=uuid`
     console.log(`[API Route] Fetching: ${url.replace(token, 'TOKEN')}`)
 
+    // Note: Next.js extends RequestInit with 'next' property for caching
     const response = await fetch(url, {
       next: { revalidate: version === 'draft' ? 0 : 3600 }
-    })
+    } as RequestInit)
 
     console.log(`[API Route] Response status: ${response.status} ${response.statusText}`)
 
