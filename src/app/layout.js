@@ -56,49 +56,17 @@ export default function RootLayout({ children }) {
 			<html
 				lang="en"
 				className={`${playfairDisplay.variable} ${montserrat.variable} ${dancingScript.variable}`}
+				data-theme="light"
+				data-brand="romantic"
 				suppressHydrationWarning
 			>
 				<head>
 					<script src="//instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
-					<script
-						dangerouslySetInnerHTML={{
-							__html: `
-(function(){
-  try{
-		var d = document.documentElement;
-		var params = new URLSearchParams(window.location.search);
-
-		// Theme (light/dark)
-		var theme = params.get('theme');
-		var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
-		if(!allowedTheme){
-			allowedTheme = localStorage.getItem('rr.theme');
-			if(!allowedTheme){
-				allowedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-			}
-		} else {
-			localStorage.setItem('rr.theme', allowedTheme);
-		}
-		d.setAttribute('data-theme', allowedTheme);
-
-		// Brand (romantic/modern) - default to romantic for public site
-		var brandParam = params.get('brand');
-		var allowedBrand = brandParam === 'romantic' || brandParam === 'modern' ? brandParam : null;
-		if(!allowedBrand){
-			allowedBrand = localStorage.getItem('rr.brand') || 'romantic';
-		} else {
-			localStorage.setItem('rr.brand', allowedBrand);
-		}
-		d.setAttribute('data-brand', allowedBrand);
-  }catch(e){}
-})();
-`}}
-					/>
 				</head>
 				<body>
 					<ThemeProvider>
 						<div data-clean-root="true">
-							<Navbar />
+							{/* <Navbar /> */}
 							{children}
 						</div>
 					{isDev ? <ThemeSelect /> : null}
