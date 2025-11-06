@@ -1,0 +1,285 @@
+/**
+ * Hero Section - Semantic CSS Implementation
+ * Full-viewport hero with parallax background and romantic overlay
+ * Zero !important declarations - pure CSS cascade
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO CONTAINER
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--theme-text-on-dark, #FFF8E7);
+  background-color: #2c241a; /* Fallback */
+}
+
+/* Background image layer */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--hero-bg, url("/hotfix-assets/barn-exterior-full-deck-view-evening.jpg"));
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: 1;
+}
+
+/* Romantic overlay - light mode */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(44, 36, 22, 0.85) 0%,
+    rgba(107, 78, 61, 0.75) 50%,
+    rgba(58, 74, 60, 0.80) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Dark mode overlay - uses tonal ladder gradient token */
+html[data-theme="dark"] .hero::after {
+  background: var(--grad-section-deep);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero::after {
+    background: var(--grad-section-deep);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO CONTENT
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero__content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 2rem;
+  animation: fadeInUp 1.2s ease-out;
+  color: var(--theme-text-on-dark, #FFF8E7);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Script accent kicker */
+.hero__kicker {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: var(--theme-accent-gold, #E4C896);
+  margin-bottom: 1rem;
+  font-weight: 400;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Main title */
+.hero__title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  color: var(--theme-text-on-dark, #FFF8E7);
+  text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+/* Title accent (gold highlight) - EXACT match of hotfix */
+.hero__title--accent {
+  color: var(--theme-accent-gold, #E4C896);
+  /* display: inline (inherited from span element) */
+  /* font-weight: 400 (inherited from parent .hero__title) */
+}
+
+/* Hero description */
+.hero__description {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--theme-text-on-dark, #FFF8E7);
+  opacity: 0.95;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA BUTTONS
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero__buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  background: transparent;
+  color: var(--theme-text-on-dark, #FFF8E7);
+  border: 2px solid var(--theme-accent-gold, #E4C896);
+  border-radius: 9999px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(228, 200, 150, 0.2);
+}
+
+.hero__cta:hover {
+  background: color-mix(in srgb, var(--theme-accent-gold, #E4C896) 90%, #FFFFFF 10%);
+  border-color: var(--theme-accent-gold, #E4C896);
+  color: #6B4E3D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(228, 200, 150, 0.4);
+}
+
+.hero__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  z-index: 0;
+}
+
+.hero__cta:hover::before {
+  transform: translateX(100%);
+}
+
+.hero__cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__cta:focus {
+  outline: 2px solid var(--theme-accent-gold, #E4C896);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL INDICATOR
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--theme-text-on-dark, #FFF8E7);
+  opacity: 0.9;
+  animation: fadeInUpCentered 1.8s ease-out;
+  z-index: 10;
+}
+
+.hero__scroll-text {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+}
+
+.hero__scroll-arrow {
+  font-size: 1.5rem;
+  animation: bounceArrow 2s infinite;
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll indicator needs centering during animation */
+@keyframes fadeInUpCentered {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Removed 'bounce' keyframe - clean version uses only 'bounceArrow' */
+
+@keyframes bounceArrow {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .hero::before {
+    background-attachment: scroll; /* Better mobile performance */
+  }
+
+  .hero__kicker {
+    font-size: 1.5rem;
+  }
+
+  .hero__description {
+    font-size: 1.125rem;
+  }
+
+  .hero__cta {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+
+  .hero__scroll-indicator {
+    bottom: 1.5rem;
+  }
+}

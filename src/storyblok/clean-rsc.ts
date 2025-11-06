@@ -1,0 +1,1 @@
+export { initCleanStoryblokRsc } from './clean-rsc.tsx'

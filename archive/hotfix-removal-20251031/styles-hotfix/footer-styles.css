@@ -1,0 +1,251 @@
+/* ============================================================================
+   HOTFIX: Footer Section - Flexbox Layout
+   ============================================================================ */
+
+/* Remove any parent container gaps */
+footer {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hotfix-footer {
+  padding: 3rem 0 2rem !important;
+  background: linear-gradient(135deg, #2C2416 0%, #1F1A11 100%) !important;
+  color: var(--theme-text-on-dark, #FFF8E7) !important;
+  width: 100% !important;
+  margin: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Footer container */
+.hotfix-footer-container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 2rem !important;
+}
+
+/* Footer Content - Using Flexbox */
+.hotfix-footer-content {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 4rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Footer sections - equal width */
+.hotfix-footer-section {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+/* First section slightly wider for description */
+.hotfix-footer-section:first-child {
+  flex: 1.2 !important;
+}
+
+/* Center the contact section content */
+.hotfix-footer-section:nth-child(2) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.hotfix-footer-section:nth-child(2) .hotfix-footer-contact {
+  width: 100% !important;
+  max-width: 100% !important;
+  align-items: center !important;
+}
+
+/* Section Titles - All Centered */
+.hotfix-footer-title,
+.hotfix-footer-section-title {
+  color: var(--theme-accent-gold, #E4C896) !important;
+  margin: 0 0 1.25rem 0 !important;
+  font-size: 1.25rem !important;
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  position: relative !important;
+  padding-bottom: 0.75rem !important;
+  text-align: center !important;
+}
+
+/* Dividers - All Centered */
+.hotfix-footer-title::after,
+.hotfix-footer-section-title::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 40px !important;
+  height: 2px !important;
+  background: var(--theme-accent-gold, #E4C896) !important;
+}
+
+/* Footer Description Text */
+.hotfix-footer-description {
+  line-height: 1.8 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  color: var(--theme-text-secondary, #E8D4BC) !important;
+  margin: 0 0 1.5rem 0 !important;
+  font-size: 1rem !important;
+  font-style: italic !important;
+}
+
+/* Address Styling */
+.hotfix-address {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.75rem !important;
+  margin-bottom: 1rem !important;
+  line-height: 1.6 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 1rem !important;
+}
+
+/* Phone Link */
+.hotfix-phone-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  color: var(--theme-accent-gold, #E4C896) !important;
+  text-decoration: none !important;
+  font-family: 'Montserrat', sans-serif !important;
+  padding: 0.5rem 0 !important;
+  transition: all 0.3s ease !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+}
+
+.hotfix-phone-link:hover {
+  color: var(--theme-text-on-dark, #FFF8E7) !important;
+  transform: translateX(3px) !important;
+}
+
+/* Contact Container */
+.hotfix-footer-contact {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  align-items: center !important;
+}
+
+/* Social Links Container */
+.hotfix-social-links {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 1.5rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Individual Social Link - Icon Only */
+.hotfix-social-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.hotfix-social-link:hover {
+  background: var(--theme-accent-gold, #E4C896) !important;
+  color: var(--theme-bg-secondary, #2C2416) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* DARK MODE */
+html[data-theme="dark"] .hotfix-footer {
+  background: var(--grad-section-deep) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hotfix-footer {
+    background: var(--grad-section-deep) !important;
+  }
+}
+
+/* Social Icons */
+.hotfix-social-icon {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Footer Bottom Section */
+.hotfix-footer-bottom {
+  padding-top: 1.5rem !important;
+  margin-top: 1.5rem !important;
+  text-align: center !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Copyright Text */
+.hotfix-copyright {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.875rem !important;
+  letter-spacing: 0.5px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ============================================================================
+   Responsive Design
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .hotfix-footer {
+    padding: 40px 0 20px !important;
+  }
+
+  .hotfix-footer-content {
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+  }
+
+  .hotfix-footer-section:first-child {
+    flex: 1 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hotfix-footer {
+    padding: 40px 0 1.5rem !important;
+  }
+
+  .hotfix-footer-content {
+    gap: 2rem !important;
+    padding: 0 1rem !important;
+  }
+
+  .hotfix-footer-title,
+  .hotfix-footer-section-title {
+    font-size: 1.125rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .hotfix-footer-description,
+  .hotfix-address,
+  .hotfix-phone-link,
+  .hotfix-social-link {
+    font-size: 0.875rem !important;
+  }
+
+  .hotfix-social-links {
+    gap: 1rem !important;
+  }
+
+  .hotfix-social-icon {
+    width: 18px !important;
+    height: 18px !important;
+  }
+}

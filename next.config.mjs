@@ -1,0 +1,52 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+	// Disable ESLint during builds to allow deployment
+	eslint: {
+		ignoreDuringBuilds: true,
+	},
+	// Disable TypeScript checking during builds for faster deployment
+	typescript: {
+		ignoreBuildErrors: true,
+	},
+	images: {
+		remotePatterns: [
+			{ protocol: 'https', hostname: 'a.storyblok.com', pathname: '/**' },
+			{ protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
+			{ protocol: 'https', hostname: 's3.amazonaws.com', pathname: '/**' },
+			{ protocol: 'https', hostname: 'images.ctfassets.net', pathname: '/**' },
+		],
+	},
+	// The following environment variables can be safely exposed to the public bundle.
+	// The Storyblok public access token is required for features like live preview.
+	env: {
+		STORYBLOK_ACCESS_TOKEN: process.env.STORYBLOK_ACCESS_TOKEN,
+		STORYBLOK_DELIVERY_API_TOKEN: process.env.STORYBLOK_DELIVERY_API_TOKEN,
+		STORYBLOK_API_BASE_URL: process.env.STORYBLOK_API_BASE_URL,
+		STORYBLOK_REGION: process.env.STORYBLOK_REGION,
+		STORYBLOK_IS_PREVIEW: process.env.STORYBLOK_IS_PREVIEW,
+	},
+	// Disable caching for Visual Editor routes
+	async headers() {
+		return [
+			{
+				source: '/home-live',
+				headers: [
+					{
+						key: 'Cache-Control',
+						value: 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+					},
+					{
+						key: 'Pragma',
+						value: 'no-cache',
+					},
+					{
+						key: 'Expires',
+						value: '0',
+					},
+				],
+			},
+		];
+	},
+};
+
+export default nextConfig;

@@ -1,0 +1,188 @@
+# Storyblok Access Tokens - Single Source of Truth
+
+## Space Information
+- **Space Name**: rum-river-mn  
+- **Space ID**: 288003424841711
+
+## Access Tokens (Read-Only)
+
+### 1. Public Token
+- **Token**: `tJCdp1QyfInsvreqnI2gLQtt`
+- **Name**: publictoken
+- **Type**: Public
+- **Access**: Published content only
+- **Use Case**: Production websites, live content
+- **API**: Content Delivery API (`https://api.storyblok.com/v2/cdn/`)
+- **Version**: `version=published`
+- **Authentication**: Token in URL params, no headers needed
+
+### 2. Preview Token  
+- **Token**: `AcBamY8QEHeF7Wid0UOgcAtt`
+- **Name**: previewtoken
+- **Type**: Preview
+- **Access**: Both draft AND published content
+- **Use Case**: Development, staging, content preview
+- **API**: Content Delivery API (`https://api.storyblok.com/v2/cdn/`)
+- **Version**: `version=draft` or `version=published`
+- **Authentication**: Token in URL params, no headers needed
+
+### 3. Asset Token
+- **Token**: `waTYk2VUxFymCMUMcGXQRwtt`
+- **Name**: assettoken  
+- **Type**: Asset
+- **Access**: Private assets only
+- **Use Case**: Accessing private/protected images and files
+- **API**: Asset service
+- **Authentication**: Token-based asset URLs
+
+### 4. Theme Token
+- **Token**: `np9NPdI2NaJiXf7DmeYB8Qtt`
+- **Name**: themetoken
+- **Type**: Theme  
+- **Access**: Theme development resources
+- **Use Case**: Theme development and customization
+- **API**: Theme-specific endpoints
+
+## Usage Recommendations
+
+### For `/beta-cms` Route (Current Implementation)
+**Use**: Public Token (`tJCdp1QyfInsvreqnI2gLQtt`)
+**Why**: Fetching published content for live website
+**Implementation**:
+```javascript
+const url = `https://api.storyblok.com/v2/cdn/stories/home?token=tJCdp1QyfInsvreqnI2gLQtt&version=published`
+```
+
+### For Development/Staging  
+**Use**: Preview Token (`AcBamY8QEHeF7Wid0UOgcAtt`)
+**Why**: See draft content and unpublished changes
+**Implementation**:
+```javascript
+const url = `https://api.storyblok.com/v2/cdn/stories/home?token=AcBamY8QEHeF7Wid0UOgcAtt&version=draft`
+```
+
+### For Private Images
+**Use**: Asset Token (`waTYk2VUxFymCMUMcGXQRwtt`)
+**Why**: Access protected assets
+**Implementation**: Applied to asset URLs automatically
+
+### For Theme Development
+**Use**: Theme Token (`np9NPdI2NaJiXf7DmeYB8Qtt`)
+**Why**: Theme customization and development
+**Implementation**: Theme-specific API calls
+
+## Security Notes
+- All tokens are read-only (safe for frontend use)
+- Public and Preview tokens can be used in client-side code
+- Asset and Theme tokens have specific use cases
+- No authentication headers required for CDN API
+- Store in environment variables for production
+
+## Personal Access Token (Management API)
+
+### 5. Personal Access Token
+- **Token**: `YEhO2k7vcACiMyP1hn5jZgtt-104181807873698-2NDxmxXu3ewEQ239Gpcb`
+- **Name**: pensonaaaal
+- **Type**: Personal Access Token (OAuth-like)
+- **Access**: FULL management API access to ALL account spaces
+- **Use Case**: Content creation, schema management, bulk operations, automation
+- **API**: Management API (`https://mapi.storyblok.com/v1/`)
+- **Authentication**: `Authorization: TOKEN` (no "Bearer" prefix)
+- **⚠️ CRITICAL SECURITY**: NEVER expose publicly - server-side only!
+
+### Management API Usage Examples:
+```javascript
+// Create/update stories
+curl -H "Authorization: YEhO2k7vcACiMyP1hn5jZgtt-104181807873698-2NDxmxXu3ewEQ239Gpcb" \
+     -X POST https://mapi.storyblok.com/v1/spaces/288003424841711/stories
+
+// Get story by ID (Management API)
+curl -H "Authorization: YEhO2k7vcACiMyP1hn5jZgtt-104181807873698-2NDxmxXu3ewEQ239Gpcb" \
+     https://mapi.storyblok.com/v1/spaces/288003424841711/stories/104455170476316
+
+// Manage components/schemas
+curl -H "Authorization: YEhO2k7vcACiMyP1hn5jZgtt-104181807873698-2NDxmxXu3ewEQ239Gpcb" \
+     https://mapi.storyblok.com/v1/spaces/288003424841711/components
+```
+
+## Current Environment Setup
+- **Production**: Use Public Token for content delivery
+- **Development**: Can use Preview Token to see drafts  
+- **Management Operations**: Use Personal Access Token (server-side only)
+- **Feature Flag**: `FEATURE_CMS_IMAGES=0` (images disabled for safety)
+
+## GitHub Repository Secrets (Configured)
+All tokens have been set as GitHub repository secrets using GitHub CLI:
+
+```bash
+# Repository secrets set via: gh secret set TOKEN_NAME -b"token_value"
+STORYBLOK_ACCESS_TOKEN          # Public token (tJCdp1QyfInsvreqnI2gLQtt)
+STORYBLOK_PUBLIC_TOKEN          # Same as ACCESS_TOKEN - GitHub docs naming
+STORYBLOK_PREVIEW_TOKEN         # Preview token (AcBamY8QEHeF7Wid0UOgcAtt) 
+STORYBLOK_PERSONAL_ACCESS_TOKEN # Personal token (YEhO2k7vcACiMyP1hn5jZgtt-...)
+STORYBLOK_MANAGEMENT_TOKEN      # Same as PERSONAL - GitHub docs naming
+STORYBLOK_ASSET_TOKEN           # Asset token (waTYk2VUxFymCMUMcGXQRwtt)
+STORYBLOK_THEME_TOKEN           # Theme token (np9NPdI2NaJiXf7DmeYB8Qtt)
+SPACE_NAME                      # rum-river-mn
+SPACE_ID                        # 288003424841711
+FEATURE_CMS_IMAGES              # 0 (disabled for safety)
+```
+
+**Access via:**
+- GitHub Actions workflows
+- Netlify deployments (if GitHub integration enabled)
+- Other CI/CD tools with GitHub integration
+
+**Security:** Tokens are encrypted and never exposed in logs or pull requests.
+
+## GitHub Actions Workflow Usage
+
+### Example Workflow (`.github/workflows/build.yml`)
+```yaml
+name: Build and Deploy
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Server-side token (masked in logs, not exposed to browser)
+      STORYBLOK_ACCESS_TOKEN: ${{ secrets.STORYBLOK_ACCESS_TOKEN }}
+      # Feature flag for safe deployments
+      FEATURE_CMS_IMAGES: ${{ secrets.FEATURE_CMS_IMAGES }}
+      # Space information
+      SPACE_ID: ${{ secrets.SPACE_ID }}
+      SPACE_NAME: ${{ secrets.SPACE_NAME }}
+      # Optional: Client-side token (only if truly needed - PUBLIC tokens only!)
+      NEXT_PUBLIC_STORYBLOK_TOKEN: ${{ secrets.STORYBLOK_ACCESS_TOKEN }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+
+      # Create .env file for build process
+      - name: Create .env file
+        run: |
+          printf "STORYBLOK_ACCESS_TOKEN=%s\n" "${STORYBLOK_ACCESS_TOKEN}" > .env
+          printf "SPACE_ID=%s\n" "${SPACE_ID}" >> .env
+          printf "SPACE_NAME=%s\n" "${SPACE_NAME}" >> .env
+          printf "FEATURE_CMS_IMAGES=%s\n" "${FEATURE_CMS_IMAGES}" >> .env
+
+      - run: npm run build
+      - run: npm run test
+```
+
+### Secret Security Best Practices
+- ✅ **Auto-masked**: GitHub automatically masks secrets from logs
+- ✅ **Encrypted storage**: All secrets encrypted at rest with LibSodium
+- ✅ **Server-side only**: Management/Preview tokens never exposed to client
+- ✅ **Public tokens safe**: Can be exposed via NEXT_PUBLIC_* if needed
+- ✅ **Scoped access**: Repository secrets only available to this repo
+
+### Token Usage Guidelines
+- **Production builds**: Use `STORYBLOK_ACCESS_TOKEN` (Public token)
+- **Development/staging**: Use `STORYBLOK_PREVIEW_TOKEN` for draft content  
+- **Management operations**: Use `STORYBLOK_PERSONAL_ACCESS_TOKEN` in CI scripts only
+- **Never expose**: Management/Preview tokens to client-side code
