@@ -1,54 +1,22 @@
+# Simplified Netlify configuration following Storyblok best practices
 [build]
-  command = "NEXT_TELEMETRY_DISABLED=1 npm run build"
+  command = "npm ci && npm run build"
   publish = ".next"
-  edge_functions = "netlify/edge-functions"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
 
 [build.environment]
   NODE_VERSION = "18.17.0"
   NEXT_TELEMETRY_DISABLED = "1"
 
-# ---------- Production context ----------
-[context.production]
-  command = "npm ci && npm run build"
-  
-[context.deploy-preview]
-  command = "npm ci && npm run build"
-  
-[context.branch-deploy]
-  command = "npm ci && npm run build"
+# Essential security headers only
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.storyblok.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.storyblok.com; frame-src 'self' https://app.storyblok.com;"
 
-# ---------- Static asset caching ----------
+# Static asset caching
 [[headers]]
   for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/fonts/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/images/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# HTML: don't cache (want fresh HTML after rebuild)
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Cache-Control = "no-store"
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.storyblok.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://api.storyblok.com https://api-us.storyblok.com; frame-src 'self' https://app.storyblok.com; frame-ancestors 'self' https://app.storyblok.com;"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-
-# ---------- Edge function for theme ----------
-[[edge_functions]]
-  path = "/*"
-  function = "theme"
