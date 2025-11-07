@@ -1,5 +1,5 @@
 // ===============================================================
-// FILE: src/components/clean/FAQ.tsx
+// FILE: src/features/FAQ.tsx
 // Clean FAQ with robust Storyblok field handling + per-item fallbacks
 // MIGRATED to unified Section component
 // ===============================================================
@@ -8,7 +8,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import { renderRichText } from '@storyblok/js'
-import SectionShell from '@/components/ui/SectionShell'
+import Section from '@/components/ui/Section'
 
 type Blok = Record<string, any>
 
@@ -95,32 +95,27 @@ export default function FAQ({ blok }: { blok: Blok }) {
   // useEffect(() => { console.log('[FAQ blok]', JSON.parse(JSON.stringify(blok))) }, [blok])
 
   return (
-    <SectionShell
+    <Section
       as="section"
+      variant="centered"
       container="wrapper"
-      align="center"
       paddingY="lg"
       background="surface"
       tone="auto"
       className="faq-accordion"
       data-section="faq"
+      header={{
+        scriptAccent: subtitle,
+        title: title,
+        align: 'center'
+      }}
       {...storyblokEditable(blok)}
     >
-      <header
-        className="section__header"
-        data-align="center"
-        data-max="prose"
-        data-test-id="faq-header"
-        style={{ scrollMarginTop: '80px' }}
-      >
-        {subtitle && <p className="section__kicker">{subtitle}</p>}
-        {title && <h2 className="section__title">{title}</h2>}
-      </header>
-
       <div
-        className="section__content"
+        className="faq-content"
         data-test-id="faq-content"
         aria-label="Frequently asked questions list"
+        style={{ scrollMarginTop: '80px' }}
       >
         <div className="faq-list">
           {items.map((it) => {
@@ -151,6 +146,6 @@ export default function FAQ({ blok }: { blok: Blok }) {
           })}
         </div>
       </div>
-    </SectionShell>
+    </Section>
   )
 }
