@@ -5,6 +5,11 @@
 
    @layer components {
 
+    /* NAVBAR HIDDEN - Preserving all functionality while hiding visually */
+    [data-clean-root="true"] .navbar {
+      display: none !important;
+    }
+
     /* Root navbar container */
     [data-clean-root="true"] .navbar {
       position: fixed;
