@@ -5,7 +5,7 @@ import type { ReactNode } from 'react'
 import { StoryblokComponent } from '@storyblok/react/rsc'
 
 // ✅ Client component (accordion) must be loaded dynamically in RSC:
-const FAQ = dynamic(() => import('@/components/clean/FAQ'), { ssr: false })
+const FAQ = dynamic(() => import('@/features/FAQ'), { ssr: false })
 
 // ✅ Minimal server component that renders nested body:
 function CleanPage({ blok }: { blok: any }) {

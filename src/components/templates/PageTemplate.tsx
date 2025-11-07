@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from "@/components/clean/Navbar";
-import Footer from "@/components/clean/Footer";
+import Navbar from "@/features/Navbar";
+import Footer from "@/features/Footer";
 import GlassToolbar from "@/development/GlassToolbar";
 
 interface PageTemplateProps {
