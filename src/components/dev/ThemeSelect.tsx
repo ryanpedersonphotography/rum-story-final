@@ -28,7 +28,8 @@ export default function ThemeSelect() {
         padding: '1rem',
         boxShadow: 'var(--shadow-lg)',
         fontFamily: 'var(--font-sans)',
-        fontSize: '0.875rem'
+        fontSize: '0.875rem',
+        minWidth: '240px' // 20% wider than natural size
       }}
     >
       <div style={{ marginBottom: '0.75rem', fontWeight: 600 }}>

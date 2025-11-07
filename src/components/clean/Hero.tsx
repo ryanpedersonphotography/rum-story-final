@@ -102,10 +102,10 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
         </div>
       </div>
 
-      <div className="hero-scroll" onClick={onScrollClick}>
+      {/* <div className="hero-scroll" onClick={onScrollClick}>
         <div className="hero-scroll-text">{scrollText}</div>
         <div className="hero-scroll-arrow">↓</div>
-      </div>
+      </div> */}
     </section>
   )
 }
