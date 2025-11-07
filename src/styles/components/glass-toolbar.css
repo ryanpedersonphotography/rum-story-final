@@ -555,67 +555,67 @@ html[data-theme="light"] .glass-toolbar {
 
 :root:not([data-theme="dark"]) .glass-toolbar,
 html[data-theme="light"] .glass-toolbar {
-  /* Light theme with warm walnut tones */
-  --glass-toolbar-frost-tint: 42, 32, 26; /* Warm walnut base */
+  /* Light theme with clean white/glass tones */
+  --glass-toolbar-frost-tint: 255, 255, 255; /* Pure white base */
   --glass-toolbar-frost-accent: 216, 179, 130; /* Gold accent */
   --glass-toolbar-frost-dark: 0, 0, 0; /* Shadow base */
   
-  /* Light walnut rail gradient */
+  /* Clean white glass rail */
   --glass-toolbar-rail-bg: linear-gradient(
     90deg,
-    rgba(42, 32, 26, 0.88) 0%,
-    rgba(42, 32, 26, 0.82) 30%,
-    rgba(61, 47, 37, 0.78) 70%,
-    rgba(25, 20, 16, 0.9) 100%
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.65) 30%,
+    rgba(248, 248, 248, 0.70) 70%,
+    rgba(255, 255, 255, 0.80) 100%
   );
   --glass-toolbar-rail-blur: 20px;
   --glass-toolbar-rail-overlay: linear-gradient(
     135deg,
-    rgba(42, 32, 26, 0.3) 0%,
-    rgba(61, 47, 37, 0.1) 40%,
-    rgba(25, 20, 16, 0.2) 100%
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(248, 248, 248, 0.2) 40%,
+    rgba(255, 255, 255, 0.3) 100%
   );
   --glass-toolbar-rail-border: var(--toolbar-gold);
   --glass-toolbar-rail-text: rgba(0, 0, 0, 0.85);
   --glass-toolbar-rail-label: rgba(0, 0, 0, 0.45);
   
-  /* Light walnut panel gradient */
+  /* Clean white glass panel */
   --glass-toolbar-panel-bg: linear-gradient(
     90deg,
-    rgba(25, 20, 16, 0.85) 0%,
-    rgba(42, 32, 26, 0.78) 50%,
-    rgba(15, 12, 10, 0.88) 100%
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(248, 248, 248, 0.80) 50%,
+    rgba(255, 255, 255, 0.90) 100%
   );
   --glass-toolbar-panel-blur: 16px;
   --glass-toolbar-panel-border: var(--toolbar-gold);
   
   /* Interactive elements for light theme */
-  --glass-toolbar-mark-bg: rgba(0, 0, 0, 0.06);
+  --glass-toolbar-mark-bg: rgba(255, 255, 255, 0.20);
   --glass-toolbar-mark-color: rgba(0, 0, 0, 0.8);
-  --glass-toolbar-pill-bg: rgba(0, 0, 0, 0.04);
+  --glass-toolbar-pill-bg: rgba(255, 255, 255, 0.15);
   --glass-toolbar-pill-label: rgba(0, 0, 0, 0.6);
   --glass-toolbar-pill-label-active: rgba(0, 0, 0, 0.85);
-  --glass-toolbar-pill-hover-bg: rgba(0, 0, 0, 0.08);
-  --glass-toolbar-pill-hover-tint: rgba(var(--glass-toolbar-frost-accent), 0.06);
+  --glass-toolbar-pill-hover-bg: rgba(255, 255, 255, 0.30);
+  --glass-toolbar-pill-hover-tint: rgba(var(--glass-toolbar-frost-accent), 0.08);
   --glass-toolbar-icon-active: rgba(0, 0, 0, 0.9);
-  --glass-toolbar-pill-active-bg: rgba(0, 0, 0, 0.12);
+  --glass-toolbar-pill-active-bg: rgba(255, 255, 255, 0.40);
   --glass-toolbar-chip-border: rgba(0, 0, 0, 0.1);
   --glass-toolbar-chip-foreground: rgba(0, 0, 0, 0.85);
   
   /* Panel content for light theme */
-  --glass-toolbar-panel-text: color-mix(in oklch, var(--theme-text-primary, #352c24) 94%, black 6%);
-  --glass-toolbar-panel-muted: color-mix(in oklch, var(--theme-text-secondary, #605749) 80%, white 20%);
-  --glass-toolbar-panel-kicker: color-mix(in oklch, var(--theme-text-secondary, #605749) 65%, transparent 35%);
-  --glass-toolbar-panel-subtitle: color-mix(in oklch, var(--theme-text-secondary, #605749) 88%, white 12%);
-  --glass-toolbar-subnav-text: color-mix(in oklch, var(--theme-text-primary, #352c24) 92%, black 8%);
-  --glass-toolbar-subnav-subtext: color-mix(in oklch, var(--theme-text-secondary, #605749) 82%, white 18%);
-  --glass-toolbar-subnav-hover-bg: rgba(var(--glass-toolbar-frost-tint), 0.12);
-  --glass-toolbar-subnav-hover-border: rgba(var(--glass-toolbar-frost-tint), 0.35);
-  --glass-toolbar-empty-color: color-mix(in oklch, var(--theme-text-secondary, #605749) 70%, white 30%);
-  --glass-toolbar-footer-border: rgba(var(--glass-toolbar-frost-tint), 0.2);
-  --glass-toolbar-footer-bg: rgba(var(--glass-toolbar-frost-tint), 0.08);
-  --glass-toolbar-footer-hover-border: rgba(var(--glass-toolbar-frost-tint), 0.4);
-  --glass-toolbar-footer-hover-bg: rgba(var(--glass-toolbar-frost-tint), 0.18);
+  --glass-toolbar-panel-text: rgba(0, 0, 0, 0.85);
+  --glass-toolbar-panel-muted: rgba(0, 0, 0, 0.58);
+  --glass-toolbar-panel-kicker: rgba(0, 0, 0, 0.48);
+  --glass-toolbar-panel-subtitle: rgba(0, 0, 0, 0.72);
+  --glass-toolbar-subnav-text: rgba(0, 0, 0, 0.88);
+  --glass-toolbar-subnav-subtext: rgba(0, 0, 0, 0.58);
+  --glass-toolbar-subnav-hover-bg: rgba(255, 255, 255, 0.20);
+  --glass-toolbar-subnav-hover-border: rgba(0, 0, 0, 0.15);
+  --glass-toolbar-empty-color: rgba(0, 0, 0, 0.6);
+  --glass-toolbar-footer-border: rgba(0, 0, 0, 0.12);
+  --glass-toolbar-footer-bg: rgba(255, 255, 255, 0.15);
+  --glass-toolbar-footer-hover-border: rgba(0, 0, 0, 0.25);
+  --glass-toolbar-footer-hover-bg: rgba(255, 255, 255, 0.25);
   --glass-toolbar-shadow: 0 24px 56px rgba(var(--glass-toolbar-frost-dark), 0.12);
 }
 
