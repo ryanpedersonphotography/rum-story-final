@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Tokens Demo - Rum River Section System</title>
+  <link rel="stylesheet" href="./theme.tokens.css">
+  <style>
+    body {
+      font-family: var(--font-sans);
+      line-height: var(--line-normal);
+      background: var(--surface-0);
+      color: var(--text-primary);
+      margin: 0;
+      padding: var(--space-lg);
+    }
+    
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-lg);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .token-section {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .token-section h2 {
+      font-family: var(--font-serif);
+      color: var(--accent-rose);
+      margin-bottom: var(--space-lg);
+      font-size: var(--size-2xl);
+    }
+    
+    .token-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .token-name {
+      font-family: var(--font-mono);
+      font-size: var(--size-sm);
+      color: var(--text-secondary);
+    }
+    
+    .token-value {
+      font-family: var(--font-mono);
+      font-size: var(--size-xs);
+      color: var(--text-muted);
+    }
+    
+    /* Typography Scale Demo */
+    .type-scale .token-row {
+      align-items: baseline;
+    }
+    
+    .type-example {
+      font-size: var(--size, 1rem);
+      margin: 0;
+    }
+    
+    /* Color Swatches */
+    .color-swatch {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: var(--color, transparent);
+    }
+    
+    /* Spacing Demo */
+    .spacing-demo {
+      height: var(--space, 1rem);
+      background: var(--accent-gold);
+      border-radius: var(--radius-sm);
+      opacity: 0.7;
+    }
+    
+    /* Shadow Demo */
+    .shadow-demo {
+      width: 60px;
+      height: 40px;
+      background: var(--surface-2);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow, none);
+    }
+    
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: var(--space-lg);
+      right: var(--space-lg);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--accent-rose);
+      color: var(--text-inverse);
+      border: none;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-weight: var(--weight-medium);
+      transition: all var(--duration-normal) var(--ease-smooth);
+    }
+    
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elev-2);
+    }
+    
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-4xl);
+    }
+    
+    .page-title {
+      font-family: var(--font-serif);
+      font-size: var(--size-4xl);
+      color: var(--text-primary);
+      margin-bottom: var(--space-md);
+    }
+    
+    .page-subtitle {
+      font-family: var(--font-script);
+      font-size: var(--size-xl);
+      color: var(--accent-gold);
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+  
+  <header class="page-header">
+    <h1 class="page-title">Design Tokens</h1>
+    <p class="page-subtitle">Rum River Section System</p>
+  </header>
+  
+  <div class="demo-grid">
+    <!-- Typography Scale -->
+    <section class="token-section type-scale">
+      <h2>Typography Scale</h2>
+      <div class="token-row">
+        <span class="token-name">--size-xs</span>
+        <p class="type-example" style="--size: var(--size-xs)">Sample Text</p>
+        <span class="token-value">0.75-0.875rem</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--size-sm</span>
+        <p class="type-example" style="--size: var(--size-sm)">Sample Text</p>
+        <span class="token-value">0.875-1rem</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--size-base</span>
+        <p class="type-example" style="--size: var(--size-base)">Sample Text</p>
+        <span class="token-value">1-1.125rem</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--size-lg</span>
+        <p class="type-example" style="--size: var(--size-lg)">Sample Text</p>
+        <span class="token-value">1.125-1.25rem</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--size-xl</span>
+        <p class="type-example" style="--size: var(--size-xl)">Sample Text</p>
+        <span class="token-value">1.25-1.5rem</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--size-2xl</span>
+        <p class="type-example" style="--size: var(--size-2xl)">Sample Text</p>
+        <span class="token-value">1.5-1.75rem</span>
+      </div>
+    </section>
+    
+    <!-- Color Palette -->
+    <section class="token-section">
+      <h2>Color Palette</h2>
+      <div class="token-row">
+        <span class="token-name">--text-primary</span>
+        <div class="color-swatch" style="--color: var(--text-primary)"></div>
+        <span class="token-value">Rich Brown</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--text-secondary</span>
+        <div class="color-swatch" style="--color: var(--text-secondary)"></div>
+        <span class="token-value">Medium Brown</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--accent-rose</span>
+        <div class="color-swatch" style="--color: var(--accent-rose)"></div>
+        <span class="token-value">Dusty Rose</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--accent-sage</span>
+        <div class="color-swatch" style="--color: var(--accent-sage)"></div>
+        <span class="token-value">Sage Green</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--accent-gold</span>
+        <div class="color-swatch" style="--color: var(--accent-gold)"></div>
+        <span class="token-value">Warm Gold</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--surface-0</span>
+        <div class="color-swatch" style="--color: var(--surface-0)"></div>
+        <span class="token-value">Base Surface</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--surface-1</span>
+        <div class="color-swatch" style="--color: var(--surface-1)"></div>
+        <span class="token-value">Elevated Surface</span>
+      </div>
+    </section>
+    
+    <!-- Spacing System -->
+    <section class="token-section">
+      <h2>Spacing System</h2>
+      <div class="token-row">
+        <span class="token-name">--space-xs</span>
+        <div class="spacing-demo" style="--space: var(--space-xs)"></div>
+        <span class="token-value">0.5rem (8px)</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--space-sm</span>
+        <div class="spacing-demo" style="--space: var(--space-sm)"></div>
+        <span class="token-value">0.75rem (12px)</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--space-md</span>
+        <div class="spacing-demo" style="--space: var(--space-md)"></div>
+        <span class="token-value">1rem (16px)</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--space-lg</span>
+        <div class="spacing-demo" style="--space: var(--space-lg)"></div>
+        <span class="token-value">1.5rem (24px)</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--space-xl</span>
+        <div class="spacing-demo" style="--space: var(--space-xl)"></div>
+        <span class="token-value">2rem (32px)</span>
+      </div>
+    </section>
+    
+    <!-- Shadow System -->
+    <section class="token-section">
+      <h2>Shadow System</h2>
+      <div class="token-row">
+        <span class="token-name">--shadow-elev-1</span>
+        <div class="shadow-demo" style="--shadow: var(--shadow-elev-1)"></div>
+        <span class="token-value">Subtle</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--shadow-elev-2</span>
+        <div class="shadow-demo" style="--shadow: var(--shadow-elev-2)"></div>
+        <span class="token-value">Medium</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--shadow-elev-3</span>
+        <div class="shadow-demo" style="--shadow: var(--shadow-elev-3)"></div>
+        <span class="token-value">Strong</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--shadow-elev-4</span>
+        <div class="shadow-demo" style="--shadow: var(--shadow-elev-4)"></div>
+        <span class="token-value">Dramatic</span>
+      </div>
+    </section>
+    
+    <!-- Font Families -->
+    <section class="token-section">
+      <h2>Font Families</h2>
+      <div class="token-row">
+        <span class="token-name">--font-serif</span>
+        <p style="font-family: var(--font-serif); margin: 0;">Playfair Display</p>
+        <span class="token-value">Headings</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--font-sans</span>
+        <p style="font-family: var(--font-sans); margin: 0;">Montserrat</p>
+        <span class="token-value">Body Text</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--font-script</span>
+        <p style="font-family: var(--font-script); margin: 0;">Dancing Script</p>
+        <span class="token-value">Accents</span>
+      </div>
+      <div class="token-row">
+        <span class="token-name">--font-mono</span>
+        <p style="font-family: var(--font-mono); margin: 0;">SF Mono</p>
+        <span class="token-value">Code</span>
+      </div>
+    </section>
+  </div>
+  
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+    }
+    
+    // Add dark mode styles
+    const darkModeStyles = `
+      html[data-theme="dark"] {
+        --surface-0: oklch(0.15 0.01 65);
+        --surface-1: oklch(0.18 0.015 65);
+        --surface-2: oklch(0.22 0.02 65);
+        --text-primary: oklch(0.9 0.02 85);
+        --text-secondary: oklch(0.75 0.03 85);
+        --text-muted: oklch(0.6 0.02 85);
+        --border-subtle: oklch(1 0 0 / 0.1);
+      }
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = darkModeStyles;
+    document.head.appendChild(style);
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</body>
+</html>

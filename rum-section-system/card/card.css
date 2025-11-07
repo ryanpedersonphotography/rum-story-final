@@ -1,0 +1,206 @@
+/* ============================================================================
+   CARD PRIMITIVE STYLES - Foundation card component
+   ============================================================================ */
+
+@layer components {
+  .card {
+    /* Base card styling */
+    background: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    
+    /* Layout structure */
+    display: flex;
+    flex-direction: column;
+    
+    /* Transitions */
+    transition: 
+      box-shadow var(--motion-normal) var(--motion-smooth),
+      transform var(--motion-normal) var(--motion-smooth),
+      border-color var(--motion-normal) var(--motion-smooth);
+  }
+  
+  .card__header {
+    /* Card header styling */
+    padding: var(--card-header-padding);
+    border-bottom: 1px solid var(--card-border);
+    background: transparent;
+    
+    /* Flex for alignment */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-component-xs);
+  }
+  
+  .card__body {
+    /* Card body styling */
+    padding: var(--card-body-padding);
+    flex: 1;
+    
+    /* Content flow */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-component-md);
+  }
+  
+  .card__footer {
+    /* Card footer styling */
+    padding: var(--card-footer-padding);
+    border-top: 1px solid var(--card-border);
+    background: color-mix(in oklch, var(--card-background) 95%, transparent);
+    
+    /* Footer layout */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-component-sm);
+  }
+  
+  /* ============================================================================
+     ELEVATION VARIANTS - Shadow depth control
+     ============================================================================ */
+  
+  .card[data-elevation="0"] {
+    box-shadow: var(--section-elevation-0);
+  }
+  
+  .card[data-elevation="1"] {
+    box-shadow: var(--section-elevation-1);
+  }
+  
+  .card[data-elevation="2"] {
+    box-shadow: var(--section-elevation-2);
+  }
+  
+  .card[data-elevation="3"] {
+    box-shadow: var(--section-elevation-3);
+  }
+  
+  /* ============================================================================
+     PADDING VARIANTS - Interior spacing control
+     ============================================================================ */
+  
+  .card[data-padding="none"] .card__header,
+  .card[data-padding="none"] .card__body,
+  .card[data-padding="none"] .card__footer {
+    padding: 0;
+  }
+  
+  .card[data-padding="sm"] .card__header {
+    padding: var(--space-component-sm);
+  }
+  
+  .card[data-padding="sm"] .card__body {
+    padding: var(--space-component-md);
+  }
+  
+  .card[data-padding="sm"] .card__footer {
+    padding: var(--space-component-sm);
+  }
+  
+  .card[data-padding="lg"] .card__header {
+    padding: var(--space-component-lg);
+  }
+  
+  .card[data-padding="lg"] .card__body {
+    padding: var(--space-component-xl);
+  }
+  
+  .card[data-padding="lg"] .card__footer {
+    padding: var(--space-component-lg);
+  }
+  
+  /* ============================================================================
+     VARIANT STYLES - Visual theme variations
+     ============================================================================ */
+  
+  .card[data-variant="default"] {
+    /* Default styling already applied above */
+  }
+  
+  .card[data-variant="outlined"] {
+    background: transparent;
+    border-width: 2px;
+    box-shadow: var(--section-elevation-0);
+  }
+  
+  .card[data-variant="filled"] {
+    background: var(--background-elevated);
+    border: none;
+    box-shadow: var(--section-elevation-2);
+  }
+  
+  /* ============================================================================
+     INTERACTIVE STATES - Hover, focus, active
+     ============================================================================ */
+  
+  .card:hover {
+    box-shadow: var(--section-elevation-2);
+    transform: translateY(-2px);
+  }
+  
+  .card[data-elevation="2"]:hover,
+  .card[data-elevation="3"]:hover {
+    box-shadow: var(--section-elevation-3);
+    transform: translateY(-4px);
+  }
+  
+  .card:focus-within {
+    border-color: var(--border-focus);
+  }
+  
+  /* ============================================================================
+     SPECIAL CASES - No header/footer border when empty
+     ============================================================================ */
+  
+  .card__header:empty {
+    display: none;
+  }
+  
+  .card__footer:empty {
+    display: none;
+  }
+  
+  /* Remove top border if header is not present */
+  .card__body:first-child {
+    border-top: none;
+  }
+  
+  /* Remove bottom border if footer is not present */
+  .card__body:last-child {
+    border-bottom: none;
+  }
+  
+  /* ============================================================================
+     RESPONSIVE DESIGN - Mobile adaptations
+     ============================================================================ */
+  
+  @media (max-width: 768px) {
+    .card {
+      border-radius: var(--radius-small);
+    }
+    
+    .card__header {
+      padding: var(--space-component-sm);
+    }
+    
+    .card__body {
+      padding: var(--space-component-md);
+    }
+    
+    .card__footer {
+      padding: var(--space-component-sm);
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    /* Reduce hover effects on touch devices */
+    @media (hover: none) {
+      .card:hover {
+        transform: none;
+      }
+    }
+  }
+}

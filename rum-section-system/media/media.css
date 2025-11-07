@@ -1,0 +1,204 @@
+/* ============================================================================
+   MEDIA PRIMITIVE STYLES - Foundation media component
+   ============================================================================ */
+
+@layer components {
+  .media-container {
+    /* Base media container */
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .media {
+    /* Base image styling */
+    width: 100%;
+    height: auto;
+    display: block;
+    
+    /* Default object fit */
+    object-fit: cover;
+    
+    /* Smooth loading transition */
+    transition: 
+      opacity var(--motion-normal) var(--motion-smooth),
+      transform var(--motion-slow) var(--motion-smooth);
+  }
+  
+  .media-overlay {
+    /* Overlay container */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Default overlay styling */
+    background: var(--media-overlay);
+    color: var(--color-inverse);
+    
+    /* Initially hidden, shown on hover */
+    opacity: 0;
+    transition: opacity var(--motion-normal) var(--motion-smooth);
+  }
+  
+  /* ============================================================================
+     ASPECT RATIO VARIANTS - Responsive sizing control
+     ============================================================================ */
+  
+  .media-container[data-aspect-ratio="square"] {
+    aspect-ratio: 1 / 1;
+  }
+  
+  .media-container[data-aspect-ratio="16/9"] {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .media-container[data-aspect-ratio="4/3"] {
+    aspect-ratio: 4 / 3;
+  }
+  
+  .media-container[data-aspect-ratio="3/2"] {
+    aspect-ratio: 3 / 2;
+  }
+  
+  .media-container[data-aspect-ratio="21/9"] {
+    aspect-ratio: 21 / 9;
+  }
+  
+  .media-container[data-aspect-ratio="auto"] {
+    aspect-ratio: auto;
+  }
+  
+  /* ============================================================================
+     OBJECT FIT VARIANTS - Image scaling control
+     ============================================================================ */
+  
+  .media-container[data-object-fit="cover"] .media {
+    object-fit: cover;
+  }
+  
+  .media-container[data-object-fit="contain"] .media {
+    object-fit: contain;
+  }
+  
+  .media-container[data-object-fit="fill"] .media {
+    object-fit: fill;
+  }
+  
+  .media-container[data-object-fit="scale-down"] .media {
+    object-fit: scale-down;
+  }
+  
+  .media-container[data-object-fit="none"] .media {
+    object-fit: none;
+  }
+  
+  /* ============================================================================
+     VISUAL MODIFIERS - Styling enhancements
+     ============================================================================ */
+  
+  .media--rounded {
+    border-radius: var(--media-radius);
+  }
+  
+  .media-container:has(.media--rounded) {
+    border-radius: var(--media-radius);
+  }
+  
+  .media--shadow {
+    box-shadow: var(--media-shadow);
+  }
+  
+  .media-container:has(.media--shadow) {
+    box-shadow: var(--media-shadow);
+  }
+  
+  /* ============================================================================
+     INTERACTIVE STATES - Hover and focus effects
+     ============================================================================ */
+  
+  .media-container:hover .media {
+    transform: scale(1.05);
+  }
+  
+  .media-container:hover .media-overlay {
+    opacity: 1;
+  }
+  
+  .media-container:focus-within .media-overlay {
+    opacity: 1;
+  }
+  
+  .media-container:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+  
+  /* ============================================================================
+     LOADING STATES - Progressive enhancement
+     ============================================================================ */
+  
+  .media[loading="lazy"] {
+    /* Subtle fade-in when lazy loaded */
+    opacity: 0;
+    animation: mediaFadeIn var(--motion-normal) var(--motion-smooth) forwards;
+  }
+  
+  @keyframes mediaFadeIn {
+    from { 
+      opacity: 0; 
+      transform: scale(0.95); 
+    }
+    to { 
+      opacity: 1; 
+      transform: scale(1); 
+    }
+  }
+  
+  /* ============================================================================
+     RESPONSIVE DESIGN - Mobile adaptations
+     ============================================================================ */
+  
+  @media (max-width: 768px) {
+    .media-container {
+      border-radius: var(--radius-small);
+    }
+    
+    .media--rounded {
+      border-radius: var(--radius-small);
+    }
+    
+    /* Reduce hover effects on touch devices */
+    @media (hover: none) {
+      .media-container:hover .media {
+        transform: none;
+      }
+      
+      .media-overlay {
+        opacity: 0.8;
+      }
+    }
+  }
+  
+  /* ============================================================================
+     ACCESSIBILITY - Reduced motion support
+     ============================================================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    .media,
+    .media-overlay {
+      transition: none;
+    }
+    
+    .media-container:hover .media {
+      transform: none;
+    }
+    
+    @keyframes mediaFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  }
+}

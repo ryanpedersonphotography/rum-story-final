@@ -1,0 +1,222 @@
+/* ==========================================================================
+   LAYERED SECTION SYSTEM
+   - Rail-aware layout primitives
+   - Base canvas with layered sections
+   - Prevents flush-edge images and provides consistent spacing
+   - Integrates with glass toolbar offset
+   ========================================================================== */
+
+@layer components {
+
+/* ===== Base Layout Tokens ===== */
+:root {
+  --rail-w: var(--glass-toolbar-offset, 135px);  /* Glass toolbar width */
+  --container-max: 1400px;                       /* Content max width */
+  --gutter-x: clamp(16px, 4vw, 40px);           /* Responsive gutters */
+  --section-y: clamp(48px, 7vw, 120px);         /* Vertical rhythm */
+  
+  /* Elevation tokens for depth */
+  --elev-0: none;
+  --elev-1: 0 8px 24px rgba(0,0,0,.08);
+  --elev-2: 0 14px 40px rgba(0,0,0,.12);
+  --elev-3: 0 20px 60px rgba(0,0,0,.16);
+}
+
+/* ===== Page Base Canvas ===== */
+[data-clean-root="true"] .page-base {
+  position: relative;
+  width: 100vw;
+  overflow-x: clip;  /* Prevent 100vw scrollbar */
+  background: var(--surface-0);
+}
+
+/* ===== Rail-Aware Layout ===== */
+[data-clean-root="true"] .rail-aware {
+  padding-left: var(--rail-w);
+}
+
+/* Standard content container */
+[data-clean-root="true"] .container {
+  width: min(calc(100% - 2 * var(--gutter-x)), var(--container-max));
+  margin-inline: auto;
+}
+
+/* ===== Section Base Styles ===== */
+[data-clean-root="true"] .rr-section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+/* ===== Layer Variants ===== */
+
+/* Base: sits directly on the canvas */
+[data-clean-root="true"] .rr-section--base {
+  background: transparent;
+}
+
+/* Partial: subtle panel under content */
+[data-clean-root="true"] .rr-section--partial {
+  background: color-mix(in oklch, var(--surface-2) 90%, white 10%);
+  border: 1px solid color-mix(in oklch, var(--border-subtle) 60%, transparent 40%);
+  border-radius: 16px;
+  backdrop-filter: blur(6px) saturate(1.05);
+  box-shadow: var(--elev-1);
+  margin-inline: var(--gutter-x);
+}
+
+/* Isolated: distinct elevated surface */
+[data-clean-root="true"] .rr-section--isolated {
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--elev-2);
+  margin-inline: var(--gutter-x);
+}
+
+/* ===== Width Controls ===== */
+
+/* Content: standard content width */
+[data-clean-root="true"] .rr-section--content .rr-section__inner {
+  width: min(calc(100% - 2 * var(--gutter-x)), var(--container-max));
+  margin: 0 auto;
+}
+
+/* Wide: larger content area */
+[data-clean-root="true"] .rr-section--wide .rr-section__inner {
+  width: min(calc(100% - 2 * var(--gutter-x)), 1600px);
+  margin: 0 auto;
+}
+
+/* Full: spans entire width */
+[data-clean-root="true"] .rr-section--full .rr-section__inner {
+  width: 100%;
+}
+
+/* ===== Alignment Controls ===== */
+
+/* Left alignment (rail-aware) */
+[data-clean-root="true"] .rr-section--align-left .rr-section__inner {
+  margin-left: max(var(--gutter-x), calc(var(--rail-w) + var(--gutter-x)));
+  margin-right: auto;
+  text-align: left;
+}
+
+/* Right alignment */
+[data-clean-root="true"] .rr-section--align-right .rr-section__inner {
+  margin-left: auto;
+  margin-right: var(--gutter-x);
+  text-align: right;
+}
+
+/* Center alignment (default) */
+[data-clean-root="true"] .rr-section--align-center .rr-section__inner {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* ===== Media Helpers (prevent flush edges) ===== */
+
+[data-clean-root="true"] .media--pull-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[data-clean-root="true"] .media--pull-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+[data-clean-root="true"] .media--inset {
+  margin-inline: clamp(0px, 4vw, 48px);
+  border-radius: 14px;
+  overflow: clip;
+}
+
+/* ===== Grid Systems ===== */
+
+/* Flexible card grids with controllable spacing */
+[data-clean-root="true"] .cards {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--cards-gap, clamp(16px, 2.5vw, 36px));
+}
+
+[data-clean-root="true"] .cards--2up > * { grid-column: span 6; }
+[data-clean-root="true"] .cards--3up > * { grid-column: span 4; }
+[data-clean-root="true"] .cards--4up > * { grid-column: span 3; }
+
+/* Responsive stacking */
+@container (max-width: 900px) {
+  [data-clean-root="true"] .cards--2up > *,
+  [data-clean-root="true"] .cards--3up > *,
+  [data-clean-root="true"] .cards--4up > * {
+    grid-column: span 12;
+  }
+}
+
+/* ===== Elevation Utilities ===== */
+
+[data-clean-root="true"] .elev-0 { box-shadow: var(--elev-0); }
+[data-clean-root="true"] .elev-1 { box-shadow: var(--elev-1); }
+[data-clean-root="true"] .elev-2 { box-shadow: var(--elev-2); }
+[data-clean-root="true"] .elev-3 { box-shadow: var(--elev-3); }
+
+/* ===== Alternating Layout Helpers ===== */
+
+[data-clean-root="true"] .alt {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+}
+
+[data-clean-root="true"] .alt--reverse {
+  grid-template-columns: 1fr 1.2fr;
+}
+
+[data-clean-root="true"] .alt__media {
+  border-radius: 14px;
+  overflow: clip;
+  margin-inline: clamp(0px, 3vw, 32px);
+}
+
+/* ===== Mobile Responsive ===== */
+
+@media (max-width: 768px) {
+  /* Always center on mobile */
+  [data-clean-root="true"] .rr-section--align-left .rr-section__inner,
+  [data-clean-root="true"] .rr-section--align-right .rr-section__inner {
+    margin-left: var(--gutter-x) !important;
+    margin-right: var(--gutter-x) !important;
+    text-align: center !important;
+  }
+  
+  /* Stack alternating layouts */
+  [data-clean-root="true"] .alt,
+  [data-clean-root="true"] .alt--reverse {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  /* Remove rail padding on mobile */
+  [data-clean-root="true"] .rail-aware {
+    padding-left: 0;
+  }
+}
+
+/* ===== Dark Mode Adjustments ===== */
+
+html[data-theme="dark"] [data-clean-root="true"] .rr-section--partial {
+  background: color-mix(in oklch, var(--surface-1) 80%, black 20%);
+  border-color: color-mix(in oklch, var(--border-subtle) 40%, transparent 60%);
+  backdrop-filter: blur(8px) saturate(1.15);
+}
+
+html[data-theme="dark"] [data-clean-root="true"] .rr-section--isolated {
+  background: color-mix(in oklch, var(--surface-2) 85%, black 15%);
+  border-color: var(--border);
+  box-shadow: var(--elev-3);
+}
+
+} /* End @layer components */

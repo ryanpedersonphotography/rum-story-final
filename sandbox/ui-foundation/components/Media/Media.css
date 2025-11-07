@@ -1,0 +1,168 @@
+/* Media Base */
+.media {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-8, .5rem);
+  background: var(--surface-1, color-mix(in oklch, Canvas 96%, black 4%));
+}
+
+.media__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.media__element {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+/* ASPECT RATIOS */
+.media[data-aspect="16/9"] {
+  aspect-ratio: 16 / 9;
+}
+
+.media[data-aspect="4/3"] {
+  aspect-ratio: 4 / 3;
+}
+
+.media[data-aspect="1/1"] {
+  aspect-ratio: 1 / 1;
+}
+
+.media[data-aspect="3/2"] {
+  aspect-ratio: 3 / 2;
+}
+
+.media[data-aspect="auto"] {
+  aspect-ratio: auto;
+}
+
+/* OBJECT FIT */
+.media[data-fit="cover"] .media__element {
+  object-fit: cover;
+}
+
+.media[data-fit="contain"] .media__element {
+  object-fit: contain;
+}
+
+.media[data-fit="fill"] .media__element {
+  object-fit: fill;
+}
+
+/* OBJECT POSITION */
+.media[data-position="center"] .media__element {
+  object-position: center;
+}
+
+.media[data-position="top"] .media__element {
+  object-position: top;
+}
+
+.media[data-position="bottom"] .media__element {
+  object-position: bottom;
+}
+
+.media[data-position="left"] .media__element {
+  object-position: left;
+}
+
+.media[data-position="right"] .media__element {
+  object-position: right;
+}
+
+/* OVERLAY */
+.media__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.media:hover .media__overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* PRIORITY (for performance hints) */
+.media[data-priority="high"] .media__element {
+  /* High priority images should load immediately */
+  loading: eager;
+}
+
+.media[data-priority="low"] .media__element {
+  /* Low priority images can wait */
+  loading: lazy;
+}
+
+/* BLUR EFFECT */
+.media[data-blur="true"] .media__element {
+  filter: blur(4px);
+  transition: filter 0.3s ease;
+}
+
+.media[data-blur="true"]:hover .media__element {
+  filter: blur(0);
+}
+
+/* TYPE SPECIFIC */
+.media[data-type="video"] {
+  cursor: pointer;
+}
+
+.media[data-type="embed"] {
+  /* Iframe styling */
+  border: 1px solid var(--border-subtle, color-mix(in oklch, Canvas 90%, black 10%));
+}
+
+/* LOADING STATE */
+.media__element[loading="lazy"] {
+  /* Add subtle loading animation */
+  background: 
+    linear-gradient(90deg, 
+      transparent, 
+      var(--surface-2, Canvas), 
+      transparent
+    );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .media {
+    border-radius: var(--radius-6, .375rem);
+  }
+  
+  /* Always show overlay on mobile (no hover) */
+  .media__overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Disable blur hover on mobile */
+  .media[data-blur="true"]:hover .media__element {
+    filter: blur(4px);
+  }
+}

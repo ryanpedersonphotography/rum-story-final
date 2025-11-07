@@ -1,0 +1,345 @@
+/* ============================================================================
+   HERO SECTION STYLES - Full-screen hero with background image
+   ============================================================================ */
+
+@layer components {
+  .hero {
+    /* Hero container */
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    /* Remove section padding for full-screen effect */
+    padding: 0;
+  }
+  
+  .hero__background {
+    /* Background image container */
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  
+  .hero__background-image {
+    /* Background image styling */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .hero__overlay {
+    /* Dark overlay for text readability */
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      oklch(0.2 0.03 65 / 0.85) 0%,
+      oklch(0.25 0.05 80 / 0.75) 50%,
+      oklch(0.3 0.04 70 / 0.8) 100%
+    );
+    z-index: 2;
+  }
+  
+  .hero__content {
+    /* Content container */
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: var(--section-width-prose);
+    padding: 0 var(--space-layout-sm);
+    color: var(--color-inverse);
+    
+    /* Animation */
+    animation: heroFadeIn 1.2s var(--motion-smooth) forwards;
+  }
+  
+  .hero__header {
+    /* Header content wrapper */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-component-md);
+    margin-bottom: var(--space-layout-lg);
+  }
+  
+  .hero__script-accent {
+    /* Script accent text */
+    font-family: var(--font-script, 'Dancing Script', cursive);
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    color: var(--color-accent-neutral);
+    font-weight: var(--text-weight-normal);
+    text-shadow: 0 2px 4px oklch(0 0 0 / 0.3);
+  }
+  
+  .hero__title {
+    /* Main hero title */
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: var(--text-weight-normal);
+    line-height: var(--text-line-tight);
+    letter-spacing: -0.02em;
+    color: var(--color-inverse);
+    margin: 0;
+    text-shadow: 0 4px 8px oklch(0 0 0 / 0.4);
+  }
+  
+  .hero__title-accent {
+    /* Title accent styling */
+    color: var(--color-accent-neutral);
+    display: block;
+    font-style: italic;
+  }
+  
+  .hero__lead {
+    /* Lead paragraph */
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    line-height: var(--text-line-loose);
+    color: var(--color-inverse);
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 0 2px 4px oklch(0 0 0 / 0.3);
+  }
+  
+  .hero__actions {
+    /* CTA button container */
+    display: flex;
+    gap: var(--space-component-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-layout-lg);
+  }
+  
+  .hero__cta {
+    /* Base CTA styling */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--btn-padding-x-lg) var(--space-layout-sm);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-weight: var(--text-weight-medium);
+    font-size: var(--btn-font-size-md);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 
+      transform var(--motion-fast) var(--motion-smooth),
+      box-shadow var(--motion-fast) var(--motion-smooth),
+      background-color var(--motion-fast) var(--motion-smooth),
+      color var(--motion-fast) var(--motion-smooth);
+    min-height: var(--btn-height-lg);
+  }
+  
+  .hero__cta--primary {
+    /* Primary CTA styling */
+    background: var(--btn-background-primary);
+    color: var(--btn-color-primary);
+    border: 2px solid var(--btn-background-primary);
+    box-shadow: 0 8px 25px oklch(0 0 0 / 0.25);
+  }
+  
+  .hero__cta--primary:hover {
+    background: var(--btn-background-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px oklch(0 0 0 / 0.35);
+  }
+  
+  .hero__cta--secondary {
+    /* Secondary CTA styling */
+    background: transparent;
+    color: var(--color-inverse);
+    border: 2px solid var(--color-accent-neutral);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero__cta--secondary::before {
+    /* Shimmer effect */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      45deg, 
+      transparent 0%, 
+      oklch(1 0 0 / 0.2) 50%, 
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s var(--motion-smooth);
+    z-index: 0;
+  }
+  
+  .hero__cta--secondary:hover::before {
+    transform: translateX(100%);
+  }
+  
+  .hero__cta--secondary:hover {
+    background: color-mix(in oklch, var(--color-accent-neutral) 90%, transparent);
+    border-color: var(--color-accent-neutral);
+    color: var(--text-color-primary);
+    transform: translateY(-2px);
+  }
+  
+  .hero__scroll-hint {
+    /* Scroll hint styling */
+    position: absolute;
+    bottom: var(--space-layout-md);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--color-inverse);
+    opacity: 0.9;
+    z-index: 10;
+    cursor: pointer;
+    transition: opacity var(--motion-normal) var(--motion-smooth);
+    animation: heroScrollHint 1.8s var(--motion-smooth) forwards;
+  }
+  
+  .hero__scroll-hint:hover {
+    opacity: 1;
+  }
+  
+  .hero__scroll-text {
+    /* Scroll text styling */
+    font-size: var(--text-size-xs);
+    margin-bottom: var(--space-component-xs);
+    font-weight: var(--text-weight-light);
+    display: block;
+    text-shadow: 0 1px 2px oklch(0 0 0 / 0.3);
+  }
+  
+  .hero__scroll-arrow {
+    /* Scroll arrow styling */
+    font-size: var(--text-size-lg);
+    animation: heroScrollBounce 2s infinite;
+    display: block;
+  }
+  
+  /* ============================================================================
+     ANIMATIONS - Hero entrance and scroll hint
+     ============================================================================ */
+  
+  @keyframes heroFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes heroScrollHint {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+    to {
+      opacity: 0.9;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  
+  @keyframes heroScrollBounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  /* ============================================================================
+     RESPONSIVE DESIGN - Mobile adaptations
+     ============================================================================ */
+  
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 100vh;
+    }
+    
+    .hero__content {
+      padding: 0 var(--space-component-md);
+    }
+    
+    .hero__header {
+      gap: var(--space-component-sm);
+      margin-bottom: var(--space-layout-md);
+    }
+    
+    .hero__actions {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-component-sm);
+    }
+    
+    .hero__cta {
+      width: 100%;
+      max-width: 280px;
+      padding: var(--btn-padding-x-md) var(--space-layout-sm);
+      font-size: var(--btn-font-size-sm);
+    }
+    
+    .hero__scroll-hint {
+      bottom: var(--space-layout-sm);
+    }
+  }
+  
+  /* ============================================================================
+     ACCESSIBILITY - Reduced motion and focus support
+     ============================================================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    .hero__content,
+    .hero__scroll-hint {
+      animation: none;
+    }
+    
+    .hero__scroll-arrow {
+      animation: none;
+    }
+    
+    .hero__cta {
+      transition: none;
+    }
+    
+    .hero__cta:hover {
+      transform: none;
+    }
+  }
+  
+  .hero__cta:focus-visible {
+    outline: 3px solid var(--border-focus);
+    outline-offset: 3px;
+  }
+  
+  /* ============================================================================
+     DARK MODE ADAPTATIONS - Enhanced overlays and contrast
+     ============================================================================ */
+  
+  html[data-theme="dark"] .hero__overlay {
+    background: linear-gradient(
+      135deg,
+      oklch(0.15 0.03 65 / 0.92) 0%,
+      oklch(0.2 0.05 80 / 0.88) 50%,
+      oklch(0.25 0.04 70 / 0.90) 100%
+    );
+  }
+  
+  html[data-theme="dark"] .hero__script-accent,
+  html[data-theme="dark"] .hero__title,
+  html[data-theme="dark"] .hero__title-accent,
+  html[data-theme="dark"] .hero__lead {
+    text-shadow: 0 2px 8px oklch(0 0 0 / 0.6);
+  }
+}

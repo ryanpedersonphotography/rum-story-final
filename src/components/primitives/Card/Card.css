@@ -1,0 +1,130 @@
+/* Root defaults (token fallbacks for safety) */
+.card {
+  --card-bg: var(--surface-2, oklch(1 0 0 / 0.02));
+  --card-fg: var(--text-primary, oklch(0.25 0 0));
+  --card-border: color-mix(in oklch, var(--border-subtle, oklch(0.9 0 0)) 75%, transparent);
+  --card-radius-sm: 8px;
+  --card-radius-md: 12px;
+  --card-radius-lg: 16px;
+  --card-radius-xl: 20px;
+  --card-pad-sm: var(--space-12, 12px);
+  --card-pad-md: var(--space-16, 16px);
+  --card-pad-lg: var(--space-24, 24px);
+
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius-lg);
+  box-shadow: var(--shadow-elev-1, 0 6px 18px oklch(0 0 0 / 0.10));
+  overflow: clip;
+  transition: box-shadow 180ms ease, transform 180ms ease, background 180ms ease, border-color 180ms ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Variants */
+.card[data-variant="elevated"] {
+  background: var(--surface-card, var(--surface-2));
+  border-color: color-mix(in oklch, var(--border-subtle) 60%, transparent);
+}
+
+.card[data-variant="outline"] {
+  background: var(--surface-1, transparent);
+  box-shadow: none;
+  border-color: color-mix(in oklch, var(--border-strong, oklch(0.82 0 0)) 85%, transparent);
+}
+
+.card[data-variant="ghost"] {
+  background: transparent;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+/* Elevation levels (shadow tokens) */
+.card[data-elevation="0"] { box-shadow: none; }
+.card[data-elevation="1"] { box-shadow: var(--shadow-elev-1, 0 6px 18px oklch(0 0 0 / .10)); }
+.card[data-elevation="2"] { box-shadow: var(--shadow-elev-2, 0 12px 28px oklch(0 0 0 / .15)); }
+.card[data-elevation="3"] { box-shadow: var(--shadow-elev-3, 0 24px 54px oklch(0 0 0 / .22)); }
+
+/* Padding scale */
+.card[data-padding="none"] .card__body,
+.card[data-padding="none"] .card__header,
+.card[data-padding="none"] .card__footer { padding: 0; }
+
+.card[data-padding="sm"] .card__body,
+.card[data-padding="sm"] .card__header,
+.card[data-padding="sm"] .card__footer { padding: var(--card-pad-sm); }
+
+.card[data-padding="md"] .card__body,
+.card[data-padding="md"] .card__header,
+.card[data-padding="md"] .card__footer { padding: var(--card-pad-md); }
+
+.card[data-padding="lg"] .card__body,
+.card[data-padding="lg"] .card__header,
+.card[data-padding="lg"] .card__footer { padding: var(--card-pad-lg); }
+
+/* Radius scale */
+.card[data-radius="sm"] { border-radius: var(--card-radius-sm); }
+.card[data-radius="md"] { border-radius: var(--card-radius-md); }
+.card[data-radius="lg"] { border-radius: var(--card-radius-lg); }
+.card[data-radius="xl"] { border-radius: var(--card-radius-xl); }
+
+/* Interactive affordances */
+.card[data-interactive="true"] {
+  cursor: pointer;
+  outline: none;
+}
+.card[data-interactive="true"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elev-2, 0 12px 28px oklch(0 0 0 / .15));
+}
+.card[data-interactive="true"]:focus-visible {
+  outline: 2px solid var(--focus-ring, oklch(0.72 0.14 300 / .8));
+  outline-offset: 2px;
+}
+.card[data-interactive="true"]:active {
+  transform: translateY(0);
+}
+
+/* Slots */
+.card__media {
+  position: relative;
+  /* no padding here; your Media component controls its own aspect ratio */
+}
+
+.card__header {
+  display: grid;
+  gap: var(--space-6, 6px);
+}
+
+.card__title {
+  font: inherit;
+  font-weight: var(--weight-semibold, 600);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.card__subtitle {
+  color: var(--text-secondary, oklch(0.45 0 0));
+  margin: 0;
+}
+
+.card__body {
+  display: grid;
+  gap: var(--space-8, 8px);
+}
+
+.card__actions {
+  display: flex;
+  gap: var(--space-8, 8px);
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8, 8px);
+  border-top: 1px solid color-mix(in oklch, var(--border-subtle) 70%, transparent);
+}

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Component Demo</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      background: #f5f5f5;
+      padding: 2rem;
+    }
+    
+    /* Design tokens (simplified for demo) */
+    :root {
+      --card-background: #ffffff;
+      --card-border: rgba(0,0,0,0.08);
+      --card-radius: 12px;
+      --section-elevation-0: none;
+      --section-elevation-1: 0 4px 12px rgba(0,0,0,0.1);
+      --section-elevation-2: 0 8px 24px rgba(0,0,0,0.15);
+      --section-elevation-3: 0 16px 40px rgba(0,0,0,0.2);
+      --space-component-xs: 0.5rem;
+      --space-component-sm: 0.75rem;
+      --space-component-md: 1rem;
+      --space-component-lg: 1.5rem;
+      --space-component-xl: 2rem;
+      --color-primary: #2c241a;
+      --color-secondary: #6b4e3d;
+      --color-accent: #9d6b7b;
+      --border-focus: #E4C896;
+    }
+    
+    /* Card Component Styles */
+    .card {
+      background: var(--card-background);
+      border: 1px solid var(--card-border);
+      border-radius: var(--card-radius);
+      box-shadow: var(--section-elevation-1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: 
+        box-shadow 0.3s ease,
+        transform 0.3s ease,
+        border-color 0.3s ease;
+      margin-bottom: 2rem;
+      width: 300px;
+    }
+    
+    .card__header {
+      padding: var(--space-component-md);
+      border-bottom: 1px solid var(--card-border);
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-component-xs);
+    }
+    
+    .card__body {
+      padding: var(--space-component-lg);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-component-md);
+    }
+    
+    .card__footer {
+      padding: var(--space-component-md);
+      border-top: 1px solid var(--card-border);
+      background: rgba(248, 249, 250, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-component-sm);
+    }
+    
+    /* Elevation variants */
+    .card[data-elevation="0"] {
+      box-shadow: var(--section-elevation-0);
+    }
+    
+    .card[data-elevation="1"] {
+      box-shadow: var(--section-elevation-1);
+    }
+    
+    .card[data-elevation="2"] {
+      box-shadow: var(--section-elevation-2);
+    }
+    
+    .card[data-elevation="3"] {
+      box-shadow: var(--section-elevation-3);
+    }
+    
+    /* Padding variants */
+    .card[data-padding="sm"] .card__header {
+      padding: var(--space-component-sm);
+    }
+    
+    .card[data-padding="sm"] .card__body {
+      padding: var(--space-component-md);
+    }
+    
+    .card[data-padding="sm"] .card__footer {
+      padding: var(--space-component-sm);
+    }
+    
+    .card[data-padding="lg"] .card__header {
+      padding: var(--space-component-lg);
+    }
+    
+    .card[data-padding="lg"] .card__body {
+      padding: var(--space-component-xl);
+    }
+    
+    .card[data-padding="lg"] .card__footer {
+      padding: var(--space-component-lg);
+    }
+    
+    /* Variant styles */
+    .card[data-variant="outlined"] {
+      background: transparent;
+      border-width: 2px;
+      box-shadow: var(--section-elevation-0);
+    }
+    
+    .card[data-variant="filled"] {
+      background: #f8f9fa;
+      border: none;
+      box-shadow: var(--section-elevation-2);
+    }
+    
+    /* Interactive states */
+    .card:hover {
+      box-shadow: var(--section-elevation-2);
+      transform: translateY(-2px);
+    }
+    
+    .card[data-elevation="2"]:hover,
+    .card[data-elevation="3"]:hover {
+      box-shadow: var(--section-elevation-3);
+      transform: translateY(-4px);
+    }
+    
+    .card:focus-within {
+      border-color: var(--border-focus);
+    }
+    
+    /* Demo layout */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .demo-section {
+      margin-bottom: 3rem;
+    }
+    
+    h1, h2 {
+      text-align: center;
+      color: var(--color-primary);
+      margin-bottom: 2rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    /* Card content styling */
+    .card h3 {
+      color: var(--color-primary);
+      font-size: 1.25rem;
+      margin: 0;
+    }
+    
+    .card p {
+      color: var(--color-secondary);
+      margin: 0;
+    }
+    
+    .button {
+      padding: 0.5rem 1rem;
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: background 0.3s ease;
+    }
+    
+    .button:hover {
+      background: #7a5462;
+    }
+    
+    .button--secondary {
+      background: transparent;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+    }
+    
+    .button--secondary:hover {
+      background: var(--color-accent);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Card Component Variants</h1>
+  
+  <div class="demo-section">
+    <h2>Basic Cards with Different Content</h2>
+    <div class="demo-grid">
+      <!-- Basic Card -->
+      <div class="card" data-elevation="1" data-padding="md" data-variant="default">
+        <header class="card__header">
+          <h3>Standard Card</h3>
+        </header>
+        <div class="card__body">
+          <p>This is a basic card with header, body, and footer sections. Perfect for displaying structured content with actions.</p>
+        </div>
+        <footer class="card__footer">
+          <button class="button button--secondary">Cancel</button>
+          <button class="button">Action</button>
+        </footer>
+      </div>
+      
+      <!-- Content Only Card -->
+      <div class="card" data-elevation="1" data-padding="md" data-variant="default">
+        <div class="card__body">
+          <h3>Content Only</h3>
+          <p>Some cards don't need headers or footers. This card contains only body content with proper spacing and styling.</p>
+        </div>
+      </div>
+      
+      <!-- Header + Body Card -->
+      <div class="card" data-elevation="1" data-padding="md" data-variant="default">
+        <header class="card__header">
+          <h3>Header + Body</h3>
+          <p style="font-size: 0.875rem; opacity: 0.8;">Subtitle text</p>
+        </header>
+        <div class="card__body">
+          <p>This card has a header with subtitle and body content, but no footer actions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="demo-section">
+    <h2>Elevation Variants</h2>
+    <div class="demo-grid">
+      <div class="card" data-elevation="0" data-padding="md" data-variant="default">
+        <div class="card__body">
+          <h3>Elevation 0</h3>
+          <p>Flat card with no shadow.</p>
+        </div>
+      </div>
+      
+      <div class="card" data-elevation="1" data-padding="md" data-variant="default">
+        <div class="card__body">
+          <h3>Elevation 1</h3>
+          <p>Subtle shadow for gentle separation.</p>
+        </div>
+      </div>
+      
+      <div class="card" data-elevation="2" data-padding="md" data-variant="default">
+        <div class="card__body">
+          <h3>Elevation 2</h3>
+          <p>Medium shadow for clear hierarchy.</p>
+        </div>
+      </div>
+      
+      <div class="card" data-elevation="3" data-padding="md" data-variant="default">
+        <div class="card__body">
+          <h3>Elevation 3</h3>
+          <p>Strong shadow for prominent display.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="demo-section">
+    <h2>Style Variants</h2>
+    <div class="demo-grid">
+      <div class="card" data-elevation="1" data-padding="md" data-variant="default">
+        <div class="card__body">
+          <h3>Default</h3>
+          <p>Standard card with background and border.</p>
+        </div>
+      </div>
+      
+      <div class="card" data-elevation="1" data-padding="md" data-variant="outlined">
+        <div class="card__body">
+          <h3>Outlined</h3>
+          <p>Transparent background with prominent border.</p>
+        </div>
+      </div>
+      
+      <div class="card" data-elevation="1" data-padding="md" data-variant="filled">
+        <div class="card__body">
+          <h3>Filled</h3>
+          <p>Tinted background with no border.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>

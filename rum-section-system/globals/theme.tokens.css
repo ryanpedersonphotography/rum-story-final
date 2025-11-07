@@ -1,0 +1,365 @@
+/* ========================================================================== *
+   SHADOW TOKEN LAYER - Section System Foundation
+   
+   PURPOSE: Safe migration path from legacy tokens to clean section system
+   - Maps legacy tokens to new clean namespace
+   - Provides section-specific design tokens
+   - Enables gradual migration without breaking changes
+   - Establishes foundation for independent section architecture
+   
+   STRATEGY: Use css.layer to ensure this loads after existing tokens
+   but before components, creating clean shadow aliases
+ * ========================================================================== */
+
+@layer tokens;
+
+@layer tokens {
+  :root {
+    /* ============================================================================
+       SECTION SYSTEM TOKENS - Clean namespace for new architecture
+       ============================================================================ */
+    
+    /* Layout System */
+    --section-layer-base: var(--surface-0);            /* Page canvas background */
+    --section-layer-partial: var(--surface-1);         /* Subtle elevation */
+    --section-layer-isolated: var(--surface-2);        /* Clear separation */
+    
+    --section-width-prose: min(65ch, 100vw - var(--gutter) * 2);
+    --section-width-content: min(1200px, 100vw - var(--gutter) * 2);
+    --section-width-wide: min(1400px, 100vw - var(--gutter) * 2);
+    --section-width-full: 100vw;
+    
+    --section-align-left: flex-start;
+    --section-align-center: center;
+    --section-align-right: flex-end;
+    
+    /* Elevation System - Glass-aware shadows */
+    --section-elevation-0: none;
+    --section-elevation-1: var(--shadow-elev-1);
+    --section-elevation-2: 0 12px 28px oklch(0 0 0 / 0.15);
+    --section-elevation-3: var(--shadow-elev-3);
+    
+    /* Glass Effects - Backdrop integration */
+    --section-glass-subtle: blur(var(--blur-sm)) saturate(var(--saturate-low));
+    --section-glass-medium: blur(var(--blur-md)) saturate(var(--saturate-med));
+    --section-glass-strong: blur(var(--blur-lg)) saturate(var(--saturate-high));
+    
+    /* Section Padding - Rail-aware spacing */
+    --section-pad-xs: var(--pad-section-xs);
+    --section-pad-sm: var(--pad-section-sm);
+    --section-pad-md: var(--pad-section-md);
+    --section-pad-lg: var(--pad-section-lg);
+    --section-pad-xl: var(--pad-section-xl);
+    --section-pad-fluid: var(--pad-section-fluid);
+    
+    /* Rail System - Glass toolbar integration */
+    --rail-toolbar-height: 135px;  /* Glass toolbar fixed height */
+    --rail-gutter: var(--gutter);
+    --rail-prose: var(--section-width-prose);
+    --rail-content: var(--section-width-content);
+    --rail-wide: var(--section-width-wide);
+    --rail-full: var(--section-width-full);
+    
+    /* ============================================================================
+       PRIMITIVE SHADOWS - Legacy token mapping for safe migration
+       ============================================================================ */
+    
+    /* Color Shadows - Alias existing semantic tokens */
+    --color-primary: var(--text-primary);
+    --color-secondary: var(--text-secondary);
+    --color-inverse: var(--text-inverse);
+    --color-accent: var(--accent-rose);
+    --color-accent-alt: var(--accent-sage);
+    --color-accent-neutral: var(--accent-gold);
+    
+    --background-base: var(--bg-surface);
+    --background-tint: var(--bg-tint-rose);
+    --background-tint-alt: var(--bg-tint-sage);
+    --background-elevated: var(--surface-1);
+    
+    --border-light: var(--border-subtle);
+    --border-medium: var(--border-medium);
+    --border-focus: var(--focus-ring);
+    
+    /* Typography Shadows - Alias existing type tokens */
+    --text-size-xs: var(--size-sm);
+    --text-size-sm: var(--size-base);
+    --text-size-md: var(--size-lg);
+    --text-size-lg: var(--size-xl);
+    --text-size-xl: var(--size-2xl);
+    
+    --text-weight-light: var(--weight-light);
+    --text-weight-normal: var(--weight-regular);
+    --text-weight-medium: var(--weight-medium);
+    
+    --text-line-tight: var(--line-tight);
+    --text-line-normal: var(--line-normal);
+    --text-line-loose: var(--line-loose);
+    
+    /* Spacing Shadows - Alias existing space tokens */
+    --space-component-xs: var(--space-xs);
+    --space-component-sm: var(--space-sm);
+    --space-component-md: var(--space-md);
+    --space-component-lg: var(--space-lg);
+    --space-component-xl: var(--space-xl);
+    
+    --space-layout-xs: var(--space-lg);
+    --space-layout-sm: var(--space-xl);
+    --space-layout-md: var(--space-2xl);
+    --space-layout-lg: var(--space-3xl);
+    --space-layout-xl: var(--space-4xl);
+    
+    /* Motion Shadows - Alias existing animation tokens */
+    --motion-fast: var(--duration-fast);
+    --motion-normal: var(--duration-normal);
+    --motion-slow: var(--duration-slow);
+    
+    --motion-smooth: var(--ease-smooth);
+    --motion-spring: var(--ease-spring);
+    --motion-snap: var(--ease-snap);
+    
+    /* Radius Shadows - Alias existing radius tokens */
+    --radius-small: var(--radius-sm);
+    --radius-medium: var(--radius-md);
+    --radius-large: var(--radius-lg);
+    --radius-pill: var(--radius-pill);
+    
+    /* ============================================================================
+       TYPOGRAPHY & RHYTHM TOKENS - Complete type scale and rhythm system
+       ============================================================================ */
+    
+    /* Font Families */
+    --font-serif: 'Playfair Display', 'Georgia', serif;
+    --font-sans: 'Montserrat', 'Helvetica Neue', sans-serif;
+    --font-script: 'Dancing Script', 'Brush Script MT', cursive;
+    --font-mono: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    
+    /* Type Scale - Fluid typography with clamp() */
+    --size-xs: clamp(0.75rem, 1.5vw, 0.875rem);        /* 12-14px */
+    --size-sm: clamp(0.875rem, 2vw, 1rem);             /* 14-16px */
+    --size-base: clamp(1rem, 2.5vw, 1.125rem);         /* 16-18px */
+    --size-lg: clamp(1.125rem, 3vw, 1.25rem);          /* 18-20px */
+    --size-xl: clamp(1.25rem, 3.5vw, 1.5rem);          /* 20-24px */
+    --size-2xl: clamp(1.5rem, 4vw, 1.75rem);           /* 24-28px */
+    --size-3xl: clamp(1.75rem, 5vw, 2.25rem);          /* 28-36px */
+    --size-4xl: clamp(2.25rem, 6vw, 3rem);             /* 36-48px */
+    --size-5xl: clamp(3rem, 8vw, 4rem);                /* 48-64px */
+    --size-6xl: clamp(4rem, 10vw, 5rem);               /* 64-80px */
+    
+    /* Font Weights */
+    --weight-thin: 100;
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-black: 900;
+    
+    /* Line Heights - Semantic scale */
+    --line-none: 1;
+    --line-tight: 1.1;
+    --line-snug: 1.25;
+    --line-normal: 1.5;
+    --line-relaxed: 1.625;
+    --line-loose: 1.8;
+    
+    /* Letter Spacing - Contextual scale */
+    --tracking-tighter: -0.05em;
+    --tracking-tight: -0.025em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.025em;
+    --tracking-wider: 0.05em;
+    --tracking-widest: 0.1em;
+    
+    /* Rhythm & Spacing - 8px grid system */
+    --space-px: 1px;
+    --space-0: 0;
+    --space-xs: 0.5rem;     /* 8px */
+    --space-sm: 0.75rem;    /* 12px */
+    --space-md: 1rem;       /* 16px */
+    --space-lg: 1.5rem;     /* 24px */
+    --space-xl: 2rem;       /* 32px */
+    --space-2xl: 2.5rem;    /* 40px */
+    --space-3xl: 3rem;      /* 48px */
+    --space-4xl: 4rem;      /* 64px */
+    --space-5xl: 5rem;      /* 80px */
+    --space-6xl: 6rem;      /* 96px */
+    
+    /* Section-specific Spacing - Rail-aware gutters */
+    --gutter: clamp(1rem, 3vw, 2rem);                  /* 16-32px */
+    --gutter-sm: clamp(0.75rem, 2vw, 1.5rem);          /* 12-24px */
+    --gutter-lg: clamp(1.5rem, 4vw, 3rem);             /* 24-48px */
+    
+    --pad-section-xs: clamp(1rem, 3vw, 2rem);          /* 16-32px */
+    --pad-section-sm: clamp(2rem, 5vw, 3rem);          /* 32-48px */
+    --pad-section-md: clamp(3rem, 6vw, 4rem);          /* 48-64px */
+    --pad-section-lg: clamp(4rem, 8vw, 6rem);          /* 64-96px */
+    --pad-section-xl: clamp(6rem, 10vw, 8rem);         /* 96-128px */
+    --pad-section-fluid: clamp(3rem, 8vh, 8rem);       /* Viewport-aware */
+    
+    /* Content Width System - Rail integration */
+    --content-max-width: 1200px;
+    --content-wide-width: 1400px;
+    --content-prose-width: 65ch;
+    --content-full-width: 100vw;
+    
+    /* Glass Effects & Blur */
+    --blur-none: 0;
+    --blur-sm: 4px;
+    --blur-md: 8px;
+    --blur-lg: 16px;
+    --blur-xl: 24px;
+    --blur-2xl: 40px;
+    
+    --saturate-low: 1.05;
+    --saturate-med: 1.15;
+    --saturate-high: 1.25;
+    
+    /* Shadow System - Elevation aware */
+    --shadow-elev-1: 0 4px 6px oklch(0 0 0 / 0.07), 0 1px 3px oklch(0 0 0 / 0.06);
+    --shadow-elev-2: 0 10px 15px oklch(0 0 0 / 0.10), 0 4px 6px oklch(0 0 0 / 0.05);
+    --shadow-elev-3: 0 20px 25px oklch(0 0 0 / 0.15), 0 8px 10px oklch(0 0 0 / 0.04);
+    --shadow-elev-4: 0 25px 50px oklch(0 0 0 / 0.25);
+    
+    /* Surface System - Light/dark foundations */
+    --surface-0: oklch(0.99 0.005 85);     /* Pure background */
+    --surface-1: oklch(0.97 0.01 85);      /* Subtle elevation */
+    --surface-2: oklch(0.95 0.015 85);     /* Card elevation */
+    --surface-3: oklch(0.93 0.02 85);      /* Higher elevation */
+    
+    /* Border System */
+    --border-width: 1px;
+    --border-width-2: 2px;
+    --border-width-4: 4px;
+    
+    --border-subtle: oklch(0 0 0 / 0.05);
+    --border-medium: oklch(0 0 0 / 0.10);
+    --border-strong: oklch(0 0 0 / 0.20);
+    
+    /* Radius System */
+    --radius-none: 0;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+    --radius-3xl: 24px;
+    --radius-pill: 9999px;
+    --radius-full: 50%;
+    
+    /* Motion & Timing */
+    --duration-instant: 0ms;
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 350ms;
+    --duration-slower: 500ms;
+    
+    --ease-linear: linear;
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-snap: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Focus & Interaction */
+    --focus-ring: oklch(0.7 0.15 85);      /* Gold focus ring */
+    --focus-width: 2px;
+    --focus-offset: 2px;
+    
+    /* Semantic Colors - Wedding venue palette */
+    --text-primary: oklch(0.25 0.02 65);   /* Rich brown */
+    --text-secondary: oklch(0.45 0.03 65); /* Medium brown */
+    --text-inverse: oklch(0.98 0.01 85);   /* Warm white */
+    --text-muted: oklch(0.55 0.02 65);     /* Light brown */
+    
+    --accent-rose: oklch(0.65 0.12 15);    /* Dusty rose */
+    --accent-sage: oklch(0.55 0.08 140);   /* Sage green */
+    --accent-gold: oklch(0.75 0.08 85);    /* Warm gold */
+    
+    /* Semantic Accent Families - Theme switching support */
+    --accent-primary: var(--accent-rose);
+    --accent-secondary: var(--accent-sage);
+    --accent-tertiary: var(--accent-gold);
+    
+    --bg-surface: oklch(0.98 0.005 85);    /* Main background */
+    --bg-tint-rose: oklch(0.96 0.02 15);   /* Rose tint */
+    --bg-tint-sage: oklch(0.96 0.015 140); /* Sage tint */
+    
+    /* ============================================================================
+       COMPONENT-SPECIFIC TOKENS - Building blocks for leaf components
+       ============================================================================ */
+    
+    /* Button Tokens */
+    --btn-height-sm: 32px;
+    --btn-height-md: 44px;  /* WCAG minimum touch target */
+    --btn-height-lg: 52px;
+    --btn-height-xl: 60px;
+    
+    --btn-padding-x-sm: var(--space-md);
+    --btn-padding-x-md: var(--space-lg);
+    --btn-padding-x-lg: var(--space-xl);
+    --btn-padding-x-xl: var(--space-2xl);
+    
+    --btn-font-size-sm: var(--text-size-xs);
+    --btn-font-size-md: var(--text-size-sm);
+    --btn-font-size-lg: var(--text-size-md);
+    --btn-font-size-xl: var(--text-size-lg);
+    
+    --btn-color-primary: var(--color-inverse);
+    --btn-background-primary: var(--color-accent);
+    --btn-background-primary-hover: color-mix(in oklch, var(--color-accent) 85%, black 15%);
+    
+    --btn-color-secondary: var(--color-primary);
+    --btn-background-secondary: transparent;
+    --btn-border-secondary: var(--border-medium);
+    --btn-border-secondary-hover: var(--color-accent);
+    
+    /* Card Tokens */
+    --card-background: var(--background-elevated);
+    --card-border: var(--border-light);
+    --card-shadow: var(--section-elevation-1);
+    --card-radius: var(--radius-medium);
+    --card-padding: var(--space-component-lg);
+    
+    --card-header-padding: var(--space-component-md);
+    --card-body-padding: var(--space-component-lg);
+    --card-footer-padding: var(--space-component-md);
+    
+    /* Text Tokens */
+    --text-color-primary: var(--color-primary);
+    --text-color-secondary: var(--color-secondary);
+    --text-color-muted: color-mix(in oklch, var(--color-primary) 60%, transparent);
+    --text-color-accent: var(--color-accent);
+    
+    /* Media Tokens */
+    --media-radius: var(--radius-medium);
+    --media-shadow: var(--section-elevation-1);
+    --media-overlay: oklch(0 0 0 / 0.2);
+    
+    /* ============================================================================
+       THEME ADAPTATIONS - Dark mode overrides
+       ============================================================================ */
+  }
+  
+  /* Dark theme adaptations */
+  html[data-theme="dark"] {
+    --section-elevation-2: 0 12px 28px oklch(0 0 0 / 0.25);
+    
+    --media-overlay: oklch(0 0 0 / 0.4);
+    
+    --btn-background-primary-hover: color-mix(in oklch, var(--color-accent) 70%, black 30%);
+  }
+  
+  /* Modern brand adaptations */
+  html[data-brand="modern"] {
+    --color-accent: var(--accent-brass);
+    --color-accent-alt: var(--accent-stone);
+    --color-accent-neutral: var(--accent-ink);
+    
+    --btn-background-primary: var(--accent-brass);
+    --btn-background-primary-hover: color-mix(in oklch, var(--accent-brass) 80%, black 20%);
+    --btn-border-secondary-hover: var(--accent-ink);
+  }
+  
+  html[data-brand="modern"][data-theme="dark"] {
+    --btn-background-primary-hover: color-mix(in oklch, var(--accent-brass) 70%, black 30%);
+  }
+}

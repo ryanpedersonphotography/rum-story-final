@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Section - Rum River Wedding Barn</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+    }
+    
+    /* Design tokens (simplified for demo) */
+    :root {
+      --color-inverse: #FFF8E7;
+      --color-accent-neutral: #E4C896;
+      --btn-background-primary: #9D6B7B;
+      --btn-color-primary: #FFF8E7;
+      --btn-background-primary-hover: #7A5462;
+      --section-width-prose: min(65ch, 100vw - 2rem);
+      --space-layout-sm: 1rem;
+      --space-component-md: 1rem;
+      --space-layout-lg: 3rem;
+      --space-layout-md: 2rem;
+      --font-script: 'Dancing Script', cursive;
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Montserrat', sans-serif;
+      --text-weight-normal: 400;
+      --text-weight-medium: 500;
+      --text-line-tight: 1.1;
+      --text-line-loose: 1.8;
+      --radius-pill: 9999px;
+      --btn-height-lg: 52px;
+      --motion-fast: 200ms;
+      --motion-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --border-focus: #E4C896;
+    }
+    
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500&family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
+    
+    /* Hero Section Styles */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0;
+    }
+    
+    .hero__background {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    
+    .hero__background-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(44, 36, 22, 0.85) 0%,
+        rgba(107, 78, 61, 0.75) 50%,
+        rgba(58, 74, 60, 0.8) 100%
+      );
+      z-index: 2;
+    }
+    
+    .hero__content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: var(--section-width-prose);
+      padding: 0 var(--space-layout-sm);
+      color: var(--color-inverse);
+      animation: heroFadeIn 1.2s var(--motion-smooth) forwards;
+    }
+    
+    .hero__header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-component-md);
+      margin-bottom: var(--space-layout-lg);
+    }
+    
+    .hero__script-accent {
+      font-family: var(--font-script);
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      color: var(--color-accent-neutral);
+      font-weight: var(--text-weight-normal);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: var(--text-weight-normal);
+      line-height: var(--text-line-tight);
+      letter-spacing: -0.02em;
+      color: var(--color-inverse);
+      margin: 0;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+    
+    .hero__title-accent {
+      color: var(--color-accent-neutral);
+      display: block;
+      font-style: italic;
+    }
+    
+    .hero__lead {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      line-height: var(--text-line-loose);
+      color: var(--color-inverse);
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero__actions {
+      display: flex;
+      gap: var(--space-component-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-layout-lg);
+    }
+    
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-sans);
+      font-weight: var(--text-weight-medium);
+      font-size: 0.875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 
+        transform var(--motion-fast) var(--motion-smooth),
+        box-shadow var(--motion-fast) var(--motion-smooth),
+        background-color var(--motion-fast) var(--motion-smooth),
+        color var(--motion-fast) var(--motion-smooth);
+      min-height: var(--btn-height-lg);
+    }
+    
+    .hero__cta--primary {
+      background: var(--btn-background-primary);
+      color: var(--btn-color-primary);
+      border: 2px solid var(--btn-background-primary);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+    
+    .hero__cta--primary:hover {
+      background: var(--btn-background-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+    }
+    
+    .hero__cta--secondary {
+      background: transparent;
+      color: var(--color-inverse);
+      border: 2px solid var(--color-accent-neutral);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero__cta--secondary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        45deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        transparent 100%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.6s var(--motion-smooth);
+      z-index: 0;
+    }
+    
+    .hero__cta--secondary:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .hero__cta--secondary:hover {
+      background: rgba(228, 200, 150, 0.9);
+      border-color: var(--color-accent-neutral);
+      color: #2C241A;
+      transform: translateY(-2px);
+    }
+    
+    .hero__scroll-hint {
+      position: absolute;
+      bottom: var(--space-layout-md);
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: var(--color-inverse);
+      opacity: 0.9;
+      z-index: 10;
+      cursor: pointer;
+      transition: opacity 0.3s var(--motion-smooth);
+      animation: heroScrollHint 1.8s var(--motion-smooth) forwards;
+    }
+    
+    .hero__scroll-hint:hover {
+      opacity: 1;
+    }
+    
+    .hero__scroll-text {
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+      font-weight: 300;
+      display: block;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero__scroll-arrow {
+      font-size: 1.5rem;
+      animation: heroScrollBounce 2s infinite;
+      display: block;
+    }
+    
+    /* Animations */
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes heroScrollHint {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+      }
+      to {
+        opacity: 0.9;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+    
+    @keyframes heroScrollBounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+    
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .hero__content {
+        padding: 0 1rem;
+      }
+      
+      .hero__header {
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+      
+      .hero__actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      
+      .hero__cta {
+        width: 100%;
+        max-width: 280px;
+        padding: 0.875rem 1.5rem;
+        font-size: 0.8125rem;
+      }
+      
+      .hero__scroll-hint {
+        bottom: 1rem;
+      }
+    }
+    
+    /* Focus states */
+    .hero__cta:focus {
+      outline: 3px solid var(--border-focus);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero" id="hero" data-section="hero">
+    <div class="hero__background">
+      <img 
+        src="https://images.unsplash.com/photo-1519167758481-83f29c5c6ca1?w=1920&h=1080&fit=crop&crop=center" 
+        alt="Rum River Wedding Barn at sunset"
+        class="hero__background-image"
+      />
+      <div class="hero__overlay" aria-hidden="true"></div>
+    </div>
+    
+    <div class="hero__content">
+      <header class="hero__header">
+        <div class="hero__script-accent">
+          A Rustic Romance
+        </div>
+        
+        <h1 class="hero__title">
+          Rum River Wedding Barn
+          <br>
+          <span class="hero__title-accent">Your Perfect Day</span>
+        </h1>
+        
+        <p class="hero__lead">
+          Nestled along the scenic Rum River, our restored 1920s barn offers the perfect blend of rustic charm and modern elegance for your special day.
+        </p>
+      </header>
+      
+      <div class="hero__actions">
+        <a 
+          href="#contact"
+          class="hero__cta hero__cta--primary"
+          data-testid="hero-primary-cta"
+        >
+          Schedule Your Tour
+        </a>
+        
+        <a 
+          href="#pricing"
+          class="hero__cta hero__cta--secondary"
+          data-testid="hero-secondary-cta"
+        >
+          View Packages
+        </a>
+      </div>
+    </div>
+    
+    <div class="hero__scroll-hint">
+      <span class="hero__scroll-text">Scroll to explore</span>
+      <div class="hero__scroll-arrow" aria-hidden="true">↓</div>
+    </div>
+  </section>
+</body>
+</html>

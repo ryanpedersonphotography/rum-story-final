@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Component Demo</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      background: #f5f5f5;
+      padding: 2rem;
+    }
+    
+    /* Design tokens (simplified for demo) */
+    :root {
+      --media-radius: 12px;
+      --media-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --media-overlay: rgba(0,0,0,0.4);
+      --color-inverse: white;
+      --border-focus: #E4C896;
+    }
+    
+    /* Media Component Styles */
+    .media-container {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    
+    .media {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transition: 
+        opacity 0.3s ease,
+        transform 0.5s ease;
+    }
+    
+    .media-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--media-overlay);
+      color: var(--color-inverse);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-size: 1.125rem;
+      font-weight: 500;
+      text-align: center;
+      padding: 1rem;
+    }
+    
+    /* Aspect ratio variants */
+    .media-container[data-aspect-ratio="square"] {
+      aspect-ratio: 1 / 1;
+    }
+    
+    .media-container[data-aspect-ratio="16/9"] {
+      aspect-ratio: 16 / 9;
+    }
+    
+    .media-container[data-aspect-ratio="4/3"] {
+      aspect-ratio: 4 / 3;
+    }
+    
+    .media-container[data-aspect-ratio="3/2"] {
+      aspect-ratio: 3 / 2;
+    }
+    
+    .media-container[data-aspect-ratio="21/9"] {
+      aspect-ratio: 21 / 9;
+    }
+    
+    /* Object fit variants */
+    .media-container[data-object-fit="cover"] .media {
+      object-fit: cover;
+    }
+    
+    .media-container[data-object-fit="contain"] .media {
+      object-fit: contain;
+    }
+    
+    .media-container[data-object-fit="fill"] .media {
+      object-fit: fill;
+    }
+    
+    /* Visual modifiers */
+    .media--rounded {
+      border-radius: var(--media-radius);
+    }
+    
+    .media-container:has(.media--rounded) {
+      border-radius: var(--media-radius);
+    }
+    
+    .media--shadow {
+      box-shadow: var(--media-shadow);
+    }
+    
+    .media-container:has(.media--shadow) {
+      box-shadow: var(--media-shadow);
+    }
+    
+    /* Interactive states */
+    .media-container:hover .media {
+      transform: scale(1.05);
+    }
+    
+    .media-container:hover .media-overlay {
+      opacity: 1;
+    }
+    
+    .media-container:focus-within .media-overlay {
+      opacity: 1;
+    }
+    
+    .media-container:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+    
+    /* Demo layout */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .demo-section {
+      margin-bottom: 3rem;
+    }
+    
+    h1, h2 {
+      text-align: center;
+      color: #2c241a;
+      margin-bottom: 2rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .demo-label {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #6b4e3d;
+      font-size: 0.875rem;
+    }
+    
+    /* Loading animation */
+    .media[loading="lazy"] {
+      opacity: 0;
+      animation: mediaFadeIn 0.3s ease forwards;
+    }
+    
+    @keyframes mediaFadeIn {
+      from { 
+        opacity: 0; 
+        transform: scale(0.95); 
+      }
+      to { 
+        opacity: 1; 
+        transform: scale(1); 
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Media Component Variants</h1>
+  
+  <div class="demo-section">
+    <h2>Aspect Ratio Variants</h2>
+    <div class="demo-grid">
+      <div>
+        <div class="demo-label">Square (1:1)</div>
+        <div class="media-container" data-aspect-ratio="square" data-object-fit="cover">
+          <img 
+            src="https://images.unsplash.com/photo-1519167758481-83f29c5c6ca1?w=400&h=400&fit=crop&crop=center" 
+            alt="Wedding venue exterior"
+            class="media media--rounded"
+          />
+          <div class="media-overlay">Square Format</div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">Widescreen (16:9)</div>
+        <div class="media-container" data-aspect-ratio="16/9" data-object-fit="cover">
+          <img 
+            src="https://images.unsplash.com/photo-1519167758481-83f29c5c6ca1?w=600&h=338&fit=crop&crop=center" 
+            alt="Wedding ceremony setup"
+            class="media media--rounded"
+          />
+          <div class="media-overlay">16:9 Format</div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">Standard (4:3)</div>
+        <div class="media-container" data-aspect-ratio="4/3" data-object-fit="cover">
+          <img 
+            src="https://images.unsplash.com/photo-1519167758481-83f29c5c6ca1?w=600&h=450&fit=crop&crop=center" 
+            alt="Reception hall"
+            class="media media--rounded"
+          />
+          <div class="media-overlay">4:3 Format</div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">Portrait (3:2)</div>
+        <div class="media-container" data-aspect-ratio="3/2" data-object-fit="cover">
+          <img 
+            src="https://images.unsplash.com/photo-1519167758481-83f29c5c6ca1?w=600&h=400&fit=crop&crop=center" 
+            alt="Bridal suite"
+            class="media media--rounded"
+          />
+          <div class="media-overlay">3:2 Format</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="demo-section">
+    <h2>Object Fit Variants</h2>
+    <div class="demo-grid">
+      <div>
+        <div class="demo-label">Cover (Default)</div>
+        <div class="media-container" data-aspect-ratio="square" data-object-fit="cover">
+          <img 
+            src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop&crop=center" 
+            alt="Wedding table setting"
+            class="media media--rounded media--shadow"
+          />
+          <div class="media-overlay">Object Fit: Cover</div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">Contain</div>
+        <div class="media-container" data-aspect-ratio="square" data-object-fit="contain">
+          <img 
+            src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop&crop=center" 
+            alt="Wedding flowers"
+            class="media media--rounded media--shadow"
+          />
+          <div class="media-overlay">Object Fit: Contain</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="demo-section">
+    <h2>Style Variants</h2>
+    <div class="demo-grid">
+      <div>
+        <div class="demo-label">Basic</div>
+        <div class="media-container" data-aspect-ratio="16/9" data-object-fit="cover">
+          <img 
+            src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=600&h=338&fit=crop&crop=center" 
+            alt="Wedding cake"
+            class="media"
+          />
+          <div class="media-overlay">No Styling</div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">Rounded</div>
+        <div class="media-container" data-aspect-ratio="16/9" data-object-fit="cover">
+          <img 
+            src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=600&h=338&fit=crop&crop=center" 
+            alt="Wedding rings"
+            class="media media--rounded"
+          />
+          <div class="media-overlay">Rounded Corners</div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">With Shadow</div>
+        <div class="media-container" data-aspect-ratio="16/9" data-object-fit="cover">
+          <img 
+            src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=600&h=338&fit=crop&crop=center" 
+            alt="Wedding bouquet"
+            class="media media--shadow"
+          />
+          <div class="media-overlay">Drop Shadow</div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">Rounded + Shadow</div>
+        <div class="media-container" data-aspect-ratio="16/9" data-object-fit="cover">
+          <img 
+            src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=600&h=338&fit=crop&crop=center" 
+            alt="Wedding decoration"
+            class="media media--rounded media--shadow"
+          />
+          <div class="media-overlay">Combined Styling</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="demo-section">
+    <h2>Interactive Overlays</h2>
+    <div class="demo-grid">
+      <div>
+        <div class="demo-label">Hover for Overlay</div>
+        <div class="media-container" data-aspect-ratio="4/3" data-object-fit="cover" tabindex="0">
+          <img 
+            src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=600&h=450&fit=crop&crop=center" 
+            alt="Wedding dance"
+            class="media media--rounded media--shadow"
+          />
+          <div class="media-overlay">
+            <div>
+              <strong>Wedding Dance</strong><br>
+              Reception Hall - 7:00 PM
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="demo-label">Focus for Overlay (Tab)</div>
+        <div class="media-container" data-aspect-ratio="4/3" data-object-fit="cover" tabindex="0">
+          <img 
+            src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=600&h=450&fit=crop&crop=center" 
+            alt="Wedding ceremony"
+            class="media media--rounded media--shadow"
+          />
+          <div class="media-overlay">
+            <div>
+              <strong>Ceremony</strong><br>
+              Garden Pavilion - 4:00 PM
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
