@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { storyblokEditable } from '@storyblok/react/rsc'
-import Section from '@/components/ui/SectionEnhanced'
+import Section from '@/components/ui/Section'
 
 interface AlternatingBlocksBlok {
   _uid?: string
@@ -39,16 +39,10 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
   const themeOverride = blok.theme_override || 'auto'
   const paddingSize = blok.padding_size || 'fluid'
 
-  // Keep anchor targets clear of the fixed navbar when linking into this section.
-  const headerSlotProps: React.HTMLAttributes<HTMLElement> & { 'data-testid': string } = {
-    'data-testid': 'alternating-blocks-header',
-    style: { scrollMarginTop: '96px' }
-  }
-
   return (
     <Section
         align="center"
-        contentWrapper={true}  // Use enhanced content wrapper
+        container="wrapper"
         background={backgroundVariant}
         tone={themeOverride}
         paddingY={paddingSize}
@@ -65,7 +59,6 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
           lead: blok.description || 'Discover what makes our venue the perfect setting for your unforgettable celebration',
           align: 'center'
         }}
-        headerSlotProps={headerSlotProps}
         className="alternating-blocks"
         data-section="alternating-blocks"
         {...storyblokEditable(blok)}

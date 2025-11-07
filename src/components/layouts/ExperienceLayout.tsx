@@ -1,6 +1,6 @@
 import React from 'react'
-import Section from '@/components/ui/SectionEnhanced'
-import type { SectionProps, Background, Tone, PaddingY, Divider } from '@/components/ui/SectionEnhanced'
+import Section from '@/components/ui/Section'
+import type { SectionProps, Background, Tone, PaddingY, Divider } from '@/components/ui/Section'
 
 interface ExperienceLayoutProps {
   children: React.ReactNode
@@ -81,20 +81,10 @@ export default function ExperienceLayout({
     divider,
     
     // Layout configuration
-    contentWrapper: useContentWrapper,
+    container: useContentWrapper ? 'wrapper' : 'rails',
     
     // Header
     header: resolvedHeader,
-    
-    // Enhanced features
-    headerSlotProps: {
-      'data-test-id': `${id}-header`,
-      style: { scrollMarginTop: '80px' }
-    },
-    contentSlotProps: {
-      'data-test-id': `${id}-content`,
-      'aria-label': 'Venue experience and features'
-    },
     
     // Classes
     className: `rum-river-experience ${className}`.trim(),

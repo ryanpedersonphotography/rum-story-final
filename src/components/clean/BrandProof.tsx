@@ -9,7 +9,7 @@
 
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
-import Section from '@/components/ui/SectionEnhanced'
+import Section from '@/components/ui/Section'
 
 interface BrandProofStoryblok extends SbBlokData {
   brands?: string
@@ -58,16 +58,12 @@ export default function BrandProof({ blok }: { blok: BrandProofStoryblok }) {
     <Section
       as="section"
       align="center"
-      contentWrapper={true}  // Use legacy wrapper for consistent content width
+      container="wrapper"
       paddingY="md"
       background="tint-rose"
       className="brand-quote-section"
       data-section="brand-proof"
       data-discover="true"
-      contentSlotProps={{
-        'data-test-id': 'brand-proof-content',
-        'aria-label': 'Brand endorsements and testimonial'
-      }}
       {...storyblokEditable(blok)}
     >
       <div className="brand-quote-content">

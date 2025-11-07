@@ -1,4 +1,4 @@
-import Section from '@/components/layout/Section'
+import Section from '@/components/ui/Section'
 import Experience from '@/components/clean/Experience' // existing file
 
 interface LegacyExperienceAdapterProps {
@@ -9,10 +9,10 @@ interface LegacyExperienceAdapterProps {
 export default function LegacyExperienceAdapter(props: LegacyExperienceAdapterProps) {
   return (
     <Section 
-      layer="partial" 
-      width="wide" 
+      background="tint-rose" 
+      contentWidth="wide" 
       align="center" 
-      elevation={1}
+      className="elev-1"
       data-header-placement="outside"
     >
       {/* mark a neutralization boundary for legacy CSS */}

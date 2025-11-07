@@ -1,5 +1,5 @@
 import { storyblokEditable } from '@storyblok/react'
-import Section from '@/components/layout/Section'
+import Section from '@/components/ui/Section'
 import Hero from '@/components/clean/Hero'
 
 /**
@@ -18,8 +18,8 @@ export function SectionDemoPage({ story }: { story: any }) {
       {/* Hero: Full-bleed background with rail-aware content */}
       <Section 
         as="header" 
-        layer="base" 
-        width="full" 
+        background="surface" 
+        contentWidth="full" 
         {...storyblokEditable(story.content.hero)}
       >
         <Hero 
@@ -32,8 +32,8 @@ export function SectionDemoPage({ story }: { story: any }) {
 
       {/* Discover Our Spaces: Base layer, left-aligned, wide content */}
       <Section 
-        layer="base" 
-        width="wide" 
+        background="surface" 
+        contentWidth="wide" 
         align="left"
         {...storyblokEditable(sections[0])}
       >
@@ -45,8 +45,8 @@ export function SectionDemoPage({ story }: { story: any }) {
 
       {/* Your Perfect Venue: Partial background, alternating layout */}
       <Section 
-        layer="partial" 
-        width="content"
+        background="tint-rose" 
+        contentWidth="content"
         className="elev-1"
         {...storyblokEditable(sections[1])}
       >
@@ -62,8 +62,8 @@ export function SectionDemoPage({ story }: { story: any }) {
 
       {/* The Rum River Experience: Fully isolated surface */}
       <Section 
-        layer="isolated" 
-        width="wide"
+        background="tint-sage" 
+        contentWidth="wide"
         className="elev-2"
         {...storyblokEditable(sections[2])}
       >
@@ -72,8 +72,8 @@ export function SectionDemoPage({ story }: { story: any }) {
 
       {/* Investment in Forever: Base layer with controllable card spacing */}
       <Section 
-        layer="base" 
-        width="content"
+        background="surface" 
+        contentWidth="content"
         {...storyblokEditable(sections[3])}
       >
         <div 
@@ -106,8 +106,8 @@ function OldPattern({ blok }: { blok: any }) {
 function NewPattern({ blok }: { blok: any }) {
   return (
     <Section 
-      layer="partial" 
-      width="content" 
+      background="tint-rose" 
+      contentWidth="content" 
       align="center"
       className="custom-section"  // Keep existing styles if needed
       {...storyblokEditable(blok)}  // ← Preserves Storyblok integration
@@ -123,19 +123,19 @@ function NewPattern({ blok }: { blok: any }) {
 export function SemanticSections({ blok }: { blok: any }) {
   return (
     <>
-      <Section as="header" layer="base" width="full" {...storyblokEditable(blok.header)}>
+      <Section as="header" background="surface" contentWidth="full" {...storyblokEditable(blok.header)}>
         <Hero blok={blok.header} />
       </Section>
       
-      <Section as="main" layer="partial" width="content" {...storyblokEditable(blok.main)}>
+      <Section as="main" background="tint-rose" contentWidth="content" {...storyblokEditable(blok.main)}>
         {/* Main content */}
       </Section>
       
-      <Section as="aside" layer="isolated" width="wide" {...storyblokEditable(blok.sidebar)}>
+      <Section as="aside" background="tint-sage" contentWidth="wide" {...storyblokEditable(blok.sidebar)}>
         {/* Sidebar content */}
       </Section>
       
-      <Section as="footer" layer="base" width="full" {...storyblokEditable(blok.footer)}>
+      <Section as="footer" background="surface" contentWidth="full" {...storyblokEditable(blok.footer)}>
         {/* Footer content */}
       </Section>
     </>
@@ -146,8 +146,8 @@ export function SemanticSections({ blok }: { blok: any }) {
 export function CustomizedSection({ blok }: { blok: any }) {
   return (
     <Section 
-      layer="isolated"
-      width="wide"
+      background="tint-sage"
+      contentWidth="wide"
       align="left"
       className="elev-3"  // Custom elevation
       style={{ 

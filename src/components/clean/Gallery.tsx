@@ -4,7 +4,7 @@
 import Image from 'next/image'
 import { useEffect, useMemo, useState, type HTMLAttributes } from 'react'
 import { storyblokEditable } from '@storyblok/react/rsc'
-import Section from '@/components/ui/SectionEnhanced'
+import Section from '@/components/ui/Section'
 import WeddingGalleryModal from '@/components/gallery/WeddingGalleryModal'
 
 type GalleryItemBlok = Record<string, any>
@@ -190,23 +190,13 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
 
   const hasStoryblokGalleries = Boolean(galleries)
 
-  const headerSlotProps: HTMLAttributes<HTMLElement> = useMemo(
-    () => ({ style: { scrollMarginTop: '80px' } }),
-    []
-  )
-
-  const contentSlotProps: HTMLAttributes<HTMLElement> = useMemo(
-    () => ({ 'aria-label': 'Wedding gallery showcase' }),
-    []
-  )
-
   return (
     <>
       <Section
         id="gallery"
         as="section"
         align="center"
-        contentWrapper={true}
+        container="wrapper"
         paddingY="lg"
         background={blok?.background_variant || 'surface'}
         tone={blok?.theme_override || 'auto'}
@@ -216,8 +206,6 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
           lead: sectionDescription,
           align: 'center'
         }}
-        headerSlotProps={headerSlotProps}
-        contentSlotProps={contentSlotProps}
         className="love-stories-gallery"
         data-section="gallery"
         variant={blok?.section_variant || 'gallery-rose-grid'}

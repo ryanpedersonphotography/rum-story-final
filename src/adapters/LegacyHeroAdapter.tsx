@@ -1,4 +1,4 @@
-import Section from '@/components/layout/Section'
+import Section from '@/components/ui/Section'
 import Hero from '@/components/clean/Hero' // existing file
 
 interface LegacyHeroAdapterProps {
@@ -9,10 +9,9 @@ interface LegacyHeroAdapterProps {
 export default function LegacyHeroAdapter(props: LegacyHeroAdapterProps) {
   return (
     <Section 
-      layer="base" 
-      width="full" 
+      background="surface" 
+      contentWidth="full" 
       align="center" 
-      elevation={0}
       data-rail-offset="true"
       data-float="true"
     >

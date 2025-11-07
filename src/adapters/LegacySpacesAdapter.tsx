@@ -1,4 +1,4 @@
-import Section from '@/components/layout/Section'
+import Section from '@/components/ui/Section'
 import Spaces from '@/components/clean/Spaces' // existing file
 
 interface LegacySpacesAdapterProps {
@@ -16,19 +16,17 @@ export default function LegacySpacesAdapter(props: LegacySpacesAdapterProps) {
 
   return (
     <Section 
-      layer="partial" 
-      width="content" 
+      background="tint-rose" 
+      contentWidth="content" 
       align="center" 
-      elevation={1}
+      className="elev-1"
       data-header-placement="inside"
+      header={{
+        scriptAccent,
+        title,
+        lead,
+      }}
     >
-      {/* Section header with proper typography */}
-      <div className="section__header">
-        <span className="section__script-accent">{scriptAccent}</span>
-        <h2 className="section__title">{title}</h2>
-        <p className="section__lead">{lead}</p>
-      </div>
-
       {/* mark a neutralization boundary for legacy CSS */}
       <div data-legacy-root>
         <Spaces {...props} />

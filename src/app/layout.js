@@ -33,7 +33,7 @@ import '@/styles/components/footer.css'
 import '@/styles/components/faq.css'
 import '@/styles/components/section-layered.css'
 
-import StoryblokProvider from '@/components/StoryblokProvider';
+// import StoryblokProvider from '@/components/StoryblokProvider';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import { playfairDisplay, montserrat, dancingScript } from './fonts';
 import Navbar from '@/components/clean/Navbar';
@@ -55,7 +55,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<StoryblokProvider>
+		<>
 			<html
 				lang="en"
 				className={`${playfairDisplay.variable} ${montserrat.variable} ${dancingScript.variable}`}
@@ -73,7 +73,7 @@ export default function RootLayout({ children }) {
 
 		// Theme (light/dark)
 		var theme = params.get('theme');
-		var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
+var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
 		if(!allowedTheme){
 			allowedTheme = localStorage.getItem('rr.theme');
 			if(!allowedTheme){
@@ -108,6 +108,6 @@ export default function RootLayout({ children }) {
 					</ThemeProvider>
 				</body>
 			</html>
-		</StoryblokProvider>
+		</>
 	);
 }
