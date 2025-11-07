@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "@/components/clean/Navbar";
 import Footer from "@/components/clean/Footer";
-import GlassToolbar from "@/components/dev/GlassToolbar";
+import GlassToolbar from "@/development/GlassToolbar";
 
 interface PageTemplateProps {
   children: React.ReactNode;

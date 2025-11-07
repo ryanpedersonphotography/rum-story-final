@@ -1,5 +1,5 @@
 // =============================================
-// File: src/components/clean/CleanStoryRenderer.tsx
+// File: src/features/CleanStoryRenderer.tsx
 // Client component: initializes Storyblok (non-RSC) and renders the blok tree.
 // We KEEP your existing *Editor components* so your stories render NOW,
 // but we override specific ones (e.g., faq_accordion) with clean versions.
@@ -16,18 +16,18 @@ import RealWeddingEditor from '@/components/storyblok/RealWeddingEditor'
 import FeaturedWeddingsEditor from '@/components/storyblok/FeaturedWeddingsEditor'
 
 // --- Clean overrides (start swapping here)
-import FAQ from '@/components/clean/FAQ'
-import Hero from '@/components/clean/Hero'
-import Footer from '@/components/clean/Footer'
-import AlternatingBlocks from '@/components/clean/AlternatingBlocks'
-import Experience from '@/components/clean/Experience'
-import BrandProof from '@/components/clean/BrandProof'
-import Pricing from '@/components/clean/Pricing'
-import Gallery from '@/components/clean/Gallery'
-import Spaces from '@/components/clean/Spaces'
-import ScheduleForm from '@/components/clean/ScheduleForm'
-import Map from '@/components/clean/Map'
-import CleanStoryblokBridge from '@/components/clean/CleanStoryblokBridge'
+import FAQ from '@/features/FAQ'
+import Hero from '@/features/Hero'
+import Footer from '@/features/Footer'
+import AlternatingBlocks from '@/features/AlternatingBlocks'
+import Experience from '@/features/Experience'
+import BrandProof from '@/features/BrandProof'
+import Pricing from '@/features/Pricing'
+import Gallery from '@/features/Gallery'
+import Spaces from '@/features/Spaces'
+import ScheduleForm from '@/features/ScheduleForm'
+import Map from '@/features/Map'
+import CleanStoryblokBridge from '@/features/CleanStoryblokBridge'
 
 
 let inited = false

@@ -19,7 +19,7 @@ import FeaturedWeddingsEditor from '@/components/storyblok/FeaturedWeddingsEdito
 import SpacesEditor from '@/components/storyblok/SpacesEditor'
 
 // Clean FAQ (client)
-import FAQ from '@/components/clean/FAQ'
+import FAQ from '@/features/FAQ'
 
 // guard to avoid double-init in dev HMR
 let _initialized = false

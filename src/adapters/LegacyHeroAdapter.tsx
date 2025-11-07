@@ -1,5 +1,5 @@
 import Section from '@/components/ui/Section'
-import Hero from '@/components/clean/Hero' // existing file
+import Hero from '@/features/Hero' // existing file
 
 interface LegacyHeroAdapterProps {
   blok?: any

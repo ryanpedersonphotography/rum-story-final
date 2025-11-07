@@ -36,8 +36,8 @@ import '@/styles/components/section-layered.css'
 // import StoryblokProvider from '@/components/StoryblokProvider';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import { playfairDisplay, montserrat, dancingScript } from './fonts';
-import Navbar from '@/components/clean/Navbar';
-import ThemeSelect from '@/components/dev/ThemeSelect';
+import Navbar from '@/features/Navbar';
+import ThemeSelect from '@/development/ThemeSelect';
 
 const isDev = process.env.NODE_ENV !== 'production';
 

@@ -1,5 +1,5 @@
 import Section from '@/components/ui/Section'
-import Experience from '@/components/clean/Experience' // existing file
+import Experience from '@/features/Experience' // existing file
 
 interface LegacyExperienceAdapterProps {
   blok?: any

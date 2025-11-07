@@ -11,7 +11,7 @@ import Image from 'next/image'
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
 import { SparklesIcon, HeartIcon, CheckBadgeIcon, HomeModernIcon } from '@heroicons/react/24/outline'
-import ExperienceLayout from '@/components/layouts/ExperienceLayout'
+import ExperienceLayout from '@/features/ExperienceLayout'
 
 interface ExperienceStoryblok extends SbBlokData {
   title?: string

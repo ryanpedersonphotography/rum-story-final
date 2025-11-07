@@ -1,5 +1,5 @@
 import Section from '@/components/ui/Section'
-import Spaces from '@/components/clean/Spaces' // existing file
+import Spaces from '@/features/Spaces' // existing file
 
 interface LegacySpacesAdapterProps {
   blok?: any

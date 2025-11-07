@@ -19,7 +19,7 @@ import FeaturedWeddingsEditor from '@/components/storyblok/FeaturedWeddingsEdito
 import SpacesEditor from '@/components/storyblok/SpacesEditor'
 
 // ---- Clean components (override one by one)
-import FAQ from '@/components/clean/FAQ' // your clean FAQ (client component is fine)
+import FAQ from '@/features/FAQ' // your clean FAQ (client component is fine)
 
 // ---- Legacy/About section (RESTORED)
 import LegacyCodeSection from '@/components/storyblok/LegacyCodeSection'

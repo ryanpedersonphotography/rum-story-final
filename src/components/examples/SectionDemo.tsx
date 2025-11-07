@@ -1,6 +1,6 @@
 import { storyblokEditable } from '@storyblok/react'
 import Section from '@/components/ui/Section'
-import Hero from '@/components/clean/Hero'
+import Hero from '@/features/Hero'
 
 /**
  * Example usage of the layered Section system with Storyblok integration

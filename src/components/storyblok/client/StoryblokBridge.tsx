@@ -18,7 +18,7 @@ import FooterEditor from '@/components/storyblok/FooterEditor'
 import RealWeddingEditor from '@/components/storyblok/RealWeddingEditor'
 import FeaturedWeddingsEditor from '@/components/storyblok/FeaturedWeddingsEditor'
 import SpacesEditor from '@/components/storyblok/SpacesEditor'
-import Navbar from '@/components/clean/Navbar'
+import Navbar from '@/features/Navbar'
 
 // Initialize Storyblok for client-side rendering
 // Use PREVIEW token for draft content in Visual Editor

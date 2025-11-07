@@ -16,8 +16,8 @@ async function fetchStory(slug: string) {
   return data.story
 }
 
-import CleanStoryRenderer from '@/components/clean/CleanStoryRenderer'
-import GlassToolbar from '@/components/dev/GlassToolbar'
+import CleanStoryRenderer from '@/features/CleanStoryRenderer'
+import GlassToolbar from '@/development/GlassToolbar'
 
 export default async function HomePage() {
   const story = await fetchStory('home')
