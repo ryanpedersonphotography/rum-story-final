@@ -69,11 +69,6 @@ export default function Experience({ blok }: { blok: ExperienceStoryblok }) {
   return (
     <ExperienceLayout
       {...storyblokEditable(blok)}
-      header={{
-        scriptAccent: subtitle,
-        title: title,
-        lead: description
-      }}
       // Styling kept in code for consistency
       background="surface"     // Clean, professional
       paddingY="xl"           // Generous spacing

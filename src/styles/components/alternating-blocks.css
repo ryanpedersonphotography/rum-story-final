@@ -25,10 +25,15 @@
   gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
   margin-bottom: clamp(3.5rem, 7vw, 7.5rem);
-  background: var(--why-card);
-  border: 1px solid var(--why-border);
-  border-radius: 16px;
-  box-shadow: var(--why-shadow);
+  /* TEMPORARILY HIDDEN: Glassmorphic container effects */
+  /* background: var(--why-card); */
+  /* border: 1px solid var(--why-border); */
+  /* border-radius: 16px; */
+  /* box-shadow: var(--why-shadow); */
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
   max-width: 90%; /* Allow zigzag alignment to be visible */
 }
@@ -181,13 +186,13 @@ html[data-theme="dark"] [data-clean-root="true"] .alternating-blocks__number {
   color: var(--why-number);
 }
 
-/* Glassmorphism cards */
-html[data-theme="dark"] [data-clean-root="true"] .alternating-blocks__item {
+/* TEMPORARILY HIDDEN: Glassmorphism cards */
+/* html[data-theme="dark"] [data-clean-root="true"] .alternating-blocks__item {
   background: color-mix(in oklch, var(--surface-1) 75%, white 25%);
   backdrop-filter: blur(12px) saturate(1.12);
   border: 1px solid color-mix(in oklch, var(--accent-gold) 30%, transparent);
   box-shadow: var(--why-shadow);
-}
+} */
 
 html[data-theme="dark"] [data-clean-root="true"] .alternating-blocks__item:hover .alternating-blocks__image {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.50);
@@ -205,13 +210,13 @@ html[data-theme="dark"] [data-clean-root="true"] .alternating-blocks__item:hover
     color: var(--why-number);
   }
 
-  /* Glassmorphism cards */
-  :root:not([data-theme="light"]) [data-clean-root="true"] .alternating-blocks__item {
+  /* TEMPORARILY HIDDEN: Glassmorphism cards */
+  /* :root:not([data-theme="light"]) [data-clean-root="true"] .alternating-blocks__item {
     background: color-mix(in oklch, var(--surface-1) 75%, white 25%);
     backdrop-filter: blur(12px) saturate(1.12);
     border: 1px solid color-mix(in oklch, var(--accent-gold) 30%, transparent);
     box-shadow: var(--why-shadow);
-  }
+  } */
 
   :root:not([data-theme="light"]) [data-clean-root="true"] .alternating-blocks__item:hover .alternating-blocks__image {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.50);

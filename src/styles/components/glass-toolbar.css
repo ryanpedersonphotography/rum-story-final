@@ -203,6 +203,37 @@ html[data-theme="light"] .glass-toolbar {
     0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Logo styling */
+.glass-toolbar__logo {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--glass-toolbar-mark-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s var(--glass-toolbar-ease);
+}
+
+.glass-toolbar__logo:hover {
+  background: var(--glass-toolbar-mark-bg-hover, rgba(216, 179, 130, 0.15));
+  border-color: var(--toolbar-gold-muted);
+  transform: translateY(-1px);
+}
+
+.glass-toolbar__logo-image {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  transition: filter 0.3s var(--glass-toolbar-ease);
+}
+
+.glass-toolbar__logo:hover .glass-toolbar__logo-image {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) brightness(1.1);
+}
+
 .glass-toolbar__rail-label {
   font-size: 0.62rem;
   letter-spacing: 0.26em;

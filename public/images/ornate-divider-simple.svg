@@ -1,0 +1,52 @@
+<svg width="300" height="40" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="ornate-divider">
+  <!-- Left flourish -->
+  <g transform="translate(30, 20)">
+    <!-- Spiral curve -->
+    <path d="M0 0 Q-8 -4 -12 -6 Q-18 -8 -20 -4 Q-22 0 -20 4 Q-18 8 -12 6 Q-8 4 0 0" 
+          stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.8"/>
+    <!-- Inner detail -->
+    <path d="M-4 0 Q-8 -2 -10 -3 Q-12 -4 -10 -1 Q-8 2 -4 0" 
+          stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+    <!-- Decorative dot -->
+    <circle cx="-15" cy="0" r="1" fill="currentColor" opacity="0.5"/>
+  </g>
+
+  <!-- Right flourish (mirrored) -->
+  <g transform="translate(270, 20) scale(-1, 1)">
+    <!-- Spiral curve -->
+    <path d="M0 0 Q-8 -4 -12 -6 Q-18 -8 -20 -4 Q-22 0 -20 4 Q-18 8 -12 6 Q-8 4 0 0" 
+          stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.8"/>
+    <!-- Inner detail -->
+    <path d="M-4 0 Q-8 -2 -10 -3 Q-12 -4 -10 -1 Q-8 2 -4 0" 
+          stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+    <!-- Decorative dot -->
+    <circle cx="-15" cy="0" r="1" fill="currentColor" opacity="0.5"/>
+  </g>
+
+  <!-- Central ornament -->
+  <g transform="translate(150, 20)">
+    <!-- Central diamond/star -->
+    <path d="M0 -6 L3 0 L0 6 L-3 0 Z" 
+          stroke="currentColor" stroke-width="1" fill="currentColor" opacity="0.7"/>
+    <!-- Side flourishes -->
+    <path d="M-8 0 Q-12 -2 -15 0 Q-12 2 -8 0" 
+          stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M8 0 Q12 -2 15 0 Q12 2 8 0" 
+          stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+    <!-- Tiny decorative elements -->
+    <circle cx="-6" cy="-3" r="0.5" fill="currentColor" opacity="0.4"/>
+    <circle cx="6" cy="-3" r="0.5" fill="currentColor" opacity="0.4"/>
+    <circle cx="-6" cy="3" r="0.5" fill="currentColor" opacity="0.4"/>
+    <circle cx="6" cy="3" r="0.5" fill="currentColor" opacity="0.4"/>
+  </g>
+
+  <!-- Connecting lines -->
+  <line x1="50" y1="20" x2="120" y2="20" 
+        stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+  <line x1="180" y1="20" x2="250" y2="20" 
+        stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+  
+  <!-- Subtle decorative accents along the line -->
+  <circle cx="85" cy="20" r="0.5" fill="currentColor" opacity="0.3"/>
+  <circle cx="215" cy="20" r="0.5" fill="currentColor" opacity="0.3"/>
+</svg>

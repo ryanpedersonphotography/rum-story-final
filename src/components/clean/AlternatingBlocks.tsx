@@ -47,29 +47,29 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
 
   return (
     <Section
-      align="center"
-      contentWrapper={true}  // Use enhanced content wrapper
-      background={backgroundVariant}
-      tone={themeOverride}
-      paddingY={paddingSize}
-      divider="thread-gold"
-      variant={[
-        'alternating-blocks-luxe',  // Additional styling
-        'header-center-wide',         // Remove max-width constraint on header
-        'lead-full-width',            // Remove 48ch constraint on lead text
-        'box-sizing-content'          // Override box-sizing if needed
-      ]}
-      header={{
-        scriptAccent: blok.script_accent || 'Your Perfect Venue',
-        title: blok.title || 'Why Choose Rum River Barn',
-        lead: blok.description || 'Discover what makes our venue the perfect setting for your unforgettable celebration',
-        align: 'center'
-      }}
-      headerSlotProps={headerSlotProps}
-      className="alternating-blocks"
-      data-section="alternating-blocks"
-      {...storyblokEditable(blok)}
-    >
+        align="center"
+        contentWrapper={true}  // Use enhanced content wrapper
+        background={backgroundVariant}
+        tone={themeOverride}
+        paddingY={paddingSize}
+        divider="thread-gold"
+        variant={[
+          'alternating-blocks-luxe',  // Additional styling
+          'header-center-wide',         // Remove max-width constraint on header
+          'lead-full-width',            // Remove 48ch constraint on lead text
+          'box-sizing-content'          // Override box-sizing if needed
+        ]}
+        header={{
+          scriptAccent: blok.script_accent || 'Your Perfect Venue',
+          title: blok.title || 'Why Choose Rum River Barn',
+          lead: blok.description || 'Discover what makes our venue the perfect setting for your unforgettable celebration',
+          align: 'center'
+        }}
+        headerSlotProps={headerSlotProps}
+        className="alternating-blocks"
+        data-section="alternating-blocks"
+        {...storyblokEditable(blok)}
+      >
       <div className="alternating-blocks__container">
         {(blok.blocks || []).map((block, index) => {
           // Use alternating fallback images based on index

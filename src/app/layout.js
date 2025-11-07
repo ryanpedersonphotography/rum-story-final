@@ -8,6 +8,7 @@ import '@/styles/primitives/index.css'
 // 3. UTILITIES - Section presets and layout utilities (@layer utilities)
 import '@/styles/system/section-presets.css'
 import '@/styles/system/layout.css'
+import '@/styles/utilities/ornate-divider.css'
 
 // 4. GLOBALS - Base styles
 import '@/styles/globals.css'

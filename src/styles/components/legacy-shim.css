@@ -62,3 +62,33 @@
   display: inherit;
   gap: inherit;
 }
+
+/* Shrink Experience image by ~50% in the legacy block, desktop only */
+.section [data-legacy-root] .experience-image {
+  max-width: 50% !important;   /* use max-width so small images don't upscale */
+  width: 100%;
+  margin-inline: auto;
+  display: block;               /* ensure centering works even inside flex */
+}
+
+/* Keep it roomy on tablets/phones */
+@media (max-width: 1024px) {
+  .section [data-legacy-root] .experience-image {
+    max-width: 66% !important;
+  }
+}
+@media (max-width: 768px) {
+  .section [data-legacy-root] .experience-image {
+    max-width: 90% !important;
+  }
+}
+
+/* Reduce margin below "Why Choose Rum River Barn" header */
+.section.alternating-blocks .section__header {
+  margin-bottom: 2rem !important;
+}
+
+/* Make "Discover Our Spaces" header narrower */
+.section.spaces-section .content-wrapper {
+  margin-left: 10px !important;
+}

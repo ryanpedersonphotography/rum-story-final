@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 import {
   Squares2X2Icon,
   SparklesIcon,
@@ -9,6 +10,8 @@ import {
   CommandLineIcon,
   ArrowLeftOnRectangleIcon,
   ChevronDoubleRightIcon,
+  DocumentTextIcon,
+  QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
@@ -19,6 +22,7 @@ type ToolbarItem = {
   id: string
   label: string
   description?: string
+  href?: string
 }
 
 type ToolbarSection = {
@@ -378,10 +382,16 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
         className="glass-toolbar__rail"
       >
         <div className="glass-toolbar__rail-top">
-          <span className="glass-toolbar__mark" aria-hidden="true">
-            RR
-          </span>
-          <span className="glass-toolbar__rail-label">Navigation</span>
+          <div className="glass-toolbar__logo" aria-hidden="true">
+            <Image
+              src="/images/barn-logo.svg"
+              alt="Rum River Barn Logo"
+              width={32}
+              height={32}
+              className="glass-toolbar__logo-image"
+            />
+          </div>
+          <span className="glass-toolbar__rail-label">HOME</span>
         </div>
 
         <nav
@@ -490,6 +500,14 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
         </div>
 
         <footer className="glass-toolbar__footer">
+          <button 
+            type="button" 
+            className="glass-toolbar__footer-cta"
+            onClick={() => window.location.href = '/faq'}
+          >
+            <QuestionMarkCircleIcon aria-hidden="true" />
+            <span>FAQ</span>
+          </button>
           <button type="button" className="glass-toolbar__footer-cta">
             <ArrowLeftOnRectangleIcon aria-hidden="true" />
             <span>Sign out</span>

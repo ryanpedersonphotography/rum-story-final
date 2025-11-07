@@ -1,0 +1,98 @@
+/* ==========================================================================
+   ORNATE DIVIDER UTILITY
+   Elegant gold section divider with ornamental flourishes
+   ========================================================================== */
+
+@layer utilities {
+  
+  /* Define divider-gold if not already defined */
+  :root {
+    --divider-gold: var(--accent-gold, oklch(0.88 0.07 88));
+  }
+
+  /* Base ornate divider styling */
+  .ornate-divider {
+    color: var(--divider-gold);
+    width: 100%;
+    max-width: 400px;
+    height: 60px;
+    margin: 0 auto;
+    display: block;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+  }
+
+  /* Container for the divider */
+  .ornate-divider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: clamp(2rem, 4vw, 3rem) 0;
+    padding: 0 2rem;
+  }
+
+  /* Hover effect */
+  .ornate-divider:hover {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+
+  /* Size variants */
+  .ornate-divider--sm {
+    max-width: 300px;
+    height: 45px;
+  }
+
+  .ornate-divider--lg {
+    max-width: 500px;
+    height: 75px;
+  }
+
+  /* Detailed ornate divider - square design needs special handling */
+  .ornate-divider--detailed {
+    max-width: 150px;
+    height: 150px;
+    width: auto;
+  }
+
+  /* Theme variations */
+  [data-clean-root="true"] .ornate-divider {
+    color: var(--accent-gold);
+    opacity: 0.7;
+  }
+
+  html[data-theme="dark"] [data-clean-root="true"] .ornate-divider {
+    color: var(--accent-gold);
+    opacity: 0.8;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  }
+
+  /* Auto dark mode support */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) [data-clean-root="true"] .ornate-divider {
+      color: var(--accent-gold);
+      opacity: 0.8;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+  }
+
+  /* Responsive sizing */
+  @media (max-width: 768px) {
+    .ornate-divider {
+      max-width: 280px;
+      height: 42px;
+    }
+    
+    .ornate-divider-container {
+      margin: clamp(1.5rem, 3vw, 2rem) 0;
+      padding: 0 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ornate-divider {
+      max-width: 240px;
+      height: 36px;
+    }
+  }
+}
