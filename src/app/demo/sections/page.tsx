@@ -1,6 +1,7 @@
 import Section from '@/components/layout/Section'
 import LegacyHeroAdapter from '@/adapters/LegacyHeroAdapter'
 import LegacyExperienceAdapter from '@/adapters/LegacyExperienceAdapter'
+import LegacySpacesAdapter from '@/adapters/LegacySpacesAdapter'
 
 export default function SectionsDemo() {
   // Mock data for legacy components
@@ -24,10 +25,30 @@ export default function SectionsDemo() {
     description: 'From intimate ceremonies to grand celebrations'
   }
 
+  const mockSpacesBlok = {
+    _uid: 'demo-spaces',
+    component: 'spaces_section',
+    script_accent: 'Your Perfect Setting',
+    title: 'Discover Our Spaces', 
+    description: 'Every corner tells a story, every space creates memories',
+    spaces: [
+      {
+        _uid: 'space-1',
+        component: 'space',
+        space_name: 'The Historic Barn',
+        space_description: 'Our crown jewel, this beautifully restored barn features soaring ceilings, original timber beams, and modern amenities.',
+        space_photos: [
+          { filename: 'https://images.unsplash.com/photo-1519167758481-83f29c8e8d4b?w=800&h=600&fit=crop', alt: 'Historic barn exterior' }
+        ]
+      }
+    ]
+  }
+
   return (
     <>
       {/* Legacy Component Adapters */}
       <LegacyHeroAdapter blok={mockHeroBlok} />
+      <LegacySpacesAdapter blok={mockSpacesBlok} />
       <LegacyExperienceAdapter blok={mockExperienceBlok} />
       
       {/* Pure Section Tests */}
