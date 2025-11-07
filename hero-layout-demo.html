@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Layout Control Demo</title>
+    <style>
+        body { margin: 0; font-family: system-ui; }
+        .demo-section { padding: 2rem; border-bottom: 2px solid #ccc; }
+        .demo-title { font-size: 1.5rem; margin-bottom: 1rem; color: #333; }
+        .props { background: #f5f5f5; padding: 1rem; margin: 1rem 0; border-radius: 4px; font-family: monospace; }
+        
+        /* Mock hero styles for demo */
+        .hero-demo { 
+            min-height: 60vh; 
+            background: linear-gradient(45deg, #2c241a, #3a4a3c);
+            display: flex; 
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+        .hero-content { 
+            background: rgba(255,255,255,0.1); 
+            padding: 2rem; 
+            border-radius: 8px;
+            backdrop-filter: blur(8px);
+        }
+        
+        /* Our new layout system */
+        .hero-demo[data-content-align="left"][data-use-rails="true"] { justify-content: flex-start; }
+        .hero-demo[data-content-align="left"][data-use-rails="true"] .hero-content { 
+            text-align: left; 
+            margin-left: 120px; 
+            margin-right: auto; 
+        }
+        
+        .hero-demo[data-content-align="right"][data-use-rails="true"] { justify-content: flex-end; }
+        .hero-demo[data-content-align="right"][data-use-rails="true"] .hero-content { 
+            text-align: right; 
+            margin-right: 120px; 
+            margin-left: auto; 
+        }
+        
+        .hero-demo[data-content-align="center"] { justify-content: center; }
+        .hero-demo[data-content-align="center"] .hero-content { 
+            text-align: center; 
+            margin: 0 auto; 
+        }
+        
+        .hero-demo[data-content-width="prose"] .hero-content { max-width: 600px; }
+        .hero-demo[data-content-width="content"] .hero-content { max-width: 800px; }
+        .hero-demo[data-content-width="wide"] .hero-content { max-width: 1000px; }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; padding: 2rem;">Hero Layout Control System Demo</h1>
+    
+    <div class="demo-section">
+        <div class="demo-title">1. Default Behavior (Preserved)</div>
+        <div class="props">contentAlign="center" contentWidth="content" useRailSystem={false}</div>
+        <div class="hero-demo" data-content-align="center" data-content-width="content" data-use-rails="false">
+            <div class="hero-content">
+                <h2>Rum River Wedding Barn</h2>
+                <p>Your dream wedding venue in Minnesota. This is the default centered layout that preserves existing behavior.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <div class="demo-title">2. Left Rail Layout</div>
+        <div class="props">contentAlign="left" contentWidth="prose" useRailSystem={true}</div>
+        <div class="hero-demo" data-content-align="left" data-content-width="prose" data-use-rails="true">
+            <div class="hero-content">
+                <h2>Left-Aligned Content</h2>
+                <p>Content positioned on the left rail with prose width for optimal reading. Perfect for storytelling layouts.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <div class="demo-title">3. Right Rail Layout</div>
+        <div class="props">contentAlign="right" contentWidth="wide" useRailSystem={true}</div>
+        <div class="hero-demo" data-content-align="right" data-content-width="wide" data-use-rails="true">
+            <div class="hero-content">
+                <h2>Right-Aligned Content</h2>
+                <p>Content positioned on the right rail with wide width. Great for showcasing different perspectives or creating visual balance with left-aligned elements below.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <div class="demo-title">4. Center with Prose Width</div>
+        <div class="props">contentAlign="center" contentWidth="prose" useRailSystem={false}</div>
+        <div class="hero-demo" data-content-align="center" data-content-width="prose" data-use-rails="false">
+            <div class="hero-content">
+                <h2>Centered Prose</h2>
+                <p>Center-aligned content with prose width for better typography. Ideal for literary content or quotes.</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 2rem; text-align: center; background: #f8f9fa;">
+        <h3>✅ Implementation Complete</h3>
+        <p><strong>Phase 1:</strong> Content positioning system with rail support</p>
+        <p><strong>Phase 2 (Future):</strong> Full-viewport slideshow mode</p>
+        <p><strong>Result:</strong> Flexible layout control while preserving all existing functionality</p>
+    </div>
+</body>
+</html>

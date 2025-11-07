@@ -389,4 +389,78 @@ html[data-theme="dark"] [data-clean-root="true"] .hero-cta-secondary {
   }
 }
 
+/* ============================================================================
+   HERO LAYOUT CONTROL SYSTEM (Phase 1)
+   - Optional content positioning via data attributes
+   - Preserves all existing behavior as defaults
+   - Enables left/right rail alignment for content
+   ============================================================================ */
+
+/* Rail System: Content Width Controls */
+[data-clean-root="true"] .hero[data-use-rails="true"] .hero-content {
+  margin: 0; /* Remove auto centering when using rails */
+}
+
+/* Content Width: Prose (narrow, ~65ch) */
+[data-clean-root="true"] .hero[data-content-width="prose"] .hero-content {
+  max-width: min(65ch, 600px);
+}
+
+/* Content Width: Content (default, 800px) */
+[data-clean-root="true"] .hero[data-content-width="content"] .hero-content {
+  max-width: 800px;
+}
+
+/* Content Width: Wide (generous, 1000px) */
+[data-clean-root="true"] .hero[data-content-width="wide"] .hero-content {
+  max-width: 1000px;
+}
+
+/* Content Alignment: Left Rail */
+[data-clean-root="true"] .hero[data-content-align="left"][data-use-rails="true"] {
+  justify-content: flex-start;
+}
+[data-clean-root="true"] .hero[data-content-align="left"][data-use-rails="true"] .hero-content {
+  text-align: left;
+  margin-left: max(var(--gutter), calc((100vw - var(--page-max, 1400px)) / 2 + var(--rail-offset, 120px)));
+  margin-right: auto;
+}
+
+/* Content Alignment: Right Rail */
+[data-clean-root="true"] .hero[data-content-align="right"][data-use-rails="true"] {
+  justify-content: flex-end;
+}
+[data-clean-root="true"] .hero[data-content-align="right"][data-use-rails="true"] .hero-content {
+  text-align: right;
+  margin-right: max(var(--gutter), calc((100vw - var(--page-max, 1400px)) / 2 + var(--rail-offset, 120px)));
+  margin-left: auto;
+}
+
+/* Content Alignment: Center (enhanced - keeps existing behavior) */
+[data-clean-root="true"] .hero[data-content-align="center"] .hero-content {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Phase 2 Placeholder: Full Viewport Mode */
+/* 
+[data-clean-root="true"] .hero[data-full-viewport="true"] {
+  height: calc(100vh - var(--glass-toolbar-offset, 135px));
+  min-height: calc(100vh - var(--glass-toolbar-offset, 135px));
+}
+*/
+
+/* Mobile: Always center and stack on small screens */
+@media (max-width: 768px) {
+  [data-clean-root="true"] .hero[data-use-rails="true"] .hero-content {
+    margin-left: var(--gutter) !important;
+    margin-right: var(--gutter) !important;
+    text-align: center !important;
+  }
+  [data-clean-root="true"] .hero[data-use-rails="true"] {
+    justify-content: center !important;
+  }
+}
+
 } /* End @layer components */

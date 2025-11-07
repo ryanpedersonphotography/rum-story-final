@@ -27,6 +27,17 @@ interface HeroBlok {
   [key: string]: any
 }
 
+// Layout Control System (Phase 1: Content Positioning)
+export interface HeroLayoutProps {
+  /** Content alignment - where to position the hero content */
+  contentAlign?: 'left' | 'center' | 'right'
+  /** Content width constraint for typography and readability */
+  contentWidth?: 'prose' | 'content' | 'wide'
+  /** Use modern rail-based positioning system */
+  useRailSystem?: boolean
+  // Phase 2 (Future): fullViewport?: boolean  // Full-screen slideshow experience
+}
+
 function assetUrl(a: SBAsset): string | undefined {
   if (!a) return undefined
   if (typeof a === 'string') return a
@@ -38,7 +49,12 @@ function assetAlt(a: SBAsset, fallback: string): string {
   return a.alt || fallback
 }
 
-export default function Hero({ blok }: { blok: HeroBlok }) {
+export default function Hero({ 
+  blok,
+  contentAlign = 'center',
+  contentWidth = 'content', 
+  useRailSystem = false 
+}: { blok: HeroBlok } & HeroLayoutProps) {
   const bg =
     assetUrl(blok.background_image) ||
     assetUrl(blok.hero_image) ||
@@ -81,7 +97,15 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
   }
 
   return (
-    <section className="hero" data-section="hero" style={style} {...storyblokEditable(blok)}>
+    <section 
+      className="hero" 
+      data-section="hero" 
+      data-content-align={contentAlign}
+      data-content-width={contentWidth}
+      data-use-rails={useRailSystem ? 'true' : 'false'}
+      style={style} 
+      {...storyblokEditable(blok)}
+    >
       <span className="sr-only">{bgAlt}</span>
 
       <div className="hero-content">
