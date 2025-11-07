@@ -9,7 +9,7 @@
   --toolbar-gold-bright: oklch(0.92 0.09 88);
   --toolbar-gold-muted: oklch(0.75 0.06 88);
   
-  --glass-toolbar-rail-width: 110px;
+  --glass-toolbar-rail-width: 135px;
   --glass-toolbar-panel-width: 380px;
   --glass-toolbar-offset: var(--glass-toolbar-rail-width);
   --glass-toolbar-shadow: 0 24px 56px rgba(0, 0, 0, 0.12);
