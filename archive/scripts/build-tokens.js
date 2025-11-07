@@ -23,7 +23,7 @@ console.log('');
 
 // Style Dictionary v4 configuration
 const sd = new StyleDictionary({
-  source: ['tokens/design-tokens.json'],
+  source: ['tokens/design-tokens.json', 'tokens/spacing.tokens.json'],
   platforms: {
     css: {
       transformGroup: 'css',
