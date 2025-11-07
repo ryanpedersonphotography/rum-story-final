@@ -1,8 +1,36 @@
 import Section from '@/components/layout/Section'
+import LegacyHeroAdapter from '@/adapters/LegacyHeroAdapter'
+import LegacyExperienceAdapter from '@/adapters/LegacyExperienceAdapter'
 
 export default function SectionsDemo() {
+  // Mock data for legacy components
+  const mockHeroBlok = {
+    _uid: 'demo-hero',
+    component: 'hero',
+    kicker: 'Rum River Barn',
+    title: 'Your Perfect Wedding',
+    title_accent: 'Starts Here',
+    description: 'Experience elegance and romance at our premier venue',
+    bg_image: {
+      filename: 'https://images.unsplash.com/photo-1519167758481-83f29c8e8d4b?w=1920&h=1080&fit=crop',
+      alt: 'Wedding venue hero'
+    }
+  }
+
+  const mockExperienceBlok = {
+    _uid: 'demo-experience', 
+    component: 'experience',
+    title: 'The Complete Experience',
+    description: 'From intimate ceremonies to grand celebrations'
+  }
+
   return (
     <>
+      {/* Legacy Component Adapters */}
+      <LegacyHeroAdapter blok={mockHeroBlok} />
+      <LegacyExperienceAdapter blok={mockExperienceBlok} />
+      
+      {/* Pure Section Tests */}
       <Section layer="base" width="content" align="center" elevation={0}>
         <div style={{padding:'2rem 0'}}>
           <h2>Section System Smoke Test</h2>

@@ -15,6 +15,7 @@ import '@/styles/globals.css'
 // 5. COMPONENTS - Component-specific styles (@layer components)
 import '@/styles/components/buttons.css'
 import '@/styles/components/section.css'
+import '@/styles/components/legacy-shim.css'
 import '@/styles/components/section.variants.css'
 import '@/styles/components/section.wrapper.css'
 import '@/styles/components/navbar.css'

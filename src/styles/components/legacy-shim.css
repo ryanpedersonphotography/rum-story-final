@@ -1,0 +1,64 @@
+/* ==========================================================================
+   LEGACY COMPONENT SHIM - Neutralizes old wrappers inside new Section system
+   ========================================================================== */
+
+/* Make legacy shells inert inside Section */
+.section [data-legacy-root] .container,
+.section [data-legacy-root] .wrapper,
+.section [data-legacy-root] .section,
+.section [data-legacy-root] [class*="container"],
+.section [data-legacy-root] [class*="wrapper"] {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Let the Section control width; keep inner content comfy */
+.section [data-legacy-root] {
+  padding-inline: 0;
+}
+
+/* Kill nth-child "alternating" tricks that fight explicit layout */
+.section [data-legacy-root] [class*="alternating"] :is([class*="item"], section) {
+  /* no alternation here; actual alternating logic is gone */
+}
+
+/* Headings and paragraphs: harmonize spacing without rewriting */
+.section [data-legacy-root] :is(h1,h2,h3,h4,h5,h6) {
+  margin: 0 0 var(--space-16, 1rem);
+}
+
+.section [data-legacy-root] p {
+  margin: 0 0 var(--space-12, 0.75rem);
+}
+
+/* Images that used full-bleed wrappers */
+.section [data-legacy-root] img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Neutralize old section padding systems */
+.section [data-legacy-root] .rr-section,
+.section [data-legacy-root] [class*="section__"] {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Let Section handle background layers */
+.section [data-legacy-root] [class*="bg-"],
+.section [data-legacy-root] [style*="background"] {
+  background: transparent !important;
+}
+
+/* Grid/flex containers inside legacy - keep their internal logic */
+.section [data-legacy-root] [class*="grid"],
+.section [data-legacy-root] [class*="flex"],
+.section [data-legacy-root] .cards,
+.section [data-legacy-root] .items {
+  /* preserve internal layout */
+  display: inherit;
+  gap: inherit;
+}
