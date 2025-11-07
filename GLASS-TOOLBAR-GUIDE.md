@@ -384,7 +384,241 @@ root.style.setProperty('--glass-toolbar-offset', expanded ? expandedWidth : rail
 
 ## 🎯 Quick Customization Recipes
 
-### Recipe 1: Wider Rail
+### Recipe 1: Premium Walnut & Gold Theme (Dark)
+Complete premium dark theme with rich walnut tones and gold accents:
+
+```css
+:root {
+  /* Premium walnut & gold theme colors */
+  --walnut-dark: #191410;
+  --walnut-darker: #0f0c0a;
+  --walnut-darkest: #080605;
+  --walnut-medium: #2a201a;
+  --walnut-highlight: #3d2f25;
+  --toolbar-gold: oklch(0.88 0.07 88);
+  --toolbar-gold-bright: oklch(0.92 0.09 88);
+  --toolbar-gold-muted: oklch(0.75 0.06 88);
+  
+  --glass-toolbar-rail-width: 135px;
+  
+  /* Premium dark theme with walnut & gold */
+  --glass-toolbar-frost-tint: 25, 20, 16; /* Walnut base */
+  --glass-toolbar-frost-accent: 216, 179, 130; /* Gold accent */
+  --glass-toolbar-frost-dark: 0, 0, 0; /* Shadow base */
+  
+  /* Premium rail with walnut gradient background */
+  --glass-toolbar-rail-bg: linear-gradient(
+    90deg,
+    rgba(25, 20, 16, 0.92) 0%,
+    rgba(25, 20, 16, 0.88) 30%,
+    rgba(42, 32, 26, 0.85) 70%,
+    rgba(15, 12, 10, 0.95) 100%
+  );
+  --glass-toolbar-rail-border: var(--toolbar-gold-muted);
+  --glass-toolbar-rail-text: rgba(255, 255, 255, 0.92);
+  --glass-toolbar-rail-label: rgba(255, 255, 255, 0.45);
+  
+  /* Premium panel with walnut gradient */
+  --glass-toolbar-panel-bg: linear-gradient(
+    90deg,
+    rgba(15, 12, 10, 0.88) 0%,
+    rgba(25, 20, 16, 0.82) 50%,
+    rgba(8, 6, 5, 0.9) 100%
+  );
+  --glass-toolbar-panel-border: var(--toolbar-gold-muted);
+}
+
+/* Enhanced glassmorphism effects */
+.glass-toolbar__rail {
+  backdrop-filter: blur(20px) saturate(1.4) contrast(1.05);
+  box-shadow: 
+    inset 2px 0 3px rgba(255, 255, 255, 0.05),
+    inset -2px 0 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2),
+    4px 0 24px rgba(0, 0, 0, 0.4),
+    2px 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Glowing gold accent stripe */
+.glass-toolbar__rail::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+  right: -1px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--toolbar-gold-muted) 15%,
+    var(--toolbar-gold) 50%,
+    var(--toolbar-gold-muted) 85%,
+    transparent 100%
+  );
+  opacity: 0.9;
+  filter: drop-shadow(0 0 4px var(--toolbar-gold));
+}
+```
+
+### Recipe 2: Clean White Glass Theme (Light)
+Elegant light theme with pristine white glass and gold accents:
+
+```css
+:root:not([data-theme="dark"]) .glass-toolbar,
+html[data-theme="light"] .glass-toolbar {
+  /* Light theme with clean white/glass tones */
+  --glass-toolbar-frost-tint: 255, 255, 255; /* Pure white base */
+  --glass-toolbar-frost-accent: 216, 179, 130; /* Gold accent */
+  
+  /* Clean white glass rail */
+  --glass-toolbar-rail-bg: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.65) 30%,
+    rgba(248, 248, 248, 0.70) 70%,
+    rgba(255, 255, 255, 0.80) 100%
+  );
+  --glass-toolbar-rail-overlay: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(248, 248, 248, 0.2) 40%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  --glass-toolbar-rail-border: var(--toolbar-gold);
+  --glass-toolbar-rail-text: rgba(0, 0, 0, 0.85);
+  --glass-toolbar-rail-label: rgba(0, 0, 0, 0.45);
+  
+  /* Clean white glass panel */
+  --glass-toolbar-panel-bg: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(248, 248, 248, 0.80) 50%,
+    rgba(255, 255, 255, 0.90) 100%
+  );
+  --glass-toolbar-panel-border: var(--toolbar-gold);
+  
+  /* Interactive elements */
+  --glass-toolbar-mark-bg: rgba(255, 255, 255, 0.20);
+  --glass-toolbar-pill-bg: rgba(255, 255, 255, 0.15);
+  --glass-toolbar-pill-hover-bg: rgba(255, 255, 255, 0.30);
+  --glass-toolbar-pill-active-bg: rgba(255, 255, 255, 0.40);
+  
+  /* Text colors for white backgrounds */
+  --glass-toolbar-panel-text: rgba(0, 0, 0, 0.85);
+  --glass-toolbar-panel-muted: rgba(0, 0, 0, 0.58);
+  --glass-toolbar-subnav-text: rgba(0, 0, 0, 0.88);
+  --glass-toolbar-subnav-subtext: rgba(0, 0, 0, 0.58);
+  --glass-toolbar-subnav-hover-bg: rgba(255, 255, 255, 0.20);
+  --glass-toolbar-footer-bg: rgba(255, 255, 255, 0.15);
+  --glass-toolbar-footer-hover-bg: rgba(255, 255, 255, 0.25);
+}
+```
+
+### Recipe 3: Complete Dual-Theme Setup
+Implement both premium themes with automatic theme switching:
+
+```css
+:root {
+  /* Global theme colors */
+  --walnut-dark: #191410;
+  --walnut-darker: #0f0c0a;
+  --walnut-darkest: #080605;
+  --walnut-medium: #2a201a;
+  --walnut-highlight: #3d2f25;
+  --toolbar-gold: oklch(0.88 0.07 88);
+  --toolbar-gold-bright: oklch(0.92 0.09 88);
+  --toolbar-gold-muted: oklch(0.75 0.06 88);
+  
+  --glass-toolbar-rail-width: 135px;
+  --glass-toolbar-panel-width: 380px;
+  
+  /* Dark theme (default) - Premium walnut */
+  --glass-toolbar-frost-tint: 25, 20, 16;
+  --glass-toolbar-frost-accent: 216, 179, 130;
+  --glass-toolbar-frost-dark: 0, 0, 0;
+  
+  --glass-toolbar-rail-bg: linear-gradient(
+    90deg,
+    rgba(25, 20, 16, 0.92) 0%,
+    rgba(25, 20, 16, 0.88) 30%,
+    rgba(42, 32, 26, 0.85) 70%,
+    rgba(15, 12, 10, 0.95) 100%
+  );
+  --glass-toolbar-panel-bg: linear-gradient(
+    90deg,
+    rgba(15, 12, 10, 0.88) 0%,
+    rgba(25, 20, 16, 0.82) 50%,
+    rgba(8, 6, 5, 0.9) 100%
+  );
+  --glass-toolbar-rail-border: var(--toolbar-gold-muted);
+  --glass-toolbar-rail-text: rgba(255, 255, 255, 0.92);
+}
+
+/* Light theme override - Clean white glass */
+:root:not([data-theme="dark"]) .glass-toolbar,
+html[data-theme="light"] .glass-toolbar {
+  --glass-toolbar-frost-tint: 255, 255, 255;
+  
+  --glass-toolbar-rail-bg: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.65) 30%,
+    rgba(248, 248, 248, 0.70) 70%,
+    rgba(255, 255, 255, 0.80) 100%
+  );
+  --glass-toolbar-panel-bg: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(248, 248, 248, 0.80) 50%,
+    rgba(255, 255, 255, 0.90) 100%
+  );
+  --glass-toolbar-rail-border: var(--toolbar-gold);
+  --glass-toolbar-rail-text: rgba(0, 0, 0, 0.85);
+  --glass-toolbar-pill-bg: rgba(255, 255, 255, 0.15);
+  --glass-toolbar-pill-hover-bg: rgba(255, 255, 255, 0.30);
+  --glass-toolbar-pill-active-bg: rgba(255, 255, 255, 0.40);
+}
+
+/* Enhanced glassmorphism for both themes */
+.glass-toolbar__rail {
+  backdrop-filter: blur(20px) saturate(1.4) contrast(1.05);
+  box-shadow: 
+    inset 2px 0 3px rgba(255, 255, 255, 0.05),
+    inset -2px 0 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2),
+    4px 0 24px rgba(0, 0, 0, 0.4),
+    2px 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Gold accent stripe for both themes */
+.glass-toolbar__rail::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+  right: -1px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--toolbar-gold-muted) 15%,
+    var(--toolbar-gold) 50%,
+    var(--toolbar-gold-muted) 85%,
+    transparent 100%
+  );
+  opacity: 0.9;
+  filter: drop-shadow(0 0 4px var(--toolbar-gold));
+}
+```
+
+**Usage:**
+- Automatically switches between walnut (dark) and white (light) themes
+- Maintains gold accents and premium effects in both modes
+- Perfect for sites with theme toggle functionality
+
+### Recipe 4: Wider Rail
 ```css
 :root {
   --glass-toolbar-rail-width: 150px;
