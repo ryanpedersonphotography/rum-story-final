@@ -36,7 +36,7 @@ import RealWeddingEditor from '@/components/storyblok/RealWeddingEditor'
 import FeaturedWeddingsEditor from '@/components/storyblok/FeaturedWeddingsEditor'
 import SpacesEditor from '@/components/storyblok/SpacesEditor'
 
-export default function StoryblokProvider({ children }) {
+export default function StoryblokProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const initialized = useRef(false)
 

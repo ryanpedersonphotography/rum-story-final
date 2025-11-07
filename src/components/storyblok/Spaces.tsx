@@ -1,7 +1,29 @@
 import Image from 'next/image'
 import { storyblokEditable } from '@storyblok/react/rsc'
 
-export default function Spaces({ blok }) {
+interface Space {
+  _uid: string;
+  image: {
+    filename: string;
+    alt?: string;
+  };
+  title: string;
+  description: string;
+  features: { text: string }[];
+  link: {
+    url: string;
+    target?: string;
+    text?: string;
+  };
+}
+
+interface SpacesBlok {
+  title?: string;
+  description?: string;
+  spaces: Space[];
+}
+
+export default function Spaces({ blok }: { blok: SpacesBlok }) {
   return (
     <section 
       className="spaces-section"
