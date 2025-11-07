@@ -186,8 +186,8 @@ html[data-theme="light"] .glass-toolbar {
 .glass-toolbar__mark {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 14px;
   background: var(--glass-toolbar-mark-bg);
   backdrop-filter: blur(12px);
@@ -236,8 +236,8 @@ html[data-theme="light"] .glass-toolbar {
 }
 
 .glass-toolbar__pill-icon-wrapper {
-  width: 56px;
-  height: 32px;
+  width: 64px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -257,8 +257,8 @@ html[data-theme="light"] .glass-toolbar {
 }
 
 .glass-toolbar__pill-icon-wrapper svg {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   color: inherit;
 }
 
@@ -343,8 +343,8 @@ html[data-theme="light"] .glass-toolbar {
 .glass-toolbar__toggle {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   border: 1px solid var(--glass-toolbar-chip-border);
   background: rgba(255, 255, 255, 0.08);
@@ -362,8 +362,8 @@ html[data-theme="light"] .glass-toolbar {
 }
 
 .glass-toolbar__toggle svg {
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
   transition: transform 240ms var(--glass-toolbar-ease);
 }
 
