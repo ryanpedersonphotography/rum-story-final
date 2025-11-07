@@ -1,405 +1,130 @@
-/* ==========================================================================
-   UNIFIED SECTION SYSTEM (scoped to /clean via [data-clean-root="true"])
-   - Token-driven layout & spacing
-   - Rail-based left alignment system
-   - Props-based variations via data attributes
-   ========================================================================== */
+:root {
+  /* Site-wide layout tokens */
+  --gutter: clamp(16px, 4vw, 32px);
+  --rail-height: 64px; /* match your glass rail */
+  --elev-0: none;
+  --elev-1: 0 4px 14px rgba(0,0,0,.08);
+  --elev-2: 0 10px 28px rgba(0,0,0,.12);
+  --elev-3: 0 20px 48px rgba(0,0,0,.18);
+}
 
-@layer components {
-
-/* ===== Base Section ===== */
-[data-clean-root="true"] .section {
+/* Base */
+.section {
   position: relative;
   width: 100%;
-  margin: 0;
-  overflow: clip; /* Bleed guard: prevent horizontal scroll */
-  contain: paint; /* Bleed guard: safer stacking context */
+  padding-block: var(--space-48, 3rem);
+  /* remove inline padding so backgrounds can go edge-to-edge */
+  padding-inline: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  /* safe stacking for overlaps */
+  z-index: 0;
 }
 
-/* ===== Container Queries (opt-in, feature-flagged) ===== */
-/* Enable container-based responsiveness when data-cq="on" */
-@supports (container-type: inline-size) {
-  [data-clean-root="true"] .section[data-cq="on"] {
-    container-type: inline-size;
-    container-name: section;
-  }
+.section__inner { width: 100%; height: 100%; }
 
-  /* Enable container queries on content rail for fine-grained control */
-  [data-clean-root="true"] .section[data-cq="on"] .section__rail--content {
-    container-type: inline-size;
-    container-name: content-rail;
-  }
-}
-
-/* ===== Vertical Padding Presets ===== */
-[data-clean-root="true"] .section[data-padding-y="xs"] {
-  padding: var(--pad-section-xs) 0;
-}
-
-[data-clean-root="true"] .section[data-padding-y="sm"] {
-  padding: var(--pad-section-sm) 0;
-}
-
-[data-clean-root="true"] .section[data-padding-y="md"] {
-  padding: var(--pad-section-md) 0;
-}
-
-[data-clean-root="true"] .section[data-padding-y="lg"] {
-  padding: var(--pad-section-lg) 0;
-}
-
-[data-clean-root="true"] .section[data-padding-y="xl"] {
-  padding: var(--pad-section-xl) 0;
-}
-
-[data-clean-root="true"] .section[data-padding-y="fluid"] {
-  padding: var(--pad-section-fluid) 0;
-}
-
-/* ===== Hero Height ===== */
-[data-clean-root="true"] .section[data-height="screen"] {
-  min-height: 100vh;
-  display: grid;
-  align-content: center; /* vertically centers stacked rails */
-}
-
-/* ===== Background Variations ===== */
-[data-clean-root="true"] .section[data-bg="surface"] {
-  background: var(--bg-surface);
-}
-
-[data-clean-root="true"] .section[data-bg="tint-rose"] {
-  background: var(--bg-tint-rose);
-}
-
-[data-clean-root="true"] .section[data-bg="tint-sage"] {
-  background: var(--bg-tint-sage);
-}
-
-[data-clean-root="true"] .section[data-bg="dark-gradient"] {
-  background: var(--bg-dark-grad);
-}
-
-[data-clean-root="true"] .section[data-bg="image"] {
-  /* Background image set via inline style in component */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* ===== Tone Hints (for text color adaptation + button contrast) ===== */
-[data-clean-root="true"] .section[data-tone="dark"] {
-  color: var(--theme-text-on-dark, #FFF8E7);
-}
-
-[data-clean-root="true"] .section[data-tone="light"] {
-  color: var(--theme-text-primary, #6B4E3D);
-}
-
-[data-clean-root="true"] .section[data-tone="auto"] {
-  color: inherit;
-}
-
-/* Strict tone cascade for titles/lead on dark backgrounds */
-[data-clean-root="true"] .section[data-tone="dark"] .section__title,
-[data-clean-root="true"] .section[data-tone="dark"] .section__lead,
-[data-clean-root="true"] .section[data-tone="dark"] .section__script-accent {
-  color: var(--theme-text-on-dark, #FFF8E7);
-}
-
-/* With overlay, ensure sufficient contrast for readability */
-[data-clean-root="true"] .section[data-overlay="soft"] .section__title,
-[data-clean-root="true"] .section[data-overlay="strong"] .section__title {
-  color: var(--theme-text-on-dark, #FFF8E7);
-  text-shadow: 0 2px 8px rgba(0,0,0,.6);
-}
-
-[data-clean-root="true"] .section[data-overlay="soft"] .section__lead,
-[data-clean-root="true"] .section[data-overlay="strong"] .section__lead {
-  color: var(--theme-text-on-dark, #FFF8E7);
-  text-shadow: 0 1px 4px rgba(0,0,0,.5);
-}
-
-/* ===== Overlay Layer (for background images) ===== */
-[data-clean-root="true"] .section__overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-[data-clean-root="true"] .section__overlay[data-overlay="soft"] {
-  background: var(--overlay-soft);
-}
-
-[data-clean-root="true"] .section__overlay[data-overlay="strong"] {
-  background: var(--overlay-strong);
-}
-
-/* ===== Dual Rail System (Independent Header + Content Widths) ===== */
-/* Each rail (header, content, actions) has independent width control via data-width attr */
-[data-clean-root="true"] .section__rail {
-  position: relative;
-  z-index: 2;
+/* Content container gains the horizontal gutter and max-width */
+.section__container {
   width: 100%;
+  max-width: var(--width-content, 1200px);
   margin-inline: auto;
-  padding-inline: 0;  /* Set per-alignment below */
-}
-
-/* Rail width: do NOT include gutter in max-width */
-[data-clean-root="true"] .section__rail[data-width="prose"]   { max-width: var(--rail-prose); }
-[data-clean-root="true"] .section__rail[data-width="content"] { max-width: var(--rail-content); }
-[data-clean-root="true"] .section__rail[data-width="wide"]    { max-width: var(--rail-wide); }
-[data-clean-root="true"] .section__rail[data-width="full"]    { max-width: none; }
-
-/* Left: rail hugs the left edge; gutter lives on the left only */
-[data-clean-root="true"] .section[data-align="left"] .section__rail {
-  margin-left: 0;
-  margin-right: auto;
-  padding-inline-start: var(--rail-gutter);
-  padding-inline-end: 0;
-}
-
-/* Right: rail hugs the right edge; gutter lives on the right only */
-[data-clean-root="true"] .section[data-align="right"] .section__rail {
-  margin-left: auto;
-  margin-right: 0;
-  padding-inline-start: 0;
-  padding-inline-end: var(--rail-gutter);
-}
-
-/* Center: symmetric gutter both sides */
-[data-clean-root="true"] .section[data-align="center"] .section__rail {
-  margin-inline: auto;
-  padding-inline: var(--rail-gutter);
-}
-
-/* Bleed mode (full viewport width with breakout) */
-[data-clean-root="true"] .section[data-bleed="true"] {
-  width: 100vw;
-  max-width: none;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-}
-
-/* ===== Header ===== */
-[data-clean-root="true"] .section__header {
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-[data-clean-root="true"] .section__header[data-align="center"] {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 900px;
-}
-
-[data-clean-root="true"] .section__header[data-align="left"] {
-  text-align: left;
-  /* Left-aligned headers use rail-gutter offset for alignment */
-}
-
-[data-clean-root="true"] .section__header[data-align="right"] {
-  text-align: right;
-  /* Right-aligned headers use rail-gutter offset for alignment */
-}
-
-/* Script accent */
-[data-clean-root="true"] .section__script-accent {
-  font-family: var(--font-script, 'Dancing Script', cursive);
-  color: var(--theme-accent-rose, #9D6B7B);
-  font-size: clamp(1.5rem, 3.2vw, 1.75rem);
-  margin-bottom: var(--space-12);
-  font-weight: 400;
-}
-
-/* Title */
-[data-clean-root="true"] .section__title {
-  font-family: var(--font-serif, 'Playfair Display', serif);
-  font-size: clamp(2.25rem, 4.8vw, 3rem);
-  color: inherit;
-  margin: 0 0 var(--space-12);
-  font-weight: 400;
-  line-height: 1.2;
-}
-
-/* Lead text */
-[data-clean-root="true"] .section__lead {
-  color: var(--theme-text-secondary, #8B7355);
-  font-size: clamp(1rem, 2.4vw, 1.125rem);
-  line-height: 1.7;
-  max-width: 48ch;
-  margin: 0;
-}
-
-/* Center-aligned lead text */
-[data-clean-root="true"] .section__header[data-align="center"] .section__lead {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ===== Content ===== */
-/* Content alignment for rail mode */
-[data-clean-root="true"] .section[data-align="center"] .section__content {
-  text-align: center;
-}
-
-[data-clean-root="true"] .section[data-align="center"] .section__content > * {
-  margin-inline: auto;
-}
-
-[data-clean-root="true"] .section[data-align="left"] .section__content {
-  text-align: left;
-}
-
-[data-clean-root="true"] .section[data-align="right"] .section__content {
-  text-align: right;
-}
-
-/* ===== Actions (Buttons, Links) ===== */
-[data-clean-root="true"] .section__actions {
-  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-inline: var(--gutter);
   display: flex;
-  gap: var(--space-16);
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-[data-clean-root="true"] .section__actions[data-align="center"] {
-  justify-content: center;
+/* LAYERS */
+.section[data-layer="base"] { background: transparent; }
+
+.section[data-layer="partial"] {
+  background: var(--surface-1, color-mix(in oklch, Canvas 96%, black 4%));
 }
 
-[data-clean-root="true"] .section__actions[data-align="left"] {
-  justify-content: flex-start;
+.section[data-layer="isolated"] {
+  background: var(--surface-2, Canvas);
+  border-radius: var(--radius-12, .75rem);
+  /* keep a little air so isolated blocks don't kiss edges */
+  margin-inline: var(--gutter);
+  /* isolated should also own its padding so its bg breathes */
+  padding-block: clamp(24px, 6vw, 64px);
 }
 
-[data-clean-root="true"] .section__actions[data-align="right"] {
-  justify-content: flex-end;
+/* WIDTHS */
+.section[data-width="prose"] .section__container { max-width: var(--width-prose, 65ch); }
+.section[data-width="content"] .section__container { max-width: var(--width-content, 1200px); }
+.section[data-width="wide"] .section__container { max-width: var(--width-wide, 1400px); }
+.section[data-width="full"] .section__container { max-width: none; padding-inline: 0; }
+
+/* ALIGN */
+.section[data-align="left"] .section__container { align-items: flex-start; text-align: left; }
+.section[data-align="center"] .section__container { align-items: center; text-align: center; }
+.section[data-align="right"] .section__container { align-items: flex-end; text-align: right; }
+
+/* ELEVATION (tokenized) */
+.section[data-elevation="0"] { box-shadow: var(--elev-0); }
+.section[data-elevation="1"] { box-shadow: var(--elev-1); }
+.section[data-elevation="2"] { box-shadow: var(--elev-2); }
+.section[data-elevation="3"] { box-shadow: var(--elev-3); }
+
+/* RAIL OFFSET (optional) */
+.section[data-rail-offset="true"] {
+  margin-top: calc(var(--rail-height) * -1);
+  padding-top: calc(var(--rail-height) + var(--space-24, 1.5rem));
 }
 
-/* ===== Dividers ===== */
-[data-clean-root="true"] .section__divider {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  pointer-events: none;
+/* OVERLAPS (magazine feel) */
+.section[data-overlap="top"] { margin-top: -clamp(8px, 2vw, 28px); }
+.section[data-overlap="bottom"] { margin-bottom: -clamp(8px, 2vw, 28px); }
+
+/* FLOAT ABOVE (hero special) */
+.section[data-float="true"] { z-index: 2; position: relative; }
+
+/* HEADER PLACEMENT - for magazine-style layouts */
+.section[data-header-placement="outside"] {
+  /* When header sits outside/above the section background */
+  padding-top: 0;
 }
 
-/* Position divider at bottom by default */
-[data-clean-root="true"] .section__divider[data-divider="hairline"],
-[data-clean-root="true"] .section__divider[data-divider="thread-gold"] {
-  bottom: 0;
+.section[data-header-placement="outside"] .section__container {
+  position: relative;
 }
 
-[data-clean-root="true"] .section__divider[data-divider="hairline"] {
-  background: var(--divider-hairline);
+.section[data-header-placement="outside"] .section__container > :first-child {
+  /* First child (typically header/title) gets negative margin to sit outside */
+  margin-top: calc(-1 * var(--space-32, 2rem));
+  margin-bottom: var(--space-24, 1.5rem);
 }
 
-[data-clean-root="true"] .section__divider[data-divider="thread-gold"] {
-  background: var(--divider-gold);
-  height: 2px;
+/* Inside is default - header sits within section padding */
+.section[data-header-placement="inside"] {
+  /* explicit default, header stays within normal flow */
 }
 
-/* Old rail system removed - now using dual rail system above */
-
-/* ============================================================================
-   Dark Mode Adaptations
-   ============================================================================ */
-
-/* Explicit dark mode */
-html[data-theme="dark"] [data-clean-root="true"] .section[data-tone="auto"] {
-  color: var(--theme-text-on-dark, #FFF8E7);
-}
-
-html[data-theme="dark"] [data-clean-root="true"] .section__lead {
-  color: var(--theme-text-secondary-dark, #E8D4BC);
-}
-
-/* Auto dark mode (OS preference) */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) [data-clean-root="true"] .section[data-tone="auto"] {
-    color: var(--theme-text-on-dark, #FFF8E7);
-  }
-
-  :root:not([data-theme="light"]) [data-clean-root="true"] .section__lead {
-    color: var(--theme-text-secondary-dark, #E8D4BC);
-  }
-}
-
-/* ============================================================================
-   Responsive Adjustments
-   ============================================================================ */
-
+/* MOBILE */
 @media (max-width: 768px) {
-  [data-clean-root="true"] .section__header {
-    margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  .section { padding-block: var(--space-32, 2rem); }
+  .section__container { padding-inline: calc(var(--gutter) * .75); }
+
+  .section[data-layer="isolated"] {
+    border-radius: var(--radius-8, .5rem);
+    margin-inline: calc(var(--gutter) * .5);
   }
 
-  [data-clean-root="true"] .section__actions {
-    margin-top: clamp(1rem, 2vw, 1.5rem);
-    flex-direction: column;
-    align-items: stretch;
-  }
+  /* attenuate elevation one step */
+  .section[data-elevation="1"] { box-shadow: var(--elev-0); }
+  .section[data-elevation="2"] { box-shadow: var(--elev-1); }
+  .section[data-elevation="3"] { box-shadow: var(--elev-2); }
 
-  [data-clean-root="true"] .section__actions[data-align="center"] {
-    align-items: center;
+  /* rail offset not needed on mobile if the rail collapses */
+  .section[data-rail-offset="true"] {
+    margin-top: 0;
+    padding-top: var(--space-24, 1.5rem);
   }
-
-  [data-clean-root="true"] .section__actions[data-align="left"] {
-    align-items: flex-start;
-  }
-
-  [data-clean-root="true"] .section__actions[data-align="right"] {
-    align-items: flex-end;
-  }
-}
-
-@media (max-width: 480px) {
-  [data-clean-root="true"] .section__title {
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
-  }
-
-  [data-clean-root="true"] .section__script-accent {
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
+  
+  /* reduce header outside offset on mobile */
+  .section[data-header-placement="outside"] .section__container > :first-child {
+    margin-top: calc(-1 * var(--space-16, 1rem));
+    margin-bottom: var(--space-16, 1rem);
   }
 }
-
-/* ============================================================================
-   Accessibility
-   ============================================================================ */
-
-/* Focus visibility */
-[data-clean-root="true"] .section:focus-visible {
-  outline: 3px solid var(--focus-ring, var(--theme-accent-gold));
-  outline-offset: 3px;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  [data-clean-root="true"] .section,
-  [data-clean-root="true"] .section * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  [data-clean-root="true"] .section[data-bg="image"] {
-    background-attachment: scroll !important;
-  }
-}
-
-/* ============================================================================
-   Variant Hooks (optional flourishes per variant)
-   ============================================================================ */
-
-/* Home hero 2024 - tighter letter spacing */
-[data-clean-root="true"] .section[data-variant="home-hero-2024"] .section__title {
-  letter-spacing: .01em;
-}
-
-/* Alternating blocks luxe - balanced text wrapping */
-[data-clean-root="true"] .section[data-variant="alternating-blocks-luxe"] .section__title {
-  text-wrap: balance;
-}
-
-} /* End @layer components */
