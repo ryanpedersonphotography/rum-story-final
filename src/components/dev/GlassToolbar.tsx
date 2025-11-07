@@ -14,7 +14,6 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 import { cx } from '@/lib/react-interop'
 import '@/styles/components/glass-toolbar.css'
-import ThemeToggle from '@/components/ThemeToggle'
 
 type ToolbarItem = {
   id: string
@@ -415,7 +414,7 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
         </nav>
 
         <div className="glass-toolbar__rail-footer">
-          <ThemeToggle variant="toolbar" className="glass-toolbar__theme-toggle" />
+          <div className="theme-toggle-placeholder theme-toggle-placeholder--toolbar glass-toolbar__theme-toggle" />
           <button
             type="button"
             className="glass-toolbar__toggle"
