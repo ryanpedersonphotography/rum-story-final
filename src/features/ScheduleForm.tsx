@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
+import styles from './ScheduleForm.module.css'
 
 interface ScheduleFormStoryblok extends SbBlokData {
   title?: string
@@ -40,27 +41,27 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
   const submitText = blok.submit_text || 'Schedule Your Tour'
 
   return (
-    <section {...storyblokEditable(blok)} className="schedule-tour" data-section="schedule-form">
-        <div className="form-container">
-        <div className="form-header">
-          <span className="form-script">{subtitle}</span>
-          <h2 className="form-title">{title}</h2>
-          <p className="form-description">
+    <section {...storyblokEditable(blok)} className={styles.scheduleTour} data-section="schedule-form">
+        <div className={styles.formContainer}>
+        <div className={styles.formHeader}>
+          <span className={styles.formScript}>{subtitle}</span>
+          <h2 className={styles.formTitle}>{title}</h2>
+          <p className={styles.formDescription}>
             {description}
           </p>
         </div>
 
-        <form className="tour-form" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="name" className="form-label">
+        <form className={styles.tourForm} onSubmit={handleSubmit}>
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label htmlFor="name" className={styles.formLabel}>
                 Your Name *
               </label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                className="form-input"
+                className={styles.formInput}
                 placeholder="John & Jane Doe"
                 value={formData.name}
                 onChange={handleChange}
@@ -68,15 +69,15 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="email" className="form-label">
+            <div className={styles.formGroup}>
+              <label htmlFor="email" className={styles.formLabel}>
                 Email Address *
               </label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                className="form-input"
+                className={styles.formInput}
                 placeholder="your@email.com"
                 value={formData.email}
                 onChange={handleChange}
@@ -85,45 +86,45 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="phone" className="form-label">
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label htmlFor="phone" className={styles.formLabel}>
                 Phone Number
               </label>
               <input
                 type="tel"
                 id="phone"
                 name="phone"
-                className="form-input"
+                className={styles.formInput}
                 placeholder="(555) 123-4567"
                 value={formData.phone}
                 onChange={handleChange}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="date" className="form-label">
+            <div className={styles.formGroup}>
+              <label htmlFor="date" className={styles.formLabel}>
                 Preferred Date
               </label>
               <input
                 type="date"
                 id="date"
                 name="date"
-                className="form-input"
+                className={styles.formInput}
                 value={formData.date}
                 onChange={handleChange}
               />
             </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="guests" className="form-label">
+          <div className={styles.formGroup}>
+            <label htmlFor="guests" className={styles.formLabel}>
               Expected Guest Count
             </label>
             <select
               id="guests"
               name="guests"
-              className="form-select"
+              className={styles.formSelect}
               value={formData.guests}
               onChange={handleChange}
             >
@@ -136,21 +137,21 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
             </select>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="message" className="form-label">
+          <div className={styles.formGroup}>
+            <label htmlFor="message" className={styles.formLabel}>
               Tell Us About Your Vision
             </label>
             <textarea
               id="message"
               name="message"
-              className="form-textarea"
+              className={styles.formTextarea}
               placeholder="Share your dream wedding details, special requests, or questions..."
               value={formData.message}
               onChange={handleChange}
             />
           </div>
 
-          <button type="submit" className="form-submit">
+          <button type="submit" className={styles.formSubmit}>
             {submitText}
           </button>
         </form>

@@ -10,6 +10,7 @@
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
 import Section from '@/components/ui/Section'
+import styles from './BrandProof.module.css'
 
 interface BrandProofStoryblok extends SbBlokData {
   brands?: string
@@ -38,14 +39,14 @@ export default function BrandProof({ blok }: { blok: BrandProofStoryblok }) {
     return parts.map((part, index) => {
       if (part === '{highlight_1}') {
         return (
-          <span key={index} className="highlight">
+          <span key={index} className={styles.highlight}>
             {highlight1}
           </span>
         )
       }
       if (part === '{highlight_2}') {
         return (
-          <span key={index} className="highlight">
+          <span key={index} className={styles.highlight}>
             {highlight2}
           </span>
         )
@@ -61,23 +62,23 @@ export default function BrandProof({ blok }: { blok: BrandProofStoryblok }) {
       container="wrapper"
       paddingY="md"
       background="tint-rose"
-      className="brand-quote-section"
+      className={styles.brandQuoteSection}
       data-section="brand-proof"
       data-discover="true"
       {...storyblokEditable(blok)}
     >
-      <div className="brand-quote-content">
+      <div className={styles.content}>
         {/* Brand Logos Section */}
-        <div className="brand-logos">
+        <div className={styles.logos}>
           {brandsList.map((brand, index) => (
-            <span key={index} className="brand-logo">
+            <span key={index} className={styles.logo}>
               {brand.trim()}
             </span>
           ))}
         </div>
 
         {/* Testimonial Quote with Highlighted Text */}
-        <p className="brand-quote-text">
+        <p className={styles.quoteText}>
           &ldquo;{renderQuoteText()}&rdquo;
         </p>
       </div>

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React from 'react'
 import { storyblokEditable } from '@storyblok/react/rsc'
 import Section from '@/components/ui/Section'
+import styles from './AlternatingBlocks.module.css'
 
 interface AlternatingBlocksBlok {
   _uid?: string
@@ -59,11 +60,11 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
           lead: blok.description || 'Discover what makes our venue the perfect setting for your unforgettable celebration',
           align: 'center'
         }}
-        className="alternating-blocks"
+        className={styles.alternatingBlocks}
         data-section="alternating-blocks"
         {...storyblokEditable(blok)}
       >
-      <div className="alternating-blocks__container">
+      <div className={styles.container}>
         {(blok.blocks || []).map((block, index) => {
           // Use alternating fallback images based on index
           const fallbackImage = fallbackImages[index % fallbackImages.length]
@@ -78,17 +79,17 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
           return (
             <div
               key={block._uid || index}
-              className={`alternating-blocks__item${block.is_reverse ? ' alternating-blocks__item--reverse' : ''}`}
+              className={`${styles.item}${block.is_reverse ? ` ${styles.itemReverse}` : ''}`}
               {...(block._uid ? storyblokEditable(block) : {})}
             >
-              <div className="alternating-blocks__content">
-                <div className="alternating-blocks__number">
+              <div className={styles.content}>
+                <div className={styles.number}>
                   {block.number || `0${index + 1}`}
                 </div>
-                <h3 className="alternating-blocks__title">
+                <h3 className={styles.title}>
                   {block.title || 'Block Title'}
                 </h3>
-                <p className="alternating-blocks__lead">
+                <p className={styles.lead}>
                   {block.lead || 'Block lead text'}
                 </p>
                 {(block.content || []).map((paragraph, pIndex) => {
@@ -99,13 +100,13 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
                   return (
                     <p
                       key={pIndex}
-                      className="alternating-blocks__paragraph"
+                      className={styles.paragraph}
                       dangerouslySetInnerHTML={{ __html: text }}
                     />
                   )
                 })}
               </div>
-              <div className="alternating-blocks__image">
+              <div className={styles.image}>
                 <Image
                   src={imageUrl}
                   alt={block.image_alt || 'Venue image'}

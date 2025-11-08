@@ -3,6 +3,7 @@ import { MapPinIcon, ClockIcon, PhoneIcon, EnvelopeIcon, HomeIcon, CakeIcon } fr
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
 import Section from '@/components/ui/Section'
+import styles from './Map.module.css'
 
 interface LocationStoryblok {
   icon?: string
@@ -80,19 +81,19 @@ export default function Map({ blok }: { blok: MapStoryblok }) {
         lead: description,
         align: 'center'
       }}
-      className="map-section"
+      className={styles.mapSection}
       data-section="map"
       {...storyblokEditable(blok)}
     >
-      <div className="map-content-grid">
+      <div className={styles.mapContentGrid}>
         {locations.slice(0, 3).map((location, index) => {
           const IconComponent = iconMap[location.icon || 'map'] || MapPinIcon
           return (
-            <div key={index} className="location-item">
-              <div className="location-icon">
-                <IconComponent className="icon" />
+            <div key={index} className={styles.locationItem}>
+              <div className={styles.locationIcon}>
+                <IconComponent className={styles.icon} />
               </div>
-              <div className="location-text">
+              <div className={styles.locationText}>
                 <h4>{location.title}</h4>
                 <p>{location.description}</p>
               </div>
@@ -100,7 +101,7 @@ export default function Map({ blok }: { blok: MapStoryblok }) {
           );
         })}
 
-        <div className="map-embed">
+        <div className={styles.mapEmbed}>
           <iframe
             src={mapEmbedUrl}
             width="650"
@@ -116,11 +117,11 @@ export default function Map({ blok }: { blok: MapStoryblok }) {
         {locations.slice(3).map((location, index) => {
           const IconComponent = iconMap[location.icon || 'map'] || MapPinIcon
           return (
-            <div key={index + 3} className="location-item">
-              <div className="location-icon">
-                <IconComponent className="icon" />
+            <div key={index + 3} className={styles.locationItem}>
+              <div className={styles.locationIcon}>
+                <IconComponent className={styles.icon} />
               </div>
-              <div className="location-text">
+              <div className={styles.locationText}>
                 <h4>{location.title}</h4>
                 <p>{location.description}</p>
               </div>

@@ -1,1 +1,1 @@
-export { initCleanStoryblokRsc } from './clean-rsc.tsx'
+export { initCleanStoryblokRsc } from './clean-rsc-impl.tsx'

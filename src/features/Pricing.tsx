@@ -2,6 +2,7 @@
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
 import { Check, Calendar, Star } from 'lucide-react'
+import styles from './Pricing.module.css'
 
 interface PricingTierStoryblok extends SbBlokData {
   name?: string
@@ -87,70 +88,70 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
   return (
     <section
       id="packages"
-      className="pricing-section"
+      className={styles.pricingSection}
       data-section="pricing"
       {...storyblokEditable(blok)}
     >
-      <div className="content-wrapper">
-        <div className="section-header">
-          <div className="script-accent">
+      <div className={styles.contentWrapper}>
+        <div className={styles.sectionHeader}>
+          <div className={styles.scriptAccent}>
             {blok?.script_accent || 'Investment in Forever'}
           </div>
-          <h2 className="section-title">
+          <h2 className={styles.sectionTitle}>
             {blok?.title || 'Wedding Packages & Pricing'}
           </h2>
-          <div className="hero-pricing-line">
+          <div className={styles.heroPricingLine}>
             {blok?.hero_line || 'Saturdays from $6,200 • Fridays/Sundays from $5,500 • Weekdays from $4,500'}
           </div>
-          <p className="lead">
+          <p className={styles.lead}>
             {blok?.description || 'Transparent pricing with no hidden fees. Every package includes tables, chairs, setup, teardown, and on-site coordination.'}
           </p>
         </div>
 
-        <div className="pricing-grid">
+        <div className={styles.pricingGrid}>
           {tiers.map((tier, index) => (
             <article
               key={tier._uid || index}
-              className={`pricing-card ${tier.is_popular ? 'popular' : ''}`}
+              className={`${styles.pricingCard} ${tier.is_popular ? styles.popular : ''}`}
               aria-label={`${tier.name} package`}
             >
               {tier.is_popular && (
-                <div className="popular-badge" aria-label="Most popular">
+                <div className={styles.popularBadge} aria-label="Most popular">
                   <Star size={14} aria-hidden="true" />
-                  <span className="sr-only">Most Popular: </span>{tier.label}
+                  <span className={styles.srOnly}>Most Popular: </span>{tier.label}
                 </div>
               )}
 
-              <header className="pricing-header">
-                <h3 className="package-name">{tier.name}</h3>
-                <div className="pricing-display" aria-describedby={`price-desc-${index}`}>
-                  <div className="weekend-price" role="text">
-                    <span className="amount">{tier.price}</span>
-                    <span className="price-label">Fri–Sun</span>
+              <header className={styles.pricingHeader}>
+                <h3 className={styles.packageName}>{tier.name}</h3>
+                <div className={styles.pricingDisplay} aria-describedby={`price-desc-${index}`}>
+                  <div className={styles.weekendPrice} role="text">
+                    <span className={styles.amount}>{tier.price}</span>
+                    <span className={styles.priceLabel}>Fri–Sun</span>
                   </div>
-                  <div className="weekday-price" role="text">
-                    <span className="amount">{tier.weekday_price}</span>
-                    <span className="label">Weekdays</span>
+                  <div className={styles.weekdayPrice} role="text">
+                    <span className={styles.amount}>{tier.weekday_price}</span>
+                    <span className={styles.label}>Weekdays</span>
                   </div>
                 </div>
-                <p id={`price-desc-${index}`} className="sr-only">
+                <p id={`price-desc-${index}`} className={styles.srOnly}>
                   Weekend price listed for Friday through Sunday; weekday price listed for Monday through Thursday.
                 </p>
               </header>
 
-              <ul className="features-list">
+              <ul className={styles.featuresList}>
                 {(tier.features || []).map((feature, featureIndex) => (
-                  <li key={featureIndex} className="feature-item">
-                    <Check size={16} className="check-icon" aria-hidden="true" />
+                  <li key={featureIndex} className={styles.featureItem}>
+                    <Check size={16} className={styles.checkIcon} aria-hidden="true" />
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className="pricing-actions">
+              <div className={styles.pricingActions}>
                 <a
                   href={tier.cta_url || '#schedule'}
-                  className={`cta-button ${tier.is_popular ? 'primary' : 'secondary'}`}
+                  className={`${styles.ctaButton} ${tier.is_popular ? styles.primary : styles.secondary}`}
                   data-testid="pricing-cta"
                 >
                   <Calendar size={16} aria-hidden="true" />
@@ -158,7 +159,7 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
                 </a>
                 <a
                   href={tier.tour_url || '#contact'}
-                  className="link-button"
+                  className={styles.linkButton}
                   data-testid="pricing-tour"
                 >
                   Book a Tour

@@ -1,0 +1,115 @@
+/* ==========================================================================
+   UNIFIED BUTTON COMPONENT - CSS MODULE
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--btn-pad-y) var(--btn-pad-x);
+  border-radius: var(--btn-radius);
+  font-family: var(--font-sans, 'Montserrat', system-ui, sans-serif);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  min-height: 44px;
+}
+
+/* ===== Primary Variant (Solid Gold) ===== */
+.primary {
+  background: var(--btn-bg-gold);
+  color: var(--btn-fg-on-gold);
+  box-shadow: 0 6px 18px rgba(228, 200, 150, 0.32);
+}
+
+.primary:hover {
+  background: var(--btn-bg-gold-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(228, 200, 150, 0.42);
+}
+
+/* ===== Secondary Variant (Outline) ===== */
+.secondary {
+  background: transparent;
+  color: var(--btn-outline-fg);
+  border-color: var(--btn-outline-border);
+  box-shadow: 0 4px 15px rgba(228, 200, 150, 0.20);
+}
+
+.secondary:hover {
+  background: color-mix(in srgb, var(--btn-outline-border) 90%, white 10%);
+  color: #6B4E3D;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(228, 200, 150, 0.35);
+}
+
+/* ===== On-Image Variant (Outline with Safety Backdrop) ===== */
+.onImage {
+  background-color: var(--btn-outline-on-image-bg);
+  backdrop-filter: blur(2px) saturate(1.06);
+}
+
+.onImage:hover {
+  background-color: var(--btn-outline-on-image-bg-hover);
+}
+
+/* ===== Rose variant - for forms and CTAs on light backgrounds ===== */
+.rose {
+  background: var(--theme-accent-rose, #9D6B7B);
+  color: var(--theme-text-on-dark, #FFF8E7);
+  border: 2px solid var(--theme-accent-rose, #9D6B7B);
+  box-shadow: 0 6px 18px rgba(157, 107, 123, 0.30);
+}
+
+.rose:hover {
+  background: color-mix(in srgb, var(--theme-accent-rose, #9D6B7B) 85%, black 15%);
+  border-color: color-mix(in srgb, var(--theme-accent-rose, #9D6B7B) 85%, black 15%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(157, 107, 123, 0.40);
+}
+
+/* ===== Outline gold variant - for dark backgrounds/images ===== */
+.outlineGold {
+  background: transparent;
+  color: var(--theme-text-on-dark, #FFF8E7);
+  border: 2px solid var(--theme-accent-gold, #E4C896);
+  box-shadow: 0 4px 15px rgba(228, 200, 150, 0.20);
+}
+
+.outlineGold:hover {
+  background: color-mix(in srgb, var(--theme-accent-gold, #E4C896) 90%, white 10%);
+  color: #2C241A;
+  border-color: var(--theme-accent-gold, #E4C896);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(228, 200, 150, 0.35);
+}
+
+/* ===== Ghost variant - transparent, inherits color ===== */
+.ghost {
+  background: transparent;
+  color: currentColor;
+  border: 2px solid transparent;
+  box-shadow: none;
+}
+
+.ghost:hover {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  transform: translateY(-1px);
+}
+
+/* ===== Focus State (Accessibility) ===== */
+.btn:focus-visible {
+  outline: 3px solid var(--focus-ring, var(--btn-bg-gold));
+  outline-offset: 3px;
+}
+
+/* ===== Active State ===== */
+.btn:active {
+  transform: translateY(0);
+}

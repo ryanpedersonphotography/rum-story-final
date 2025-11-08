@@ -14,24 +14,7 @@ import '@/styles/utilities/ornate-divider.css'
 import '@/styles/globals.css'
 
 // 5. COMPONENTS - Component-specific styles (@layer components)
-import '@/styles/components/buttons.css'
-import '@/styles/components/section.css'
-import '@/styles/components/legacy-shim.css'
-import '@/styles/components/section.variants.css'
-import '@/styles/components/section.wrapper.css'
 import '@/styles/components/navbar.css'
-import '@/styles/components/hero.css'
-import '@/styles/components/experience.css'
-import '@/styles/components/spaces.css'
-import '@/styles/components/gallery.css'
-import '@/styles/components/alternating-blocks.css'
-import '@/styles/components/brand-proof.css'
-import '@/styles/components/pricing.css'
-import '@/styles/components/schedule-form.css'
-import '@/styles/components/map.css'
-import '@/styles/components/footer.css'
-import '@/styles/components/faq.css'
-import '@/styles/components/section-layered.css'
 
 // import StoryblokProvider from '@/components/StoryblokProvider';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';

@@ -1,21 +1,17 @@
-/* SCHEDULE FORM SECTION STYLES - Clean architecture implementation */
+/* SCHEDULE FORM - CSS MODULE */
 
-[data-clean-root="true"] .schedule-tour {
+.scheduleTour {
   padding: clamp(var(--space-56), 6vw, var(--space-96)) 0;
   background: linear-gradient(135deg, var(--surface-0, #F4E4E1) 0%, var(--surface-2, #FFF8E7) 100%);
   position: relative;
   overflow: hidden;
-
-  /* 🔥 CRITICAL: Full-width breakout to prevent black bars */
   width: 100vw;
   max-width: none;
-  max-inline-size: none;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
 }
 
-/* Rotating background decoration */
-[data-clean-root="true"] .schedule-tour::before {
+.scheduleTour::before {
   content: '';
   position: absolute;
   top: -50%;
@@ -32,7 +28,7 @@
   to { transform: rotate(360deg); }
 }
 
-[data-clean-root="true"] .form-container {
+.formContainer {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 var(--gutter);
@@ -40,8 +36,7 @@
   z-index: 1;
 }
 
-/* Form Header */
-[data-clean-root="true"] .form-header {
+.formHeader {
   text-align: center;
   margin-bottom: clamp(var(--space-32), 4vw, var(--space-48));
   max-width: 900px;
@@ -51,7 +46,7 @@
   padding-right: clamp(var(--space-16), 3vw, var(--space-32));
 }
 
-[data-clean-root="true"] .form-script {
+.formScript {
   font-family: 'Dancing Script', cursive;
   font-size: clamp(1.5rem, 3.2vw, 1.75rem);
   color: var(--theme-accent-gold, #E4C896);
@@ -59,7 +54,7 @@
   font-weight: 400;
 }
 
-[data-clean-root="true"] .form-title {
+.formTitle {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.25rem, 4.8vw, 3rem);
   line-height: 1.2;
@@ -69,7 +64,7 @@
   letter-spacing: -0.02em;
 }
 
-[data-clean-root="true"] .form-description {
+.formDescription {
   font-size: clamp(1rem, 2.4vw, 1.125rem);
   color: var(--theme-text-secondary, #7B5E4E);
   margin: 0 auto;
@@ -77,8 +72,7 @@
   max-width: 48ch;
 }
 
-/* Form */
-[data-clean-root="true"] .tour-form {
+.tourForm {
   background: var(--theme-bg-primary, #FFFCF8);
   backdrop-filter: none;
   padding: var(--space-48);
@@ -89,18 +83,18 @@
   gap: var(--space-32);
 }
 
-[data-clean-root="true"] .form-row {
+.formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-32);
 }
 
-[data-clean-root="true"] .form-group {
+.formGroup {
   display: grid;
   gap: var(--space-8);
 }
 
-[data-clean-root="true"] .form-label {
+.formLabel {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 0.875rem;
@@ -109,9 +103,9 @@
   letter-spacing: 0.05em;
 }
 
-[data-clean-root="true"] .form-input,
-[data-clean-root="true"] .form-select,
-[data-clean-root="true"] .form-textarea {
+.formInput,
+.formSelect,
+.formTextarea {
   padding: var(--space-16) var(--space-20);
   border: 2px solid color-mix(in srgb, var(--theme-accent-gold, #E4C896) 30%, transparent);
   border-radius: 12px;
@@ -123,27 +117,26 @@
   transition: all 0.3s ease;
 }
 
-[data-clean-root="true"] .form-input::placeholder,
-[data-clean-root="true"] .form-textarea::placeholder {
+.formInput::placeholder,
+.formTextarea::placeholder {
   color: var(--theme-text-muted, rgba(107, 78, 61, 0.6));
 }
 
-[data-clean-root="true"] .form-input:focus,
-[data-clean-root="true"] .form-select:focus,
-[data-clean-root="true"] .form-textarea:focus {
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
   outline: none;
   border-color: var(--theme-accent-gold, #E4C896);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-accent-gold, #E4C896) 20%, transparent);
   background: var(--theme-bg-primary, #FFFCF8);
 }
 
-[data-clean-root="true"] .form-textarea {
+.formTextarea {
   resize: vertical;
   min-height: 120px;
 }
 
-/* Submit Button Enhancement */
-[data-clean-root="true"] .form-submit {
+.formSubmit {
   margin: var(--space-32) auto 0;
   display: flex;
   padding: var(--space-12) var(--space-40);
@@ -164,18 +157,18 @@
   overflow: hidden;
 }
 
-[data-clean-root="true"] .form-submit:hover {
+.formSubmit:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px color-mix(in srgb, var(--theme-accent-rose, #9D6B7B) 40%, transparent);
   background: var(--theme-bg-card, #3D2F22);
   border-color: var(--theme-bg-card, #3D2F22);
 }
 
-[data-clean-root="true"] .form-submit:active {
+.formSubmit:active {
   transform: translateY(0);
 }
 
-[data-clean-root="true"] .form-submit::before {
+.formSubmit::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -184,148 +177,100 @@
   transition: transform 0.6s ease;
 }
 
-[data-clean-root="true"] .form-submit:hover::before {
+.formSubmit:hover::before {
   transform: translateX(100%);
 }
 
-/* ════════════════════════════════════════════════════════════════
-   DARK MODE - Forced (html[data-theme="dark"])
-   ════════════════════════════════════════════════════════════════ */
-
-html[data-theme="dark"] [data-clean-root="true"] .schedule-tour {
+:global(html[data-theme="dark"]) .scheduleTour {
   background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
 }
 
-html[data-theme="dark"] [data-clean-root="true"] .tour-form {
-  /* Glassmorphism card styling */
+:global(html[data-theme="dark"]) .tourForm {
   background: color-mix(in oklch, var(--surface-1) 80%, white 20%);
   backdrop-filter: blur(12px) saturate(1.12);
   border: 1px solid color-mix(in oklch, var(--accent-gold) 35%, transparent);
   box-shadow: var(--theme-shadow-dark-lg, 0 20px 60px rgba(0, 0, 0, 0.60));
 }
 
-html[data-theme="dark"] [data-clean-root="true"] .form-label {
+:global(html[data-theme="dark"]) .formLabel {
   color: var(--theme-text-primary, #F5E6D3);
 }
 
-html[data-theme="dark"] [data-clean-root="true"] .form-input,
-html[data-theme="dark"] [data-clean-root="true"] .form-select,
-html[data-theme="dark"] [data-clean-root="true"] .form-textarea {
+:global(html[data-theme="dark"]) .formInput,
+:global(html[data-theme="dark"]) .formSelect,
+:global(html[data-theme="dark"]) .formTextarea {
   background: var(--theme-bg-secondary, #2C2416);
   border-color: var(--theme-border-medium, rgba(255,255,255,0.12));
   color: var(--theme-text-primary, #F5E6D3);
 }
 
-html[data-theme="dark"] [data-clean-root="true"] .form-input::placeholder,
-html[data-theme="dark"] [data-clean-root="true"] .form-textarea::placeholder {
+:global(html[data-theme="dark"]) .formInput::placeholder,
+:global(html[data-theme="dark"]) .formTextarea::placeholder {
   color: var(--theme-text-muted, rgba(245, 230, 211, 0.5));
 }
 
-html[data-theme="dark"] [data-clean-root="true"] .form-input:focus,
-html[data-theme="dark"] [data-clean-root="true"] .form-select:focus,
-html[data-clean-root="true"] .form-textarea:focus {
+:global(html[data-theme="dark"]) .formInput:focus,
+:global(html[data-theme="dark"]) .formSelect:focus,
+:global(html[data-theme="dark"]) .formTextarea:focus {
   border-color: var(--theme-accent-gold, #F0D9A8);
   background: var(--theme-bg-card, #3D2F22);
 }
 
-/* ════════════════════════════════════════════════════════════════
-   AUTO MODE - OS Preference (prefers-color-scheme: dark)
-   ════════════════════════════════════════════════════════════════ */
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) [data-clean-root="true"] .schedule-tour {
-    background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
-  }
-
-  :root:not([data-theme="light"]) [data-clean-root="true"] .tour-form {
-    /* Glassmorphism card styling */
-    background: color-mix(in oklch, var(--surface-1) 80%, white 20%);
-    backdrop-filter: blur(12px) saturate(1.12);
-    border: 1px solid color-mix(in oklch, var(--accent-gold) 35%, transparent);
-    box-shadow: var(--theme-shadow-dark-lg, 0 20px 60px rgba(0, 0, 0, 0.60));
-  }
-
-  :root:not([data-theme="light"]) [data-clean-root="true"] .form-label {
-    color: var(--theme-text-primary, #F5E6D3);
-  }
-
-  :root:not([data-theme="light"]) [data-clean-root="true"] .form-input,
-  :root:not([data-theme="light"]) [data-clean-root="true"] .form-select,
-  :root:not([data-theme="light"]) [data-clean-root="true"] .form-textarea {
-    background: var(--theme-bg-secondary, #2C2416);
-    border-color: var(--theme-border-medium, rgba(255,255,255,0.12));
-    color: var(--theme-text-primary, #F5E6D3);
-  }
-
-  :root:not([data-theme="light"]) [data-clean-root="true"] .form-input::placeholder,
-  :root:not([data-theme="light"]) [data-clean-root="true"] .form-textarea::placeholder {
-    color: var(--theme-text-muted, rgba(245, 230, 211, 0.5));
-  }
-
-  :root:not([data-theme="light"]) [data-clean-root="true"] .form-input:focus,
-  :root:not([data-theme="light"]) [data-clean-root="true"] .form-select:focus,
-  :root:not([data-theme="light"]) [data-clean-root="true"] .form-textarea:focus {
-    border-color: var(--theme-accent-gold, #F0D9A8);
-    background: var(--theme-bg-card, #3D2F22);
-  }
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
-  [data-clean-root="true"] .schedule-tour {
+  .scheduleTour {
     padding: var(--space-80) 0;
   }
 
-  [data-clean-root="true"] .form-container {
+  .formContainer {
     max-width: 100%;
     padding: 0 var(--gutter);
   }
 
-  [data-clean-root="true"] .form-header {
+  .formHeader {
     margin-bottom: var(--space-64);
   }
 
-  [data-clean-root="true"] .form-title {
+  .formTitle {
     font-size: 2.5rem;
   }
 
-  [data-clean-root="true"] .form-script {
+  .formScript {
     font-size: 1.5rem;
   }
 
-  [data-clean-root="true"] .tour-form {
+  .tourForm {
     padding: var(--space-32);
     border-radius: 16px;
   }
 
-  [data-clean-root="true"] .form-row {
+  .formRow {
     grid-template-columns: 1fr;
     gap: var(--space-20);
   }
 }
 
 @media (max-width: 480px) {
-  [data-clean-root="true"] .schedule-tour {
+  .scheduleTour {
     padding: var(--space-64) 0;
   }
 
-  [data-clean-root="true"] .form-container {
+  .formContainer {
     padding: 0 var(--gutter);
   }
 
-  [data-clean-root="true"] .form-title {
+  .formTitle {
     font-size: 2rem;
     letter-spacing: 1px;
   }
 
-  [data-clean-root="true"] .tour-form {
+  .tourForm {
     padding: var(--space-20);
     gap: var(--space-20);
   }
 
-  [data-clean-root="true"] .form-input,
-  [data-clean-root="true"] .form-select,
-  [data-clean-root="true"] .form-textarea {
+  .formInput,
+  .formSelect,
+  .formTextarea {
     padding: var(--space-12) var(--space-16);
     font-size: 0.9rem;
   }

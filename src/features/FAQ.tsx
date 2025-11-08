@@ -1,14 +1,10 @@
-// ===============================================================
-// FILE: src/features/FAQ.tsx
-// Clean FAQ with robust Storyblok field handling + per-item fallbacks
-// MIGRATED to unified Section component
-// ===============================================================
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import { renderRichText } from '@storyblok/js'
 import Section from '@/components/ui/Section'
+import styles from './FAQ.module.css'
 
 type Blok = Record<string, any>
 
@@ -23,9 +19,8 @@ function toHTML(value: any): string {
   if (!value) return ''
   if (typeof value === 'string') return value
   try {
-    return renderRichText(value) as unknown as string
+    return renderRichText(value)
   } catch {
-    // flatten to plain text if it’s not valid RichText
     try {
       return JSON.stringify(value)
     } catch {
@@ -39,7 +34,6 @@ function firstArray(blok: Blok, keys: string[]): any[] | null {
     const v = blok?.[k]
     if (Array.isArray(v) && v.length) return v
   }
-  // if an empty array exists under any candidate key, return it (so we don’t fall back wrongly)
   for (const k of keys) {
     if (Array.isArray(blok?.[k])) return []
   }
@@ -49,7 +43,6 @@ function firstArray(blok: Blok, keys: string[]): any[] | null {
 export default function FAQ({ blok }: { blok: Blok }) {
   const [open, setOpen] = useState<Record<string, boolean>>({})
 
-  // Detect the list field Storyblok is actually using
   const rawList =
     firstArray(blok, ['faq_items', 'items', 'faqs', 'faq', 'accordion_items']) ??
     FALLBACK_ITEMS
@@ -60,7 +53,6 @@ export default function FAQ({ blok }: { blok: Blok }) {
       const question =
         it?.question ?? it?.title ?? it?.heading ?? it?.label ?? 'Untitled question'
 
-      // Try common Storyblok answer fields (rich text or plain)
       const rawAnswer =
         it?.answer ??
         it?.rich_text ??
@@ -72,7 +64,6 @@ export default function FAQ({ blok }: { blok: Blok }) {
 
       let answerHTML = toHTML(rawAnswer)
 
-      // If answer missing/empty, provide a per-item fallback
       if (!answerHTML || /^\s*$/.test(answerHTML)) {
         const fb = FALLBACK_ITEMS[i % FALLBACK_ITEMS.length]
         answerHTML = toHTML(fb.answer)
@@ -82,7 +73,6 @@ export default function FAQ({ blok }: { blok: Blok }) {
     })
   }, [rawList])
 
-  // Open first item for easy visual verification
   useEffect(() => {
     if (items[0]) setOpen((s) => ({ ...s, [items[0].uid]: true }))
   }, [items])
@@ -90,9 +80,6 @@ export default function FAQ({ blok }: { blok: Blok }) {
   const title = blok?.title || 'Frequently Asked Questions'
   const subtitle = blok?.subtitle || 'Everything You Need to Know'
   const toggle = (id: string) => setOpen((s) => ({ ...s, [id]: !s[id] }))
-
-  // Debug: uncomment while diagnosing field shapes
-  // useEffect(() => { console.log('[FAQ blok]', JSON.parse(JSON.stringify(blok))) }, [blok])
 
   return (
     <Section
@@ -102,7 +89,7 @@ export default function FAQ({ blok }: { blok: Blok }) {
       paddingY="lg"
       background="surface"
       tone="auto"
-      className="faq-accordion"
+      className={styles.faqAccordion}
       data-section="faq"
       header={{
         scriptAccent: subtitle,
@@ -112,34 +99,33 @@ export default function FAQ({ blok }: { blok: Blok }) {
       {...storyblokEditable(blok)}
     >
       <div
-        className="faq-content"
-        data-test-id="faq-content"
+        className={styles.faqContent}
         aria-label="Frequently asked questions list"
         style={{ scrollMarginTop: '80px' }}
       >
-        <div className="faq-list">
+        <div className={styles.faqList}>
           {items.map((it) => {
             const isOpen = !!open[it.uid]
             return (
-              <div key={it.uid} className={`faq-item ${isOpen ? 'is-open' : ''}`}>
+              <div key={it.uid} className={`${styles.item} ${isOpen ? styles.isOpen : ''}`}>
                 <button
                   type="button"
-                  className="faq-question"
+                  className={styles.question}
                   onClick={() => toggle(it.uid)}
                   aria-expanded={isOpen}
                   aria-controls={`answer-${it.uid}`}
                 >
                   <h3>{it.question}</h3>
-                  <span className="faq-toggle" aria-hidden>↓</span>
+                  <span className={styles.toggle} aria-hidden>↓</span>
                 </button>
 
                 <div
                   id={`answer-${it.uid}`}
-                  className="faq-answer"
+                  className={styles.answer}
                   role="region"
                   aria-live="polite"
                 >
-                  <div className="faq-answer-body" dangerouslySetInnerHTML={{ __html: it.answerHTML }} />
+                  <div className={styles.answerBody} dangerouslySetInnerHTML={{ __html: it.answerHTML }} />
                 </div>
               </div>
             )

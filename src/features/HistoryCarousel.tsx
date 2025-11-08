@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/solid'
+import styles from './HistoryCarousel.module.css'
 
 export default function HistoryCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -52,46 +53,46 @@ export default function HistoryCarousel() {
   };
 
   return (
-    <section className="history">
-      <div className="history__content">
-        <div className="history__header">
-          <span className="history__script">Our Story</span>
-          <h2 className="history__title">A Journey Through Time</h2>
-          <p className="history__lead">
+    <section className={styles.history}>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <span className={styles.script}>Our Story</span>
+          <h2 className={styles.title}>A Journey Through Time</h2>
+          <p className={styles.lead}>
             Discover how Rum River Barn became Minnesota&apos;s premier wedding destination
           </p>
         </div>
 
-        <div className="history__carousel">
-          <div className="history__viewport">
+        <div className={styles.carousel}>
+          <div className={styles.viewport}>
             <div
-              className="history__container"
+              className={styles.container}
               style={{
                 transform: `translateX(-${currentSlide * 100}%)`,
                 transition: 'transform 0.5s ease-in-out'
               }}
             >
               {slides.map((slide, index) => (
-                <div key={index} className="history__slide">
-                  <div className="history__slide-inner">
-                    <div className="history__image-wrapper">
+                <div key={index} className={styles.slide}>
+                  <div className={styles.slideInner}>
+                    <div className={styles.imageWrapper}>
                       <Image
                         src={slide.image}
                         alt={`${slide.title} - ${slide.year}`}
-                        className="history__image"
+                        className={styles.image}
                         width={1600}
                         height={1000}
                         priority={index === currentSlide}
                       />
-                      <div className="history__gradient"></div>
+                      <div className={styles.gradient}></div>
 
-                      <div className="history__badge">
+                      <div className={styles.badge}>
                         <span>{slide.year}</span>
                       </div>
 
-                      <div className="history__text">
-                        <h3 className="history__slide-title">{slide.title}</h3>
-                        <p className="history__slide-description">{slide.description}</p>
+                      <div className={styles.text}>
+                        <h3 className={styles.slideTitle}>{slide.title}</h3>
+                        <p className={styles.slideDescription}>{slide.description}</p>
                       </div>
                     </div>
                   </div>
@@ -102,7 +103,7 @@ export default function HistoryCarousel() {
 
           {/* Navigation Buttons */}
           <button
-            className="history__nav history__nav--prev"
+            className={`${styles.nav} ${styles.navPrev}`}
             onClick={prevSlide}
             aria-label="Previous slide"
           >
@@ -110,7 +111,7 @@ export default function HistoryCarousel() {
           </button>
 
           <button
-            className="history__nav history__nav--next"
+            className={`${styles.nav} ${styles.navNext}`}
             onClick={nextSlide}
             aria-label="Next slide"
           >
@@ -119,7 +120,7 @@ export default function HistoryCarousel() {
 
           {/* Autoplay Toggle */}
           <button
-            className="history__autoplay"
+            className={styles.autoplay}
             onClick={toggleAutoplay}
             aria-label={isAutoplayOn ? 'Pause autoplay' : 'Resume autoplay'}
           >
@@ -132,11 +133,11 @@ export default function HistoryCarousel() {
         </div>
 
         {/* Progress Dots */}
-        <div className="history__dots">
+        <div className={styles.dots}>
           {slides.map((_, index) => (
             <button
               key={index}
-              className={`history__dot ${index === currentSlide ? 'history__dot--active' : ''}`}
+              className={`${styles.dot} ${index === currentSlide ? styles.dotActive : ''}`}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -144,7 +145,7 @@ export default function HistoryCarousel() {
         </div>
 
         {/* Slide Counter */}
-        <div className="history__counter">
+        <div className={styles.counter}>
           <span>
             {currentSlide + 1} / {slides.length}
           </span>

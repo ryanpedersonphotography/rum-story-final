@@ -23,10 +23,12 @@ export default function Hero() {
           Experience elegance and romance at Rum River Venue — where every detail is
           crafted to make your special day unforgettable.
         </p>
-        <div className="hero__actions">
-          <a className="btn btn--primary" href="#schedule-form">Book Your Tour</a>
-          <a className="btn btn--ghost" href="#gallery">View Gallery</a>
-        </div>
+import Button from '@/components/ui/Button';
+// ...
+<div className="hero-actions">
+  <Button as="a" href="#schedule-form" variant="primary">Book Your Tour</Button>
+  <Button as="a" href="#gallery" variant="ghost">View Gallery</Button>
+</div>
         
         {/* Feature highlights */}
         <div className="hero__highlights">

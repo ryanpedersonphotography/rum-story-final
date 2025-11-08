@@ -8,6 +8,7 @@
 'use client'
 import React from 'react'
 import { storyblokEditable } from '@storyblok/react'
+import styles from './Hero.module.css'
 
 type SBAsset = { filename?: string; alt?: string } | string | undefined
 
@@ -98,7 +99,7 @@ export default function Hero({
 
   return (
     <section 
-      className="hero" 
+      className={styles.hero} 
       data-section="hero" 
       data-content-align={contentAlign}
       data-content-width={contentWidth}
@@ -106,29 +107,29 @@ export default function Hero({
       style={style} 
       {...storyblokEditable(blok)}
     >
-      <span className="sr-only">{bgAlt}</span>
+      <span className={styles.srOnly}>{bgAlt}</span>
 
-      <div className="hero-content">
-        <div className="hero-eyebrow">{kicker}</div>
+      <div className={styles.heroContent}>
+        <div className={styles.eyebrow}>{kicker}</div>
 
-        <h1 className="hero-title">
+        <h1 className={styles.title}>
           {title}
           <br />
-          <span className="hero-title-accent">{titleAccent}</span>
+          <span className={styles.titleAccent}>{titleAccent}</span>
         </h1>
 
-        <p className="hero-lead">{lead}</p>
+        <p className={styles.lead}>{lead}</p>
 
-        <div className="hero-ctas">
-          <a href="#contact" className="hero-cta hero-cta-secondary">
+        <div className={styles.ctas}>
+          <a href="#contact" className={`${styles.cta} ${styles.ctaSecondary}`}>
             {ctaLabel}
           </a>
         </div>
       </div>
 
-      {/* <div className="hero-scroll" onClick={onScrollClick}>
-        <div className="hero-scroll-text">{scrollText}</div>
-        <div className="hero-scroll-arrow">↓</div>
+      {/* <div className={styles.scroll} onClick={onScrollClick}>
+        <div className={styles.scrollText}>{scrollText}</div>
+        <div className={styles.scrollArrow}>↓</div>
       </div> */}
     </section>
   )

@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState, type HTMLAttributes } from 'react'
 import { storyblokEditable } from '@storyblok/react/rsc'
 import Section from '@/components/ui/Section'
 import WeddingGalleryModal from '@/components/gallery/WeddingGalleryModal'
+import styles from './Gallery.module.css'
 
 type GalleryItemBlok = Record<string, any>
 
@@ -206,12 +207,12 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
           lead: sectionDescription,
           align: 'center'
         }}
-        className="love-stories-gallery"
+        className={styles.loveStoriesGallery}
         data-section="gallery"
         variant={blok?.section_variant || 'gallery-rose-grid'}
         {...(blok ? storyblokEditable(blok) : {})}
       >
-        <div className="wedding-gallery" data-anim="stagger" data-fetch-error={fetchError ? 'true' : undefined}>
+        <div className={styles.weddingGallery} data-anim="stagger" data-fetch-error={fetchError ? 'true' : undefined}>
           {hasStoryblokGalleries
             ? galleries!.map((gallery, index) => {
                 const uuid = typeof gallery.wedding_story === 'string' ? gallery.wedding_story : ''
@@ -232,7 +233,7 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
                 return (
                   <a
                     key={gallery._uid || index}
-                    className="gallery-item"
+                    className={styles.item}
                     href={detailHref}
                     aria-label={`${cardTitle}${cardSubtitle ? ` — ${cardSubtitle}` : ''}`}
                     data-testid="gallery-item"
@@ -262,10 +263,10 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
                       decoding="async"
                       sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 100vw"
                     />
-                    <div className="gallery-overlay" aria-hidden="true">
-                      <div className="gallery-couple-names">{cardTitle}</div>
-                      <div className="gallery-season">{cardSubtitle}</div>
-                      <div className="gallery-details">
+                    <div className={styles.overlay} aria-hidden="true">
+                      <div className={styles.coupleNames}>{cardTitle}</div>
+                      <div className={styles.season}>{cardSubtitle}</div>
+                      <div className={styles.details}>
                         {canOpenModal
                           ? photos > 0
                             ? `${photos} Photos • View Gallery →`
@@ -279,7 +280,7 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
             : FALLBACK_GALLERIES.map((wedding, index) => (
                 <a
                   key={`${wedding.couple}-${index}`}
-                  className="gallery-item"
+                  className={styles.item}
                   href={wedding.href || '#'}
                   aria-label={`${wedding.couple}${wedding.season ? ` — ${wedding.season}` : ''}`}
                   data-testid="gallery-item"
@@ -293,10 +294,10 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
                     decoding="async"
                     sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 100vw"
                   />
-                  <div className="gallery-overlay" aria-hidden="true">
-                    <div className="gallery-couple-names">{wedding.couple}</div>
-                    <div className="gallery-season">{wedding.season}</div>
-                    <div className="gallery-details">View Gallery →</div>
+                  <div className={styles.overlay} aria-hidden="true">
+                    <div className={styles.coupleNames}>{wedding.couple}</div>
+                    <div className={styles.season}>{wedding.season}</div>
+                    <div className={styles.details}>View Gallery →</div>
                   </div>
                 </a>
               ))}

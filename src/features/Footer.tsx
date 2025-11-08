@@ -2,6 +2,7 @@
 import React from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react'
+import styles from './Footer.module.css'
 
 interface FooterBlok {
   _uid?: string
@@ -30,35 +31,35 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
 
   return (
     <footer
-      className="footer"
+      className={styles.footer}
       data-section="footer"
       {...(blok ? storyblokEditable(blok) : {})}
     >
-      <div className="footer-container">
-        <div className="footer-content">
+      <div className={styles.container}>
+        <div className={styles.content}>
           {/* Column 1: Brand & Description */}
-          <div className="footer-section">
-            <h3 className="footer-title">{brandTitle}</h3>
-            <p className="footer-description">{brandDescription}</p>
+          <div className={styles.section}>
+            <h3 className={styles.title}>{brandTitle}</h3>
+            <p className={styles.description}>{brandDescription}</p>
           </div>
 
           {/* Column 2: Contact Information */}
-          <div className="footer-section">
-            <h4 className="footer-section-title">Contact Information</h4>
-            <div className="footer-contact">
-              <p className="footer-address">
-                <MapPin className="footer-social-icon" size={18} />
+          <div className={styles.section}>
+            <h4 className={styles.sectionTitle}>Contact Information</h4>
+            <div className={styles.contact}>
+              <p className={styles.address}>
+                <MapPin className={styles.socialIcon} size={18} />
                 {address}
               </p>
               {phone && (
-                <a href={`tel:${phone.replace(/[^0-9]/g, '')}`} className="footer-phone-link">
-                  <Phone className="footer-social-icon" size={18} />
+                <a href={`tel:${phone.replace(/[^0-9]/g, '')}`} className={styles.phoneLink}>
+                  <Phone className={styles.socialIcon} size={18} />
                   {phone}
                 </a>
               )}
               {email && (
-                <a href={`mailto:${email}`} className="footer-phone-link">
-                  <Mail className="footer-social-icon" size={18} />
+                <a href={`mailto:${email}`} className={styles.phoneLink}>
+                  <Mail className={styles.socialIcon} size={18} />
                   {email}
                 </a>
               )}
@@ -66,29 +67,29 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
           </div>
 
           {/* Column 3: Social Links */}
-          <div className="footer-section">
-            <h4 className="footer-section-title">Connect With Us</h4>
-            <div className="footer-social-links">
+          <div className={styles.section}>
+            <h4 className={styles.sectionTitle}>Connect With Us</h4>
+            <div className={styles.socialLinks}>
               {facebookUrl && (
                 <a
                   href={facebookUrl}
-                  className="footer-social-link"
+                  className={styles.socialLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow us on Facebook"
                 >
-                  <Facebook className="footer-social-icon" size={20} />
+                  <Facebook className={styles.socialIcon} size={20} />
                 </a>
               )}
               {instagramUrl && (
                 <a
                   href={instagramUrl}
-                  className="footer-social-link"
+                  className={styles.socialLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow us on Instagram"
                 >
-                  <Instagram className="footer-social-icon" size={20} />
+                  <Instagram className={styles.socialIcon} size={20} />
                 </a>
               )}
             </div>
@@ -96,8 +97,8 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
         </div>
 
         {/* Footer Bottom with Centered Copyright */}
-        <div className="footer-bottom">
-          <div className="footer-copyright">
+        <div className={styles.bottom}>
+          <div className={styles.copyright}>
             &copy; {currentYear} {brandTitle}. All rights reserved.
           </div>
         </div>

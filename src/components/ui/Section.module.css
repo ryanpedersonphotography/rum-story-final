@@ -1,0 +1,156 @@
+/* ==========================================================================
+   UNIFIED SECTION COMPONENT - CSS MODULE
+   - Merges logic from section.css, section-layered.css, section.wrapper.css, and section.variants.css
+   - Uses a simple, prop-based class system
+   ========================================================================== */
+
+/* ===== BASE TOKENS & LAYOUT ===== */
+.section {
+  position: relative;
+  width: 100%;
+  padding-block: var(--section-y, clamp(48px, 7vw, 120px));
+  padding-inline: 0;
+  background: transparent;
+  z-index: 0;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== CONTAINER / WRAPPER LOGIC ===== */
+.wrapper {
+  --wrapper-max: var(--rail-content, 1200px);
+  --wrapper-gutter: clamp(50px, 5vw, 80px);
+  max-width: var(--wrapper-max);
+  margin: 0 auto;
+  padding-inline: var(--wrapper-gutter);
+}
+
+/* Wrapper Width Variants */
+.widthProse { --wrapper-max: var(--rail-prose, 65ch); }
+.widthContent { --wrapper-max: var(--rail-content, 1200px); }
+.widthWide { --wrapper-max: var(--rail-wide, 1400px); }
+.widthFull { --wrapper-max: none; --wrapper-gutter: 0; }
+
+/* ===== ALIGNMENT ===== */
+.alignLeft { text-align: left; }
+.alignCenter { text-align: center; }
+.alignRight { text-align: right; }
+
+.alignLeft > .header,
+.alignLeft > .content {
+  margin-inline: 0;
+}
+
+.alignCenter > .header,
+.alignCenter > .content {
+  margin-inline: auto;
+}
+
+.alignRight > .header,
+.alignRight > .content {
+  margin-inline: auto 0;
+}
+
+/* ===== BACKGROUND & TONE ===== */
+.backgroundSurface { background: var(--surface-1); }
+.backgroundSubtle { background: var(--surface-2); }
+.backgroundImage {
+  background-size: cover;
+  background-position: center;
+}
+
+.toneLight { color: var(--text-primary-light); }
+.toneDark { color: var(--text-primary-dark); }
+
+/* ===== HEADER STYLES ===== */
+.header {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  max-width: 900px; /* Default prose-like width for headers */
+}
+
+.scriptAccent {
+  font-family: var(--font-script, 'Dancing Script', cursive);
+  color: var(--theme-accent-rose, #9D6B7B);
+  font-size: clamp(1.5rem, 3.2vw, 1.75rem);
+  margin-bottom: var(--space-12, 0.75rem);
+  font-weight: 400;
+  display: block;
+}
+
+.title {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-size: clamp(2.25rem, 4.8vw, 3rem);
+  color: inherit;
+  margin: 0 0 var(--space-12, 0.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.lead {
+  color: var(--theme-text-secondary, #8B7355);
+  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  line-height: 1.7;
+  max-width: 48ch;
+}
+
+/* Header Alignment Overrides */
+.header.alignLeft { text-align: left; }
+.header.alignCenter { text-align: center; }
+.header.alignRight { text-align: right; }
+
+/* Lead text needs its own margin reset for alignment */
+.header.alignLeft .lead { margin-inline: 0; }
+.header.alignCenter .lead { margin-inline: auto; }
+.header.alignRight .lead { margin-inline: auto 0; }
+
+
+/* ===== SPECIAL VARIANTS ===== */
+
+/* Home Hero Variant */
+.variantHomeHero {
+  isolation: isolate;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.variantHomeHero .overlay {
+  background:
+    linear-gradient(0deg, rgba(44,36,26,.55) 0%, rgba(44,36,26,.15) 40%, rgba(44,36,26,0) 70%),
+    radial-gradient(120% 65% at 50% 110%, rgba(228,200,150,.28) 0%, rgba(228,200,150,0) 55%),
+    linear-gradient(135deg, rgba(157,107,123,.18) 0%, rgba(157,107,123,0) 55%);
+}
+
+.variantHomeHero .title {
+  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+  letter-spacing:.01em;
+}
+
+.variantHomeHero .lead {
+  text-shadow: 0 1px 6px rgba(0,0,0,.35);
+}
+
+/* Centered Variant */
+.variantCentered .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Dark Mode Adjustments */
+:global(html[data-theme="dark"]) .backgroundSurface {
+  background: var(--surface-1-dark);
+}
+:global(html[data-theme="dark"]) .backgroundSubtle {
+  background: var(--surface-2-dark);
+}
+:global(html[data-theme="dark"]) .toneLight {
+  color: var(--text-primary-dark);
+}
+:global(html[data-theme="dark"]) .toneDark {
+  color: var(--text-primary-light);
+}

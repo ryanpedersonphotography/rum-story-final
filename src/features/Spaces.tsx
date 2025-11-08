@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
 import SpacesLayout from '@/features/SpacesLayout'
+import styles from './Spaces.module.css'
 
 interface FeatureStoryblok {
   _uid: string
@@ -174,11 +175,11 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
       data-discover="true"
       data-section="spaces"
     >
-      <div className="venue-tabs">
+      <div className={styles.venueTabs}>
         {spacesData.map((space, index) => (
           <button
             key={space._uid}
-            className={`venue-tab ${activeSpaceIndex === index ? 'active' : ''}`}
+            className={`${styles.venueTab} ${activeSpaceIndex === index ? styles.active : ''}`}
             onClick={() => handleSpaceChange(index)}
           >
             {space.space_name}
@@ -186,8 +187,8 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
         ))}
       </div>
 
-      <div className="spaces-content layout-classic">
-          <div className="venue-main-image">
+      <div className={`${styles.spacesContent} ${styles.layoutClassic}`}>
+          <div className={styles.venueMainImage}>
             {(() => {
               const currentSpace = spacesData[activeSpaceIndex]
               const images = getSpaceImages(currentSpace)
@@ -200,16 +201,16 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
                   alt={currentSpace?.space_name || 'Space image'}
                   width={1200}
                   height={800}
-                  className="venue-main-image__img"
+                  className={styles.venueMainImageImg}
                   priority
                 />
               )
             })()}
-            <button className="carousel-arrow prev" onClick={prevImage}>←</button>
-            <button className="carousel-arrow next" onClick={nextImage}>→</button>
+            <button className={`${styles.carouselArrow} ${styles.prev}`} onClick={prevImage}>←</button>
+            <button className={`${styles.carouselArrow} ${styles.next}`} onClick={nextImage}>→</button>
           </div>
 
-          <div className="venue-details">
+          <div className={styles.venueDetails}>
             {(() => {
               const currentSpace = spacesData[activeSpaceIndex]
               if (!currentSpace) return <div>Loading space details...</div>
@@ -218,9 +219,9 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
                 <>
                   <h3>{currentSpace.space_name}</h3>
                   <p>{currentSpace.space_description}</p>
-                  <div className="venue-features">
+                  <div className={styles.venueFeatures}>
                     {(currentSpace.space_features || []).map((feature) => (
-                      <div key={feature._uid} className="venue-feature">
+                      <div key={feature._uid} className={styles.venueFeature}>
                         <h5>{feature.feature_title}</h5>
                         <p>{feature.feature_blurb}</p>
                       </div>
