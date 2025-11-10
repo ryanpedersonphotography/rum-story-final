@@ -148,6 +148,7 @@
 .header {
   margin-bottom: var(--space-fluid-lg, clamp(16px, 3vw, 32px));
   max-width: 900px;
+  width: 100%;
 }
 
 .scriptAccent {
@@ -178,6 +179,7 @@
 /* Header alignment */
 .align-left {
   text-align: left;
+  margin-inline: 0;
 }
 
 .align-left .lead {
@@ -186,6 +188,7 @@
 
 .align-center {
   text-align: center;
+  margin-inline: auto;
 }
 
 .align-center .lead {
@@ -194,6 +197,7 @@
 
 .align-right {
   text-align: right;
+  margin-inline: auto 0;
 }
 
 .align-right .lead {
