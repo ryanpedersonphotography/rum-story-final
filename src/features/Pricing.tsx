@@ -2,8 +2,10 @@
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
 import { Check, Calendar, Star } from 'lucide-react'
-import SectionWrapper from '@/components/ui/SectionWrapper'
+import SectionShell from '@/components/ui/SectionShell'
 import styles from './Pricing.module.css'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 interface PricingTierStoryblok extends SbBlokData {
   name?: string
@@ -87,13 +89,13 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
   const tiers = blok?.tiers?.length ? blok.tiers : defaultTiers
 
   return (
-    <SectionWrapper
+    <SectionShell
       id="packages"
       paddingY="lg"
       spacing="footer-approach"
-      maxWidth="standard"
-      background="surface-1"
-      theme="inherit"
+      container="content"
+      background="surface"
+      tone="auto"
       className={styles.pricingSection}
       data-section="pricing"
       header={{
@@ -106,9 +108,9 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
       {...storyblokEditable(blok)}
     >
       <div className={styles.contentWrapper}>
-        <div className={styles.heroPricingLine}>
+        <Text size="lg" align="center" className={styles.heroPricingLine}>
           {blok?.hero_line || 'Saturdays from $6,200 • Fridays/Sundays from $5,500 • Weekdays from $4,500'}
-        </div>
+        </Text>
 
         <div className={styles.pricingGrid}>
           {tiers.map((tier, index) => (
@@ -120,20 +122,20 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
               {tier.is_popular && (
                 <div className={styles.popularBadge} aria-label="Most popular">
                   <Star size={14} aria-hidden="true" />
-                  <span className={styles.srOnly}>Most Popular: </span>{tier.label}
+                  <Text as="span" size="sm" weight="semibold">{tier.label}</Text>
                 </div>
               )}
 
               <header className={styles.pricingHeader}>
-                <h3 className={styles.packageName}>{tier.name}</h3>
+                <Typography as="h3" variant="h3" className={styles.packageName}>{tier.name}</Typography>
                 <div className={styles.pricingDisplay} aria-describedby={`price-desc-${index}`}>
                   <div className={styles.weekendPrice} role="text">
-                    <span className={styles.amount}>{tier.price}</span>
-                    <span className={styles.priceLabel}>Fri–Sun</span>
+                    <Typography as="span" variant="h2" className={styles.amount}>{tier.price}</Typography>
+                    <Text as="span" size="sm" className={styles.priceLabel}>Fri–Sun</Text>
                   </div>
                   <div className={styles.weekdayPrice} role="text">
-                    <span className={styles.amount}>{tier.weekday_price}</span>
-                    <span className={styles.label}>Weekdays</span>
+                    <Typography as="span" variant="h3" className={styles.amount}>{tier.weekday_price}</Typography>
+                    <Text as="span" size="sm" className={styles.label}>Weekdays</Text>
                   </div>
                 </div>
                 <p id={`price-desc-${index}`} className={styles.srOnly}>
@@ -145,7 +147,7 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
                 {(tier.features || []).map((feature, featureIndex) => (
                   <li key={featureIndex} className={styles.featureItem}>
                     <Check size={16} className={styles.checkIcon} aria-hidden="true" />
-                    <span>{feature}</span>
+                    <Text as="span" size="sm">{feature}</Text>
                   </li>
                 ))}
               </ul>
@@ -157,7 +159,7 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
                   data-testid="pricing-cta"
                 >
                   <Calendar size={16} aria-hidden="true" />
-                  <span>Check Your Date</span>
+                  <Text as="span" weight="semibold">Check Your Date</Text>
                 </a>
                 <a
                   href={tier.tour_url || '#contact'}
@@ -171,6 +173,6 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
           ))}
         </div>
       </div>
-    </SectionWrapper>
+    </SectionShell>
   )
 }
