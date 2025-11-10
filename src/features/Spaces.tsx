@@ -170,6 +170,7 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
       background={backgroundVariant}
       tone={themeOverride}
       paddingY={paddingSize}
+      spacing="content-flow"  // Standard section spacing
       divider="none"          // Clean transition
       useContentWrapper={true} // Consistent width
       data-discover="true"

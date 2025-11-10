@@ -71,6 +71,7 @@ export default function Map({ blok }: { blok: MapStoryblok }) {
   return (
     <SectionWrapper
       paddingY="lg"
+      spacing="content-flow"
       maxWidth="standard"
       background="surface-1"
       theme="inherit"

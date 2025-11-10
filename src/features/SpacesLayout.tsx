@@ -1,6 +1,6 @@
 import React from 'react'
 import SectionWrapper from '@/components/ui/SectionWrapper'
-import type { PaddingY, Theme, Background } from '@/components/ui/SectionWrapper'
+import type { PaddingY, Theme, Background, SpacingPreset } from '@/components/ui/SectionWrapper'
 
 interface SpacesLayoutProps {
   children: React.ReactNode
@@ -16,6 +16,7 @@ interface SpacesLayoutProps {
   background?: Background  // 'surface' | 'tint-rose' | 'tint-sage' | 'dark-gradient' | 'image'
   tone?: Tone              // 'light' | 'dark' | 'auto'
   paddingY?: PaddingY      // 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'fluid'
+  spacing?: SpacingPreset  // Spacing preset for consistent rhythm
   divider?: Divider        // 'none' | 'hairline' | 'thread-gold'
   
   // Layout options
@@ -80,6 +81,7 @@ export default function SpacesLayout({
   background = 'tint-rose',  // Default: warm rose tint
   tone = 'auto',              // Auto-detect based on background
   paddingY = 'lg',            // Generous padding
+  spacing,                    // Spacing preset (pass through)
   divider = 'none',           // No divider by default
   
   // Layout props
@@ -103,18 +105,15 @@ export default function SpacesLayout({
   } : undefined
 
   // Build section props
-  const sectionProps: SectionProps = {
-    as: 'section',
+  const sectionProps = {
+    as: 'section' as const,
     id,
-    align: 'center',
     
     // Design configuration
     background,
-    tone,
+    theme: tone as Theme,
     paddingY,
-    divider,
-    
-    // Layout configuration
+    spacing,  // Pass through spacing preset
     
     // Header
     header: resolvedHeader,

@@ -38,11 +38,14 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
   // Get styling from Storyblok or use defaults
   const backgroundVariant = blok.background_variant || 'tint-rose'
   const themeOverride = blok.theme_override || 'auto'
-  const paddingSize = blok.padding_size || 'fluid'
+  // Map 'fluid' to 'lg' since we don't have a fluid padding variant
+  const rawPaddingSize = blok.padding_size || 'lg'
+  const paddingSize = rawPaddingSize === 'fluid' ? 'lg' : rawPaddingSize
 
   return (
     <SectionWrapper
         paddingY={paddingSize as any}
+        spacing="hero-start"
         maxWidth="standard"
         theme="inherit"
         background={backgroundVariant === 'surface' ? 'surface-1' : backgroundVariant === 'tint-rose' ? 'surface-2' : 'transparent'}

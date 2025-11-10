@@ -58,6 +58,7 @@ export default function BrandProof({ blok }: { blok: BrandProofStoryblok }) {
   return (
     <SectionWrapper
       paddingY="md"
+      spacing="compact-stack"
       maxWidth="standard"
       background="surface-2"
       theme="inherit"

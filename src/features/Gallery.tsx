@@ -196,6 +196,7 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
       <SectionWrapper
         id="gallery"
         paddingY="lg"
+        spacing="content-flow"
         maxWidth="standard"
         background={blok?.background_variant === 'surface' ? 'surface-1' : 'transparent'}
         theme="inherit"

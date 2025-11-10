@@ -1,6 +1,6 @@
 import React from 'react'
 import SectionWrapper from '@/components/ui/SectionWrapper'
-import type { PaddingY, Theme, Background } from '@/components/ui/SectionWrapper'
+import type { PaddingY, Theme, Background, SpacingPreset } from '@/components/ui/SectionWrapper'
 
 interface ExperienceLayoutProps {
   children: React.ReactNode
@@ -16,6 +16,7 @@ interface ExperienceLayoutProps {
   background?: Background
   tone?: Theme
   paddingY?: PaddingY
+  spacing?: SpacingPreset
   divider?: string
   useContentWrapper?: boolean
   
@@ -49,6 +50,7 @@ export default function ExperienceLayout({
   background = 'surface',     // Clean, professional
   tone = 'auto',              
   paddingY = 'xl',            // Extra breathing room
+  spacing,                    // Spacing preset
   divider = 'none',           
   useContentWrapper = true,   // Consistent width
   
@@ -72,6 +74,7 @@ export default function ExperienceLayout({
   const sectionProps = {
     id,
     paddingY,
+    spacing,
     maxWidth: useContentWrapper ? 'standard' : 'wide' as const,
     background: background === 'surface' ? 'surface-1' as const : 'transparent' as const,
     theme: tone === 'auto' ? 'inherit' as const : tone,

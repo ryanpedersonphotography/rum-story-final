@@ -73,6 +73,7 @@ export default function Experience({ blok }: { blok: ExperienceStoryblok }) {
       // Styling kept in code for consistency
       background="surface"     // Clean, professional
       paddingY="xl"           // Generous spacing
+      spacing="content-flow"  // Standard section spacing
       useContentWrapper={true} // Consistent width
       data-section="experience"
     >

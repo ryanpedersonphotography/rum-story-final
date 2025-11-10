@@ -90,6 +90,7 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
     <SectionWrapper
       id="packages"
       paddingY="lg"
+      spacing="footer-approach"
       maxWidth="standard"
       background="surface-1"
       theme="inherit"

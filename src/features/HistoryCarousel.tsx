@@ -56,6 +56,7 @@ export default function HistoryCarousel() {
   return (
     <SectionWrapper
       paddingY="lg"
+      spacing="content-flow"
       maxWidth="wide"
       background="surface-2"
       theme="inherit"

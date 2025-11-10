@@ -84,6 +84,7 @@ export default function FAQ({ blok }: { blok: Blok }) {
   return (
     <SectionWrapper
       paddingY="lg"
+      spacing="content-flow"
       maxWidth="standard"
       background="surface-1"
       theme="inherit"

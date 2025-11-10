@@ -60,6 +60,63 @@
   margin-block: var(--space-xl, 32px);
 }
 
+/* ===== MARGIN TOP VARIANTS ===== */
+.marginTop-none {
+  margin-top: 0;
+}
+
+.marginTop-sm {
+  margin-top: var(--section-gap-sm);
+}
+
+.marginTop-md {
+  margin-top: var(--section-gap-md);
+}
+
+.marginTop-lg {
+  margin-top: var(--section-gap-lg);
+}
+
+.marginTop-xl {
+  margin-top: var(--section-gap-xl);
+}
+
+/* ===== MARGIN BOTTOM VARIANTS ===== */
+.marginBottom-none {
+  margin-bottom: 0;
+}
+
+.marginBottom-sm {
+  margin-bottom: var(--section-gap-sm);
+}
+
+.marginBottom-md {
+  margin-bottom: var(--section-gap-md);
+}
+
+.marginBottom-lg {
+  margin-bottom: var(--section-gap-lg);
+}
+
+.marginBottom-xl {
+  margin-bottom: var(--section-gap-xl);
+}
+
+/* ===== AUTOMATIC SECTION SPACING ===== */
+.section + .section {
+  margin-top: var(--section-gap-md); /* Default gap between sections */
+}
+
+/* Special case: After hero */
+[data-section="hero"] + .section {
+  margin-top: var(--gap-after-hero);
+}
+
+/* Special case: Before footer */
+.section:has(+ footer) {
+  margin-bottom: var(--gap-before-footer);
+}
+
 /* ===== WRAPPER / CONTAINER ===== */
 .wrapper {
   position: relative;
