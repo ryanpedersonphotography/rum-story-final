@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import { renderRichText } from '@storyblok/js'
-import SectionWrapper from '@/components/ui/SectionWrapper'
+import SectionShell from '@/components/ui/SectionShell'
 import styles from './FAQ.module.css'
+import Typography from '@/components/ui/Typography'
 
 type Blok = Record<string, any>
 
@@ -82,12 +83,12 @@ export default function FAQ({ blok }: { blok: Blok }) {
   const toggle = (id: string) => setOpen((s) => ({ ...s, [id]: !s[id] }))
 
   return (
-    <SectionWrapper
+    <SectionShell
       paddingY="lg"
       spacing="content-flow"
-      maxWidth="standard"
-      background="surface-1"
-      theme="inherit"
+      container="content"
+      background="surface"
+      tone="auto"
       className={styles.faqAccordion}
       data-section="faq"
       header={{
@@ -115,7 +116,7 @@ export default function FAQ({ blok }: { blok: Blok }) {
                   aria-expanded={isOpen}
                   aria-controls={`answer-${it.uid}`}
                 >
-                  <h3>{it.question}</h3>
+                  <Typography as="h3" variant="h3">{it.question}</Typography>
                   <span className={styles.toggle} aria-hidden>↓</span>
                 </button>
 
@@ -132,6 +133,6 @@ export default function FAQ({ blok }: { blok: Blok }) {
           })}
         </div>
       </div>
-    </SectionWrapper>
+    </SectionShell>
   )
 }
