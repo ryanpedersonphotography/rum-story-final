@@ -2,8 +2,10 @@
 import React from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react'
-import SectionWrapper from '@/components/ui/SectionWrapper'
+import SectionShell from '@/components/ui/SectionShell'
 import styles from './Footer.module.css'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 interface FooterBlok {
   _uid?: string
@@ -36,47 +38,47 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
       data-section="footer"
       {...(blok ? storyblokEditable(blok) : {})}
     >
-      <SectionWrapper
+      <SectionShell
         as="div"
         paddingY="lg"
-        maxWidth="standard"
+        container="content"
         background="transparent"
-        theme="inherit"
+        tone="auto"
         blok={blok}
       >
         <div className={styles.content}>
           {/* Column 1: Brand & Description */}
           <div className={styles.section}>
-            <h3 className={styles.title}>{brandTitle}</h3>
-            <p className={styles.description}>{brandDescription}</p>
+            <Typography as="h3" variant="h3" className={styles.title}>{brandTitle}</Typography>
+            <Text size="sm" className={styles.description}>{brandDescription}</Text>
           </div>
 
           {/* Column 2: Contact Information */}
           <div className={styles.section}>
-            <h4 className={styles.sectionTitle}>Contact Information</h4>
+            <Typography as="h4" variant="h4" className={styles.sectionTitle}>Contact Information</Typography>
             <div className={styles.contact}>
-              <p className={styles.address}>
+              <Text size="sm" className={styles.address}>
                 <MapPin className={styles.socialIcon} size={18} />
                 {address}
-              </p>
+              </Text>
               {phone && (
-                <a href={`tel:${phone.replace(/[^0-9]/g, '')}`} className={styles.phoneLink}>
+                <Text as="a" size="sm" href={`tel:${phone.replace(/[^0-9]/g, '')}`} className={styles.phoneLink}>
                   <Phone className={styles.socialIcon} size={18} />
                   {phone}
-                </a>
+                </Text>
               )}
               {email && (
-                <a href={`mailto:${email}`} className={styles.phoneLink}>
+                <Text as="a" size="sm" href={`mailto:${email}`} className={styles.phoneLink}>
                   <Mail className={styles.socialIcon} size={18} />
                   {email}
-                </a>
+                </Text>
               )}
             </div>
           </div>
 
           {/* Column 3: Social Links */}
           <div className={styles.section}>
-            <h4 className={styles.sectionTitle}>Connect With Us</h4>
+            <Typography as="h4" variant="h4" className={styles.sectionTitle}>Connect With Us</Typography>
             <div className={styles.socialLinks}>
               {facebookUrl && (
                 <a
@@ -106,11 +108,11 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
 
         {/* Footer Bottom with Centered Copyright */}
         <div className={styles.bottom}>
-          <div className={styles.copyright}>
+          <Text size="sm" className={styles.copyright}>
             &copy; {currentYear} {brandTitle}. All rights reserved.
-          </div>
+          </Text>
         </div>
-      </SectionWrapper>
+      </SectionShell>
     </footer>
   )
 }
