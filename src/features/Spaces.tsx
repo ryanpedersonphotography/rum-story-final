@@ -4,8 +4,10 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
-import SpacesLayout from '@/features/SpacesLayout'
+import SectionShell from '@/components/ui/SectionShell'
 import styles from './Spaces.module.css'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 interface FeatureStoryblok {
   _uid: string
@@ -159,7 +161,7 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
   }
 
   return (
-    <SpacesLayout
+    <SectionShell
       {...storyblokEditable(blok)}
       header={{
         scriptAccent: subtitle,
@@ -172,7 +174,7 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
       paddingY={paddingSize}
       spacing="content-flow"  // Standard section spacing
       divider="none"          // Clean transition
-      useContentWrapper={true} // Consistent width
+      container="wide" // Consistent width
       data-discover="true"
       data-section="spaces"
     >
@@ -218,13 +220,13 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
               
               return (
                 <>
-                  <h3>{currentSpace.space_name}</h3>
-                  <p>{currentSpace.space_description}</p>
+                  <Typography as="h3" variant="h2">{currentSpace.space_name}</Typography>
+                  <Text>{currentSpace.space_description}</Text>
                   <div className={styles.venueFeatures}>
                     {(currentSpace.space_features || []).map((feature) => (
                       <div key={feature._uid} className={styles.venueFeature}>
-                        <h5>{feature.feature_title}</h5>
-                        <p>{feature.feature_blurb}</p>
+                        <Typography as="h5" variant="h3">{feature.feature_title}</Typography>
+                        <Text size="sm">{feature.feature_blurb}</Text>
                       </div>
                     ))}
                   </div>
@@ -233,6 +235,6 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
             })()}
           </div>
         </div>
-    </SpacesLayout>
+    </SectionShell>
   )
 }
