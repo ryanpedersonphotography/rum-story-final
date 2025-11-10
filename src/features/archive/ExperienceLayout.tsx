@@ -1,6 +1,6 @@
 import React from 'react'
-import SectionWrapper from '@/components/ui/SectionWrapper'
-import type { PaddingY, Theme, Background, SpacingPreset } from '@/components/ui/SectionWrapper'
+import SectionShell from '@/components/ui/SectionShell'
+import type { PaddingY, Tone, Background, SpacingPreset } from '@/components/ui/SectionShell'
 
 interface ExperienceLayoutProps {
   children: React.ReactNode
@@ -14,7 +14,7 @@ interface ExperienceLayoutProps {
   
   // Design customization (kept in code for consistency)
   background?: Background
-  tone?: Theme
+  tone?: Tone
   paddingY?: PaddingY
   spacing?: SpacingPreset
   divider?: string
@@ -75,17 +75,17 @@ export default function ExperienceLayout({
     id,
     paddingY,
     spacing,
-    maxWidth: useContentWrapper ? 'standard' : 'wide' as const,
-    background: background === 'surface' ? 'surface-1' as const : 'transparent' as const,
-    theme: tone === 'auto' ? 'inherit' as const : tone,
+    container: useContentWrapper ? 'content' : 'wide' as const,
+    background: background,
+    tone: tone,
     header: resolvedHeader,
     className: `rum-river-experience ${className}`.trim(),
     ...rest
   }
 
   return (
-    <SectionWrapper {...sectionProps}>
+    <SectionShell {...sectionProps}>
       {children}
-    </SectionWrapper>
+    </SectionShell>
   )
 }

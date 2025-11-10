@@ -11,8 +11,10 @@ import Image from 'next/image'
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
 import { SparklesIcon, HeartIcon, CheckBadgeIcon, HomeModernIcon } from '@heroicons/react/24/outline'
-import ExperienceLayout from '@/features/ExperienceLayout'
+import SectionShell from '@/components/ui/SectionShell'
 import styles from './Experience.module.css'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 interface ExperienceStoryblok extends SbBlokData {
   title?: string
@@ -68,23 +70,21 @@ export default function Experience({ blok }: { blok: ExperienceStoryblok }) {
   const description = blok.description || "At Rum River Barn, we believe your wedding day should be more than just beautiful—it should be unforgettable. Nestled along the banks of the historic Rum River, our venue offers a unique blend of rustic charm and natural elegance that creates the perfect backdrop for your love story."
 
   return (
-    <ExperienceLayout
+    <SectionShell
       {...storyblokEditable(blok)}
-      // Styling kept in code for consistency
-      background="surface"     // Clean, professional
-      paddingY="xl"           // Generous spacing
-      spacing="content-flow"  // Standard section spacing
-      useContentWrapper={true} // Consistent width
+      header={{
+        scriptAccent: subtitle,
+        title: title,
+        lead: description,
+      }}
+      background="surface"
+      paddingY="xl"
+      spacing="content-flow"
+      container="content"
       data-section="experience"
     >
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.header}>
-            <p className={styles.script}>{subtitle}</p>
-            <h2 className={styles.title}>{title}</h2>
-            <p className={styles.description}>{description}</p>
-          </div>
-
           <div className={styles.features}>
             {features.map((feature, index) => {
               const IconComponent = iconMap[feature.icon || 'sparkles'] || SparklesIcon
@@ -94,8 +94,8 @@ export default function Experience({ blok }: { blok: ExperienceStoryblok }) {
                     <IconComponent className={styles.iconSvg} />
                   </div>
                   <div className={styles.featureText}>
-                    <h3 className={styles.featureTitle}>{feature.title}</h3>
-                    <p className={styles.featureDescription}>{feature.description}</p>
+                    <Typography as="h3" variant="h3" className={styles.featureTitle}>{feature.title}</Typography>
+                    <Text size="sm" className={styles.featureDescription}>{feature.description}</Text>
                   </div>
                 </div>
               )
@@ -114,6 +114,6 @@ export default function Experience({ blok }: { blok: ExperienceStoryblok }) {
           />
         </div>
       </div>
-    </ExperienceLayout>
+    </SectionShell>
   )
 }
