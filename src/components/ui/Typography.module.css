@@ -1,0 +1,156 @@
+/* ==========================================================================
+   TYPOGRAPHY PRIMITIVE - Unified Typography System
+   Token-driven, variant-based, dark-mode aware
+   ========================================================================== */
+
+/* ===== BASE TYPOGRAPHY ===== */
+.typography {
+  margin: 0;
+  transition: color 200ms ease;
+  /* Size and line-height applied via inline styles for performance */
+}
+
+/* ===== FONT FAMILIES ===== */
+.font-serif {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans, 'Montserrat', system-ui, sans-serif);
+}
+
+.font-script {
+  font-family: var(--font-script, 'Dancing Script', cursive);
+}
+
+.font-inherit {
+  /* Inherits from parent */
+}
+
+/* ===== COLORS ===== */
+.color-primary {
+  color: var(--text-primary);
+}
+
+.color-secondary {
+  color: var(--text-secondary);
+}
+
+.color-accent {
+  color: var(--accent-rose);
+}
+
+.color-inverse {
+  color: var(--text-inverse);
+}
+
+.color-inherit {
+  color: inherit;
+}
+
+/* ===== TEXT ALIGNMENT ===== */
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-inherit {
+  text-align: inherit;
+}
+
+/* ===== FONT WEIGHTS ===== */
+.weight-light {
+  font-weight: var(--weight-light, 300);
+}
+
+.weight-regular {
+  font-weight: var(--weight-regular, 400);
+}
+
+.weight-medium {
+  font-weight: var(--weight-medium, 500);
+}
+
+.weight-semibold {
+  font-weight: var(--weight-semibold, 600);
+}
+
+.weight-bold {
+  font-weight: var(--weight-bold, 700);
+}
+
+.weight-inherit {
+  font-weight: inherit;
+}
+
+/* ===== VARIANT-SPECIFIC ADJUSTMENTS ===== */
+/* Add letter-spacing for specific variants */
+.variant-display {
+  letter-spacing: var(--tracking-tight);
+}
+
+.variant-h1,
+.variant-h2,
+.variant-h3 {
+  letter-spacing: var(--tracking-normal);
+}
+
+.variant-script {
+  letter-spacing: var(--tracking-wide);
+}
+
+.variant-caption {
+  letter-spacing: var(--tracking-normal);
+  opacity: 0.9;
+}
+
+/* ===== DARK MODE OVERRIDES ===== */
+/* Colors automatically adjust via CSS custom properties */
+:global(html[data-theme="dark"]) .color-primary {
+  color: var(--text-primary);
+}
+
+:global(html[data-theme="dark"]) .color-secondary {
+  color: var(--text-secondary);
+}
+
+:global(html[data-theme="dark"]) .color-accent {
+  color: var(--accent-rose);
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+/* Typography scales automatically via clamp() in tokens */
+
+/* ===== OPTIONAL MARGIN UTILITIES ===== */
+/* Can be added via className when needed */
+.mb-sm {
+  margin-bottom: var(--space-sm);
+}
+
+.mb-md {
+  margin-bottom: var(--space-md);
+}
+
+.mb-lg {
+  margin-bottom: var(--space-lg);
+}
+
+/* ===== SPECIAL CASES ===== */
+/* Script accent often needs specific color in headers */
+.variant-script.color-accent {
+  color: var(--accent-rose, #9D6B7B);
+}
+
+/* Display variant may need tighter tracking on mobile */
+@media (max-width: 640px) {
+  .variant-display {
+    letter-spacing: var(--tracking-normal);
+  }
+}

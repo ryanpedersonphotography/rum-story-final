@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './SectionWrapper.module.css';
+import Typography from './Typography';
+import Text from './Text';
 
 // Type definitions for Storyblok integration
 export type PaddingY = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'none';
@@ -139,13 +141,35 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
         {header && (
           <header className={headerClasses}>
             {header.scriptAccent && (
-              <span className={styles.scriptAccent}>{header.scriptAccent}</span>
+              <Typography 
+                variant="script" 
+                color="accent" 
+                align={header.align || 'center'}
+                className={styles.scriptAccent}
+              >
+                {header.scriptAccent}
+              </Typography>
             )}
             {header.title && (
-              <h2 className={styles.title}>{header.title}</h2>
+              <Typography 
+                as="h2" 
+                variant="h1" 
+                align={header.align || 'center'}
+                className={styles.title}
+              >
+                {header.title}
+              </Typography>
             )}
             {header.lead && (
-              <p className={styles.lead}>{header.lead}</p>
+              <Text 
+                size="lg" 
+                maxWidth="prose" 
+                align={header.align || 'center'}
+                color="secondary"
+                className={styles.lead}
+              >
+                {header.lead}
+              </Text>
             )}
           </header>
         )}

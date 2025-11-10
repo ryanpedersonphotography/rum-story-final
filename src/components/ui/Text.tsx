@@ -1,116 +1,110 @@
-import * as React from 'react'
-import type { Align } from './types'
+import React from 'react';
+import Typography, { type TypographyProps } from './Typography';
+import styles from './Text.module.css';
 
-/* ==========================================================================
-   TEXT PRIMITIVE - Token-Driven Body Text
+export type TextSize = 'sm' | 'base' | 'lg';
+export type TextMaxWidth = 'prose' | 'narrow' | 'wide' | 'full';
 
-   Features:
-   - Semantic HTML (p, span, div) via `as` prop
-   - Fluid typography sizes (xs, sm, md, lg)
-   - Zero margins by default (composition over inheritance)
-   - Muted color variant for secondary text
-   - True polymorphic typing (element-specific props & refs)
-   ========================================================================== */
+export interface TextProps extends Omit<TypographyProps, 'variant'> {
+  size?: TextSize;
+  maxWidth?: TextMaxWidth;
+  opacity?: number;
+  variant?: never; // Prevent variant prop since Text sets it internally
+}
 
-type Element = keyof Pick<JSX.IntrinsicElements, 'p' | 'span' | 'div'>
-
-export type TextSize = 'xs' | 'sm' | 'md' | 'lg'
-
-type Props<E extends Element> = {
-  /**
-   * HTML element to render
-   * @default 'p'
-   */
-  as?: E
-
-  /**
-   * Text size variant
-   * @default 'md'
-   */
-  size?: TextSize
-
-  /**
-   * Text alignment
-   * @default 'start'
-   */
-  align?: Align
-
-  /**
-   * Muted color variant (70% opacity)
-   * @default false
-   */
-  muted?: boolean
-
-  /**
-   * Add block margin (opt-in)
-   * @default false
-   */
-  blockMargin?: boolean
-
-  children?: React.ReactNode
-} & Omit<React.ComponentPropsWithoutRef<E>, 'as'>
-
-type Ref<E extends Element> = E extends 'span'
-  ? HTMLSpanElement
-  : E extends 'div'
-  ? HTMLDivElement
-  : HTMLParagraphElement
+// Map size to Typography variants
+const sizeToVariant = {
+  sm: 'body-sm',
+  base: 'body',
+  lg: 'body-lg'
+} as const;
 
 /**
- * Text primitive component with fluid typography and semantic HTML.
- *
- * @example
- * // Body paragraph
- * <Text size="md">
- *   Discover what makes our venue the perfect setting.
+ * Text Component - Semantic wrapper for body text
+ * 
+ * Features:
+ * - Optimized for readability with max-width control
+ * - Three size variants (sm, base, lg)
+ * - Automatic prose width for better reading experience
+ * - Opacity control for secondary text
+ * 
+ * Usage:
+ * ```tsx
+ * <Text size="lg" maxWidth="prose">
+ *   Lead paragraph with optimal reading width
  * </Text>
- *
- * @example
- * // Muted secondary text
- * <Text size="sm" muted>
- *   Last updated: January 2025
+ * 
+ * <Text size="sm" opacity={0.8}>
+ *   Secondary description text
  * </Text>
- *
- * @example
- * // Inline span with proper typing
- * <Text as="span" size="lg" onClick={(e) => console.log(e.currentTarget)}>
- *   Important highlight
- * </Text>
+ * ```
  */
-export const Text = React.forwardRef(
-  <E extends Element = 'p'>(
-    {
-      as,
-      size = 'md',
-      align = 'start',
-      muted = false,
-      blockMargin = false,
-      className = '',
-      ...rest
-    }: Props<E>,
-    ref: React.ForwardedRef<Ref<E>>
-  ) => {
-    const Tag = (as ?? 'p') as Element
+const Text: React.FC<TextProps> = ({
+  size = 'base',
+  maxWidth = 'full',
+  opacity,
+  className = '',
+  style,
+  children,
+  as = 'p',
+  font = 'sans',
+  color = 'inherit',
+  align = 'inherit',
+  weight = 'regular',
+  ...rest
+}) => {
+  const typographyVariant = sizeToVariant[size];
+  
+  // Build wrapper classes for max-width control
+  const wrapperClasses = [
+    styles.textWrapper,
+    styles[`maxWidth-${maxWidth}`],
+    align !== 'inherit' ? styles[`align-${align}`] : '',
+  ].filter(Boolean).join(' ');
+  
+  // Apply opacity via style
+  const textStyle = {
+    ...style,
+    ...(opacity !== undefined ? { opacity } : {})
+  };
 
-    const classes = [blockMargin && 't-block-margin', className]
-      .filter(Boolean)
-      .join(' ')
-      .trim()
-
+  // If maxWidth is set, wrap in div for width control
+  if (maxWidth !== 'full') {
     return (
-      <Tag
-        ref={ref as any}
-        data-ui="text"
-        data-size={size}
-        data-align={align}
-        data-muted={muted ? 'true' : undefined}
-        className={classes || undefined}
-        {...(rest as any)}
-      />
-    )
+      <div className={wrapperClasses}>
+        <Typography
+          variant={typographyVariant}
+          as={as}
+          font={font}
+          color={color}
+          align={align}
+          weight={weight}
+          className={className}
+          style={textStyle}
+          {...rest}
+        >
+          {children}
+        </Typography>
+      </div>
+    );
   }
-) as <E extends Element = 'p'>(
-  p: Props<E> & { ref?: React.Ref<Ref<E>> }
-) => JSX.Element
 
-Text.displayName = 'Text'
+  // Otherwise render Typography directly
+  return (
+    <Typography
+      variant={typographyVariant}
+      as={as}
+      font={font}
+      color={color}
+      align={align}
+      weight={weight}
+      className={className}
+      style={textStyle}
+      {...rest}
+    >
+      {children}
+    </Typography>
+  );
+};
+
+export default Text;

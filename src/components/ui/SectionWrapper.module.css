@@ -209,27 +209,22 @@
 }
 
 .scriptAccent {
-  font-family: var(--font-script, 'Dancing Script', cursive);
-  color: var(--accent-rose);
-  font-size: clamp(1.5rem, 3.2vw, 1.75rem);
+  font-size: var(--type-script) !important;
+  line-height: var(--leading-script) !important;
   margin-bottom: var(--space-sm);
-  font-weight: 400;
   display: block;
 }
 
 .title {
-  font-family: var(--font-serif, 'Playfair Display', serif);
-  font-size: clamp(2.25rem, 4.8vw, 3rem);
-  color: inherit;
+  font-size: var(--type-h1) !important;
+  line-height: var(--leading-heading) !important;
   margin: 0 0 var(--space-sm);
-  font-weight: 400;
-  line-height: 1.2;
 }
 
 .lead {
-  color: var(--text-secondary);
-  font-size: clamp(1rem, 2.4vw, 1.125rem);
-  line-height: 1.7;
+  font-size: var(--type-body-lg) !important;
+  line-height: var(--leading-body) !important;
+  margin: 0 auto;
   max-width: 48ch;
 }
 
