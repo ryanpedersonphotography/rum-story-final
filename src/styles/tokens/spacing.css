@@ -90,21 +90,3 @@
     }
   }
 }
-
-@layer utilities {
-  .u-gap-inline {
-    gap: var(--gap-inline);
-  }
-
-  .u-gap-stack > * + * {
-    margin-block-start: var(--gap-stack);
-  }
-
-  .u-pad-card {
-    padding: var(--pad-card);
-  }
-
-  .u-pad-section {
-    padding-block: var(--pad-section);
-  }
-}

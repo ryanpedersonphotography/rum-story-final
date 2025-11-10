@@ -78,6 +78,10 @@
   display: block;
 }
 
+:global(html[data-theme="dark"]) .venueMainImage img {
+  filter: brightness(0.85) contrast(1.1);
+}
+
 .venueMainImage::after {
   content: '';
   position: absolute;
@@ -212,9 +216,10 @@
 
 :global(html[data-theme="dark"]) .venueMainImage::after {
   background: linear-gradient(135deg,
-    rgba(10,8,6,0.95) 0%,
-    rgba(26,20,16,0.92) 50%,
-    rgba(15,12,10,0.94) 100%);
+    rgba(10,8,6,0.8) 0%,
+    rgba(26,20,16,0.8) 50%,
+    rgba(15,12,10,0.8) 100%);
+  mix-blend-mode: multiply;
 }
 
 :global(html[data-theme="dark"]) .carouselArrow {

@@ -2,18 +2,15 @@
 import '@/styles/tokens/theme.css'
 import '@/styles/tokens/spacing.css'
 
-// 2. PRIMITIVES - Layout primitives and component primitives (stack, cluster, grid, button)
-import '@/styles/primitives/index.css'
-
-// 3. UTILITIES - Section presets and layout utilities (@layer utilities)
+// 2. UTILITIES - Section presets and layout utilities (@layer utilities)
 import '@/styles/system/section-presets.css'
 import '@/styles/system/layout.css'
 import '@/styles/utilities/ornate-divider.css'
 
-// 4. GLOBALS - Base styles
+// 3. GLOBALS - Base styles
 import '@/styles/globals.css'
 
-// 5. COMPONENTS - Component-specific styles (@layer components)
+// 4. COMPONENTS - Component-specific styles (@layer components)
 import '@/styles/components/navbar.css'
 
 // import StoryblokProvider from '@/components/StoryblokProvider';
