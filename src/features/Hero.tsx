@@ -9,6 +9,9 @@
 import React from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import styles from './Hero.module.css'
+import SectionShell from '@/components/ui/SectionShell'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 type SBAsset = { filename?: string; alt?: string } | string | undefined
 
@@ -67,8 +70,6 @@ export default function Hero({
     assetAlt(blok.hero_image, '') ||
     assetAlt(blok.bg_image, 'Rum River Wedding Barn')
 
-  const style = { '--hero-bg-url': `url("${bg}")` } as React.CSSProperties
-
   const kicker = blok.kicker || 'Where Dreams Begin'
   const title = blok.title || 'Rum River'
   const titleAccent = blok.title_accent || 'Wedding Barn'
@@ -98,27 +99,27 @@ export default function Hero({
   }
 
   return (
-    <section 
+    <SectionShell 
+      height="screen"
+      background={{ kind: 'image', src: bg, attachment: 'fixed' }}
       className={styles.hero} 
       data-section="hero" 
-      data-content-align={contentAlign}
-      data-content-width={contentWidth}
-      data-use-rails={useRailSystem ? 'true' : 'false'}
-      style={style} 
+      align={contentAlign}
+      container={contentWidth}
       {...storyblokEditable(blok)}
     >
       <span className={styles.srOnly}>{bgAlt}</span>
 
       <div className={styles.heroContent}>
-        <div className={styles.eyebrow}>{kicker}</div>
+        <Typography as="div" variant="script" className={styles.eyebrow}>{kicker}</Typography>
 
-        <h1 className={styles.title}>
+        <Typography as="h1" variant="display" className={styles.title}>
           {title}
           <br />
           <span className={styles.titleAccent}>{titleAccent}</span>
-        </h1>
+        </Typography>
 
-        <p className={styles.lead}>{lead}</p>
+        <Text size="lg" className={styles.lead}>{lead}</Text>
 
         <div className={styles.ctas}>
           <a href="#contact" className={`${styles.cta} ${styles.ctaSecondary}`}>
@@ -131,6 +132,6 @@ export default function Hero({
         <div className={styles.scrollText}>{scrollText}</div>
         <div className={styles.scrollArrow}>↓</div>
       </div> */}
-    </section>
+    </SectionShell>
   )
 }
