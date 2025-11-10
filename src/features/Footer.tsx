@@ -2,6 +2,7 @@
 import React from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react'
+import SectionWrapper from '@/components/ui/SectionWrapper'
 import styles from './Footer.module.css'
 
 interface FooterBlok {
@@ -35,7 +36,14 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
       data-section="footer"
       {...(blok ? storyblokEditable(blok) : {})}
     >
-      <div className={styles.container}>
+      <SectionWrapper
+        as="div"
+        paddingY="lg"
+        maxWidth="standard"
+        background="transparent"
+        theme="inherit"
+        blok={blok}
+      >
         <div className={styles.content}>
           {/* Column 1: Brand & Description */}
           <div className={styles.section}>
@@ -102,7 +110,7 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
             &copy; {currentYear} {brandTitle}. All rights reserved.
           </div>
         </div>
-      </div>
+      </SectionWrapper>
     </footer>
   )
 }

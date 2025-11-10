@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { storyblokEditable } from '@storyblok/react/rsc'
-import Section from '@/components/ui/Section'
+import SectionWrapper from '@/components/ui/SectionWrapper'
 import styles from './AlternatingBlocks.module.css'
 
 interface AlternatingBlocksBlok {
@@ -41,19 +41,11 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
   const paddingSize = blok.padding_size || 'fluid'
 
   return (
-    <Section
-        align="center"
-        container="wrapper"
-        background={backgroundVariant}
-        tone={themeOverride}
-        paddingY={paddingSize}
-        divider="thread-gold"
-        variant={[
-          'alternating-blocks-luxe',  // Additional styling
-          'header-center-wide',         // Remove max-width constraint on header
-          'lead-full-width',            // Remove 48ch constraint on lead text
-          'box-sizing-content'          // Override box-sizing if needed
-        ]}
+    <SectionWrapper
+        paddingY={paddingSize as any}
+        maxWidth="standard"
+        theme="inherit"
+        background={backgroundVariant === 'surface' ? 'surface-1' : backgroundVariant === 'tint-rose' ? 'surface-2' : 'transparent'}
         header={{
           scriptAccent: blok.script_accent || 'Your Perfect Venue',
           title: blok.title || 'Why Choose Rum River Barn',
@@ -61,6 +53,7 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
           align: 'center'
         }}
         className={styles.alternatingBlocks}
+        blok={blok}
         data-section="alternating-blocks"
         {...storyblokEditable(blok)}
       >
@@ -119,6 +112,6 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
           )
         })}
       </div>
-    </Section>
+    </SectionWrapper>
   )
 }

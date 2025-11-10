@@ -1,6 +1,6 @@
 import React from 'react'
-import Section from '@/components/ui/Section'
-import type { SectionProps, Background, Tone, PaddingY, Divider } from '@/components/ui/Section'
+import SectionWrapper from '@/components/ui/SectionWrapper'
+import type { PaddingY, Theme, Background } from '@/components/ui/SectionWrapper'
 
 interface SpacesLayoutProps {
   children: React.ReactNode
@@ -115,13 +115,11 @@ export default function SpacesLayout({
     divider,
     
     // Layout configuration
-    container: useContentWrapper ? 'wrapper' : 'rails',
     
     // Header
     header: resolvedHeader,
     
-    // Variant and class
-    variant,
+    // Custom styling
     className: `spaces-section ${className}`.trim(),
     
     // Pass through remaining props
@@ -129,8 +127,8 @@ export default function SpacesLayout({
   }
 
   return (
-    <Section {...sectionProps}>
+    <SectionWrapper {...sectionProps}>
       {children}
-    </Section>
+    </SectionWrapper>
   )
 }

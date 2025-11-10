@@ -1,0 +1,244 @@
+/* ==========================================================================
+   SECTION WRAPPER - Standardized Section Component
+   Token-driven, Storyblok-integrated, theme-aware
+   ========================================================================== */
+
+/* ===== BASE SECTION ===== */
+.section {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+}
+
+/* ===== PADDING Y VARIANTS (using spacing tokens) ===== */
+.paddingY-none {
+  padding-block: 0;
+}
+
+.paddingY-xs {
+  padding-block: var(--pad-section-xs, clamp(16px, 2.5vw, 24px));
+}
+
+.paddingY-sm {
+  padding-block: var(--pad-section-sm, clamp(20px, 3vw, 32px));
+}
+
+.paddingY-md {
+  padding-block: var(--pad-section-md, clamp(28px, 4vw, 40px));
+}
+
+.paddingY-lg {
+  padding-block: var(--pad-section-lg, clamp(36px, 5vw, 56px));
+}
+
+.paddingY-xl {
+  padding-block: var(--pad-section-xl, clamp(44px, 6vw, 72px));
+}
+
+/* ===== MARGIN Y VARIANTS ===== */
+.marginY-none {
+  margin-block: 0;
+}
+
+.marginY-xs {
+  margin-block: var(--space-xs, 8px);
+}
+
+.marginY-sm {
+  margin-block: var(--space-sm, 12px);
+}
+
+.marginY-md {
+  margin-block: var(--space-md, 16px);
+}
+
+.marginY-lg {
+  margin-block: var(--space-lg, 24px);
+}
+
+.marginY-xl {
+  margin-block: var(--space-xl, 32px);
+}
+
+/* ===== WRAPPER / CONTAINER ===== */
+.wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: var(--gutter, clamp(16px, 4vw, 64px));
+}
+
+/* ===== MAX WIDTH VARIANTS ===== */
+.maxWidth-narrow {
+  max-width: 800px;
+}
+
+.maxWidth-narrow .wrapper {
+  max-width: 800px;
+}
+
+.maxWidth-standard {
+  max-width: var(--page-max, 1200px);
+}
+
+.maxWidth-standard .wrapper {
+  max-width: var(--page-max, 1200px);
+}
+
+.maxWidth-wide {
+  max-width: var(--page-wide, 1400px);
+}
+
+.maxWidth-wide .wrapper {
+  max-width: var(--page-wide, 1400px);
+}
+
+.maxWidth-full {
+  max-width: none;
+}
+
+.maxWidth-full .wrapper {
+  max-width: none;
+  padding-inline: 0;
+}
+
+/* Full width breakout hack for nested sections */
+.maxWidth-full.section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+/* ===== BACKGROUND VARIANTS (using surface tokens) ===== */
+.background-transparent {
+  background: transparent;
+}
+
+.background-surface-1 {
+  background: var(--surface-1);
+}
+
+.background-surface-2 {
+  background: var(--surface-2);
+}
+
+.background-surface-3 {
+  background: var(--surface-3);
+}
+
+.background-surface-4 {
+  background: var(--surface-4);
+}
+
+/* ===== THEME VARIANTS ===== */
+.theme-light {
+  background: var(--surface-1);
+  color: var(--text-primary);
+}
+
+.theme-dark {
+  background: var(--surface-4);
+  color: var(--text-inverse);
+}
+
+.theme-inherit {
+  /* Inherits from parent context */
+}
+
+/* ===== HEADER STYLES (optional) ===== */
+.header {
+  margin-bottom: var(--space-fluid-lg, clamp(16px, 3vw, 32px));
+  max-width: 900px;
+}
+
+.scriptAccent {
+  font-family: var(--font-script, 'Dancing Script', cursive);
+  color: var(--accent-rose);
+  font-size: clamp(1.5rem, 3.2vw, 1.75rem);
+  margin-bottom: var(--space-sm);
+  font-weight: 400;
+  display: block;
+}
+
+.title {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-size: clamp(2.25rem, 4.8vw, 3rem);
+  color: inherit;
+  margin: 0 0 var(--space-sm);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.lead {
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  line-height: 1.7;
+  max-width: 48ch;
+}
+
+/* Header alignment */
+.align-left {
+  text-align: left;
+}
+
+.align-left .lead {
+  margin-inline: 0;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-center .lead {
+  margin-inline: auto;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-right .lead {
+  margin-inline: auto 0;
+}
+
+/* ===== CONTENT AREA ===== */
+.content {
+  position: relative;
+  width: 100%;
+}
+
+/* ===== DARK MODE OVERRIDES ===== */
+:global(html[data-theme="dark"]) .theme-light {
+  /* Force light theme even in dark mode */
+  background: var(--n-95);
+  color: var(--n-28);
+}
+
+:global(html[data-theme="dark"]) .background-surface-1 {
+  background: var(--surface-1);
+}
+
+:global(html[data-theme="dark"]) .background-surface-2 {
+  background: var(--surface-2);
+}
+
+:global(html[data-theme="dark"]) .background-surface-3 {
+  background: var(--surface-3);
+}
+
+:global(html[data-theme="dark"]) .background-surface-4 {
+  background: var(--surface-4);
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 640px) {
+  .wrapper {
+    padding-inline: var(--space-md);
+  }
+}
+
+/* ===== DEBUG MODE (development only) ===== */
+@media (prefers-reduced-motion: no-preference) {
+  .section {
+    transition: padding 200ms ease, margin 200ms ease;
+  }
+}

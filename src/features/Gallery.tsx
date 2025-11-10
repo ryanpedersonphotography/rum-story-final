@@ -4,7 +4,7 @@
 import Image from 'next/image'
 import { useEffect, useMemo, useState, type HTMLAttributes } from 'react'
 import { storyblokEditable } from '@storyblok/react/rsc'
-import Section from '@/components/ui/Section'
+import SectionWrapper from '@/components/ui/SectionWrapper'
 import WeddingGalleryModal from '@/components/gallery/WeddingGalleryModal'
 import styles from './Gallery.module.css'
 
@@ -193,14 +193,12 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
 
   return (
     <>
-      <Section
+      <SectionWrapper
         id="gallery"
-        as="section"
-        align="center"
-        container="wrapper"
         paddingY="lg"
-        background={blok?.background_variant || 'surface'}
-        tone={blok?.theme_override || 'auto'}
+        maxWidth="standard"
+        background={blok?.background_variant === 'surface' ? 'surface-1' : 'transparent'}
+        theme="inherit"
         header={{
           scriptAccent: sectionSubtitle,
           title: sectionTitle,
@@ -209,7 +207,7 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
         }}
         className={styles.loveStoriesGallery}
         data-section="gallery"
-        variant={blok?.section_variant || 'gallery-rose-grid'}
+        blok={blok}
         {...(blok ? storyblokEditable(blok) : {})}
       >
         <div className={styles.weddingGallery} data-anim="stagger" data-fetch-error={fetchError ? 'true' : undefined}>
@@ -302,7 +300,7 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
                 </a>
               ))}
         </div>
-      </Section>
+      </SectionWrapper>
 
       <WeddingGalleryModal
         isOpen={isModalOpen}

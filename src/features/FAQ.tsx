@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import { renderRichText } from '@storyblok/js'
-import Section from '@/components/ui/Section'
+import SectionWrapper from '@/components/ui/SectionWrapper'
 import styles from './FAQ.module.css'
 
 type Blok = Record<string, any>
@@ -82,13 +82,11 @@ export default function FAQ({ blok }: { blok: Blok }) {
   const toggle = (id: string) => setOpen((s) => ({ ...s, [id]: !s[id] }))
 
   return (
-    <Section
-      as="section"
-      variant="centered"
-      container="wrapper"
+    <SectionWrapper
       paddingY="lg"
-      background="surface"
-      tone="auto"
+      maxWidth="standard"
+      background="surface-1"
+      theme="inherit"
       className={styles.faqAccordion}
       data-section="faq"
       header={{
@@ -96,6 +94,7 @@ export default function FAQ({ blok }: { blok: Blok }) {
         title: title,
         align: 'center'
       }}
+      blok={blok}
       {...storyblokEditable(blok)}
     >
       <div
@@ -132,6 +131,6 @@ export default function FAQ({ blok }: { blok: Blok }) {
           })}
         </div>
       </div>
-    </Section>
+    </SectionWrapper>
   )
 }

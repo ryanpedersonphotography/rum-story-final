@@ -1,6 +1,6 @@
 import React from 'react'
-import Section from '@/components/ui/Section'
-import type { SectionProps, Background, Tone, PaddingY, Divider } from '@/components/ui/Section'
+import SectionWrapper from '@/components/ui/SectionWrapper'
+import type { PaddingY, Theme, Background } from '@/components/ui/SectionWrapper'
 
 interface ExperienceLayoutProps {
   children: React.ReactNode
@@ -14,9 +14,9 @@ interface ExperienceLayoutProps {
   
   // Design customization (kept in code for consistency)
   background?: Background
-  tone?: Tone
+  tone?: Theme
   paddingY?: PaddingY
-  divider?: Divider
+  divider?: string
   useContentWrapper?: boolean
   
   // HTML attributes
@@ -69,33 +69,20 @@ export default function ExperienceLayout({
   } : undefined
 
   // Build section props
-  const sectionProps: SectionProps = {
-    as: 'section',
+  const sectionProps = {
     id,
-    align: 'center',
-    
-    // Design configuration
-    background,
-    tone,
     paddingY,
-    divider,
-    
-    // Layout configuration
-    container: useContentWrapper ? 'wrapper' : 'rails',
-    
-    // Header
+    maxWidth: useContentWrapper ? 'standard' : 'wide' as const,
+    background: background === 'surface' ? 'surface-1' as const : 'transparent' as const,
+    theme: tone === 'auto' ? 'inherit' as const : tone,
     header: resolvedHeader,
-    
-    // Classes
     className: `rum-river-experience ${className}`.trim(),
-    
-    // Pass through Storyblok editable props
     ...rest
   }
 
   return (
-    <Section {...sectionProps}>
+    <SectionWrapper {...sectionProps}>
       {children}
-    </Section>
+    </SectionWrapper>
   )
 }

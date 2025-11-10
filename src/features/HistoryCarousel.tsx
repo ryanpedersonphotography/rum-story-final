@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/solid'
+import SectionWrapper from '@/components/ui/SectionWrapper'
 import styles from './HistoryCarousel.module.css'
 
 export default function HistoryCarousel() {
@@ -53,15 +54,19 @@ export default function HistoryCarousel() {
   };
 
   return (
-    <section className={styles.history}>
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <span className={styles.script}>Our Story</span>
-          <h2 className={styles.title}>A Journey Through Time</h2>
-          <p className={styles.lead}>
-            Discover how Rum River Barn became Minnesota&apos;s premier wedding destination
-          </p>
-        </div>
+    <SectionWrapper
+      paddingY="lg"
+      maxWidth="wide"
+      background="surface-2"
+      theme="inherit"
+      className={styles.history}
+      header={{
+        scriptAccent: 'Our Story',
+        title: 'A Journey Through Time',
+        lead: 'Discover how Rum River Barn became Minnesota\'s premier wedding destination',
+        align: 'center'
+      }}
+    >
 
         <div className={styles.carousel}>
           <div className={styles.viewport}>
@@ -151,6 +156,6 @@ export default function HistoryCarousel() {
           </span>
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

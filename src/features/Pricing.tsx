@@ -2,6 +2,7 @@
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
 import { Check, Calendar, Star } from 'lucide-react'
+import SectionWrapper from '@/components/ui/SectionWrapper'
 import styles from './Pricing.module.css'
 
 interface PricingTierStoryblok extends SbBlokData {
@@ -86,26 +87,26 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
   const tiers = blok?.tiers?.length ? blok.tiers : defaultTiers
 
   return (
-    <section
+    <SectionWrapper
       id="packages"
+      paddingY="lg"
+      maxWidth="standard"
+      background="surface-1"
+      theme="inherit"
       className={styles.pricingSection}
       data-section="pricing"
+      header={{
+        scriptAccent: blok?.script_accent || 'Investment in Forever',
+        title: blok?.title || 'Wedding Packages & Pricing',
+        lead: blok?.description || 'Transparent pricing with no hidden fees. Every package includes tables, chairs, setup, teardown, and on-site coordination.',
+        align: 'center'
+      }}
+      blok={blok}
       {...storyblokEditable(blok)}
     >
       <div className={styles.contentWrapper}>
-        <div className={styles.sectionHeader}>
-          <div className={styles.scriptAccent}>
-            {blok?.script_accent || 'Investment in Forever'}
-          </div>
-          <h2 className={styles.sectionTitle}>
-            {blok?.title || 'Wedding Packages & Pricing'}
-          </h2>
-          <div className={styles.heroPricingLine}>
-            {blok?.hero_line || 'Saturdays from $6,200 • Fridays/Sundays from $5,500 • Weekdays from $4,500'}
-          </div>
-          <p className={styles.lead}>
-            {blok?.description || 'Transparent pricing with no hidden fees. Every package includes tables, chairs, setup, teardown, and on-site coordination.'}
-          </p>
+        <div className={styles.heroPricingLine}>
+          {blok?.hero_line || 'Saturdays from $6,200 • Fridays/Sundays from $5,500 • Weekdays from $4,500'}
         </div>
 
         <div className={styles.pricingGrid}>
@@ -169,6 +170,6 @@ export default function Pricing({ blok }: { blok: PricingStoryblok }) {
           ))}
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   )
 }

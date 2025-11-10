@@ -2,7 +2,7 @@
 import { MapPinIcon, ClockIcon, PhoneIcon, EnvelopeIcon, HomeIcon, CakeIcon } from '@heroicons/react/24/outline'
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
-import Section from '@/components/ui/Section'
+import SectionWrapper from '@/components/ui/SectionWrapper'
 import styles from './Map.module.css'
 
 interface LocationStoryblok {
@@ -69,12 +69,11 @@ export default function Map({ blok }: { blok: MapStoryblok }) {
   const mapEmbedUrl = blok.map_embed_url || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2810.5!2d-93.5!3d45.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDMwJzAwLjAiTiA5M8KwMzAnMDAuMCJX!5e0!3m2!1sen!2sus!4v1234567890'
 
   return (
-    <Section
-      as="section"
-      align="center"
-      container="wrapper"
+    <SectionWrapper
       paddingY="lg"
-      background="surface"
+      maxWidth="standard"
+      background="surface-1"
+      theme="inherit"
       header={{
         scriptAccent: subtitle,
         title: title,
@@ -83,6 +82,7 @@ export default function Map({ blok }: { blok: MapStoryblok }) {
       }}
       className={styles.mapSection}
       data-section="map"
+      blok={blok}
       {...storyblokEditable(blok)}
     >
       <div className={styles.mapContentGrid}>
@@ -129,6 +129,6 @@ export default function Map({ blok }: { blok: MapStoryblok }) {
           );
         })}
       </div>
-    </Section>
+    </SectionWrapper>
   );
 }

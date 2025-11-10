@@ -9,7 +9,7 @@
 
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
-import Section from '@/components/ui/Section'
+import SectionWrapper from '@/components/ui/SectionWrapper'
 import styles from './BrandProof.module.css'
 
 interface BrandProofStoryblok extends SbBlokData {
@@ -56,15 +56,15 @@ export default function BrandProof({ blok }: { blok: BrandProofStoryblok }) {
   }
 
   return (
-    <Section
-      as="section"
-      align="center"
-      container="wrapper"
+    <SectionWrapper
       paddingY="md"
-      background="tint-rose"
+      maxWidth="standard"
+      background="surface-2"
+      theme="inherit"
       className={styles.brandQuoteSection}
       data-section="brand-proof"
       data-discover="true"
+      blok={blok}
       {...storyblokEditable(blok)}
     >
       <div className={styles.content}>
@@ -82,6 +82,6 @@ export default function BrandProof({ blok }: { blok: BrandProofStoryblok }) {
           &ldquo;{renderQuoteText()}&rdquo;
         </p>
       </div>
-    </Section>
+    </SectionWrapper>
   )
 }
