@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
 import styles from './ScheduleForm.module.css'
+import SectionShell from '@/components/ui/SectionShell'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 interface ScheduleFormStoryblok extends SbBlokData {
   title?: string
@@ -41,22 +44,29 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
   const submitText = blok.submit_text || 'Schedule Your Tour'
 
   return (
-    <section {...storyblokEditable(blok)} className={styles.scheduleTour} data-section="schedule-form">
+    <SectionShell
+      {...storyblokEditable(blok)}
+      className={styles.scheduleTour}
+      data-section="schedule-form"
+      header={{
+        scriptAccent: subtitle,
+        title: title,
+        lead: description,
+        align: 'center'
+      }}
+      paddingY="lg"
+      spacing="content-flow"
+      container="content"
+      background="surface"
+      tone="auto"
+    >
         <div className={styles.formContainer}>
-        <div className={styles.formHeader}>
-          <span className={styles.formScript}>{subtitle}</span>
-          <h2 className={styles.formTitle}>{title}</h2>
-          <p className={styles.formDescription}>
-            {description}
-          </p>
-        </div>
-
         <form className={styles.tourForm} onSubmit={handleSubmit}>
           <div className={styles.formRow}>
             <div className={styles.formGroup}>
-              <label htmlFor="name" className={styles.formLabel}>
+              <Text as="label" htmlFor="name" size="sm" weight="medium" className={styles.formLabel}>
                 Your Name *
-              </label>
+              </Text>
               <input
                 type="text"
                 id="name"
@@ -70,9 +80,9 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="email" className={styles.formLabel}>
+              <Text as="label" htmlFor="email" size="sm" weight="medium" className={styles.formLabel}>
                 Email Address *
-              </label>
+              </Text>
               <input
                 type="email"
                 id="email"
@@ -88,9 +98,9 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
 
           <div className={styles.formRow}>
             <div className={styles.formGroup}>
-              <label htmlFor="phone" className={styles.formLabel}>
+              <Text as="label" htmlFor="phone" size="sm" weight="medium" className={styles.formLabel}>
                 Phone Number
-              </label>
+              </Text>
               <input
                 type="tel"
                 id="phone"
@@ -103,9 +113,9 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="date" className={styles.formLabel}>
+              <Text as="label" htmlFor="date" size="sm" weight="medium" className={styles.formLabel}>
                 Preferred Date
-              </label>
+              </Text>
               <input
                 type="date"
                 id="date"
@@ -118,9 +128,9 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="guests" className={styles.formLabel}>
+            <Text as="label" htmlFor="guests" size="sm" weight="medium" className={styles.formLabel}>
               Expected Guest Count
-            </label>
+            </Text>
             <select
               id="guests"
               name="guests"
@@ -138,9 +148,9 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="message" className={styles.formLabel}>
+            <Text as="label" htmlFor="message" size="sm" weight="medium" className={styles.formLabel}>
               Tell Us About Your Vision
-            </label>
+            </Text>
             <textarea
               id="message"
               name="message"
@@ -156,6 +166,6 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
           </button>
         </form>
       </div>
-    </section>
+    </SectionShell>
   );
 }
