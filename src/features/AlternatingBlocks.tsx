@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { storyblokEditable } from '@storyblok/react/rsc'
-import SectionWrapper from '@/components/ui/SectionWrapper'
+import SectionShell from '@/components/ui/SectionShell'
 import styles from './AlternatingBlocks.module.css'
 
 interface AlternatingBlocksBlok {
@@ -43,12 +43,12 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
   const paddingSize = rawPaddingSize === 'fluid' ? 'lg' : rawPaddingSize
 
   return (
-    <SectionWrapper
+    <SectionShell
         paddingY={paddingSize as any}
         spacing="hero-start"
-        maxWidth="standard"
-        theme="inherit"
-        background={backgroundVariant === 'surface' ? 'surface-1' : backgroundVariant === 'tint-rose' ? 'surface-2' : 'transparent'}
+        container="content"
+        tone="auto"
+        background={backgroundVariant}
         header={{
           scriptAccent: blok.script_accent || 'Your Perfect Venue',
           title: blok.title || 'Why Choose Rum River Barn',
@@ -115,6 +115,6 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
           )
         })}
       </div>
-    </SectionWrapper>
+    </SectionShell>
   )
 }
