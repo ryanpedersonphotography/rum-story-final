@@ -22,7 +22,7 @@ html {
   scrollbar-gutter: stable both-edges;
 
   /* Font rendering polish (variable fonts) */
-  font-variation-settings: 'opsz' auto;
+  font-variation-settings: 'opsz';
   font-synthesis-weight: none;
 }
 

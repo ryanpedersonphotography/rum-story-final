@@ -7,6 +7,7 @@
   width: 100%;
   overflow: hidden;
   margin: 0;
+
   --_bg: var(--footer-bg, #1E1A16);
   --_text: var(--footer-text, #FFF8E7);
   --_link: var(--footer-link, #E4C896);

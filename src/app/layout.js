@@ -42,7 +42,6 @@ export default function RootLayout({ children }) {
 				suppressHydrationWarning
 			>
 				<head>
-					<script src="//instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
 					<script
 						dangerouslySetInnerHTML={{
 							__html: `
@@ -86,6 +85,7 @@ var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
 						</div>
 					{isDev ? <ThemeSelect /> : null}
 					</ThemeProvider>
+					<script src="//instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z" async></script>
 				</body>
 			</html>
 		</>

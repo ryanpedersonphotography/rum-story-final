@@ -3,8 +3,10 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/solid'
-import SectionWrapper from '@/components/ui/SectionWrapper'
+import SectionShell from '@/components/ui/SectionShell'
 import styles from './HistoryCarousel.module.css'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 export default function HistoryCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -54,12 +56,12 @@ export default function HistoryCarousel() {
   };
 
   return (
-    <SectionWrapper
+    <SectionShell
       paddingY="lg"
       spacing="content-flow"
-      maxWidth="wide"
+      container="wide"
       background="surface-2"
-      theme="inherit"
+      tone="auto"
       className={styles.history}
       header={{
         scriptAccent: 'Our Story',
@@ -97,8 +99,8 @@ export default function HistoryCarousel() {
                       </div>
 
                       <div className={styles.text}>
-                        <h3 className={styles.slideTitle}>{slide.title}</h3>
-                        <p className={styles.slideDescription}>{slide.description}</p>
+                        <Typography as="h3" variant="h3" className={styles.slideTitle}>{slide.title}</Typography>
+                        <Text size="sm" className={styles.slideDescription}>{slide.description}</Text>
                       </div>
                     </div>
                   </div>
@@ -156,7 +158,6 @@ export default function HistoryCarousel() {
             {currentSlide + 1} / {slides.length}
           </span>
         </div>
-      </div>
-    </SectionWrapper>
+    </SectionShell>
   );
 }

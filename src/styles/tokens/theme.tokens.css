@@ -23,12 +23,10 @@
     --section-layer-base: var(--surface-0);            /* Page canvas background */
     --section-layer-partial: var(--surface-1);         /* Subtle elevation */
     --section-layer-isolated: var(--surface-2);        /* Clear separation */
-    
     --section-width-prose: min(65ch, 100vw - var(--gutter) * 2);
     --section-width-content: min(1200px, 100vw - var(--gutter) * 2);
     --section-width-wide: min(1400px, 100vw - var(--gutter) * 2);
     --section-width-full: 100vw;
-    
     --section-align-left: flex-start;
     --section-align-center: center;
     --section-align-right: flex-end;
@@ -71,12 +69,10 @@
     --color-accent: var(--accent-rose);
     --color-accent-alt: var(--accent-sage);
     --color-accent-neutral: var(--accent-gold);
-    
     --background-base: var(--bg-surface);
     --background-tint: var(--bg-tint-rose);
     --background-tint-alt: var(--bg-tint-sage);
     --background-elevated: var(--surface-1);
-    
     --border-light: var(--border-subtle);
     --border-medium: var(--border-medium);
     --border-focus: var(--focus-ring);
@@ -87,11 +83,9 @@
     --text-size-md: var(--size-lg);
     --text-size-lg: var(--size-xl);
     --text-size-xl: var(--size-2xl);
-    
     --text-weight-light: var(--weight-light);
     --text-weight-normal: var(--weight-regular);
     --text-weight-medium: var(--weight-medium);
-    
     --text-line-tight: var(--line-tight);
     --text-line-normal: var(--line-normal);
     --text-line-loose: var(--line-loose);
@@ -102,7 +96,6 @@
     --space-component-md: var(--space-md);
     --space-component-lg: var(--space-lg);
     --space-component-xl: var(--space-xl);
-    
     --space-layout-xs: var(--space-lg);
     --space-layout-sm: var(--space-xl);
     --space-layout-md: var(--space-2xl);
@@ -113,7 +106,6 @@
     --motion-fast: var(--duration-fast);
     --motion-normal: var(--duration-normal);
     --motion-slow: var(--duration-slow);
-    
     --motion-smooth: var(--ease-smooth);
     --motion-spring: var(--ease-spring);
     --motion-snap: var(--ease-snap);
@@ -133,21 +125,17 @@
     --btn-height-md: 44px;  /* WCAG minimum touch target */
     --btn-height-lg: 52px;
     --btn-height-xl: 60px;
-    
     --btn-padding-x-sm: var(--space-md);
     --btn-padding-x-md: var(--space-lg);
     --btn-padding-x-lg: var(--space-xl);
     --btn-padding-x-xl: var(--space-2xl);
-    
     --btn-font-size-sm: var(--text-size-xs);
     --btn-font-size-md: var(--text-size-sm);
     --btn-font-size-lg: var(--text-size-md);
     --btn-font-size-xl: var(--text-size-lg);
-    
     --btn-color-primary: var(--color-inverse);
     --btn-background-primary: var(--color-accent);
     --btn-background-primary-hover: color-mix(in oklch, var(--color-accent) 85%, black 15%);
-    
     --btn-color-secondary: var(--color-primary);
     --btn-background-secondary: transparent;
     --btn-border-secondary: var(--border-medium);
@@ -159,7 +147,6 @@
     --card-shadow: var(--section-elevation-1);
     --card-radius: var(--radius-medium);
     --card-padding: var(--space-component-lg);
-    
     --card-header-padding: var(--space-component-md);
     --card-body-padding: var(--space-component-lg);
     --card-footer-padding: var(--space-component-md);
@@ -183,9 +170,7 @@
   /* Dark theme adaptations */
   html[data-theme="dark"] {
     --section-elevation-2: 0 12px 28px oklch(0 0 0 / 0.25);
-    
     --media-overlay: oklch(0 0 0 / 0.4);
-    
     --btn-background-primary-hover: color-mix(in oklch, var(--color-accent) 70%, black 30%);
   }
   
@@ -194,7 +179,6 @@
     --color-accent: var(--accent-brass);
     --color-accent-alt: var(--accent-stone);
     --color-accent-neutral: var(--accent-ink);
-    
     --btn-background-primary: var(--accent-brass);
     --btn-background-primary-hover: color-mix(in oklch, var(--accent-brass) 80%, black 20%);
     --btn-border-secondary-hover: var(--accent-ink);

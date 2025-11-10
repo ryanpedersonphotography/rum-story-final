@@ -8,7 +8,6 @@
   --toolbar-gold: oklch(0.88 0.07 88);
   --toolbar-gold-bright: oklch(0.92 0.09 88);
   --toolbar-gold-muted: oklch(0.75 0.06 88);
-  
   --glass-toolbar-rail-width: 135px;
   --glass-toolbar-panel-width: 380px;
   --glass-toolbar-offset: var(--glass-toolbar-rail-width);
@@ -335,7 +334,7 @@ html[data-theme="light"] .glass-toolbar {
 .glass-toolbar__pill.is-active:hover .glass-toolbar__pill-icon-wrapper,
 .glass-toolbar__pill.is-active:focus-visible .glass-toolbar__pill-icon-wrapper {
   background: var(--glass-toolbar-pill-active-bg);
-  filter: url(#glass-depth-hover);
+  filter: url("#glass-depth-hover");
 }
 
 .glass-toolbar__pill:hover .glass-toolbar__pill-label,

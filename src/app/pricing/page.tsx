@@ -96,7 +96,7 @@ export default function PricingPage() {
       </div>
 
       <div className="mt-12 text-center">
-        <p className="text-gray-600 mb-4">Need something custom? We'd love to work with you.</p>
+        <p className="text-gray-600 mb-4">Need something custom? We&apos;d love to work with you.</p>
         <button className="bg-gray-800 text-white py-3 px-8 rounded hover:bg-gray-700">
           Contact Us for Custom Quote
         </button>

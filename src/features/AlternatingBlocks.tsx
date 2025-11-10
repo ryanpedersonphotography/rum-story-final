@@ -5,6 +5,8 @@ import React from 'react'
 import { storyblokEditable } from '@storyblok/react/rsc'
 import SectionShell from '@/components/ui/SectionShell'
 import styles from './AlternatingBlocks.module.css'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 interface AlternatingBlocksBlok {
   _uid?: string
@@ -79,22 +81,22 @@ export default function AlternatingBlocks({ blok }: { blok: AlternatingBlocksBlo
               {...(block._uid ? storyblokEditable(block) : {})}
             >
               <div className={styles.content}>
-                <div className={styles.number}>
+                <Typography as="div" variant="h1" className={styles.number}>
                   {block.number || `0${index + 1}`}
-                </div>
-                <h3 className={styles.title}>
+                </Typography>
+                <Typography as="h3" variant="h2" className={styles.title}>
                   {block.title || 'Block Title'}
-                </h3>
-                <p className={styles.lead}>
+                </Typography>
+                <Text size="lg" className={styles.lead}>
                   {block.lead || 'Block lead text'}
-                </p>
+                </Text>
                 {(block.content || []).map((paragraph, pIndex) => {
                   const text = typeof paragraph === 'object' && paragraph.text
                     ? paragraph.text
                     : String(paragraph)
 
                   return (
-                    <p
+                    <Text
                       key={pIndex}
                       className={styles.paragraph}
                       dangerouslySetInnerHTML={{ __html: text }}

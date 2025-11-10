@@ -34,7 +34,7 @@ export default function FAQPage() {
     },
     {
       question: "Do you provide decorations?",
-      answer: "We provide basic lighting and some rustic decor elements. You're welcome to bring in your own decorations or work with our preferred vendors."
+      answer: "We provide basic lighting and some rustic decor elements. You&apos;re welcome to bring in your own decorations or work with our preferred vendors."
     },
     {
       question: "What are your payment terms?",
@@ -82,7 +82,7 @@ export default function FAQPage() {
         <div className="mt-12 bg-gray-50 rounded-lg p-8 text-center">
           <h2 className="text-2xl font-semibold mb-4">Still have questions?</h2>
           <p className="text-gray-600 mb-6">
-            We're here to help! Contact us directly and we'll get back to you within 24 hours.
+            We&apos;re here to help! Contact us directly and we&apos;ll get back to you within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-blue-600 text-white py-3 px-8 rounded hover:bg-blue-700">

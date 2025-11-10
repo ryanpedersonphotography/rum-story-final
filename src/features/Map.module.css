@@ -2,15 +2,15 @@
 
 .mapContentGrid {
   display: grid;
+
   --map-size: 650px;
   --flush-offset: -12px;
+
   grid-template-columns: 1fr min-content 1fr;
   grid-template-rows: repeat(3, calc(var(--map-size) / 3));
   height: var(--map-size);
-  column-gap: 0;
-  row-gap: 0;
-  align-content: center;
-  justify-content: center;
+  gap: 0 0;
+  place-content: center center;
   padding: var(--space-64) 0;
 }
 
@@ -27,11 +27,10 @@
 
 .mapContentGrid > .locationItem:nth-child(-n+3) {
   grid-column: 1;
-  justify-self: end;
+  place-self: center end;
   flex-direction: row-reverse;
   text-align: right;
   transform: translateX(var(--flush-offset));
-  align-self: center;
 }
 
 .mapContentGrid > .locationItem:nth-child(1) {
@@ -54,11 +53,10 @@
 
 .mapContentGrid > .locationItem:nth-child(n+5) {
   grid-column: 3;
-  justify-self: start;
+  place-self: center start;
   flex-direction: row;
   text-align: left;
   transform: translateX(calc(var(--flush-offset) * -1));
-  align-self: center;
 }
 
 .mapContentGrid > .locationItem:nth-child(5) {
@@ -184,7 +182,9 @@
   .mapEmbed {
     grid-column: 1;
     grid-row: 1;
+
     --map-size: 400px;
+
     margin-inline: auto;
   }
 

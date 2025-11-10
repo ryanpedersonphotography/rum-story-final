@@ -24,6 +24,12 @@ module.exports = {
     'property-no-deprecated': null,
     'keyframes-name-pattern': null,
     'lightness-notation': null,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
 
     // Require tokens for spacing properties only
     // Allow: 0, auto, inherit as these are CSS keywords
