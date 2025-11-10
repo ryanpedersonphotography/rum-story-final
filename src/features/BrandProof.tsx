@@ -9,8 +9,10 @@
 
 import { storyblokEditable } from '@storyblok/react'
 import type { SbBlokData } from '@storyblok/react'
-import SectionWrapper from '@/components/ui/SectionWrapper'
+import SectionShell from '@/components/ui/SectionShell'
 import styles from './BrandProof.module.css'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 interface BrandProofStoryblok extends SbBlokData {
   brands?: string
@@ -56,12 +58,12 @@ export default function BrandProof({ blok }: { blok: BrandProofStoryblok }) {
   }
 
   return (
-    <SectionWrapper
+    <SectionShell
       paddingY="md"
       spacing="compact-stack"
-      maxWidth="standard"
-      background="surface-2"
-      theme="inherit"
+      container="content"
+      background="surface"
+      tone="auto"
       className={styles.brandQuoteSection}
       data-section="brand-proof"
       data-discover="true"
@@ -72,17 +74,17 @@ export default function BrandProof({ blok }: { blok: BrandProofStoryblok }) {
         {/* Brand Logos Section */}
         <div className={styles.logos}>
           {brandsList.map((brand, index) => (
-            <span key={index} className={styles.logo}>
+            <Text key={index} as="span" size="sm" weight="semibold" className={styles.logo}>
               {brand.trim()}
-            </span>
+            </Text>
           ))}
         </div>
 
         {/* Testimonial Quote with Highlighted Text */}
-        <p className={styles.quoteText}>
+        <Typography as="p" variant="h3" className={styles.quoteText}>
           &ldquo;{renderQuoteText()}&rdquo;
-        </p>
+        </Typography>
       </div>
-    </SectionWrapper>
+    </SectionShell>
   )
 }
