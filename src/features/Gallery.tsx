@@ -4,9 +4,11 @@
 import Image from 'next/image'
 import { useEffect, useMemo, useState, type HTMLAttributes } from 'react'
 import { storyblokEditable } from '@storyblok/react/rsc'
-import SectionWrapper from '@/components/ui/SectionWrapper'
+import SectionShell from '@/components/ui/SectionShell'
 import WeddingGalleryModal from '@/components/gallery/WeddingGalleryModal'
 import styles from './Gallery.module.css'
+import Typography from '@/components/ui/Typography'
+import Text from '@/components/ui/Text'
 
 type GalleryItemBlok = Record<string, any>
 
@@ -193,13 +195,13 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
 
   return (
     <>
-      <SectionWrapper
+      <SectionShell
         id="gallery"
         paddingY="lg"
         spacing="content-flow"
-        maxWidth="standard"
-        background={blok?.background_variant === 'surface' ? 'surface-1' : 'transparent'}
-        theme="inherit"
+        container="wide"
+        background={blok?.background_variant === 'surface' ? 'surface' : 'transparent'}
+        tone="auto"
         header={{
           scriptAccent: sectionSubtitle,
           title: sectionTitle,
@@ -263,15 +265,15 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
                       sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 100vw"
                     />
                     <div className={styles.overlay} aria-hidden="true">
-                      <div className={styles.coupleNames}>{cardTitle}</div>
-                      <div className={styles.season}>{cardSubtitle}</div>
-                      <div className={styles.details}>
+                      <Typography as="div" variant="h3" className={styles.coupleNames}>{cardTitle}</Typography>
+                      <Text size="sm" className={styles.season}>{cardSubtitle}</Text>
+                      <Text size="sm" className={styles.details}>
                         {canOpenModal
                           ? photos > 0
                             ? `${photos} Photos • View Gallery →`
                             : 'View Gallery →'
                           : cardLocation}
-                      </div>
+                      </Text>
                     </div>
                   </a>
                 )
@@ -294,14 +296,14 @@ export default function Gallery({ blok }: { blok?: any } = {}) {
                     sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 100vw"
                   />
                   <div className={styles.overlay} aria-hidden="true">
-                    <div className={styles.coupleNames}>{wedding.couple}</div>
-                    <div className={styles.season}>{wedding.season}</div>
-                    <div className={styles.details}>View Gallery →</div>
+                    <Typography as="div" variant="h3" className={styles.coupleNames}>{wedding.couple}</Typography>
+                    <Text size="sm" className={styles.season}>{wedding.season}</Text>
+                    <Text size="sm" className={styles.details}>View Gallery →</Text>
                   </div>
                 </a>
               ))}
         </div>
-      </SectionWrapper>
+      </SectionShell>
 
       <WeddingGalleryModal
         isOpen={isModalOpen}
