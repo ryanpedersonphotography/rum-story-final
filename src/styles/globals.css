@@ -82,3 +82,43 @@ a:hover { text-decoration: underline; }
 }
 
 } /* End @layer base */
+
+@layer utilities {
+  /* ===== SECTION SPACING SYSTEM ===== */
+  .section[data-margin-top="none"] { margin-top: 0; }
+  .section[data-margin-top="xs"] { margin-top: var(--space-xs); }
+  .section[data-margin-top="sm"] { margin-top: var(--space-sm); }
+  .section[data-margin-top="md"] { margin-top: var(--space-md); }
+  .section[data-margin-top="lg"] { margin-top: var(--space-lg); }
+  .section[data-margin-top="xl"] { margin-top: var(--space-xl); }
+
+  .section[data-margin-bottom="none"] { margin-bottom: 0; }
+  .section[data-margin-bottom="xs"] { margin-bottom: var(--space-xs); }
+  .section[data-margin-bottom="sm"] { margin-bottom: var(--space-sm); }
+  .section[data-margin-bottom="md"] { margin-bottom: var(--space-md); }
+  .section[data-margin-bottom="lg"] { margin-bottom: var(--space-lg); }
+  .section[data-margin-bottom="xl"] { margin-bottom: var(--space-xl); }
+
+  .section[data-padding-y="none"] { padding-top: 0; padding-bottom: 0; }
+  .section[data-padding-y="xs"] { padding-top: var(--space-xs); padding-bottom: var(--space-xs); }
+  .section[data-padding-y="sm"] { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
+  .section[data-padding-y="md"] { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+  .section[data-padding-y="lg"] { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+  .section[data-padding-y="xl"] { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+  .section[data-padding-y="fluid"] { padding-top: clamp(var(--space-md), 10vh, var(--space-xl)); padding-bottom: clamp(var(--space-md), 10vh, var(--space-xl)); }
+
+  /* ===== AUTOMATIC SECTION SPACING ===== */
+  .section + .section {
+    margin-top: var(--space-lg); /* Default gap */
+  }
+
+  /* Special case: After hero */
+  [data-section="hero"] + .section {
+    margin-top: var(--space-xl);
+  }
+
+  /* Special case: Before footer */
+  .section:has(+ footer) {
+    margin-bottom: var(--space-xl);
+  }
+}

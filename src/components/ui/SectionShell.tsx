@@ -1,17 +1,20 @@
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
+import Typography from './Typography'
+import Text from './Text'
 
 /* ============================================================================
-   SECTION SHELL COMPONENT
+   SECTION SHELL COMPONENT (UNIFIED)
    - Token-driven layout system
    - Visual "frame" for sections (semantics, theming, spacing, bleed, overlays)
-   - Separates visual concerns from content orchestration
-   - Uses Radix Slot for flexible element rendering
+   - Includes content orchestration for a unified header
    ============================================================================ */
 
+// --- Core Types ---
 export type Align = 'left' | 'center' | 'right'
 export type Container = 'prose' | 'content' | 'wide' | 'full'
-export type PaddingY = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'fluid'
+export type PaddingY = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'fluid' | 'none'
+export type MarginY = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'none'
 export type Tone = 'auto' | 'light' | 'dark'
 export type Background =
   | 'surface'
@@ -23,33 +26,63 @@ export type Background =
 export type Divider = 'none' | 'hairline' | 'thread-gold'
 export type Height = 'auto' | 'screen'
 
+// --- Spacing Preset System (from SectionWrapper) ---
+export type SpacingPreset = 
+  | 'hero-start'
+  | 'content-flow'
+  | 'feature-highlight'
+  | 'compact-stack'
+  | 'footer-approach'
+  | 'none';
+
+const spacingPresets = {
+  'hero-start': { marginTop: 'xl' as MarginY, paddingY: 'lg' as PaddingY },
+  'content-flow': { marginTop: 'lg' as MarginY, paddingY: 'lg' as PaddingY },
+  'feature-highlight': { marginTop: 'xl' as MarginY, paddingY: 'xl' as PaddingY },
+  'compact-stack': { marginTop: 'sm' as MarginY, paddingY: 'md' as PaddingY },
+  'footer-approach': { marginTop: 'lg' as MarginY, marginBottom: 'xl' as MarginY, paddingY: 'lg' as PaddingY },
+  'none': { marginTop: 'none' as MarginY, paddingY: 'none' as PaddingY }
+};
+
+// --- Component Props Interface ---
 export interface SectionShellProps extends React.HTMLAttributes<HTMLElement> {
-  /** Render as custom element via Slot (Radix) */
   asChild?: boolean
   as?: keyof JSX.IntrinsicElements
-
-  /** Semantics & a11y */
   id?: string
   role?: 'region' | 'complementary' | 'navigation' | 'main' | 'contentinfo' | 'none'
   'aria-labelledby'?: string
   'aria-label'?: string
 
-  /** Layout frame (no content orchestration here) */
+  // --- Layout & Spacing ---
   align?: Align
   container?: Container
-  paddingY?: PaddingY
-  paddingX?: 'gutter' | 'none' | 'wide'
   height?: Height
   bleed?: boolean
+  spacing?: SpacingPreset
+  paddingY?: PaddingY
+  paddingX?: 'gutter' | 'none' | 'wide'
+  marginTop?: MarginY
+  marginBottom?: MarginY
+
+  // --- Theming & Style ---
   tone?: Tone
   background?: Background
   divider?: Divider
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   shadow?: 'none' | 'sm' | 'md' | 'lg'
 
-  /** Advanced layout hooks */
+  // --- Content Orchestration ---
+  header?: {
+    scriptAccent?: string;
+    title?: string;
+    lead?: string;
+    align?: 'left' | 'center' | 'right';
+  };
+
+  // --- Advanced ---
   containerName?: string
   stickiness?: { top?: string }
+  blok?: any // Storyblok data passthrough
 }
 
 export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
@@ -59,8 +92,11 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
       as: Tag = 'section',
       align = 'center',
       container = 'content',
-      paddingY = 'md',
+      paddingY,
       paddingX = 'gutter',
+      marginTop,
+      marginBottom,
+      spacing = 'none',
       height = 'auto',
       bleed = false,
       tone = 'auto',
@@ -68,21 +104,29 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
       divider = 'none',
       radius = 'none',
       shadow = 'none',
+      header,
       containerName,
       stickiness,
       style,
       children,
       className = '',
+      blok,
       ...rest
     },
     ref
   ) => {
     const Comp: any = asChild ? Slot : Tag
 
-    // Normalize background
+    // --- Resolve Spacing ---
+    const resolvedSpacing = spacingPresets[spacing] || spacingPresets.none;
+    const finalPaddingY = blok?.paddingY || paddingY || resolvedSpacing.paddingY || 'none';
+    const finalMarginTop = blok?.marginTop || marginTop || resolvedSpacing.marginTop || 'none';
+    const finalMarginBottom = blok?.marginBottom || marginBottom || resolvedSpacing.marginBottom || 'none';
+
+    // --- Normalize Background ---
     const bgKind = typeof background === 'string' ? background : background.kind
 
-    // Inline style for bg image and stickiness
+    // --- Dynamic Styles ---
     const sectionStyle: React.CSSProperties = {
       ...style,
       ...(stickiness && { position: 'sticky', top: stickiness.top }),
@@ -107,8 +151,10 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
         data-section="shell"
         data-align={align}
         data-container={container}
-        data-padding-y={paddingY}
+        data-padding-y={finalPaddingY}
         data-padding-x={paddingX}
+        data-margin-top={finalMarginTop}
+        data-margin-bottom={finalMarginBottom}
         data-height={height}
         data-bleed={bleed ? 'true' : undefined}
         data-tone={tone}
@@ -118,7 +164,7 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
         data-radius={radius}
         data-shadow={shadow}
         data-container-name={containerName}
-  className={composedClassName}
+        className={composedClassName}
         style={sectionStyle}
         {...rest}
       >
@@ -135,7 +181,41 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
           )}
 
         <div className="section-shell__rail" data-rail="container">
-          {children}
+          {header && (
+            <header className="section-header" data-align={header.align || 'center'}>
+              {header.scriptAccent && (
+                <Typography 
+                  variant="script" 
+                  color="accent" 
+                  align={header.align || 'center'}
+                >
+                  {header.scriptAccent}
+                </Typography>
+              )}
+              {header.title && (
+                <Typography 
+                  as="h2" 
+                  variant="h1" 
+                  align={header.align || 'center'}
+                >
+                  {header.title}
+                </Typography>
+              )}
+              {header.lead && (
+                <Text 
+                  size="lg" 
+                  maxWidth="prose" 
+                  align={header.align || 'center'}
+                  color="secondary"
+                >
+                  {header.lead}
+                </Text>
+              )}
+            </header>
+          )}
+          <div className="section-content">
+            {children}
+          </div>
         </div>
 
         {divider !== 'none' && (
