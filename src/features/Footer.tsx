@@ -55,7 +55,7 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
 
           {/* Column 2: Contact Information */}
           <div className={styles.section}>
-            <Typography as="h4" variant="h4" className={styles.sectionTitle}>Contact Information</Typography>
+            <Typography as="h4" variant="h3" className={styles.sectionTitle}>Contact Information</Typography>
             <div className={styles.contact}>
               <Text size="sm" className={styles.address}>
                 <MapPin className={styles.socialIcon} size={18} />
@@ -78,7 +78,7 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
 
           {/* Column 3: Social Links */}
           <div className={styles.section}>
-            <Typography as="h4" variant="h4" className={styles.sectionTitle}>Connect With Us</Typography>
+            <Typography as="h4" variant="h3" className={styles.sectionTitle}>Connect With Us</Typography>
             <div className={styles.socialLinks}>
               {facebookUrl && (
                 <a
