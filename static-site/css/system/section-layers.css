@@ -1,0 +1,221 @@
+/* ==========================================================================
+   SECTION LAYERS - Parent container and dimensional styling
+   ========================================================================== */
+
+/* Master Parent Container - Holds all sections */
+.page-container {
+  position: relative;
+  width: 100%;
+  background: var(--color-neutral-white, #FFFFFF);
+  min-height: 100vh;
+}
+
+/* Section Wrapper - Adds dimensional properties to each section */
+.section-wrapper {
+  position: relative;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Section Cards - Elevated sections with shadows */
+.section-card {
+  position: relative;
+  background: var(--color-neutral-white, #FFFFFF);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+}
+
+/* Card background variants */
+.section-card--bg-white {
+  background: var(--color-neutral-white, #FFFFFF);
+}
+
+.section-card--bg-cream {
+  background: var(--color-neutral-warm-cream, #FBF8F4);
+}
+
+.section-card--bg-tint-rose {
+  background: color-mix(in srgb, var(--color-brand-rose, #9D6B7B) 5%, white);
+}
+
+.section-card--bg-tint-gold {
+  background: color-mix(in srgb, var(--color-brand-gold, #E4C896) 10%, white);
+}
+
+/* Different elevation levels */
+.section-card--elevated-sm {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.section-card--elevated-md {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.section-card--elevated-lg {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+.section-card--elevated-xl {
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover effects for interactive sections */
+.section-card--interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+}
+
+/* UNIFIED SECTION SPACING */
+:root {
+  /* Consistent gaps between sections */
+  --section-gap: 2rem;          /* Default gap between sections */
+  --section-gap-hero: 3rem;     /* Gap after hero section */
+  --section-gap-mobile: 1.5rem; /* Mobile gap */
+  
+  /* Consistent floating margins */
+  --floating-margin: clamp(1rem, 3vw, 3rem);
+  --floating-margin-mobile: 1rem;
+}
+
+/* Section spacing when using cards - UNIFIED */
+.section-wrapper + .section-wrapper {
+  margin-top: var(--section-gap);
+}
+
+/* Full-width sections (like Hero) */
+.section-wrapper--full {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
+}
+
+/* Contained sections with margin */
+.section-wrapper--contained {
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter, 1.5rem);
+  padding-right: var(--gutter, 1.5rem);
+}
+
+/* Floating sections - UNIFIED MARGINS */
+.section-wrapper--floating {
+  margin-left: var(--floating-margin);
+  margin-right: var(--floating-margin);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.section-wrapper--floating .section-card {
+  border-radius: 24px;
+}
+
+/* Z-index layering for overlapping effects */
+.section-wrapper--layer-1 {
+  z-index: 1;
+}
+
+.section-wrapper--layer-2 {
+  z-index: 2;
+}
+
+.section-wrapper--layer-3 {
+  z-index: 3;
+}
+
+/* Negative margin for overlapping sections */
+.section-wrapper--overlap-sm {
+  margin-top: calc(var(--space-3xl, 3rem) * -0.25);
+}
+
+.section-wrapper--overlap-md {
+  margin-top: calc(var(--space-3xl, 3rem) * -0.5);
+}
+
+.section-wrapper--overlap-lg {
+  margin-top: calc(var(--space-3xl, 3rem) * -0.75);
+}
+
+/* Background treatments for parent container */
+.page-container--gradient {
+  background: linear-gradient(
+    180deg,
+    var(--color-neutral-white, #FFFFFF) 0%,
+    var(--color-neutral-white, #FFFFFF) 60%,
+    color-mix(in srgb, var(--color-brand-rose, #9D6B7B) 2%, white) 85%,
+    color-mix(in srgb, var(--color-brand-gold, #E4C896) 3%, white) 100%
+  );
+}
+
+.page-container--pattern {
+  background-image: 
+    radial-gradient(circle at 20% 80%, transparent 50%, rgba(157, 107, 123, 0.05) 50%),
+    radial-gradient(circle at 80% 20%, transparent 50%, rgba(228, 200, 150, 0.05) 50%);
+  background-size: 50px 50px;
+}
+
+/* Special effects for hero section */
+.section-wrapper--hero {
+  margin-top: 0;
+  box-shadow: none;
+}
+
+.section-wrapper--hero .section-card {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive adjustments - UNIFIED SPACING */
+@media (max-width: 768px) {
+  /* Consistent mobile gaps */
+  .section-wrapper + .section-wrapper {
+    margin-top: var(--section-gap-mobile);
+  }
+  
+  .section-wrapper--hero + .section-wrapper {
+    margin-top: calc(var(--section-gap-mobile) * 1.5);
+  }
+  
+  .section-wrapper--floating {
+    margin-left: var(--floating-margin-mobile);
+    margin-right: var(--floating-margin-mobile);
+    border-radius: 16px;
+  }
+  
+  .section-wrapper--floating .section-card {
+    border-radius: 16px;
+  }
+  
+  .section-card--elevated-lg,
+  .section-card--elevated-xl {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  }
+}
+
+/* Dark mode adjustments */
+html[data-theme="dark"] .page-container {
+  background: var(--color-neutral-text-chocolate, #1A1410);
+}
+
+html[data-theme="dark"] .page-container--gradient {
+  background: linear-gradient(
+    180deg,
+    var(--color-neutral-text-chocolate, #1A1410) 0%,
+    color-mix(in srgb, var(--color-neutral-text-chocolate, #1A1410) 95%, var(--color-brand-rose, #9D6B7B)) 50%,
+    color-mix(in srgb, var(--color-neutral-text-chocolate, #1A1410) 90%, var(--color-brand-gold, #E4C896)) 100%
+  );
+}
+
+html[data-theme="dark"] .section-card {
+  background: color-mix(in srgb, var(--color-neutral-text-chocolate, #1A1410) 98%, white);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .section-card--elevated-lg {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] .section-card--elevated-xl {
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.6);
+}

@@ -1,0 +1,239 @@
+/* ==========================================================================
+   SECTION STANDARDS - Reusable spacing and layout rules
+   ========================================================================== */
+
+/* Base Section Class - Apply to all sections */
+.section {
+  position: relative;
+  width: 100%;
+}
+
+/* ENFORCED UNIFORM SPACING RULES */
+/* All sections within cards should use these consistent spacings */
+.section-wrapper .section {
+  /* Remove any default margins that might interfere */
+  margin: 0;
+}
+
+/* Uniform spacing between section wrappers */
+.section-wrapper + .section-wrapper {
+  margin-top: var(--section-gap, 2rem) !important;
+}
+
+/* Larger gap after hero section */
+.section-wrapper--hero + .section-wrapper {
+  margin-top: var(--section-gap-hero, 3rem) !important;
+}
+
+/* Consistent internal spacing for all sections */
+.section-card .section {
+  /* Ensure padding is applied consistently */
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Section Spacing Variants - Vertical Padding */
+.section--spacing-none {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.section--spacing-xs {
+  padding-top: var(--space-xs, 1rem);
+  padding-bottom: var(--space-xs, 1rem);
+}
+
+.section--spacing-sm {
+  padding-top: var(--space-sm, 1.5rem);
+  padding-bottom: var(--space-sm, 1.5rem);
+}
+
+.section--spacing-md {
+  padding-top: var(--space-md, 2rem);
+  padding-bottom: var(--space-md, 2rem);
+}
+
+.section--spacing-lg {
+  padding-top: var(--space-lg, 3rem);
+  padding-bottom: var(--space-lg, 3rem);
+}
+
+.section--spacing-xl {
+  padding-top: var(--space-xl, 4rem);
+  padding-bottom: var(--space-xl, 4rem);
+}
+
+.section--spacing-2xl {
+  padding-top: var(--space-2xl, 6rem);
+  padding-bottom: var(--space-2xl, 6rem);
+}
+
+/* Section Height Variants */
+.section--height-auto {
+  min-height: auto;
+}
+
+.section--height-screen {
+  min-height: 100vh;
+}
+
+.section--height-half {
+  min-height: 50vh;
+}
+
+.section--height-third {
+  min-height: 33vh;
+}
+
+/* Section Background Variants */
+.section--bg-white {
+  background-color: var(--color-neutral-white, #FFFFFF);
+  color: var(--color-neutral-text-dark, #2C2416);
+}
+
+.section--bg-cream {
+  background-color: var(--color-neutral-warm-cream, #FBF8F4);
+  color: var(--color-neutral-text-dark, #2C2416);
+}
+
+.section--bg-tint-rose {
+  background: color-mix(in srgb, var(--color-brand-rose, #9D6B7B) 5%, white);
+  color: var(--color-neutral-text-dark, #2C2416);
+}
+
+.section--bg-tint-gold {
+  background: color-mix(in srgb, var(--color-brand-gold, #E4C896) 10%, white);
+  color: var(--color-neutral-text-dark, #2C2416);
+}
+
+.section--bg-dark {
+  background-color: var(--color-neutral-text-chocolate, #1A1410);
+  color: var(--color-neutral-white, #FFFFFF);
+}
+
+/* Section Content Container - Controls max-width and centering */
+.section__container {
+  margin: 0 auto;
+  padding-left: var(--gutter, 1.5rem);
+  padding-right: var(--gutter, 1.5rem);
+  width: 100%;
+}
+
+.section__container--narrow {
+  max-width: 800px;
+}
+
+.section__container--content {
+  max-width: 1200px;
+}
+
+.section__container--wide {
+  max-width: 1400px;
+}
+
+.section__container--full {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Section Header - Consistent header styling */
+.section__header {
+  text-align: center;
+  margin-bottom: var(--space-3xl, 3rem);
+}
+
+.section__header--left {
+  text-align: left;
+}
+
+.section__header--right {
+  text-align: right;
+}
+
+.section__eyebrow {
+  display: block;
+  font-family: var(--font-script);
+  font-size: var(--type-script);
+  line-height: var(--leading-script);
+  color: var(--color-brand-gold, #E4C896);
+  margin-bottom: var(--space-md, 1rem);
+}
+
+.section__title {
+  font-family: var(--font-serif);
+  font-size: var(--type-h1);
+  line-height: var(--leading-heading);
+  font-weight: var(--weight-regular);
+  margin-bottom: var(--space-lg, 1.5rem);
+}
+
+.section__description {
+  font-family: var(--font-sans);
+  font-size: var(--type-body-lg);
+  line-height: var(--leading-body);
+  color: color-mix(in srgb, currentColor 80%, transparent);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Section Content - Main content area */
+.section__content {
+  position: relative;
+}
+
+/* Section to Section Spacing - REMOVED */
+/* Spacing is now handled by section-layers.css for consistency */
+/* Using .section-wrapper + .section-wrapper rules instead */
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .section--spacing-lg {
+    padding-top: var(--space-md, 2rem);
+    padding-bottom: var(--space-md, 2rem);
+  }
+  
+  .section--spacing-xl {
+    padding-top: var(--space-lg, 3rem);
+    padding-bottom: var(--space-lg, 3rem);
+  }
+  
+  .section--spacing-2xl {
+    padding-top: var(--space-xl, 4rem);
+    padding-bottom: var(--space-xl, 4rem);
+  }
+  
+  .section__container {
+    padding-left: var(--gutter-mobile, 1rem);
+    padding-right: var(--gutter-mobile, 1rem);
+  }
+  
+  .section__header {
+    margin-bottom: var(--space-2xl, 2rem);
+  }
+}
+
+/* Dark Mode Adjustments */
+html[data-theme="dark"] .section--bg-white {
+  background-color: var(--color-neutral-text-chocolate, #1A1410);
+  color: var(--color-neutral-white, #FFFFFF);
+}
+
+html[data-theme="dark"] .section--bg-cream {
+  background-color: color-mix(in srgb, var(--color-neutral-text-chocolate, #1A1410) 95%, white);
+  color: var(--color-neutral-warm-cream, #FBF8F4);
+}
+
+html[data-theme="dark"] .section--bg-tint-rose {
+  background: color-mix(in srgb, var(--color-brand-rose, #9D6B7B) 3%, var(--color-neutral-text-chocolate, #1A1410));
+  color: var(--color-neutral-warm-cream, #FBF8F4);
+}
+
+html[data-theme="dark"] .section--bg-tint-gold {
+  background: color-mix(in srgb, var(--color-brand-gold, #E4C896) 5%, var(--color-neutral-text-chocolate, #1A1410));
+  color: var(--color-neutral-warm-cream, #FBF8F4);
+}
+
+html[data-theme="dark"] .section__eyebrow {
+  color: var(--color-brand-gold-alt, #D9BD88);
+}

@@ -1,0 +1,313 @@
+/* ========================================================================== *
+   SHADOW TOKEN LAYER - Section System Foundation
+   
+   PURPOSE: Safe migration path from legacy tokens to clean section system
+   - Maps legacy tokens to new clean namespace
+   - Provides section-specific design tokens
+   - Enables gradual migration without breaking changes
+   - Establishes foundation for independent section architecture
+   
+   STRATEGY: Use css.layer to ensure this loads after existing tokens
+   but before components, creating clean shadow aliases
+ * ========================================================================== */
+
+@layer tokens;
+
+@layer tokens {
+  :root {
+    /* ============================================================================
+       SECTION SYSTEM TOKENS - Clean namespace for new architecture
+       ============================================================================ */
+    
+    /* Layout System */
+    --section-layer-base: var(--surface-0);            /* Page canvas background */
+    --section-layer-partial: var(--surface-1);         /* Subtle elevation */
+    --section-layer-isolated: var(--surface-2);        /* Clear separation */
+    --section-width-prose: min(65ch, 100vw - var(--gutter) * 2);
+    --section-width-content: min(1200px, 100vw - var(--gutter) * 2);
+    --section-width-wide: min(1400px, 100vw - var(--gutter) * 2);
+    --section-width-full: 100vw;
+    --section-align-left: flex-start;
+    --section-align-center: center;
+    --section-align-right: flex-end;
+    
+    /* Elevation System - Glass-aware shadows */
+    --section-elevation-0: none;
+    --section-elevation-1: var(--shadow-elev-1);
+    --section-elevation-2: 0 12px 28px oklch(0 0 0 / 0.15);
+    --section-elevation-3: var(--shadow-elev-3);
+    
+    /* Glass Effects - Backdrop integration */
+    --section-glass-subtle: blur(var(--blur-sm)) saturate(var(--saturate-low));
+    --section-glass-medium: blur(var(--blur-md)) saturate(var(--saturate-med));
+    --section-glass-strong: blur(var(--blur-lg)) saturate(var(--saturate-high));
+    
+    /* Section Padding - Rail-aware spacing */
+    --section-pad-xs: var(--pad-section-xs);
+    --section-pad-sm: var(--pad-section-sm);
+    --section-pad-md: var(--pad-section-md);
+    --section-pad-lg: var(--pad-section-lg);
+    --section-pad-xl: var(--pad-section-xl);
+    --section-pad-fluid: var(--pad-section-fluid);
+    
+    /* Rail System - Glass toolbar integration */
+    --rail-toolbar-height: 135px;  /* Glass toolbar fixed height */
+    --rail-gutter: var(--gutter);
+    --rail-prose: var(--section-width-prose);
+    --rail-content: var(--section-width-content);
+    --rail-wide: var(--section-width-wide);
+    --rail-full: var(--section-width-full);
+    
+    /* ============================================================================
+       PRIMITIVE SHADOWS - Legacy token mapping for safe migration
+       ============================================================================ */
+    
+    /* Color Shadows - Alias existing semantic tokens */
+    --color-primary: var(--text-primary);
+    --color-secondary: var(--text-secondary);
+    --color-inverse: var(--text-inverse);
+    --color-accent: var(--accent-rose);
+    --color-accent-alt: var(--accent-sage);
+    --color-accent-neutral: var(--accent-gold);
+    --background-base: var(--bg-surface);
+    --background-tint: var(--bg-tint-rose);
+    --background-tint-alt: var(--bg-tint-sage);
+    --background-elevated: var(--surface-1);
+    --border-light: var(--border-subtle);
+    --border-medium: var(--border-medium);
+    --border-focus: var(--focus-ring);
+    
+    /* Typography Shadows - Alias existing type tokens */
+    --text-size-xs: var(--size-sm);
+    --text-size-sm: var(--size-base);
+    --text-size-md: var(--size-lg);
+    --text-size-lg: var(--size-xl);
+    --text-size-xl: var(--size-2xl);
+    --text-weight-light: var(--weight-light);
+    --text-weight-normal: var(--weight-regular);
+    --text-weight-medium: var(--weight-medium);
+    --text-line-tight: var(--line-tight);
+    --text-line-normal: var(--line-normal);
+    --text-line-loose: var(--line-loose);
+    
+    /* Spacing Shadows - Alias existing space tokens */
+    --space-component-xs: var(--space-xs);
+    --space-component-sm: var(--space-sm);
+    --space-component-md: var(--space-md);
+    --space-component-lg: var(--space-lg);
+    --space-component-xl: var(--space-xl);
+    --space-layout-xs: var(--space-lg);
+    --space-layout-sm: var(--space-xl);
+    --space-layout-md: var(--space-2xl);
+    --space-layout-lg: var(--space-3xl);
+    --space-layout-xl: var(--space-4xl);
+    
+    /* Motion Shadows - Alias existing animation tokens */
+    --motion-fast: var(--duration-fast);
+    --motion-normal: var(--duration-normal);
+    --motion-slow: var(--duration-slow);
+    --motion-smooth: var(--ease-smooth);
+    --motion-spring: var(--ease-spring);
+    --motion-snap: var(--ease-snap);
+    
+    /* Radius Shadows - Alias existing radius tokens */
+    --radius-small: var(--radius-sm);
+    --radius-medium: var(--radius-md);
+    --radius-large: var(--radius-lg);
+    --radius-pill: var(--radius-pill);
+    
+    /* ============================================================================
+       COMPONENT-SPECIFIC TOKENS - Building blocks for leaf components
+       ============================================================================ */
+    
+    /* Button Tokens */
+    --btn-height-sm: 32px;
+    --btn-height-md: 44px;  /* WCAG minimum touch target */
+    --btn-height-lg: 52px;
+    --btn-height-xl: 60px;
+    --btn-padding-x-sm: var(--space-md);
+    --btn-padding-x-md: var(--space-lg);
+    --btn-padding-x-lg: var(--space-xl);
+    --btn-padding-x-xl: var(--space-2xl);
+    --btn-font-size-sm: var(--text-size-xs);
+    --btn-font-size-md: var(--text-size-sm);
+    --btn-font-size-lg: var(--text-size-md);
+    --btn-font-size-xl: var(--text-size-lg);
+    --btn-color-primary: var(--color-inverse);
+    --btn-background-primary: var(--color-accent);
+    --btn-background-primary-hover: color-mix(in oklch, var(--color-accent) 85%, black 15%);
+    --btn-color-secondary: var(--color-primary);
+    --btn-background-secondary: transparent;
+    --btn-border-secondary: var(--border-medium);
+    --btn-border-secondary-hover: var(--color-accent);
+    
+    /* Card Tokens */
+    --card-background: var(--background-elevated);
+    --card-border: var(--border-light);
+    --card-shadow: var(--section-elevation-1);
+    --card-radius: var(--radius-medium);
+    --card-padding: var(--space-component-lg);
+    --card-header-padding: var(--space-component-md);
+    --card-body-padding: var(--space-component-lg);
+    --card-footer-padding: var(--space-component-md);
+    
+    /* Text Tokens */
+    --text-color-primary: var(--color-primary);
+    --text-color-secondary: var(--color-secondary);
+    --text-color-muted: color-mix(in oklch, var(--color-primary) 60%, transparent);
+    --text-color-accent: var(--color-accent);
+    
+    /* Media Tokens */
+    --media-radius: var(--radius-medium);
+    --media-shadow: var(--section-elevation-1);
+    --media-overlay: oklch(0 0 0 / 0.2);
+    
+    /* ============================================================================
+       THEME ADAPTATIONS - Dark mode overrides
+       ============================================================================ */
+  }
+  
+  /* Dark theme adaptations */
+  html[data-theme="dark"] {
+    --section-elevation-2: 0 12px 28px oklch(0 0 0 / 0.25);
+    --media-overlay: oklch(0 0 0 / 0.4);
+    --btn-background-primary-hover: color-mix(in oklch, var(--color-accent) 70%, black 30%);
+  }
+  
+  /* Modern brand adaptations */
+  html[data-brand="modern"] {
+    --color-accent: var(--accent-brass);
+    --color-accent-alt: var(--accent-stone);
+    --color-accent-neutral: var(--accent-ink);
+    --btn-background-primary: var(--accent-brass);
+    --btn-background-primary-hover: color-mix(in oklch, var(--accent-brass) 80%, black 20%);
+    --btn-border-secondary-hover: var(--accent-ink);
+  }
+  
+  html[data-brand="modern"][data-theme="dark"] {
+    --btn-background-primary-hover: color-mix(in oklch, var(--accent-brass) 70%, black 30%);
+  }
+}
+
+/* ============================================================================
+   SECTION COMPONENT BASE STYLES - Foundation classes
+   ============================================================================ */
+
+@layer components {
+  .section {
+    /* Base section container */
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    
+    /* Rail-aware positioning */
+    margin-top: calc(var(--rail-toolbar-height) * -1);
+    padding-top: var(--rail-toolbar-height);
+    
+    /* Default layer styling */
+    background: var(--section-layer-base);
+    
+    /* Layout container */
+    display: flex;
+    flex-direction: column;
+    align-items: var(--section-align-center);
+    
+    /* Default padding */
+    padding-inline: var(--rail-gutter);
+    padding-block: var(--section-pad-md);
+  }
+  
+  .section__content {
+    /* Content wrapper with max-width control */
+    width: 100%;
+    max-width: var(--section-width-content);
+    
+    /* Content positioning */
+    display: flex;
+    flex-direction: column;
+    align-items: inherit;
+    justify-content: center;
+    
+    /* Default spacing */
+    gap: var(--space-component-lg);
+  }
+  
+  /* Layer variants */
+  .section[data-layer="base"] {
+    background: var(--section-layer-base);
+    box-shadow: var(--section-elevation-0);
+  }
+  
+  .section[data-layer="partial"] {
+    background: var(--section-layer-partial);
+    box-shadow: var(--section-elevation-1);
+  }
+  
+  .section[data-layer="isolated"] {
+    background: var(--section-layer-isolated);
+    box-shadow: var(--section-elevation-2);
+    border-radius: var(--radius-medium);
+    margin-inline: var(--space-component-md);
+  }
+  
+  /* Width variants */
+  .section[data-width="prose"] .section__content {
+    max-width: var(--section-width-prose);
+  }
+  
+  .section[data-width="content"] .section__content {
+    max-width: var(--section-width-content);
+  }
+  
+  .section[data-width="wide"] .section__content {
+    max-width: var(--section-width-wide);
+  }
+  
+  .section[data-width="full"] .section__content {
+    max-width: var(--section-width-full);
+  }
+  
+  /* Alignment variants */
+  .section[data-align="left"] {
+    align-items: var(--section-align-left);
+  }
+  
+  .section[data-align="center"] {
+    align-items: var(--section-align-center);
+  }
+  
+  .section[data-align="right"] {
+    align-items: var(--section-align-right);
+  }
+  
+  /* Elevation variants */
+  .section[data-elevation="0"] {
+    box-shadow: var(--section-elevation-0);
+  }
+  
+  .section[data-elevation="1"] {
+    box-shadow: var(--section-elevation-1);
+  }
+  
+  .section[data-elevation="2"] {
+    box-shadow: var(--section-elevation-2);
+  }
+  
+  .section[data-elevation="3"] {
+    box-shadow: var(--section-elevation-3);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .section {
+      margin-top: 0;  /* Mobile: no toolbar offset */
+      padding-top: var(--space-component-md);
+      padding-inline: var(--space-component-md);
+    }
+    
+    .section[data-layer="isolated"] {
+      border-radius: 0;
+      margin-inline: 0;
+    }
+  }
+}

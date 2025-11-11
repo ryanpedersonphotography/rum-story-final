@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rum River Barn | Wedding Venue</title>
+    <meta name="description" content="Experience your dream wedding at Rum River Barn, a romantic venue in Minnesota">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">
+                <span class="navbar-logo-icon">RR</span>
+                <span class="navbar-logo-text">Rum River Barn</span>
+            </a>
+            
+            <div class="navbar-nav">
+                <a href="#spaces" class="navbar-link">Spaces</a>
+                <a href="#why-choose" class="navbar-link">Why Choose Us</a>
+                <a href="#experience" class="navbar-link">Experience</a>
+                <a href="#gallery" class="navbar-link">Real Weddings</a>
+                <a href="#schedule" class="navbar-cta">Book Now</a>
+                
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v6m0 6v6m-9-9h6m6 0h6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/>
+                    </svg>
+                    <svg class="moon-icon hidden" width="24" height="24" fill="currentColor">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <button class="navbar-mobile-btn" id="mobile-menu-btn" aria-label="Open menu">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="navbar-mobile-menu" id="mobile-menu">
+            <button class="navbar-mobile-close" id="mobile-menu-close">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <a href="#spaces" class="navbar-link">Spaces</a>
+            <a href="#why-choose" class="navbar-link">Why Choose Us</a>
+            <a href="#experience" class="navbar-link">Experience</a>
+            <a href="#gallery" class="navbar-link">Real Weddings</a>
+            <a href="#schedule" class="navbar-cta-mobile">Book Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <span class="script-text">Where Dreams Begin</span>
+            <h1 class="hero-title">
+                Rum River<br>
+                <span class="hero-accent">Wedding Barn</span>
+            </h1>
+            <p class="lead-text">
+                Nestled along Minnesota's scenic Rum River, our historic barn offers the perfect blend 
+                of rustic charm and modern elegance for your once-in-a-lifetime celebration.
+            </p>
+            <div class="hero-ctas">
+                <a href="#schedule" class="btn btn-primary">Schedule Your Visit</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spaces Section -->
+    <section class="section spaces-section" id="spaces">
+        <div class="container">
+            <header class="section-header">
+                <span class="script-text">Your Perfect Setting</span>
+                <h2>Discover Our Spaces</h2>
+                <p class="lead-text">Every corner tells a story, every space creates memories</p>
+            </header>
+            
+            <div class="spaces-tabs">
+                <button class="space-tab active" data-space="barn">The Historic Barn</button>
+                <button class="space-tab" data-space="bridal">Bridal Suite</button>
+                <button class="space-tab" data-space="grooms">Groom's Quarters</button>
+                <button class="space-tab" data-space="garden">Garden Pavilion</button>
+            </div>
+            
+            <div class="spaces-content">
+                <div class="space-panel active" id="space-barn">
+                    <div class="space-image">
+                        <img src="/images/barn-exterior-full-deck-view-evening.jpg" alt="The Historic Barn">
+                    </div>
+                    <div class="space-details">
+                        <h3>The Historic Barn</h3>
+                        <p>Our crown jewel, this beautifully restored barn features soaring ceilings, original timber beams, and modern amenities seamlessly integrated into its historic charm.</p>
+                        <div class="space-features">
+                            <div class="feature">
+                                <strong>Capacity</strong>
+                                <span>Up to 300 guests</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Built</strong>
+                                <span>1920s architecture</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Features</strong>
+                                <span>Climate controlled</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Style</strong>
+                                <span>Rustic elegance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-panel" id="space-bridal">
+                    <div class="space-image">
+                        <img src="/images/barn-interior-ceiling-beams-lighting.jpg" alt="Bridal Suite">
+                    </div>
+                    <div class="space-details">
+                        <h3>Bridal Suite</h3>
+                        <p>A luxurious retreat for the bride and her party, featuring elegant furnishings, natural light, and all the amenities needed for a perfect preparation experience.</p>
+                        <div class="space-features">
+                            <div class="feature">
+                                <strong>Capacity</strong>
+                                <span>Up to 10 people</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Features</strong>
+                                <span>Private bathroom</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Amenities</strong>
+                                <span>Full-length mirrors</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Style</strong>
+                                <span>Elegant comfort</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-panel" id="space-grooms">
+                    <div class="space-image">
+                        <img src="/images/property-field-wildflowers-natural.jpg" alt="Groom's Quarters">
+                    </div>
+                    <div class="space-details">
+                        <h3>Groom's Quarters</h3>
+                        <p>A comfortable space for the groom and his party to relax and prepare, featuring rustic decor and modern conveniences.</p>
+                        <div class="space-features">
+                            <div class="feature">
+                                <strong>Capacity</strong>
+                                <span>Up to 10 people</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Features</strong>
+                                <span>Lounge area</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Amenities</strong>
+                                <span>Entertainment system</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Style</strong>
+                                <span>Rustic comfort</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-panel" id="space-garden">
+                    <div class="space-image">
+                        <img src="/images/property-field-wildflowers-natural.jpg" alt="Garden Pavilion">
+                    </div>
+                    <div class="space-details">
+                        <h3>Garden Pavilion</h3>
+                        <p>An enchanting outdoor space perfect for ceremonies or cocktail hours, surrounded by manicured gardens and natural beauty.</p>
+                        <div class="space-features">
+                            <div class="feature">
+                                <strong>Capacity</strong>
+                                <span>Up to 200 guests</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Features</strong>
+                                <span>Weather protection</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Setting</strong>
+                                <span>Garden views</span>
+                            </div>
+                            <div class="feature">
+                                <strong>Style</strong>
+                                <span>Natural elegance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section alternating-blocks" id="why-choose">
+        <div class="container">
+            <header class="section-header">
+                <span class="script-text">Your Perfect Venue</span>
+                <h2>Why Choose Rum River Barn</h2>
+                <p class="lead-text">Discover what makes our venue the perfect setting for your unforgettable celebration</p>
+            </header>
+            
+            <div class="alternating-items">
+                <div class="alternating-item">
+                    <div class="alternating-content">
+                        <span class="alternating-number">01</span>
+                        <h3>A Picturesque Location For Your Special Event</h3>
+                        <p class="lead-text">Near Milaca, Saint Paul, St Cloud, and Brainerd MN</p>
+                        <p>When it comes to special occasions such as weddings, birthday parties, or other events, it is important to have the perfect setting. You want to ensure that your event is at a location that people will remember.</p>
+                        <p>Here at Rum River Barn, we understand the importance of your special occasion. We are different from other special event venues because we allow you to pretty much run the show. When you choose us, you do not have to worry about us saying no.</p>
+                        <p>Our goal is to help you have your perfect day. We tend to book up fast, so don't wait—call us today at <strong>612-801-0546</strong>!</p>
+                    </div>
+                    <div class="alternating-image">
+                        <img src="/images/barn-interior-ceiling-beams-lighting.jpg" alt="Special event venue with beautiful ceiling beams">
+                    </div>
+                </div>
+                
+                <div class="alternating-item reverse">
+                    <div class="alternating-content">
+                        <span class="alternating-number">02</span>
+                        <h3>Rum River Barn & Vineyard</h3>
+                        <p class="lead-text">Milaca, St. Cloud, Saint Paul, and Brainerd MN</p>
+                        <p>Nestled within 400 acres of pure country and rustic charm, this is the perfect barn wedding venue in Minnesota. On a peaceful hillside overlooking grape vineyards, mile-long manicured old oak forests, and white pines next to a whispering brook, we offer Minnesota's premier barn wedding venue and country special events venue for your custom special event.</p>
+                        <p>Enjoy the serenity, peacefulness, and amazing beauty which has been carved out of the forests and developed for the past 100 years.</p>
+                    </div>
+                    <div class="alternating-image">
+                        <img src="/images/property-field-wildflowers-natural.jpg" alt="Rum River Barn and Vineyard with natural wildflowers">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience-section" id="experience">
+        <div class="container">
+            <header class="section-header">
+                <span class="script-text">Unforgettable Moments</span>
+                <h2>The Rum River Experience</h2>
+                <p class="lead-text">Every detail crafted for your perfect day</p>
+            </header>
+            
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-icon">🏛️</div>
+                    <h3>Historic Charm</h3>
+                    <p>Original 1920s architecture with exposed beams and rustic elegance</p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">🌿</div>
+                    <h3>Natural Beauty</h3>
+                    <p>400 acres of scenic landscapes, vineyards, and riverside views</p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">💎</div>
+                    <h3>All-Inclusive</h3>
+                    <p>Complete wedding packages with catering, decor, and coordination</p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">👥</div>
+                    <h3>Flexible Spaces</h3>
+                    <p>Multiple venues for ceremonies, receptions, and cocktail hours</p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">🎭</div>
+                    <h3>Your Vision</h3>
+                    <p>Customizable options to bring your unique wedding dreams to life</p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">⭐</div>
+                    <h3>Expert Team</h3>
+                    <p>Dedicated coordinators to ensure every detail is perfect</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery-section" id="gallery">
+        <div class="container">
+            <header class="section-header">
+                <span class="script-text">Love Stories</span>
+                <h2>Real Weddings at Rum River</h2>
+                <p class="lead-text">See the magic through the lens of our couples</p>
+            </header>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="/images/barn-exterior-full-deck-view-evening.jpg" alt="Wedding celebration">
+                    <div class="gallery-overlay">
+                        <h4>Sarah & Michael</h4>
+                        <p>A rustic romance celebration</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/images/barn-interior-ceiling-beams-lighting.jpg" alt="Reception setup">
+                    <div class="gallery-overlay">
+                        <h4>Emily & James</h4>
+                        <p>Elegant barn reception</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/images/property-field-wildflowers-natural.jpg" alt="Outdoor ceremony">
+                    <div class="gallery-overlay">
+                        <h4>Jessica & David</h4>
+                        <p>Garden ceremony bliss</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/images/barn-exterior-full-deck-view-evening.jpg" alt="Evening celebration">
+                    <div class="gallery-overlay">
+                        <h4>Amanda & Ryan</h4>
+                        <p>Sunset celebration</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/images/barn-interior-ceiling-beams-lighting.jpg" alt="Dance floor">
+                    <div class="gallery-overlay">
+                        <h4>Rachel & Tom</h4>
+                        <p>Dancing under the stars</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/images/property-field-wildflowers-natural.jpg" alt="Couple portrait">
+                    <div class="gallery-overlay">
+                        <h4>Lisa & Mark</h4>
+                        <p>Romantic vineyard portraits</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Form Section -->
+    <section class="section schedule-section" id="schedule">
+        <div class="container">
+            <header class="section-header">
+                <span class="script-text">Start Your Journey</span>
+                <h2>Schedule Your Visit</h2>
+                <p class="lead-text">Let's begin planning your perfect day together</p>
+            </header>
+            
+            <form class="schedule-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventDate">Preferred Event Date</label>
+                        <input type="date" id="eventDate" name="eventDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestCount">Estimated Guest Count</label>
+                        <select id="guestCount" name="guestCount">
+                            <option value="">Select...</option>
+                            <option value="0-50">Under 50</option>
+                            <option value="50-100">50-100</option>
+                            <option value="100-150">100-150</option>
+                            <option value="150-200">150-200</option>
+                            <option value="200-250">200-250</option>
+                            <option value="250-300">250-300</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="message">Tell Us About Your Vision</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-submit">
+                    <button type="submit" class="btn btn-primary">Schedule Your Visit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="section map-section" id="location">
+        <div class="container">
+            <header class="section-header">
+                <span class="script-text">Find Us</span>
+                <h2>Visit Rum River Barn</h2>
+                <p class="lead-text">Conveniently located near Milaca, MN</p>
+            </header>
+            
+            <div class="map-container">
+                <div class="map-info">
+                    <h3>Location & Directions</h3>
+                    <address>
+                        <strong>Rum River Barn & Vineyard</strong><br>
+                        37571 Zodiac St NE<br>
+                        Stanchfield, MN 55080
+                    </address>
+                    
+                    <div class="contact-info">
+                        <p><strong>Phone:</strong> <a href="tel:612-801-0546">612-801-0546</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:info@rumriverbarn.com">info@rumriverbarn.com</a></p>
+                    </div>
+                    
+                    <div class="directions">
+                        <h4>From Minneapolis/St. Paul (1 hour)</h4>
+                        <p>Take US-169 N to MN-47 N, follow to Zodiac St NE</p>
+                        
+                        <h4>From St. Cloud (45 minutes)</h4>
+                        <p>Take US-10 E to MN-95 N, follow to destination</p>
+                    </div>
+                </div>
+                
+                <div class="map-embed">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2805.0!2d-93.2!3d45.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDQ4JzAwLjAiTiA5M8KwMTInMDAuMCJX!5e0!3m2!1sen!2sus!4v1600000000000!5m2!1sen!2sus"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="navbar-logo-icon">RR</span>
+                        <span class="navbar-logo-text">Rum River Barn</span>
+                    </div>
+                    <p>Creating unforgettable wedding memories since 1920</p>
+                    
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">Facebook</a>
+                        <a href="#" aria-label="Instagram">Instagram</a>
+                        <a href="#" aria-label="Pinterest">Pinterest</a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Venue</h4>
+                        <a href="#spaces">Our Spaces</a>
+                        <a href="#gallery">Gallery</a>
+                        <a href="#experience">Experience</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Planning</h4>
+                        <a href="#schedule">Schedule Visit</a>
+                        <a href="#">Pricing</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <p>37571 Zodiac St NE<br>Stanchfield, MN 55080</p>
+                        <p><a href="tel:612-801-0546">612-801-0546</a></p>
+                        <p><a href="mailto:info@rumriverbarn.com">info@rumriverbarn.com</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Rum River Barn & Vineyard. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>

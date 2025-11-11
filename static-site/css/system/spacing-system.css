@@ -1,0 +1,107 @@
+/* ==========================================================================
+   UNIFIED SPACING SYSTEM DOCUMENTATION
+   ========================================================================== */
+
+/* 
+   This file documents the unified spacing system used across all sections.
+   All spacing values are defined here for consistency.
+   
+   SPACING HIERARCHY:
+   
+   1. SECTION GAPS (between section wrappers):
+      --section-gap: 2rem (32px)
+      --section-gap-hero: 3rem (48px) - after hero only
+      --section-gap-mobile: 1.5rem (24px)
+   
+   2. FLOATING MARGINS (for card-style sections):
+      --floating-margin: clamp(1rem, 3vw, 3rem) - responsive
+      --floating-margin-mobile: 1rem (16px)
+   
+   3. INTERNAL SECTION PADDING:
+      .section--spacing-none: 0
+      .section--spacing-xs: 1rem
+      .section--spacing-sm: 1.5rem  
+      .section--spacing-md: 2rem
+      .section--spacing-lg: 3rem
+      .section--spacing-xl: 4rem (default for most sections)
+      .section--spacing-2xl: 6rem
+   
+   4. CONTENT SPACING (within sections):
+      --space-xs: 0.5rem (8px)
+      --space-sm: 0.75rem (12px)
+      --space-md: 1rem (16px)
+      --space-lg: 1.5rem (24px)
+      --space-xl: 2rem (32px)
+      --space-2xl: 2.5rem (40px)
+      --space-3xl: 3rem (48px)
+   
+   USAGE RULES:
+   
+   1. All sections MUST be wrapped in .section-wrapper
+   2. Floating cards use .section-wrapper--floating
+   3. Full-width sections use .section-wrapper--full
+   4. Internal padding uses .section--spacing-* classes
+   5. Component spacing uses --space-* variables
+   
+   ENFORCEMENT:
+   
+   - section-layers.css controls wrapper spacing
+   - section-standards.css controls internal padding
+   - Individual component CSS should NOT override these values
+   - Use !important sparingly and only in section-layers.css
+   
+   RESPONSIVE BEHAVIOR:
+   
+   Desktop (>768px):
+   - Section gap: 2rem
+   - Floating margins: clamp(1rem, 3vw, 3rem)
+   - Full internal padding values
+   
+   Mobile (<=768px):
+   - Section gap: 1.5rem
+   - Floating margins: 1rem
+   - Reduced internal padding (automatic)
+*/
+
+/* Global spacing variables - DO NOT OVERRIDE */
+:root {
+  /* Base spacing units */
+  --spacing-unit: 0.25rem; /* 4px base */
+  
+  /* Section-level gaps */
+  --section-gap: calc(var(--spacing-unit) * 8);        /* 32px */
+  --section-gap-hero: calc(var(--spacing-unit) * 12);  /* 48px */
+  --section-gap-mobile: calc(var(--spacing-unit) * 6); /* 24px */
+  
+  /* Component-level spacing */
+  --space-xs: calc(var(--spacing-unit) * 2);   /* 8px */
+  --space-sm: calc(var(--spacing-unit) * 3);   /* 12px */
+  --space-md: calc(var(--spacing-unit) * 4);   /* 16px */
+  --space-lg: calc(var(--spacing-unit) * 6);   /* 24px */
+  --space-xl: calc(var(--spacing-unit) * 8);   /* 32px */
+  --space-2xl: calc(var(--spacing-unit) * 10); /* 40px */
+  --space-3xl: calc(var(--spacing-unit) * 12); /* 48px */
+  
+  /* Container gutters */
+  --gutter: 1.5rem;
+  --gutter-mobile: 1rem;
+}
+
+/* Debug mode - uncomment to visualize spacing */
+/*
+.section-wrapper {
+  outline: 2px dashed red;
+}
+
+.section {
+  outline: 2px dashed blue;
+}
+
+.section__container {
+  outline: 2px dashed green;
+}
+
+.section__content {
+  outline: 2px dashed orange;
+}
+*/
