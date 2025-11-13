@@ -24,6 +24,14 @@ html {
   /* Font rendering polish (variable fonts) */
   font-variation-settings: 'opsz';
   font-synthesis-weight: none;
+  
+  /* Fallback background to prevent white flash */
+  background-color: oklch(0.98 0 255); /* Light theme default */
+}
+
+/* Dark theme fallback background */
+html[data-theme="dark"] {
+  background-color: oklch(0.16 0.03 252);
 }
 
 body {

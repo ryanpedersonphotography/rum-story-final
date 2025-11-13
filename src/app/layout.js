@@ -45,6 +45,7 @@ export default function RootLayout({ children }) {
 				lang="en"
 				className={`${playfairDisplay.variable} ${montserrat.variable} ${dancingScript.variable}`}
 				suppressHydrationWarning
+				style={{ backgroundColor: 'oklch(0.98 0 255)' }}
 			>
 				<head>
 					<script
@@ -55,9 +56,9 @@ export default function RootLayout({ children }) {
 		var d = document.documentElement;
 		var params = new URLSearchParams(window.location.search);
 
-		// Theme (light/dark)
+		// Theme (light/dark) - MUST SET BEFORE FIRST PAINT
 		var theme = params.get('theme');
-var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
+		var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
 		if(!allowedTheme){
 			allowedTheme = localStorage.getItem('rr.theme');
 			if(!allowedTheme){
@@ -67,6 +68,12 @@ var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
 			localStorage.setItem('rr.theme', allowedTheme);
 		}
 		d.setAttribute('data-theme', allowedTheme);
+		
+		// Set color-scheme for native UI elements (scrollbars, etc)
+		d.style.colorScheme = allowedTheme === 'dark' ? 'dark' : 'light';
+		
+		// Set immediate background to match theme
+		d.style.backgroundColor = allowedTheme === 'dark' ? 'oklch(0.16 0.03 252)' : 'oklch(0.98 0 255)';
 
 		// Brand (romantic/modern) - default to romantic for public site
 		var brandParam = params.get('brand');
@@ -77,7 +84,12 @@ var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
 			localStorage.setItem('rr.brand', allowedBrand);
 		}
 		d.setAttribute('data-brand', allowedBrand);
-  }catch(e){}
+  }catch(e){
+		// Failsafe: set reasonable defaults
+		document.documentElement.setAttribute('data-theme', 'light');
+		document.documentElement.setAttribute('data-brand', 'romantic');
+		document.documentElement.style.backgroundColor = 'oklch(0.98 0 255)';
+  }
 })();
 `}}
 					/>
