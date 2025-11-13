@@ -1,35 +1,9 @@
-// ───────────────────────────────────────────────────────────────────────────────
-// 1) CLEAN HERO (Storyblok-ready)  src/components/clean/Hero.tsx
-// - storyblokEditable(blok) for inline editing
-// - Field mapping for clean architecture (kicker/title/title_accent/description/bg_image)
-// - Safe image handling (asset object or string)
-// - Sets --hero-bg-url for CSS layer
-// ───────────────────────────────────────────────────────────────────────────────
 'use client'
 import React from 'react'
-import { storyblokEditable } from '@storyblok/react'
 import styles from './Hero.module.css'
 import SectionShell from '@/components/ui/SectionShell'
 import Typography from '@/components/ui/Typography'
 import Text from '@/components/ui/Text'
-
-type SBAsset = { filename?: string; alt?: string } | string | undefined
-
-interface HeroBlok {
-  _uid?: string
-  component?: string
-  // common field aliases for content mapping:
-  kicker?: string
-  title?: string
-  title_accent?: string
-  description?: string
-  background_image?: SBAsset
-  hero_image?: SBAsset
-  bg_image?: SBAsset
-  primary_cta_text?: string
-  scroll_text?: string
-  [key: string]: any
-}
 
 // Layout Control System (Phase 1: Content Positioning)
 export interface HeroLayoutProps {
@@ -42,42 +16,19 @@ export interface HeroLayoutProps {
   // Phase 2 (Future): fullViewport?: boolean  // Full-screen slideshow experience
 }
 
-function assetUrl(a: SBAsset): string | undefined {
-  if (!a) return undefined
-  if (typeof a === 'string') return a
-  return a.filename
-}
-function assetAlt(a: SBAsset, fallback: string): string {
-  if (!a) return fallback
-  if (typeof a === 'string') return fallback
-  return a.alt || fallback
-}
-
-export default function Hero({ 
-  blok,
+export default function Hero({
   contentAlign = 'center',
-  contentWidth = 'content', 
-  useRailSystem = false 
-}: { blok: HeroBlok } & HeroLayoutProps) {
-  const bg =
-    assetUrl(blok.background_image) ||
-    assetUrl(blok.hero_image) ||
-    assetUrl(blok.bg_image) ||
-    '/images/barn-exterior-full-deck-view-evening.jpg'
-
-  const bgAlt =
-    assetAlt(blok.background_image, '') ||
-    assetAlt(blok.hero_image, '') ||
-    assetAlt(blok.bg_image, 'Rum River Wedding Barn')
-
-  const kicker = blok.kicker || 'Where Dreams Begin'
-  const title = blok.title || 'Rum River'
-  const titleAccent = blok.title_accent || 'Wedding Barn'
+  contentWidth = 'content',
+}: HeroLayoutProps) {
+  const bg = '/images/barn-exterior-full-deck-view-evening.jpg'
+  const bgAlt = 'Rum River Wedding Barn'
+  const kicker = 'Where Dreams Begin'
+  const title = 'Rum River'
+  const titleAccent = 'Wedding Barn'
   const lead =
-    blok.description ||
     "Nestled along Minnesota's scenic Rum River, our historic barn offers the perfect blend of rustic charm and modern elegance for your once-in-a-lifetime celebration."
-  const ctaLabel = blok.primary_cta_text || 'Schedule Your Visit'
-  const scrollText = blok.scroll_text || 'Discover Your Perfect Day'
+  const ctaLabel = 'Schedule Your Visit'
+  const scrollText = 'Discover Your Perfect Day'
 
   // smooth scroll (no Bridge conflicts)
   const onScrollClick = () => {
@@ -106,7 +57,6 @@ export default function Hero({
       data-section="hero" 
       align={contentAlign}
       container={contentWidth}
-      {...storyblokEditable(blok)}
     >
       <span className={styles.srOnly}>{bgAlt}</span>
 

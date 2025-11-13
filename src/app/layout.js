@@ -13,7 +13,12 @@ import '@/styles/globals.css'
 // 4. COMPONENTS - Component-specific styles (@layer components)
 import '@/styles/components/navbar.css'
 
-// import StoryblokProvider from '@/components/StoryblokProvider';
+// import { apiPlugin, storyblokInit } from '@storyblok/react/rsc';
+ 
+// storyblokInit({
+//   accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
+//   use: [apiPlugin]
+// });
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import { playfairDisplay, montserrat, dancingScript } from './fonts';
 import Navbar from '@/features/Navbar';

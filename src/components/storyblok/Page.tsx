@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { storyblokEditable, StoryblokComponent } from '@storyblok/react'
 
 interface PageProps {
   blok: any
@@ -9,10 +8,8 @@ interface PageProps {
 
 export default function Page({ blok }: PageProps) {
   return (
-    <div {...storyblokEditable(blok)} key={blok._uid}>
-      {(blok.body || []).map((nestedBlok: any) => (
-        <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
-      ))}
+    <div key={blok._uid}>
+      {/* Content will be rendered here */}
     </div>
   )
 }

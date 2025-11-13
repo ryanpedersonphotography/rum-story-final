@@ -1,21 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { storyblokEditable } from '@storyblok/react'
-import type { SbBlokData } from '@storyblok/react'
 import styles from './ScheduleForm.module.css'
 import SectionShell from '@/components/ui/SectionShell'
 import Typography from '@/components/ui/Typography'
 import Text from '@/components/ui/Text'
 
-interface ScheduleFormStoryblok extends SbBlokData {
-  title?: string
-  subtitle?: string
-  description?: string
-  submit_text?: string
-}
-
-export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) {
+export default function ScheduleForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,14 +29,13 @@ export default function ScheduleForm({ blok }: { blok: ScheduleFormStoryblok }) 
     console.log('Form submitted:', formData);
   };
 
-  const title = blok.title || 'Schedule a Tour'
-  const subtitle = blok.subtitle || 'Plan Your Visit'
-  const description = blok.description || 'Experience the magic of Rum River Barn in person. Book your private tour today.'
-  const submitText = blok.submit_text || 'Schedule Your Tour'
+  const title = 'Schedule a Tour'
+  const subtitle = 'Plan Your Visit'
+  const description = 'Experience the magic of Rum River Barn in person. Book your private tour today.'
+  const submitText = 'Schedule Your Tour'
 
   return (
     <SectionShell
-      {...storyblokEditable(blok)}
       className={styles.scheduleTour}
       data-section="schedule-form"
       header={{

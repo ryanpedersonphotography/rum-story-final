@@ -1,0 +1,106 @@
+/* FAQ - CSS MODULE */
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  background: transparent;
+  border-bottom: 2px solid var(--border-subtle);
+}
+
+.question {
+  padding-block: var(--density-stack, var(--space-xl));
+  padding-inline: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-inline, var(--space-lg));
+  width: 100%;
+  background: transparent;
+  border: 0;
+}
+
+.question h3 {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  text-align: left;
+}
+
+.toggle {
+  font-size: 1.25rem;
+  color: var(--accent-rose);
+  font-weight: 300;
+  transition: transform var(--duration-fast, 150ms) ease;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+}
+
+.item.isOpen .toggle {
+  transform: rotate(180deg);
+}
+
+.answer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height var(--duration-slow, 400ms) ease,
+    opacity var(--duration-normal, 300ms) ease,
+    padding var(--duration-normal, 300ms) ease;
+  padding: 0;
+}
+
+.item.isOpen .answer {
+  max-height: 500px;
+  opacity: 1;
+  padding-block-end: var(--density-stack, var(--space-xl));
+}
+
+.answerBody {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: var(--size-base, 1rem);
+  line-height: var(--line-loose, 1.8);
+  color: var(--text-secondary);
+}
+
+.answerBody p {
+  margin: 0 0 var(--gap-stack, var(--space-md)) 0;
+}
+
+:global(html[data-theme="dark"]) .question h3 {
+  color: var(--text-primary);
+}
+
+:global(html[data-theme="dark"]) .item {
+  border-bottom-color: var(--border-subtle);
+}
+
+:global(html[data-theme="dark"]) .answerBody {
+  color: var(--text-secondary);
+}
+
+.question:focus-visible {
+  outline: var(--focus-width, 3px) solid var(--focus-ring);
+  outline-offset: var(--focus-offset, 3px);
+}
+
+@media (max-width: 768px) {
+  .question {
+    padding-block: var(--gap-stack, var(--space-lg));
+  }
+
+  .item.isOpen .answer {
+    padding-block-end: var(--gap-stack, var(--space-lg));
+  }
+}

@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { storyblokEditable } from '@storyblok/react'
 import { Check, Calendar, Star } from 'lucide-react'
 
 interface PricingEditorProps {
@@ -75,7 +74,6 @@ export default function PricingEditor({ blok }: PricingEditorProps) {
         id="packages"
       className="pricing-section"
       data-section="pricing" 
-      {...storyblokEditable(blok)}
       data-discover="true"
     >
       <div className="content-wrapper">

@@ -1,42 +1,27 @@
 'use client'
 import React from 'react'
-import { storyblokEditable } from '@storyblok/react'
 import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react'
 import SectionShell from '@/components/ui/SectionShell'
 import styles from './Footer.module.css'
 import Typography from '@/components/ui/Typography'
 import Text from '@/components/ui/Text'
 
-interface FooterBlok {
-  _uid?: string
-  component?: string
-  brand_title?: string
-  brand_description?: string
-  address?: string
-  phone?: string
-  email?: string
-  facebook_url?: string
-  instagram_url?: string
-  [key: string]: any
-}
-
-export default function Footer({ blok }: { blok?: FooterBlok }) {
+export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   // Default values for clean implementation
-  const brandTitle = blok?.brand_title || 'Rum River Wedding Barn'
-  const brandDescription = blok?.brand_description || "Where dreams come to life along Minnesota's scenic Rum River. Historic charm meets modern elegance for your perfect celebration."
-  const address = blok?.address || '42618 78th Street, Hillman, MN 56338'
-  const phone = blok?.phone
-  const email = blok?.email
-  const facebookUrl = blok?.facebook_url
-  const instagramUrl = blok?.instagram_url
+  const brandTitle = 'Rum River Wedding Barn'
+  const brandDescription = "Where dreams come to life along Minnesota's scenic Rum River. Historic charm meets modern elegance for your perfect celebration."
+  const address = '42618 78th Street, Hillman, MN 56338'
+  const phone = '320-123-4567'
+  const email = 'info@rumriverbarn.com'
+  const facebookUrl = 'https://www.facebook.com/rumriverbarn'
+  const instagramUrl = 'https://www.instagram.com/rumriverbarn'
 
   return (
     <footer
       className={styles.footer}
       data-section="footer"
-      {...(blok ? storyblokEditable(blok) : {})}
     >
       <SectionShell
         as="div"
@@ -44,7 +29,6 @@ export default function Footer({ blok }: { blok?: FooterBlok }) {
         container="content"
         background="transparent"
         tone="auto"
-        blok={blok}
       >
         <div className={styles.content}>
           {/* Column 1: Brand & Description */}

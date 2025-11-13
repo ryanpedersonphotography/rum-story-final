@@ -1,105 +1,16 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { storyblokEditable } from '@storyblok/react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import WeddingGalleryModal from '../gallery/WeddingGalleryModal'
 
 interface FeaturedWeddingsEditorProps {
   blok: any
 }
 
 export default function FeaturedWeddingsEditor({ blok }: FeaturedWeddingsEditorProps) {
-  const [weddingStories, setWeddingStories] = useState<any[]>([])
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedWedding, setSelectedWedding] = useState<any>(null)
-  const [hasError, setHasError] = useState(false)
-
-  useEffect(() => {
-    // Fetch the featured wedding stories
-    const fetchWeddings = async () => {
-      if (!blok.featured_weddings || blok.featured_weddings.length === 0) {
-        return
-      }
-
-      try {
-        const results = await Promise.all(
-          blok.featured_weddings.map(async (uuid: string) => {
-            try {
-              const response = await fetch(
-                `/api/storyblok-story?uuid=${uuid}&version=draft`
-              )
-
-              // Handle individual wedding fetch errors
-              if (!response.ok) {
-                console.warn(`Failed to fetch wedding with UUID ${uuid}:`, response.status)
-                return null
-              }
-
-              const data = await response.json()
-
-              // Validate wedding has required data
-              if (!data || !data.content) {
-                console.warn(`Wedding ${uuid} has no content`)
-                return null
-              }
-
-              // Validate has title and images
-              if (!data.content.title || !data.content.gallery_photos?.length) {
-                console.warn(`Wedding ${uuid} missing title or gallery photos`)
-                return null
-              }
-
-              return data
-            } catch (err) {
-              // Individual wedding error - log but don't fail entire section
-              console.warn(`Error fetching wedding ${uuid}:`, err)
-              return null
-            }
-          })
-        )
-
-        // Filter out failed weddings
-        const validWeddings = results.filter(s => s !== null)
-
-        // If ALL weddings failed to load, this is a severe error
-        if (validWeddings.length === 0 && blok.featured_weddings.length > 0) {
-          setHasError(true)
-          return
-        }
-
-        setWeddingStories(validWeddings)
-        setHasError(false)
-      } catch (error) {
-        // Severe error (API endpoint unreachable, auth failure, etc.)
-        console.error('Critical error fetching featured weddings:', error)
-        setHasError(true)
-      }
-    }
-
-    fetchWeddings()
-  }, [blok.featured_weddings])
-
-  const openModal = (wedding: any) => {
-    setSelectedWedding(wedding)
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    // Force unlock body scroll BEFORE unmounting modal
-    document.body.style.overflow = ''
-    setIsModalOpen(false)
-    setSelectedWedding(null)
-  }
-
-  // Hide entire section if severe error or no valid weddings
-  if (hasError || weddingStories.length === 0) {
-    return null
-  }
-
   return (
-    <section className="featured-weddings" {...storyblokEditable(blok)}>
+    <section className="featured-weddings">
       <div className="featured-weddings-content">
         <div className="featured-weddings-header">
           <div className="script-accent">
@@ -114,50 +25,7 @@ export default function FeaturedWeddingsEditor({ blok }: FeaturedWeddingsEditorP
         </div>
 
         <div className="weddings-grid">
-          {weddingStories.map((story, index) => {
-            const wedding = story.content
-            const coverImage = wedding.cover_image?.filename || wedding.hero_image?.filename || wedding.gallery_photos?.[0]?.filename
-
-            return (
-              <div
-                key={story.uuid || index}
-                className="wedding-card"
-                onClick={() => openModal(wedding)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    openModal(wedding)
-                  }
-                }}
-              >
-                {coverImage && (
-                  <div className="wedding-image">
-                    <Image
-                      src={coverImage}
-                      alt={`${wedding.title} wedding at Rum River Barn`}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-                <div className="wedding-overlay">
-                  <div className="wedding-couple-names">
-                    {wedding.title}
-                  </div>
-                  {wedding.wedding_date && (
-                    <div className="wedding-date">{wedding.wedding_date}</div>
-                  )}
-                  {wedding.location && (
-                    <div className="wedding-location">{wedding.location}</div>
-                  )}
-                  <div className="view-gallery-hint">View Gallery →</div>
-                </div>
-              </div>
-            )
-          })}
+          {/* Placeholder for wedding stories */}
         </div>
 
         {blok.cta_text && blok.cta_url && (
@@ -168,13 +36,6 @@ export default function FeaturedWeddingsEditor({ blok }: FeaturedWeddingsEditorP
           </div>
         )}
       </div>
-
-      {/* Wedding Gallery Modal */}
-      <WeddingGalleryModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        wedding={selectedWedding}
-      />
 
       <style jsx>{`
         .featured-weddings {

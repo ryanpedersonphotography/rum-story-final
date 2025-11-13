@@ -17,25 +17,25 @@ export default function HistoryCarousel() {
       year: '2010',
       title: 'The Beginning',
       description: 'From a vision to reality, Rum River Barn opened its doors to couples seeking a rustic yet elegant wedding venue in the heart of Minnesota.',
-      image: 'https://a.storyblok.com/f/288003/1600x1000/a1b2c3d4e5/history-2010.jpg'
+      image: '/images/history/history-2010.jpg'
     },
     {
       year: '2015',
       title: 'Expansion & Growth',
       description: 'As word spread about our stunning venue and exceptional service, we expanded our facilities to accommodate larger celebrations while maintaining our intimate charm.',
-      image: 'https://a.storyblok.com/f/288003/1600x1000/b2c3d4e5f6/history-2015.jpg'
+      image: '/images/history/history-2015.jpg'
     },
     {
       year: '2018',
       title: 'Award Recognition',
       description: 'Honored to be featured in Minnesota Bride and recognized by The Knot as a top wedding venue. Our couples\' joy became our greatest achievement.',
-      image: 'https://a.storyblok.com/f/288003/1600x1000/c3d4e5f6g7/history-2018.jpg'
+      image: '/images/history/history-2018.jpg'
     },
     {
       year: '2024',
       title: 'A Decade of Love',
       description: 'Over 10 years and hundreds of weddings later, we continue to create unforgettable moments for couples. Thank you for making Rum River Barn your choice.',
-      image: 'https://a.storyblok.com/f/288003/1600x1000/d4e5f6g7h8/history-2024.jpg'
+      image: '/images/history/history-2024.jpg'
     }
   ];
 

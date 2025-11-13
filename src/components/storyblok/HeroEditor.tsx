@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { storyblokEditable } from '@storyblok/react'
 
 interface HeroEditorProps {
   blok: any
@@ -60,7 +59,6 @@ export default function HeroEditor({ blok }: HeroEditorProps) {
         id="hero"
         data-section="hero"
         className="hotfix-hero-romantic"
-      {...storyblokEditable(blok)}
       style={style}
     >
       <div className="hotfix-hero-content">

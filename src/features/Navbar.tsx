@@ -1,12 +1,6 @@
-/**
- * Navbar Component - Clean Semantic Implementation with Storyblok
- * Token-based styling, zero !important, full accessibility
- */
-
 'use client'
 
 import { useState, useEffect } from 'react'
-import { storyblokEditable } from '@storyblok/react'
 import ThemeToggle from '@/components/ThemeToggle'
 
 interface NavItem {
@@ -15,18 +9,7 @@ interface NavItem {
   href?: string
 }
 
-interface NavbarBlok {
-  _uid?: string
-  component?: string
-  logo_text?: string
-  nav_items?: NavItem[]
-  show_cta?: boolean
-  cta_label?: string
-  cta_url?: string
-  [key: string]: any
-}
-
-export default function Navbar({ blok }: { blok?: NavbarBlok }) {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -90,24 +73,23 @@ export default function Navbar({ blok }: { blok?: NavbarBlok }) {
   }
 
   // Default content
-  const logoText = blok?.logo_text || 'Rum River Barn'
-  const navItems = blok?.nav_items || [
+  const logoText = 'Rum River Barn'
+  const navItems = [
     { label: 'Spaces', href: '#spaces' },
     { label: 'Why Choose Us', href: '#alternating-blocks' },
     { label: 'Experience', href: '#experience' },
     { label: 'Real Weddings', href: '#gallery' },
     { label: 'History', href: '#history' },
   ]
-  const showCta = blok?.show_cta !== false
-  const ctaLabel = blok?.cta_label || 'Book Now'
-  const ctaUrl = blok?.cta_url || '#schedule-form'
+  const showCta = true
+  const ctaLabel = 'Book Now'
+  const ctaUrl = '#schedule-form'
 
   return (
     <>
       <nav
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
         data-section="navbar"
-        {...(blok ? storyblokEditable(blok) : {})}
       >
         <div className="navbar__container">
           {/* Logo */}

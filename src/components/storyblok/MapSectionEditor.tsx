@@ -1,7 +1,5 @@
 'use client';
 
-import { storyblokEditable } from '@storyblok/react';
-
 interface LocationItemProps {
   _uid: string;
   component: string;
@@ -88,7 +86,7 @@ function LocationItem({ blok }: { blok: LocationItemProps }) {
   };
 
   return (
-    <div className="hotfix-location-item" {...storyblokEditable(blok)}>
+    <div className="hotfix-location-item">
       <div className="hotfix-location-icon">
         {renderIcon()}
       </div>
@@ -163,7 +161,6 @@ export default function MapSectionEditor({ blok }: MapSectionProps) {
       <section
         className="hotfix-map-section"
         data-section="map"
-      {...storyblokEditable(blok)}
       data-discover="true"
     >
       <div className="hotfix-map-container">

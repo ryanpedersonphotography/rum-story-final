@@ -1,0 +1,148 @@
+/* ALTERNATING BLOCKS - CSS MODULE */
+
+.container {
+  margin: clamp(2rem, 4vw, 3rem) auto 0;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  margin-bottom: clamp(3.5rem, 7vw, 7.5rem);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  max-width: 90%;
+}
+
+.item:nth-child(odd) {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.item:nth-child(even) {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.item:last-child {
+  margin-bottom: 0;
+}
+
+.itemReverse {
+  direction: rtl;
+}
+
+.itemReverse .content,
+.itemReverse .image {
+  direction: ltr;
+}
+
+.content {
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.number {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  color: var(--why-number);
+  line-height: 1;
+  margin-bottom: var(--space-16);
+}
+
+.title {
+  /* Typography handled by Typography component in SectionWrapper */
+  color: var(--why-text);
+  margin-bottom: var(--space-12);
+}
+
+.lead {
+  /* Typography handled by Text component in SectionWrapper */
+  color: var(--why-text-soft);
+  margin-bottom: var(--space-16);
+}
+
+.paragraph {
+  color: var(--why-text-soft);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.7;
+  margin-bottom: var(--space-16);
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.image {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+  transition: transform 600ms ease, box-shadow 600ms ease;
+}
+
+.item:hover .image {
+  transform: scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+.image img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .item {
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .item:nth-child(odd),
+  .item:nth-child(even) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .itemReverse {
+    direction: ltr;
+  }
+
+  .image {
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: var(--space-8);
+  }
+
+  .image img {
+    height: 300px;
+  }
+}
+
+.item:focus-visible {
+  outline: 3px solid var(--focus-ring, var(--why-number));
+  outline-offset: 3px;
+}
+
+:global(html[data-theme="dark"]) .title,
+:global(html[data-theme="dark"]) .paragraph,
+:global(html[data-theme="dark"]) .lead {
+  color: var(--why-text);
+}
+
+:global(html[data-theme="dark"]) .number {
+  color: var(--why-number);
+}
+
+:global(html[data-theme="dark"]) .item:hover .image {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.50);
+}

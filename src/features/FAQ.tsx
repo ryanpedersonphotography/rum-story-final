@@ -1,13 +1,9 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { storyblokEditable } from '@storyblok/react'
-import { renderRichText } from '@storyblok/js'
 import SectionShell from '@/components/ui/SectionShell'
 import styles from './FAQ.module.css'
 import Typography from '@/components/ui/Typography'
-
-type Blok = Record<string, any>
 
 const FALLBACK_ITEMS = [
   { _uid: '1', question: 'Can we bring our own vendors?', answer: 'Absolutely! Bring any caterer, photographer, florist, DJ, and more.' },
@@ -20,33 +16,16 @@ function toHTML(value: any): string {
   if (!value) return ''
   if (typeof value === 'string') return value
   try {
-    return renderRichText(value)
+    return JSON.stringify(value)
   } catch {
-    try {
-      return JSON.stringify(value)
-    } catch {
-      return ''
-    }
+    return ''
   }
 }
 
-function firstArray(blok: Blok, keys: string[]): any[] | null {
-  for (const k of keys) {
-    const v = blok?.[k]
-    if (Array.isArray(v) && v.length) return v
-  }
-  for (const k of keys) {
-    if (Array.isArray(blok?.[k])) return []
-  }
-  return null
-}
-
-export default function FAQ({ blok }: { blok: Blok }) {
+export default function FAQ() {
   const [open, setOpen] = useState<Record<string, boolean>>({})
 
-  const rawList =
-    firstArray(blok, ['faq_items', 'items', 'faqs', 'faq', 'accordion_items']) ??
-    FALLBACK_ITEMS
+  const rawList = FALLBACK_ITEMS
 
   const items = useMemo(() => {
     return (rawList.length ? rawList : FALLBACK_ITEMS).map((it: any, i: number) => {
@@ -78,8 +57,8 @@ export default function FAQ({ blok }: { blok: Blok }) {
     if (items[0]) setOpen((s) => ({ ...s, [items[0].uid]: true }))
   }, [items])
 
-  const title = blok?.title || 'Frequently Asked Questions'
-  const subtitle = blok?.subtitle || 'Everything You Need to Know'
+  const title = 'Frequently Asked Questions'
+  const subtitle = 'Everything You Need to Know'
   const toggle = (id: string) => setOpen((s) => ({ ...s, [id]: !s[id] }))
 
   return (
@@ -96,8 +75,6 @@ export default function FAQ({ blok }: { blok: Blok }) {
         title: title,
         align: 'center'
       }}
-      blok={blok}
-      {...storyblokEditable(blok)}
     >
       <div
         className={styles.faqContent}

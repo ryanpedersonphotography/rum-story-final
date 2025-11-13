@@ -1,0 +1,252 @@
+/* RUM RIVER EXPERIENCE - CSS MODULE */
+
+.rumRiverExperience {
+  position: relative;
+  overflow: visible;
+}
+
+.rumRiverExperience::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--theme-accent-gold, #E4C896) 50%, transparent) 15%,
+    var(--theme-accent-gold, #E4C896) 50%,
+    color-mix(in srgb, var(--theme-accent-gold, #E4C896) 50%, transparent) 85%,
+    transparent 100%
+  );
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-64);
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+.header {
+  text-align: left;
+}
+
+.script {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.75rem;
+  color: var(--theme-accent-rose, #9D6B7B);
+  margin: 0 0 var(--space-16) 0;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: var(--theme-text-primary, #6B4E3D);
+  margin: 0 0 var(--space-24) 0;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--theme-text-primary, #6B4E3D);
+  opacity: 0.85;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-48);
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+  padding: var(--space-16);
+  border-radius: 12px;
+  background: var(--theme-bg-card, rgba(0, 0, 0, 0.02));
+  border: 1px solid var(--theme-border-subtle, transparent);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.feature:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--theme-shadow-sm, 0 8px 16px rgba(0, 0, 0, 0.08));
+  border-color: var(--theme-border-medium, rgba(0, 0, 0, 0.08));
+}
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.iconSvg {
+  width: 28px;
+  height: 28px;
+  color: var(--theme-accent-rose, #9D6B7B);
+  stroke-width: 1.5;
+}
+
+.featureText {
+  flex: 1;
+}
+
+.featureTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--theme-text-primary, #6B4E3D);
+  margin: 0 0 var(--space-8) 0;
+}
+
+.featureDescription {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--theme-text-primary, #2C2C2C);
+  opacity: 0.8;
+  margin: 0;
+}
+
+.image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  aspect-ratio: 4 / 5;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.image:hover .img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: var(--space-48);
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .image {
+    order: -1;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 768px) {
+  .rumRiverExperience {
+    padding: var(--space-80) 0;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+    gap: var(--space-24);
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .script {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rumRiverExperience {
+    padding: var(--space-64) 0;
+  }
+
+  .container {
+    padding: 0 var(--gutter);
+    gap: var(--space-32);
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+}
+
+:global(html[data-theme="dark"]) .rumRiverExperience {
+  background: var(--surface-2);
+}
+
+:global(html[data-theme="dark"]) .rumRiverExperience::after {
+  opacity: 0.8;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--theme-accent-gold, #F0D9A8) 40%, transparent);
+}
+
+:global(html[data-theme="dark"]) .rumRiverExperience::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: radial-gradient(
+    ellipse at bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--theme-bg-secondary, #2C2416) 15%, transparent) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+:global(html[data-theme="dark"]) .title,
+:global(html[data-theme="dark"]) .description,
+:global(html[data-theme="dark"]) .featureTitle,
+:global(html[data-theme="dark"]) .featureDescription {
+  color: var(--theme-text-primary, #F5E6D3);
+}
+
+:global(html[data-theme="dark"]) .script {
+  color: var(--theme-accent-rose, #D89BAE);
+}
+
+:global(html[data-theme="dark"]) .feature {
+  background: var(--theme-bg-card, #3D2F22);
+  border-color: var(--theme-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+:global(html[data-theme="dark"]) .feature:hover {
+  border-color: var(--theme-border-medium, rgba(255, 255, 255, 0.12));
+  box-shadow: var(--theme-shadow-dark-sm, 0 8px 16px rgba(0, 0, 0, 0.4));
+}
+
+:global(html[data-theme="dark"]) .iconSvg {
+  color: var(--theme-accent-rose, #D89BAE);
+}

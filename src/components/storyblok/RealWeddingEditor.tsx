@@ -1,8 +1,6 @@
 'use client'
 
 import React from 'react'
-import { storyblokEditable } from '@storyblok/react'
-import { render } from 'storyblok-rich-text-react-renderer'
 import MasonryGallery from '../gallery/MasonryGallery'
 import FooterEditor from './FooterEditor'
 
@@ -73,7 +71,7 @@ export default function RealWeddingEditor({ blok }: RealWeddingEditorProps) {
   }
 
   return (
-    <article className="real-wedding-page" {...storyblokEditable(blok)}>
+    <article className="real-wedding-page">
       {/* Compact Hero Section - matching home page hero but smaller */}
       <section className="hotfix-hero-romantic hotfix-hero-compact" style={heroStyle}>
         <div className="hotfix-hero-content">
@@ -98,7 +96,7 @@ export default function RealWeddingEditor({ blok }: RealWeddingEditorProps) {
             {/* Intro Text */}
             {blok.intro && (
               <div className="hotfix-section-intro">
-                {render(blok.intro)}
+                {/* Placeholder for rich text content */}
               </div>
             )}
 

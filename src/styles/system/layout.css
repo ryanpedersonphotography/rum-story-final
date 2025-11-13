@@ -22,7 +22,7 @@
     padding-inline: var(--gutter);
   }
 
-  /* Switch to left-rail with a data attribute (add in Storyblok or JSX) */
+  /* Switch to left-rail with a data attribute */
   [data-clean-root="true"] [data-align="left"] {
     text-align: left;
   }

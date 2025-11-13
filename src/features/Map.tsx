@@ -1,27 +1,17 @@
 'use client'
 import { MapPinIcon, ClockIcon, PhoneIcon, EnvelopeIcon, HomeIcon, CakeIcon } from '@heroicons/react/24/outline'
-import { storyblokEditable } from '@storyblok/react'
-import type { SbBlokData } from '@storyblok/react'
 import SectionShell from '@/components/ui/SectionShell'
 import styles from './Map.module.css'
 import Typography from '@/components/ui/Typography'
 import Text from '@/components/ui/Text'
 
-interface LocationStoryblok {
+interface Location {
   icon?: string
   title?: string
   description?: string
 }
 
-interface MapStoryblok extends SbBlokData {
-  title?: string
-  subtitle?: string
-  description?: string
-  locations?: LocationStoryblok[]
-  map_embed_url?: string
-}
-
-export default function Map({ blok }: { blok: MapStoryblok }) {
+export default function Map() {
   const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
     map: MapPinIcon,
     clock: ClockIcon,
@@ -64,11 +54,11 @@ export default function Map({ blok }: { blok: MapStoryblok }) {
     }
   ]
 
-  const locations = blok.locations && blok.locations.length > 0 ? blok.locations : defaultLocations
-  const title = blok.title || 'Visit Rum River Barn'
-  const subtitle = blok.subtitle || 'Find Us'
-  const description = blok.description || 'Located in the heart of Minnesota, easily accessible from the Twin Cities'
-  const mapEmbedUrl = blok.map_embed_url || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2810.5!2d-93.5!3d45.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDMwJzAwLjAiTiA5M8KwMzAnMDAuMCJX!5e0!3m2!1sen!2sus!4v1234567890'
+  const locations = defaultLocations
+  const title = 'Visit Rum River Barn'
+  const subtitle = 'Find Us'
+  const description = 'Located in the heart of Minnesota, easily accessible from the Twin Cities'
+  const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2810.5!2d-93.5!3d45.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDMwJzAwLjAiTiA5M8KwMzAnMDAuMCJX!5e0!3m2!1sen!2sus!4v1234567890'
 
   return (
     <SectionShell
@@ -85,8 +75,6 @@ export default function Map({ blok }: { blok: MapStoryblok }) {
       }}
       className={styles.mapSection}
       data-section="map"
-      blok={blok}
-      {...storyblokEditable(blok)}
     >
       <div className={styles.mapContentGrid}>
         {locations.slice(0, 3).map((location, index) => {

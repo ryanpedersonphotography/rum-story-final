@@ -1,6 +1,5 @@
 'use client';
 
-import { storyblokEditable } from '@storyblok/react';
 import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react';
 
 interface FooterProps {
@@ -25,7 +24,6 @@ export default function FooterEditor({ blok }: FooterProps) {
       <footer
         className="hotfix-footer"
         data-section="footer"
-      {...storyblokEditable(blok)}
       data-discover="true"
     >
       <div className="hotfix-footer-container">

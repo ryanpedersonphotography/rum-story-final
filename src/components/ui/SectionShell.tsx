@@ -82,7 +82,6 @@ export interface SectionShellProps extends React.HTMLAttributes<HTMLElement> {
   // --- Advanced ---
   containerName?: string
   stickiness?: { top?: string }
-  blok?: any // Storyblok data passthrough
 }
 
 export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
@@ -110,7 +109,6 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
       style,
       children,
       className = '',
-      blok,
       ...rest
     },
     ref
@@ -119,9 +117,9 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
 
     // --- Resolve Spacing ---
     const resolvedSpacing = spacingPresets[spacing] || spacingPresets.none;
-    const finalPaddingY = blok?.paddingY || paddingY || resolvedSpacing.paddingY || 'none';
-    const finalMarginTop = blok?.marginTop || marginTop || resolvedSpacing.marginTop || 'none';
-    const finalMarginBottom = blok?.marginBottom || marginBottom || resolvedSpacing.marginBottom || 'none';
+    const finalPaddingY = paddingY || resolvedSpacing.paddingY || 'none';
+    const finalMarginTop = marginTop || resolvedSpacing.marginTop || 'none';
+    const finalMarginBottom = marginBottom || resolvedSpacing.marginBottom || 'none';
 
     // --- Normalize Background ---
     const bgKind = typeof background === 'string' ? background : background.kind

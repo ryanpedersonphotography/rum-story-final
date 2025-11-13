@@ -1,0 +1,64 @@
+/* Token fallbacks */
+.card-group {
+  --gap-sm: var(--space-8, 8px);
+  --gap-md: var(--space-12, 12px);
+  --gap-lg: var(--space-16, 16px);
+  --gap-xl: var(--space-24, 24px);
+  --card-min: 18rem; /* overridable via inline style */
+}
+
+/* Grid-first layout */
+.card-group {
+  display: grid;
+  gap: var(--gap-lg);
+  align-items: stretch;
+}
+
+/* Gaps */
+.card-group[data-gap="sm"] { gap: var(--gap-sm); }
+.card-group[data-gap="md"] { gap: var(--gap-md); }
+.card-group[data-gap="lg"] { gap: var(--gap-lg); }
+.card-group[data-gap="xl"] { gap: var(--gap-xl); }
+
+/* Columns: explicit 1–6 */
+.card-group[data-columns="1"] { grid-template-columns: 1fr; }
+.card-group[data-columns="2"] { grid-template-columns: repeat(2, 1fr); }
+.card-group[data-columns="3"] { grid-template-columns: repeat(3, 1fr); }
+.card-group[data-columns="4"] { grid-template-columns: repeat(4, 1fr); }
+.card-group[data-columns="5"] { grid-template-columns: repeat(5, 1fr); }
+.card-group[data-columns="6"] { grid-template-columns: repeat(6, 1fr); }
+
+/* Columns: responsive auto-fit with minmax */
+.card-group[data-columns="auto"] {
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
+}
+
+/* Align / Justify */
+.card-group[data-align="start"] { align-items: start; }
+.card-group[data-align="center"] { align-items: center; }
+.card-group[data-align="end"] { align-items: end; }
+.card-group[data-align="stretch"] { align-items: stretch; }
+
+.card-group[data-justify="start"] { justify-items: start; }
+.card-group[data-justify="center"] { justify-items: center; }
+.card-group[data-justify="end"] { justify-items: end; }
+.card-group[data-justify="between"] { justify-content: space-between; }
+
+/* Equal height cards (assumes .card root) */
+.card-group[data-equal-height="true"] > .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Flex fallback (older UAs or if you force it via a class) */
+.card-group.is-flex {
+  display: flex;
+  gap: var(--gap-lg);
+  flex-wrap: wrap;
+}
+.card-group.is-flex[data-wrap="false"] { flex-wrap: nowrap; }
+.card-group.is-flex > * {
+  flex: 1 1 var(--card-min);
+  min-width: var(--card-min);
+}

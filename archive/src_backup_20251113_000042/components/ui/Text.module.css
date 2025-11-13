@@ -1,0 +1,51 @@
+/* ==========================================================================
+   TEXT COMPONENT - Semantic Body Text Wrapper
+   Max-width control for optimal readability
+   ========================================================================== */
+
+/* ===== TEXT WRAPPER ===== */
+.textWrapper {
+  width: 100%;
+}
+
+/* ===== MAX WIDTH VARIANTS ===== */
+.maxWidth-prose {
+  max-width: 65ch; /* Optimal reading width */
+}
+
+.maxWidth-narrow {
+  max-width: 48ch; /* Tight content */
+}
+
+.maxWidth-wide {
+  max-width: 80ch; /* Extended content */
+}
+
+.maxWidth-full {
+  max-width: none;
+}
+
+/* ===== ALIGNMENT FOR WRAPPER ===== */
+.align-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+  .maxWidth-prose,
+  .maxWidth-narrow,
+  .maxWidth-wide {
+    max-width: 100%; /* Full width on mobile */
+  }
+}

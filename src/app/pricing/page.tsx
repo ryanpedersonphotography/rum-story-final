@@ -11,7 +11,7 @@ export default function PricingPage() {
     <PageTemplate>
       <main className="container mx-auto px-6 py-16">
       <h1 className="text-4xl font-bold mb-6">Pricing</h1>
-      <p className="text-lg mb-8">Developer-owned page (not in Storyblok).</p>
+      <p className="text-lg mb-8">Developer-owned page.</p>
       
       <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {/* Basic Package */}

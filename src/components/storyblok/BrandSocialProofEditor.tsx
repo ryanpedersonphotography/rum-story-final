@@ -1,7 +1,5 @@
 'use client';
 
-import { storyblokEditable } from '@storyblok/react';
-
 interface BrandSocialProofProps {
   blok: {
     _uid: string;
@@ -53,7 +51,6 @@ export default function BrandSocialProofEditor({ blok }: BrandSocialProofProps) 
       <section
         className="hotfix-brand-quote-section"
         data-section="brand-proof"
-      {...storyblokEditable(blok)}
       data-discover="true"
     >
       <div className="hotfix-brand-quote-content">

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { storyblokEditable } from '@storyblok/react';
 
 interface ScheduleFormProps {
   blok: {
@@ -63,7 +62,6 @@ export default function ScheduleFormEditor({ blok }: ScheduleFormProps) {
         id="contact"
         data-section="schedule-form"
       className="hotfix-schedule-tour"
-      {...storyblokEditable(blok)}
       data-discover="true"
     >
       <div className="hotfix-form-container">

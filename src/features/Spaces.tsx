@@ -2,43 +2,28 @@
 
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { storyblokEditable } from '@storyblok/react'
-import type { SbBlokData } from '@storyblok/react'
 import SectionShell from '@/components/ui/SectionShell'
 import styles from './Spaces.module.css'
 import Typography from '@/components/ui/Typography'
 import Text from '@/components/ui/Text'
 
-interface FeatureStoryblok {
+interface Feature {
   _uid: string
   component: 'feature'
   feature_title?: string
   feature_blurb?: string
 }
 
-interface SpaceStoryblok {
+interface Space {
   _uid: string
   component: 'space'
   space_name?: string
   space_photos?: Array<{ filename?: string; alt?: string }>
   space_description?: string
-  space_features?: FeatureStoryblok[]
+  space_features?: Feature[]
 }
 
-interface SpacesStoryblok extends SbBlokData {
-  title?: string
-  subtitle?: string
-  script_accent?: string
-  description?: string
-  background_variant?: 'surface' | 'tint-rose' | 'tint-sage' | 'dark-gradient'
-  theme_override?: 'auto' | 'light' | 'dark'
-  padding_size?: 'sm' | 'md' | 'lg' | 'xl'
-  spaces?: SpaceStoryblok[]
-}
-
-export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
-  console.log('[Spaces] Rendering with blok:', blok)
-  console.log('[Spaces] Spaces data from blok:', blok.spaces)
+export default function Spaces() {
   const [activeSpaceIndex, setActiveSpaceIndex] = useState(0)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -110,34 +95,29 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
     }
   ]
 
-  // Use Storyblok spaces data if available, otherwise fall back to defaults
-  const spacesData = (blok.spaces && blok.spaces.length > 0) ? blok.spaces : defaultSpaces
+  const spacesData = defaultSpaces
 
-  // Convert Storyblok image format to simple string array for compatibility
-  const getSpaceImages = (space: SpaceStoryblok) => {
+  const getSpaceImages = (space: Space) => {
     if (!space || !space.space_photos) {
       return ['/images/barn-exterior-full-deck-view-evening.jpg'] // Safe fallback
     }
     
     if (Array.isArray(space.space_photos)) {
       if (space.space_photos.length > 0 && typeof space.space_photos[0] === 'object' && 'filename' in space.space_photos[0]) {
-        // Storyblok format
         return space.space_photos.map(img => img.filename || '')
       }
     }
     
-    // Fallback if space_photos is not a valid array
     return ['/images/barn-exterior-full-deck-view-evening.jpg']
   }
 
-  const title = blok.title || 'Discover Our Spaces'
-  const subtitle = blok.script_accent || blok.subtitle || 'Your Perfect Setting'
-  const description = blok.description || 'Every corner tells a story, every space creates memories'
+  const title = 'Discover Our Spaces'
+  const subtitle = 'Your Perfect Setting'
+  const description = 'Every corner tells a story, every space creates memories'
   
-  // Get background and theme from Storyblok or use defaults
-  const backgroundVariant = blok.background_variant || 'tint-rose'
-  const themeOverride = blok.theme_override || 'auto'
-  const paddingSize = blok.padding_size || 'lg'
+  const backgroundVariant = 'tint-rose'
+  const themeOverride = 'auto'
+  const paddingSize = 'lg'
 
   const handleSpaceChange = (spaceIndex: number) => {
     setActiveSpaceIndex(spaceIndex)
@@ -162,19 +142,17 @@ export default function Spaces({ blok }: { blok: SpacesStoryblok }) {
 
   return (
     <SectionShell
-      {...storyblokEditable(blok)}
       header={{
         scriptAccent: subtitle,
         title: title,
         lead: description
       }}
-      // Use Storyblok-configured styling
       background={backgroundVariant}
       tone={themeOverride}
       paddingY={paddingSize}
-      spacing="content-flow"  // Standard section spacing
-      divider="none"          // Clean transition
-      container="wide" // Consistent width
+      spacing="content-flow"
+      divider="none"
+      container="wide"
       data-discover="true"
       data-section="spaces"
     >

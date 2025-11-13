@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { storyblokEditable } from '@storyblok/react';
 import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -198,7 +197,6 @@ export default function HistoryCarouselEditor({ blok }: HistoryCarouselProps) {
       id="history"
       ref={sectionRef}
       className="hotfix-history-section"
-      {...storyblokEditable(blok)}
       data-discover="true"
     >
       <div className="hotfix-history-content">

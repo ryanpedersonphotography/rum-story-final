@@ -2,19 +2,20 @@
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const health = {
-    status: 'healthy',
+  const healthData = {
+    status: 'ok',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    environment: process.env.NODE_ENV,
-    memory: process.memoryUsage(),
+    deployment: {
+      environment: process.env.NODE_ENV,
+      region: process.env.VERCEL_REGION || 'unknown',
+      commit: process.env.VERCEL_GIT_COMMIT_SHA || 'local'
+    },
     checks: {
-      storyblok: !!process.env.NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN,
-      netlify: !!process.env.NETLIFY,
-      buildHook: !!process.env.NETLIFY_BUILD_HOOK,
-      webhookSecret: !!process.env.STORYBLOK_WEBHOOK_SECRET,
+      database: 'ok', // Placeholder
+      // You can add real checks here
     }
   }
-  
-  return NextResponse.json(health)
+
+  return NextResponse.json(healthData)
 }

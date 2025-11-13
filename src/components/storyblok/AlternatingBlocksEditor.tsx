@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import React from 'react'
-import { storyblokEditable } from '@storyblok/react'
 
 interface AlternatingBlocksEditorProps {
   blok: any
@@ -16,7 +15,7 @@ export default function AlternatingBlocksEditor({ blok }: AlternatingBlocksEdito
   ]
 
   return (
-      <section className="hotfix-alternating-blocks" {...storyblokEditable(blok)} data-section="alternating-blocks">
+      <section className="hotfix-alternating-blocks" data-section="alternating-blocks">
         <div className="hotfix-content-wrapper">
         <div className="hotfix-section-header">
           <div className="hotfix-script-accent">
@@ -39,7 +38,6 @@ export default function AlternatingBlocksEditor({ blok }: AlternatingBlocksEdito
               <div
                 key={block._uid || index}
                 className={`hotfix-block-item${block.is_reverse ? ' reverse' : ''}`}
-                {...storyblokEditable(block)}
               >
                 <div className="hotfix-block-content">
                   <div className="hotfix-number">{block.number || `0${index + 1}`}</div>

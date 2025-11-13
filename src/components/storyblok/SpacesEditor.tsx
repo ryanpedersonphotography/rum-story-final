@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { storyblokEditable } from '@storyblok/react'
 
 interface SpacesEditorProps {
   blok: {
@@ -101,7 +100,6 @@ export default function SpacesEditor({ blok }: SpacesEditorProps) {
         id="venue"
         data-section="spaces"
       className="spaces-section" 
-      {...storyblokEditable(blok)}
       data-discover="true"
     >
       <div className="content-wrapper">

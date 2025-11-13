@@ -1,31 +1,32 @@
-// src/app/page.tsx
-export const dynamic = 'force-dynamic'
-
-async function fetchStory(slug: string) {
-  const token = process.env.NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN
-  if (!token) throw new Error('Missing NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN')
-  const version = process.env.NODE_ENV === 'production' ? 'published' : 'draft'
-  const url = `https://api.storyblok.com/v2/cdn/stories/${slug}?version=${version}&cv=${Date.now()}&token=${token}`
-
-  const res = await fetch(url, { cache: 'no-store' })
-  if (!res.ok) {
-    const text = await res.text()
-    throw new Error(`Storyblok fetch failed (${res.status}): ${text}`)
-  }
-  const data = await res.json()
-  return data.story
-}
-
-import CleanStoryRenderer from '@/features/CleanStoryRenderer'
 import GlassToolbar from '@/development/GlassToolbar'
+import Navbar from '@/features/Navbar'
+import Hero from '@/features/Hero'
+import Spaces from '@/features/Spaces'
+import Experience from '@/features/Experience'
+import AlternatingBlocks from '@/features/AlternatingBlocks'
+import Gallery from '@/features/Gallery'
+import Pricing from '@/features/Pricing'
+import FAQ from '@/features/FAQ'
+import Map from '@/features/Map'
+import ScheduleForm from '@/features/ScheduleForm'
+import Footer from '@/features/Footer'
 
-export default async function HomePage() {
-  const story = await fetchStory('home')
+export default function HomePage() {
   return (
     <div className="glass-toolbar-layout">
       <GlassToolbar />
+      <Navbar />
       <main className="glass-toolbar-layout__content">
-        <CleanStoryRenderer story={story} />
+        <Hero />
+        <Spaces />
+        <Experience />
+        <AlternatingBlocks />
+        <Gallery />
+        <Pricing />
+        <FAQ />
+        <Map />
+        <ScheduleForm />
+        <Footer />
       </main>
     </div>
   )
