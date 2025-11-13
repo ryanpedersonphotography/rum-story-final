@@ -24,7 +24,7 @@ export const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-playfair',
-  display: 'swap', // Use 'swap' for best performance
+  display: 'block', // Changed from 'swap' to 'block' to prevent flash (3s invisible text)
   preload: true,
   fallback: ['Georgia', 'Times New Roman', 'serif'],
   adjustFontFallback: true, // Minimize CLS with size-adjusted fallback
@@ -38,7 +38,7 @@ export const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-montserrat',
-  display: 'swap',
+  display: 'block', // Changed from 'swap' to 'block' to prevent flash
   preload: true,
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
   adjustFontFallback: true,
@@ -55,7 +55,7 @@ export const dancingScript = Dancing_Script({
   subsets: ['latin'],
   weight: ['400', '700'],
   variable: '--font-dancing',
-  display: 'swap',
+  display: 'block', // Changed from 'swap' to 'block' for consistency
   preload: false, // Lower priority since it's decorative
   fallback: ['cursive'],
   adjustFontFallback: true,

@@ -1,0 +1,49 @@
+/* Critical CSS - Inlined to prevent flash */
+/* This gets injected into <head> before other styles */
+
+:root {
+  /* Prevent flash by setting initial theme colors */
+  --bg-base: oklch(0.98 0 255);
+  --text-base: oklch(0.28 0.03 260);
+}
+
+[data-theme="dark"] {
+  --bg-base: oklch(0.16 0.03 252);
+  --text-base: oklch(0.95 0 255);
+}
+
+/* Prevent layout shift */
+html {
+  overflow-y: scroll; /* Always show scrollbar to prevent shift */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-base);
+  color: var(--text-base);
+  min-height: 100vh;
+}
+
+/* Navbar skeleton to prevent shift */
+nav {
+  height: 72px;
+  background: var(--bg-base);
+  border-bottom: 1px solid oklch(0.88 0 255 / 0.1);
+}
+
+/* Hero skeleton */
+section:first-of-type {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Glass toolbar skeleton */
+.glass-toolbar-layout {
+  position: relative;
+}
+
+.glass-toolbar-layout__content {
+  position: relative;
+  z-index: 1;
+}

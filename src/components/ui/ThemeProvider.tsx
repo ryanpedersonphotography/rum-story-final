@@ -28,6 +28,7 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Initialize from DOM attributes (set by pre-paint script)
+  // IMPORTANT: Don't re-apply on mount to prevent flash
   const [theme, setThemeState] = useState<ThemeId>(() => {
     if (typeof document !== 'undefined') {
       const attr = document.documentElement.getAttribute('data-theme')
@@ -43,6 +44,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
     return 'romantic'
   })
+  
+  // Track if we've mounted to prevent re-applying initial theme
+  const mountedRef = useRef(false)
 
   const themeRef = useRef(theme)
   const brandRef = useRef(brand)
@@ -70,7 +74,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (themeRef.current === newTheme) return
     themeRef.current = newTheme
     setThemeState(newTheme)
-    applyThemeToDom(newTheme)
+    // Only apply to DOM if we've already mounted (not on initial render)
+    if (mountedRef.current) {
+      applyThemeToDom(newTheme)
+    }
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEYS.theme, newTheme)
     }
@@ -81,11 +88,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (brandRef.current === newBrand) return
     brandRef.current = newBrand
     setBrandState(newBrand)
-    applyBrandToDom(newBrand)
+    // Only apply to DOM if we've already mounted (not on initial render)
+    if (mountedRef.current) {
+      applyBrandToDom(newBrand)
+    }
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEYS.brand, newBrand)
     }
   }, [applyBrandToDom])
+
+  /* Mark as mounted after first render */
+  useEffect(() => {
+    mountedRef.current = true
+  }, [])
 
   /* Sync across tabs and respond to OS preference changes */
   useEffect(() => {
