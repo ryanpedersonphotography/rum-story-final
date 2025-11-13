@@ -39,7 +39,7 @@ body {
   line-height: var(--line-normal);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  background: var(--surface-0);
+  background: transparent; /* Let HTML background show through */
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: var(--size-base);

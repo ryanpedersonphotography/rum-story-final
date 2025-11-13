@@ -45,7 +45,6 @@ export default function RootLayout({ children }) {
 				lang="en"
 				className={`${playfairDisplay.variable} ${montserrat.variable} ${dancingScript.variable}`}
 				suppressHydrationWarning
-				style={{ backgroundColor: 'oklch(0.98 0 255)' }}
 			>
 				<head>
 					<script
@@ -54,6 +53,7 @@ export default function RootLayout({ children }) {
 (function(){
   try{
 		var d = document.documentElement;
+		var b = document.body;
 		var params = new URLSearchParams(window.location.search);
 
 		// Theme (light/dark) - MUST SET BEFORE FIRST PAINT
@@ -67,13 +67,21 @@ export default function RootLayout({ children }) {
 		} else {
 			localStorage.setItem('rr.theme', allowedTheme);
 		}
+		
+		// CRITICAL: Set concrete background color IMMEDIATELY
+		// This runs before any CSS loads, preventing white flash
+		var isDark = allowedTheme === 'dark';
+		var bgColor = isDark ? 'oklch(0.16 0.03 252)' : 'oklch(0.98 0 255)';
+		
+		// Apply to HTML element immediately
+		d.style.backgroundColor = bgColor;
+		d.style.colorScheme = isDark ? 'dark' : 'light';
 		d.setAttribute('data-theme', allowedTheme);
 		
-		// Set color-scheme for native UI elements (scrollbars, etc)
-		d.style.colorScheme = allowedTheme === 'dark' ? 'dark' : 'light';
-		
-		// Set immediate background to match theme
-		d.style.backgroundColor = allowedTheme === 'dark' ? 'oklch(0.16 0.03 252)' : 'oklch(0.98 0 255)';
+		// Also set on body if it exists (for extra safety)
+		if(b) {
+			b.style.backgroundColor = 'transparent';
+		}
 
 		// Brand (romantic/modern) - default to romantic for public site
 		var brandParam = params.get('brand');
@@ -86,9 +94,11 @@ export default function RootLayout({ children }) {
 		d.setAttribute('data-brand', allowedBrand);
   }catch(e){
 		// Failsafe: set reasonable defaults
-		document.documentElement.setAttribute('data-theme', 'light');
-		document.documentElement.setAttribute('data-brand', 'romantic');
-		document.documentElement.style.backgroundColor = 'oklch(0.98 0 255)';
+		var d = document.documentElement;
+		d.setAttribute('data-theme', 'light');
+		d.setAttribute('data-brand', 'romantic');
+		d.style.backgroundColor = 'oklch(0.98 0 255)';
+		d.style.colorScheme = 'light';
   }
 })();
 `}}
