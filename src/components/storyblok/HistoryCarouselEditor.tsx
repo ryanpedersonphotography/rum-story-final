@@ -544,7 +544,7 @@ export default function HistoryCarouselEditor({ blok }: HistoryCarouselProps) {
           position: relative;
           aspect-ratio: 5 / 4;
           overflow: hidden;
-          background: white;
+          background: var(--surface-1);
           border: 1px solid #f0f0f0;
           box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
           width: 100%;
@@ -676,7 +676,7 @@ export default function HistoryCarouselEditor({ blok }: HistoryCarouselProps) {
           position: absolute;
           bottom: 100%;
           margin-bottom: 0.5rem;
-          background: white;
+          background: var(--surface-1);
           padding: 0.2rem 0.4rem;
           border-radius: 4px;
           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);

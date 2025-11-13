@@ -1,8 +1,11 @@
 /* ==========================================================================
    THEME PROVIDER — React Context for Theme Management
    ==========================================================================
-   Provides theme and brand state to all components via React context.
-   Syncs with localStorage and responds to OS preference changes.
+   DOM-Driven Theme Synchronization:
+   - The pre-paint script in layout.tsx sets data-theme/data-brand before React loads
+   - This provider syncs its initial state FROM the DOM (not the other way around)
+   - First mount only reads DOM attributes, does NOT reapply styles (prevents flash)
+   - After initial sync, manages theme changes normally
    ========================================================================== */
 
 'use client'
@@ -27,30 +30,38 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Initialize from DOM attributes (set by pre-paint script)
-  // IMPORTANT: Don't re-apply on mount to prevent flash
-  const [theme, setThemeState] = useState<ThemeId>(() => {
-    if (typeof document !== 'undefined') {
-      const attr = document.documentElement.getAttribute('data-theme')
-      return (attr as ThemeId) || 'light'
-    }
-    return 'light'
-  })
-
-  const [brand, setBrandState] = useState<BrandId>(() => {
-    if (typeof document !== 'undefined') {
-      const attr = document.documentElement.getAttribute('data-brand')
-      return (attr as BrandId) || 'romantic'
-    }
-    return 'romantic'
-  })
+  // Initial SSR state - will be synced from DOM on client mount
+  const [theme, setThemeState] = useState<ThemeId>('light')
+  const [brand, setBrandState] = useState<BrandId>('romantic')
   
-  // Track if we've mounted to prevent re-applying initial theme
+  // Track if we've mounted and synced from DOM
   const mountedRef = useRef(false)
+  const themeRef = useRef<ThemeId>('light')
+  const brandRef = useRef<BrandId>('romantic')
 
-  const themeRef = useRef(theme)
-  const brandRef = useRef(brand)
+  // Initial DOM → state sync (runs once on client, does NOT re-apply styles)
+  useEffect(() => {
+    if (typeof document === 'undefined') return
 
+    const domTheme = document.documentElement.getAttribute('data-theme') as ThemeId | null
+    const domBrand = document.documentElement.getAttribute('data-brand') as BrandId | null
+
+    // Sync state from DOM without applying styles
+    if (domTheme && domTheme !== themeRef.current) {
+      themeRef.current = domTheme
+      setThemeState(domTheme)
+    }
+
+    if (domBrand && domBrand !== brandRef.current) {
+      brandRef.current = domBrand
+      setBrandState(domBrand)
+    }
+
+    // Mark as mounted - future changes will apply to DOM
+    mountedRef.current = true
+  }, [])
+
+  // Keep refs in sync with state
   useEffect(() => {
     themeRef.current = theme
   }, [theme])
@@ -59,7 +70,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     brandRef.current = brand
   }, [brand])
 
-  /* Set theme: update state, DOM, and localStorage */
+  /* Apply theme to DOM */
   const applyThemeToDom = useCallback((nextTheme: ThemeId) => {
     if (typeof document === 'undefined') return
     THEME_REGISTRY[nextTheme].apply(document.documentElement)
@@ -70,37 +81,39 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     BRAND_REGISTRY[nextBrand].apply(document.documentElement)
   }, [])
 
+  /* Set theme: update state, DOM (after mount), and localStorage */
   const setTheme = useCallback((newTheme: ThemeId) => {
     if (themeRef.current === newTheme) return
+    
     themeRef.current = newTheme
     setThemeState(newTheme)
-    // Only apply to DOM if we've already mounted (not on initial render)
+    
+    // Only apply to DOM if we've already mounted and synced
     if (mountedRef.current) {
       applyThemeToDom(newTheme)
     }
+    
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEYS.theme, newTheme)
     }
   }, [applyThemeToDom])
 
-  /* Set brand: update state, DOM, and localStorage */
+  /* Set brand: update state, DOM (after mount), and localStorage */
   const setBrand = useCallback((newBrand: BrandId) => {
     if (brandRef.current === newBrand) return
+    
     brandRef.current = newBrand
     setBrandState(newBrand)
-    // Only apply to DOM if we've already mounted (not on initial render)
+    
+    // Only apply to DOM if we've already mounted and synced
     if (mountedRef.current) {
       applyBrandToDom(newBrand)
     }
+    
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEYS.brand, newBrand)
     }
   }, [applyBrandToDom])
-
-  /* Mark as mounted after first render */
-  useEffect(() => {
-    mountedRef.current = true
-  }, [])
 
   /* Sync across tabs and respond to OS preference changes */
   useEffect(() => {

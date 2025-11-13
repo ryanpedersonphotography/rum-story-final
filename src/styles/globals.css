@@ -25,13 +25,13 @@ html {
   font-variation-settings: 'opsz';
   font-synthesis-weight: none;
   
-  /* Fallback background to prevent white flash */
-  background-color: oklch(0.98 0 255); /* Light theme default */
+  /* Fallback background to prevent white flash - matches --surface-0 exactly */
+  background-color: oklch(0.98 0 255); /* Light theme: var(--n-98) */
 }
 
-/* Dark theme fallback background */
+/* Dark theme fallback background - matches --surface-0 exactly */
 html[data-theme="dark"] {
-  background-color: oklch(0.16 0.03 252);
+  background-color: oklch(0.20 0.03 255); /* Dark theme: var(--n-20) */
 }
 
 body {
@@ -39,7 +39,8 @@ body {
   line-height: var(--line-normal);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  background: transparent; /* Let HTML background show through */
+  /* IMPORTANT: Body gets its background from CSS, NOT from inline script */
+  background-color: var(--surface-0); /* This wins now that inline style is removed */
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: var(--size-base);

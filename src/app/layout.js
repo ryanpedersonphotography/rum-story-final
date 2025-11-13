@@ -1,3 +1,12 @@
+/* ==========================================================================
+   ROOT LAYOUT — Next.js App Router Layout
+   ==========================================================================
+   Pre-Paint Theme Initialization:
+   - Theme is decided by inline script BEFORE React/CSS loads (prevents flash)
+   - Script uses next/script with beforeInteractive strategy
+   - React ThemeProvider only syncs to the pre-set DOM state
+   ========================================================================== */
+
 // 1. TOKENS - Design tokens (OKLCH colors, surfaces, gradients, spacing)
 import '@/styles/tokens/theme.css'
 import '@/styles/tokens/spacing.css'
@@ -13,12 +22,7 @@ import '@/styles/globals.css'
 // 4. COMPONENTS - Component-specific styles (@layer components)
 import '@/styles/components/navbar.css'
 
-// import { apiPlugin, storyblokInit } from '@storyblok/react/rsc';
- 
-// storyblokInit({
-//   accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
-//   use: [apiPlugin]
-// });
+import Script from 'next/script'
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import { playfairDisplay, montserrat, dancingScript } from './fonts';
 import Navbar from '@/features/Navbar';
@@ -30,6 +34,73 @@ export const metadata = {
 	title: 'Rum River Barn | Wedding Venue',
 	description: 'Experience your dream wedding at Rum River Barn, a romantic venue in Minnesota',
 };
+
+// Theme initialization script - runs before React/CSS to prevent flash
+const themeInitCode = `
+(function(){
+  try{
+    var d = document.documentElement;
+    var params = new URLSearchParams(window.location.search);
+
+    // Theme (light/dark) - MUST SET BEFORE FIRST PAINT
+    var theme = params.get('theme');
+    var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
+    
+    if(!allowedTheme){
+      try {
+        allowedTheme = localStorage.getItem('rr.theme');
+      } catch(_) {}
+      
+      if(!allowedTheme){
+        var prefersDark = window.matchMedia && 
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        allowedTheme = prefersDark ? 'dark' : 'light';
+      }
+    } else {
+      try {
+        localStorage.setItem('rr.theme', allowedTheme);
+      } catch(_) {}
+    }
+    
+    // CRITICAL: Set concrete background color IMMEDIATELY
+    // These must match --surface-0 tokens exactly
+    var isDark = allowedTheme === 'dark';
+    var bgColor = isDark ? 'oklch(0.20 0.03 255)' : 'oklch(0.98 0 255)';
+    
+    // Apply to HTML element immediately
+    d.style.backgroundColor = bgColor;
+    d.style.colorScheme = isDark ? 'dark' : 'light';
+    d.setAttribute('data-theme', allowedTheme);
+    
+    // DO NOT touch body.style - let CSS handle body background
+
+    // Brand (romantic/modern) - default to romantic for public site
+    var brandParam = params.get('brand');
+    var allowedBrand = brandParam === 'romantic' || brandParam === 'modern' ? brandParam : null;
+    
+    if(!allowedBrand){
+      try {
+        allowedBrand = localStorage.getItem('rr.brand') || 'romantic';
+      } catch(_) {
+        allowedBrand = 'romantic';
+      }
+    } else {
+      try {
+        localStorage.setItem('rr.brand', allowedBrand);
+      } catch(_) {}
+    }
+    
+    d.setAttribute('data-brand', allowedBrand);
+  }catch(e){
+    // Failsafe: set reasonable defaults
+    var d = document.documentElement;
+    d.setAttribute('data-theme', 'light');
+    d.setAttribute('data-brand', 'romantic');
+    d.style.backgroundColor = 'oklch(0.98 0 255)';
+    d.style.colorScheme = 'light';
+  }
+})();
+`;
 
 /*
  * DEV SERVER: http://localhost:6666
@@ -47,61 +118,11 @@ export default function RootLayout({ children }) {
 				suppressHydrationWarning
 			>
 				<head>
-					<script
-						dangerouslySetInnerHTML={{
-							__html: `
-(function(){
-  try{
-		var d = document.documentElement;
-		var b = document.body;
-		var params = new URLSearchParams(window.location.search);
-
-		// Theme (light/dark) - MUST SET BEFORE FIRST PAINT
-		var theme = params.get('theme');
-		var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
-		if(!allowedTheme){
-			allowedTheme = localStorage.getItem('rr.theme');
-			if(!allowedTheme){
-				allowedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-			}
-		} else {
-			localStorage.setItem('rr.theme', allowedTheme);
-		}
-		
-		// CRITICAL: Set concrete background color IMMEDIATELY
-		// This runs before any CSS loads, preventing white flash
-		var isDark = allowedTheme === 'dark';
-		var bgColor = isDark ? 'oklch(0.16 0.03 252)' : 'oklch(0.98 0 255)';
-		
-		// Apply to HTML element immediately
-		d.style.backgroundColor = bgColor;
-		d.style.colorScheme = isDark ? 'dark' : 'light';
-		d.setAttribute('data-theme', allowedTheme);
-		
-		// Also set on body if it exists (for extra safety)
-		if(b) {
-			b.style.backgroundColor = 'transparent';
-		}
-
-		// Brand (romantic/modern) - default to romantic for public site
-		var brandParam = params.get('brand');
-		var allowedBrand = brandParam === 'romantic' || brandParam === 'modern' ? brandParam : null;
-		if(!allowedBrand){
-			allowedBrand = localStorage.getItem('rr.brand') || 'romantic';
-		} else {
-			localStorage.setItem('rr.brand', allowedBrand);
-		}
-		d.setAttribute('data-brand', allowedBrand);
-  }catch(e){
-		// Failsafe: set reasonable defaults
-		var d = document.documentElement;
-		d.setAttribute('data-theme', 'light');
-		d.setAttribute('data-brand', 'romantic');
-		d.style.backgroundColor = 'oklch(0.98 0 255)';
-		d.style.colorScheme = 'light';
-  }
-})();
-`}}
+					{/* Runs before main bundle & before hydration */}
+					<Script
+						id="rr-theme-init"
+						strategy="beforeInteractive"
+						dangerouslySetInnerHTML={{ __html: themeInitCode }}
 					/>
 				</head>
 				<body>

@@ -259,7 +259,7 @@ export default function RealWeddingEditor({ blok }: RealWeddingEditorProps) {
         /* Gallery Section - Full Width White Background */
         .hotfix-gallery-fullwidth {
           width: 100%;
-          background: #fff;
+          background: var(--surface-0);
           padding: 5rem 0;
         }
 

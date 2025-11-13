@@ -136,7 +136,7 @@ export default function WeddingGalleryModal({
           }
 
           .modal-container {
-            background: white;
+            background: var(--surface-1);
             border-radius: 16px;
             max-width: 1400px;
             width: 100%;
@@ -180,7 +180,7 @@ export default function WeddingGalleryModal({
           }
 
           .modal-close:hover {
-            background: white;
+            background: var(--surface-1);
             transform: scale(1.1);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
           }
@@ -300,7 +300,7 @@ export default function WeddingGalleryModal({
         }
 
         .modal-container {
-          background: white;
+          background: var(--surface-1);
           border-radius: 16px;
           max-width: 1400px;
           width: 100%;
@@ -344,7 +344,7 @@ export default function WeddingGalleryModal({
         }
 
         .modal-close:hover {
-          background: white;
+          background: var(--surface-1);
           transform: scale(1.1);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
