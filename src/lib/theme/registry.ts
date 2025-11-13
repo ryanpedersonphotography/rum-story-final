@@ -29,6 +29,8 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDef> = {
     label: 'Light',
     apply(root) {
       root.setAttribute('data-theme', 'light')
+      root.style.colorScheme = 'light'
+      root.style.backgroundColor = 'oklch(0.98 0 255)' // Must match --n-98 + script
     }
   },
   dark: {
@@ -36,6 +38,8 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDef> = {
     label: 'Dark',
     apply(root) {
       root.setAttribute('data-theme', 'dark')
+      root.style.colorScheme = 'dark'
+      root.style.backgroundColor = 'oklch(0.20 0.03 255)' // Must match --n-20 + script
     }
   }
 }
