@@ -1,4 +1,8 @@
-/* PRICING - CSS MODULE */
+/* ===========================================================================
+   FILE: src/features/Pricing.module.css
+   LOCATION: /src/features/Pricing.module.css
+   PURPOSE: PRICING - CSS MODULE
+   =========================================================================== */
 
 .pricingSection {
   background: var(--pricing-bg, #FFFFFF);

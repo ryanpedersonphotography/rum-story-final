@@ -95,29 +95,10 @@ export default function ThemeSelect() {
                 color: brand === brandDef.id ? 'var(--text-inverse)' : 'var(--text-primary)',
                 cursor: 'pointer',
                 fontSize: '0.75rem',
-                fontWeight: brand === brandDef.id ? 600 : 400,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.375rem'
+                fontWeight: brand === brandDef.id ? 600 : 400
               }}
             >
-              <span>{brandDef.label}</span>
-              {/* Color swatches */}
-              <span style={{ display: 'flex', gap: '2px' }}>
-                {brandDef.swatches.map((swatch, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      display: 'inline-block',
-                      width: '10px',
-                      height: '10px',
-                      borderRadius: '2px',
-                      background: swatch,
-                      border: '1px solid rgba(0,0,0,0.1)'
-                    }}
-                  />
-                ))}
-              </span>
+              {brandDef.label}
             </button>
           ))}
         </div>

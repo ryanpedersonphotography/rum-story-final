@@ -1,3 +1,9 @@
+/* ===========================================================================
+   FILE: src/components/faq/faq.css
+   LOCATION: /src/components/faq/faq.css
+   PURPOSE: FAQ component styles
+   =========================================================================== */
+
 .faq-container {
   /* Add shell-specific styles */
   max-width: var(--max-content-width);

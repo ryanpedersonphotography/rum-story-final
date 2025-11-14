@@ -1,9 +1,12 @@
-/* src/styles/system/layout.css
-   Load this AFTER all component CSS. Scopes to [data-clean-root="true"].
-   Unifies containers + creates a consistent left rail across sections.
+/* ==========================================================================
+   FILE: src/styles/system/layout.css
+   LOCATION: /src/styles/system/layout.css
+   PURPOSE: Load this AFTER all component CSS. Scopes to [data-clean-root="true"].
+            Unifies containers + creates a consistent left rail across sections.
 
    NOTE: Layout tokens moved to theme.css for unified @layer system.
-   This file now only contains utility overrides. */
+         This file now only contains utility overrides.
+   ========================================================================== */
 
 /* -------------------- UTILITY OVERRIDES -------------------- */
 @layer utilities {

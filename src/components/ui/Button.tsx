@@ -1,3 +1,9 @@
+/**
+ * FILE: src/components/ui/Button.tsx
+ * LOCATION: /src/components/ui/Button.tsx
+ * PURPOSE: Button component with multiple variants and Link support
+ */
+
 import React from 'react';
 import Link from 'next/link';
 import styles from './Button.module.css';

@@ -1,3 +1,9 @@
+/**
+ * FILE: src/app/page.tsx
+ * LOCATION: /src/app/page.tsx
+ * PURPOSE: Main homepage component with all sections
+ */
+
 import GlassToolbar from '@/development/GlassToolbar'
 import Navbar from '@/features/Navbar'
 import Hero from '@/features/Hero'

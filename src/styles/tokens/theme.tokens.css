@@ -1,7 +1,8 @@
 /* ========================================================================== *
-   SHADOW TOKEN LAYER - Section System Foundation
-   
-   PURPOSE: Safe migration path from legacy tokens to clean section system
+   FILE: src/styles/tokens/theme.tokens.css
+   LOCATION: /src/styles/tokens/theme.tokens.css
+   PURPOSE: SHADOW TOKEN LAYER - Section System Foundation
+   Safe migration path from legacy tokens to clean section system
    - Maps legacy tokens to new clean namespace
    - Provides section-specific design tokens
    - Enables gradual migration without breaking changes
@@ -24,8 +25,8 @@
     --section-layer-partial: var(--surface-1);         /* Subtle elevation */
     --section-layer-isolated: var(--surface-2);        /* Clear separation */
     --section-width-prose: min(65ch, 100vw - var(--gutter) * 2);
-    --section-width-content: min(1200px, 100vw - var(--gutter) * 2);
-    --section-width-wide: min(1400px, 100vw - var(--gutter) * 2);
+    --section-width-content: min(1080px, 100vw - var(--gutter) * 2);
+    --section-width-wide: min(1280px, 100vw - var(--gutter) * 2);
     --section-width-full: 100vw;
     --section-align-left: flex-start;
     --section-align-center: center;

@@ -1,4 +1,8 @@
-/* GALLERY - CSS MODULE */
+/* ===========================================================================
+   FILE: src/features/Gallery.module.css
+   LOCATION: /src/features/Gallery.module.css
+   PURPOSE: GALLERY - CSS MODULE
+   =========================================================================== */
 
 .weddingGallery {
   display: grid;

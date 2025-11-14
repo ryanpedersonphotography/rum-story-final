@@ -1,5 +1,6 @@
 /* ========================================================================== *
    FILE: src/styles/tokens/theme.css
+   LOCATION: /src/styles/tokens/theme.css
    PURPOSE: Single source of truth for color/typography/spacing/motion tokens.
             - Layered token architecture
             - Romantic (default) + Modern brand support
@@ -109,10 +110,10 @@
     --section-pad-fluid: clamp(var(--space-48), 6vw, var(--space-96));
     --stack-gap-fluid-lg: clamp(var(--space-24), 3vw, var(--space-40));
     --hero-pad-fluid: clamp(var(--space-56), 8vw, var(--space-96));
-    --page-max:px;
-    --page-wide: 1400px;
-    --gutter: clamp(16px, 4vw, 64px);
-    --prose-max: 68ch;
+    --page-max: 1080px;
+    --page-wide: 1280px;
+    --gutter: clamp(16px, 3vw, 48px);
+    --prose-max: 65ch;
     --rail-offset: calc((100% - var(--page-max)) / 4 + var(--gutter));
     --blur-sm: 6px;
     --blur-md: 10px;
@@ -326,6 +327,9 @@
     --link-hover: color-mix(in oklch, var(--brand) 70%, white 30%);
     --shadow-elev-1: 0 12px 28px oklch(0 0 0 / 0.28);
     --shadow-elev-3: 0 32px 68px oklch(0 0 0 / 0.42);
+    --rose-veil-8: color-mix(in oklch, var(--surface-2) 92%, var(--theme-accent-rose) 8%);
+    --sage-veil-8: color-mix(in oklch, var(--surface-2) 92%, var(--theme-accent-sage) 8%);
+    --gold-veil-6: color-mix(in oklch, var(--surface-3) 94%, var(--theme-accent-gold) 6%);
     --theme-bg-primary:   var(--surface-1);
     --theme-bg-secondary: var(--surface-3);
     --theme-bg-card:      var(--surface-2);

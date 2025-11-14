@@ -1,5 +1,7 @@
 /* ==========================================================================
-   ROOT LAYOUT — Next.js App Router Layout
+   FILE: src/app/layout.js
+   LOCATION: /src/app/layout.js
+   PURPOSE: ROOT LAYOUT — Next.js App Router Layout
    ==========================================================================
    Pre-Paint Theme Initialization:
    - Theme is decided by inline script BEFORE React/CSS loads (prevents flash)
@@ -28,79 +30,82 @@ import { playfairDisplay, montserrat, dancingScript } from './fonts';
 import Navbar from '@/features/Navbar';
 import ThemeSelect from '@/development/ThemeSelect';
 
-const isDev = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV !== 'production'
 
-export const metadata = {
-	title: 'Rum River Barn | Wedding Venue',
-	description: 'Experience your dream wedding at Rum River Barn, a romantic venue in Minnesota',
-};
-
-// Theme initialization script - runs before React/CSS to prevent flash
-const themeInitCode = `
-(function(){
-  try{
+const THEME_INIT_CODE = `
+(function () {
+  try {
     var d = document.documentElement;
     var params = new URLSearchParams(window.location.search);
 
-    // Theme (light/dark) - MUST SET BEFORE FIRST PAINT
+    // THEME: URL param -> localStorage -> system
     var theme = params.get('theme');
-    var allowedTheme = theme === 'dark' || theme === 'light' ? theme : null;
-    
-    if(!allowedTheme){
+    var allowedTheme =
+      theme === 'dark' || theme === 'light' ? theme : null;
+
+    if (!allowedTheme) {
       try {
         allowedTheme = localStorage.getItem('rr.theme');
-      } catch(_) {}
-      
-      if(!allowedTheme){
-        var prefersDark = window.matchMedia && 
+      } catch (_) {}
+
+      if (!allowedTheme) {
+        var prefersDark =
+          window.matchMedia &&
           window.matchMedia('(prefers-color-scheme: dark)').matches;
         allowedTheme = prefersDark ? 'dark' : 'light';
       }
     } else {
       try {
         localStorage.setItem('rr.theme', allowedTheme);
-      } catch(_) {}
+      } catch (_) {}
     }
-    
-    // CRITICAL: Set concrete background color IMMEDIATELY
-    // These must match --surface-0 tokens exactly
+
     var isDark = allowedTheme === 'dark';
-    var bgColor = isDark ? 'oklch(0.20 0.03 255)' : 'oklch(0.98 0 255)';
-    
-    // Apply to HTML element immediately
+    // MUST match tokens + registry
+    var bgColor = isDark
+      ? 'oklch(0.16 0.03 252)'
+      : 'oklch(0.98 0 255)';
+
     d.style.backgroundColor = bgColor;
     d.style.colorScheme = isDark ? 'dark' : 'light';
     d.setAttribute('data-theme', allowedTheme);
-    
-    // DO NOT touch body.style - let CSS handle body background
 
-    // Brand (romantic/modern) - default to romantic for public site
+    // BRAND: URL param -> localStorage -> default romantic
     var brandParam = params.get('brand');
-    var allowedBrand = brandParam === 'romantic' || brandParam === 'modern' ? brandParam : null;
-    
-    if(!allowedBrand){
+    var allowedBrand =
+      brandParam === 'romantic' || brandParam === 'modern'
+        ? brandParam
+        : null;
+
+    if (!allowedBrand) {
       try {
         allowedBrand = localStorage.getItem('rr.brand') || 'romantic';
-      } catch(_) {
+      } catch (_) {
         allowedBrand = 'romantic';
       }
     } else {
       try {
         localStorage.setItem('rr.brand', allowedBrand);
-      } catch(_) {}
+      } catch (_) {}
     }
-    
+
     d.setAttribute('data-brand', allowedBrand);
-  }catch(e){
-    // Failsafe: set reasonable defaults
-    var d = document.documentElement;
-    d.setAttribute('data-theme', 'light');
-    d.setAttribute('data-brand', 'romantic');
-    d.style.backgroundColor = 'oklch(0.98 0 255)';
-    d.style.colorScheme = 'light';
+  } catch (e) {
+    // Failsafe
+    var d2 = document.documentElement;
+    d2.setAttribute('data-theme', 'light');
+    d2.setAttribute('data-brand', 'romantic');
+    d2.style.backgroundColor = 'oklch(0.98 0 255)';
+    d2.style.colorScheme = 'light';
   }
 })();
-`;
+`
+
+export const metadata = {
+  title: 'Rum River Barn | Wedding Venue',
+  description:
+    'Experience your dream wedding at Rum River Barn, a romantic venue in Minnesota',
+}
 
 /*
  * DEV SERVER: http://localhost:6666
@@ -110,32 +115,34 @@ const themeInitCode = `
  */
 
 export default function RootLayout({ children }) {
-	return (
-		<>
-			<html
-				lang="en"
-				className={`${playfairDisplay.variable} ${montserrat.variable} ${dancingScript.variable}`}
-				suppressHydrationWarning
-			>
-				<head>
-					{/* Runs before main bundle & before hydration */}
-					<Script
-						id="rr-theme-init"
-						strategy="beforeInteractive"
-						dangerouslySetInnerHTML={{ __html: themeInitCode }}
-					/>
-				</head>
-				<body>
-					<ThemeProvider>
-						<div data-clean-root="true">
-							<Navbar />
-							{children}
-						</div>
-					{isDev ? <ThemeSelect /> : null}
-					</ThemeProvider>
-					<script src="//instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z" async></script>
-				</body>
-			</html>
-		</>
-	);
+  return (
+    <html
+      lang="en"
+      className={`${playfairDisplay.variable} ${montserrat.variable} ${dancingScript.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <Script
+          id="rr-theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: THEME_INIT_CODE }}
+        />
+      </head>
+      <body>
+        <ThemeProvider>
+          <div data-clean-root="true">
+            <Navbar />
+            {children}
+          </div>
+          {isDev ? <ThemeSelect /> : null}
+        </ThemeProvider>
+        <script
+          src="//instant.page/5.2.0"
+          type="module"
+          integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"
+          async
+        ></script>
+      </body>
+    </html>
+  )
 }

@@ -1,3 +1,9 @@
+/**
+ * FILE: src/components/ui/Heading.tsx
+ * LOCATION: /src/components/ui/Heading.tsx
+ * PURPOSE: Heading primitive component with fluid typography and semantic HTML
+ */
+
 import * as React from 'react'
 import type { Align } from './types'
 

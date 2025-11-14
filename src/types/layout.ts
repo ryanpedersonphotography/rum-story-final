@@ -1,3 +1,9 @@
+/**
+ * FILE: src/types/layout.ts
+ * LOCATION: /src/types/layout.ts
+ * PURPOSE: Layout type definitions for section components
+ */
+
 import { ReactNode, CSSProperties } from 'react'
 
 export type SectionLayer = 'base' | 'partial' | 'isolated'

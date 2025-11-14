@@ -1,5 +1,7 @@
 /* ==========================================================================
-   THEME REGISTRY — Single Source of Truth
+   FILE: src/lib/theme/registry.ts
+   LOCATION: /src/lib/theme/registry.ts
+   PURPOSE: THEME REGISTRY — Single Source of Truth
    ==========================================================================
    Defines all available themes and brand variants.
    Registry only sets attributes (data-theme, data-brand), never token values.
@@ -9,20 +11,18 @@
 export type ThemeId = 'light' | 'dark'
 export type BrandId = 'romantic' | 'modern'
 
-export type ThemeDef = {
+export interface ThemeDef {
   id: ThemeId
   label: string
-  apply: (root: HTMLElement) => void
+  apply(root: HTMLElement): void
 }
 
-export type BrandDef = {
+export interface BrandDef {
   id: BrandId
   label: string
-  swatches: string[]  // CSS color values for preview
-  apply: (root: HTMLElement) => void
+  apply(root: HTMLElement): void
 }
 
-/* Theme Registry */
 export const THEME_REGISTRY: Record<ThemeId, ThemeDef> = {
   light: {
     id: 'light',
@@ -30,8 +30,9 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDef> = {
     apply(root) {
       root.setAttribute('data-theme', 'light')
       root.style.colorScheme = 'light'
-      root.style.backgroundColor = 'oklch(0.98 0 255)' // Must match --n-98 + script
-    }
+      // MUST match --surface-0 for light and script bgColor
+      root.style.backgroundColor = 'oklch(0.98 0 255)'
+    },
   },
   dark: {
     id: 'dark',
@@ -39,38 +40,34 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeDef> = {
     apply(root) {
       root.setAttribute('data-theme', 'dark')
       root.style.colorScheme = 'dark'
-      root.style.backgroundColor = 'oklch(0.20 0.03 255)' // Must match --n-20 + script
-    }
-  }
+      // MUST match --surface-0 for dark and script bgColor
+      root.style.backgroundColor = 'oklch(0.20 0.03 255)'
+    },
+  },
 }
 
-/* Brand Registry */
+export const STORAGE_KEYS = {
+  theme: 'rr.theme',
+  brand: 'rr.brand',
+} as const
+
 export const BRAND_REGISTRY: Record<BrandId, BrandDef> = {
   romantic: {
     id: 'romantic',
     label: 'Romantic',
-    swatches: ['var(--accent-rose)', 'var(--accent-gold)', 'var(--accent-sage)'],
     apply(root) {
       root.setAttribute('data-brand', 'romantic')
-    }
+    },
   },
   modern: {
     id: 'modern',
     label: 'Modern',
-    swatches: ['oklch(0.72 0.10 10)', 'oklch(0.86 0.07 95)', 'oklch(0.80 0.07 190)'],
     apply(root) {
       root.setAttribute('data-brand', 'modern')
-    }
-  }
+    },
+  },
 }
 
-/* Storage Keys for localStorage */
-export const STORAGE_KEYS = {
-  theme: 'rr.theme',
-  brand: 'rr.brand'
-} as const
-
-/* Helper: Detect system color scheme preference */
 export function preferredSystemTheme(): ThemeId {
   if (typeof window === 'undefined') return 'light'
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'

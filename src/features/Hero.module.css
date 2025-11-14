@@ -1,5 +1,7 @@
 /* ==========================================================================
-   CLEAN HERO - CSS MODULE
+   FILE: src/features/Hero.module.css
+   LOCATION: /src/features/Hero.module.css
+   PURPOSE: CLEAN HERO - CSS MODULE
    - All styles are locally scoped to the Hero component.
    - Uses modern, preferred design tokens.
    - Theme-aware (light/dark, romantic/modern).

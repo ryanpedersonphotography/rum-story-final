@@ -1,5 +1,7 @@
 /**
- * Font Configuration using next/font
+ * FILE: src/app/fonts.ts
+ * LOCATION: /src/app/fonts.ts
+ * PURPOSE: Font Configuration using next/font
  *
  * Benefits:
  * - Self-hosted fonts (no external requests)

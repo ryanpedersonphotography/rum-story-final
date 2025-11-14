@@ -120,7 +120,16 @@ ${Object.entries(pageData.criticalStyles).map(([selector, props]) =>
 // Theme Toggle
 document.addEventListener('DOMContentLoaded', function() {
   const root = document.documentElement;
-  const savedTheme = localStorage.getItem('rr.theme') || 'light';
+  
+  // Get theme from cookie (set by edge function)
+  const getCookie = (name) => {
+    const value = \`;\${document.cookie}\`;
+    const parts = value.split(\`;\${name}=\`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return 'light';
+  };
+  
+  const savedTheme = getCookie('rr.theme') || 'light';
   root.setAttribute('data-theme', savedTheme);
   
   // Mobile Menu

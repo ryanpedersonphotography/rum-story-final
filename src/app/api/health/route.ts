@@ -1,4 +1,8 @@
-// src/app/api/health/route.ts
+/**
+ * FILE: src/app/api/health/route.ts
+ * LOCATION: /src/app/api/health/route.ts
+ * PURPOSE: Health check API endpoint for monitoring
+ */
 import { NextResponse } from 'next/server'
 
 export async function GET() {

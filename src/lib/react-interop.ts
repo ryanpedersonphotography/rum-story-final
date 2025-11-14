@@ -1,3 +1,9 @@
+/**
+ * FILE: src/lib/react-interop.ts
+ * LOCATION: /src/lib/react-interop.ts
+ * PURPOSE: React interoperability utilities for refs, handlers, and classNames
+ */
+
 import * as React from 'react'
 
 export function composeRefs<T>(...refs: Array<React.Ref<T> | undefined>) {

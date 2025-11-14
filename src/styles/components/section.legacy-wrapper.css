@@ -1,6 +1,12 @@
+/* ===========================================================================
+   FILE: src/styles/components/section.legacy-wrapper.css
+   LOCATION: /src/styles/components/section.legacy-wrapper.css
+   PURPOSE: Legacy wrapper component for backwards compatibility
+   =========================================================================== */
+
 @layer components {
   [data-clean-root] .content-wrapper[data-legacy-wrapper="true"] {
-    max-width: 1200px;
+    max-width: var(--section-width-content);
     margin: 0 auto;
     padding: 0 clamp(50px, 5vw, 80px);
   }

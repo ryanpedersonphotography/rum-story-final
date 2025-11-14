@@ -1,6 +1,7 @@
 /* ============================================================================
- Navbar Component
- Purpose: Clean Navbar - Token-driven
+ FILE: src/styles/components/navbar.css
+ LOCATION: /src/styles/components/navbar.css
+ PURPOSE: Clean Navbar Component - Token-driven
 ============================================================================ */
 
    @layer components {
@@ -34,7 +35,7 @@
   
     /* Container */
     [data-clean-root="true"] .navbar__container {
-      max-width: 1400px;
+      max-width: var(--section-width-wide);
       margin: 0 auto;
       padding: 0 var(--space-32);
       display: flex;

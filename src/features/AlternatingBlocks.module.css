@@ -1,4 +1,8 @@
-/* ALTERNATING BLOCKS - CSS MODULE */
+/* ===========================================================================
+   FILE: src/features/AlternatingBlocks.module.css
+   LOCATION: /src/features/AlternatingBlocks.module.css
+   PURPOSE: ALTERNATING BLOCKS - CSS MODULE
+   =========================================================================== */
 
 .container {
   margin: clamp(2rem, 4vw, 3rem) auto 0;

@@ -1,3 +1,9 @@
+/**
+ * FILE: src/components/ThemeToggle.tsx
+ * LOCATION: /src/components/ThemeToggle.tsx
+ * PURPOSE: Theme toggle component with light/dark/system modes
+ */
+
 'use client'
 
 import { useEffect, useState } from 'react'

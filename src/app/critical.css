@@ -1,5 +1,9 @@
-/* Critical CSS - Inlined to prevent flash */
-/* This gets injected into <head> before other styles */
+/* ===========================================================================
+   FILE: src/app/critical.css
+   LOCATION: /src/app/critical.css
+   PURPOSE: Critical CSS - Inlined to prevent flash
+   This gets injected into <head> before other styles
+   =========================================================================== */
 
 :root {
   /* Prevent flash by setting initial theme colors */

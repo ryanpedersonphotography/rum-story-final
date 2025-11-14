@@ -1,5 +1,10 @@
+/**
+ * FILE: src/components/ui/SectionShell.tsx
+ * LOCATION: /src/components/ui/SectionShell.tsx
+ * PURPOSE: Section shell component without Radix dependencies
+ */
+
 import * as React from 'react'
-import { Slot } from '@radix-ui/react-slot'
 import Typography from './Typography'
 import Text from './Text'
 
@@ -20,33 +25,45 @@ export type Background =
   | 'surface'
   | 'tint-rose'
   | 'tint-sage'
+  | 'deep'
+  | 'soft'
   | { kind: 'gradient'; token?: string }
-  | { kind: 'image'; src: string; attachment?: 'fixed' | 'scroll'; fit?: 'cover' | 'contain'; position?: string; overlay?: 'none' | 'soft' | 'strong' }
+  | {
+      kind: 'image'
+      src: string
+      attachment?: 'fixed' | 'scroll'
+      fit?: 'cover' | 'contain'
+      position?: string
+      overlay?: 'none' | 'soft' | 'strong'
+    }
 
 export type Divider = 'none' | 'hairline' | 'thread-gold'
 export type Height = 'auto' | 'screen'
 
-// --- Spacing Preset System (from SectionWrapper) ---
-export type SpacingPreset = 
+// --- Spacing Preset System ---
+export type SpacingPreset =
   | 'hero-start'
   | 'content-flow'
   | 'feature-highlight'
   | 'compact-stack'
   | 'footer-approach'
-  | 'none';
+  | 'none'
 
-const spacingPresets = {
-  'hero-start': { marginTop: 'xl' as MarginY, paddingY: 'lg' as PaddingY },
-  'content-flow': { marginTop: 'lg' as MarginY, paddingY: 'lg' as PaddingY },
-  'feature-highlight': { marginTop: 'xl' as MarginY, paddingY: 'xl' as PaddingY },
-  'compact-stack': { marginTop: 'sm' as MarginY, paddingY: 'md' as PaddingY },
-  'footer-approach': { marginTop: 'lg' as MarginY, marginBottom: 'xl' as MarginY, paddingY: 'lg' as PaddingY },
-  'none': { marginTop: 'none' as MarginY, paddingY: 'none' as PaddingY }
-};
+const spacingPresets: Record<
+  SpacingPreset,
+  { marginTop?: MarginY; marginBottom?: MarginY; paddingY?: PaddingY }
+> = {
+  'hero-start': { marginTop: 'xl', paddingY: 'lg' },
+  'content-flow': { marginTop: 'lg', paddingY: 'lg' },
+  'feature-highlight': { marginTop: 'xl', paddingY: 'xl' },
+  'compact-stack': { marginTop: 'sm', paddingY: 'md' },
+  'footer-approach': { marginTop: 'lg', marginBottom: 'xl', paddingY: 'lg' },
+  none: { marginTop: 'none', paddingY: 'none' },
+}
 
 // --- Component Props Interface ---
 export interface SectionShellProps extends React.HTMLAttributes<HTMLElement> {
-  asChild?: boolean
+  // NOTE: asChild removed – just use `as` for semantics
   as?: keyof JSX.IntrinsicElements
   id?: string
   role?: 'region' | 'complementary' | 'navigation' | 'main' | 'contentinfo' | 'none'
@@ -73,11 +90,11 @@ export interface SectionShellProps extends React.HTMLAttributes<HTMLElement> {
 
   // --- Content Orchestration ---
   header?: {
-    scriptAccent?: string;
-    title?: string;
-    lead?: string;
-    align?: 'left' | 'center' | 'right';
-  };
+    scriptAccent?: string
+    title?: string
+    lead?: string
+    align?: 'left' | 'center' | 'right'
+  }
 
   // --- Advanced ---
   containerName?: string
@@ -87,7 +104,6 @@ export interface SectionShellProps extends React.HTMLAttributes<HTMLElement> {
 export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
   (
     {
-      asChild,
       as: Tag = 'section',
       align = 'center',
       container = 'content',
@@ -113,16 +129,26 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
     },
     ref
   ) => {
-    const Comp: any = asChild ? Slot : Tag
-
     // --- Resolve Spacing ---
-    const resolvedSpacing = spacingPresets[spacing] || spacingPresets.none;
-    const finalPaddingY = paddingY || resolvedSpacing.paddingY || 'none';
-    const finalMarginTop = marginTop || resolvedSpacing.marginTop || 'none';
-    const finalMarginBottom = marginBottom || resolvedSpacing.marginBottom || 'none';
+    const resolvedSpacing = spacingPresets[spacing] || spacingPresets.none
+    const finalPaddingY = paddingY ?? resolvedSpacing.paddingY ?? 'none'
+    const finalMarginTop = marginTop ?? resolvedSpacing.marginTop ?? 'none'
+    const finalMarginBottom = marginBottom ?? resolvedSpacing.marginBottom ?? 'none'
 
-    // --- Normalize Background ---
+    // --- Dev-only warning for spacing preset overrides ---
+    if (process.env.NODE_ENV === 'development' && spacing !== 'none') {
+      const hasOverrides = paddingY || marginTop || marginBottom
+      if (hasOverrides) {
+        console.warn(
+          `SectionShell: Using spacing preset "${spacing}" with manual overrides. ` +
+          `Consider updating the preset or using spacing="none" for full manual control.`
+        )
+      }
+    }
+
+    // --- Background mapping ---
     const bgKind = typeof background === 'string' ? background : background.kind
+    const bgDataAttribute = typeof background === 'string' ? background : undefined
 
     // --- Dynamic Styles ---
     const sectionStyle: React.CSSProperties = {
@@ -142,6 +168,8 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
     const baseClass = 'section section-shell'
     const composedClassName = className ? `${baseClass} ${className}` : baseClass
 
+    const Comp = Tag as any
+
     return (
       <Comp
         ref={ref}
@@ -156,7 +184,7 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
         data-height={height}
         data-bleed={bleed ? 'true' : undefined}
         data-tone={tone}
-        data-bg={typeof background === 'string' ? background : undefined}
+        data-bg={bgDataAttribute}
         data-bg-kind={bgKind}
         data-divider={divider}
         data-radius={radius}
@@ -166,7 +194,6 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
         style={sectionStyle}
         {...rest}
       >
-        {/* Optional overlay for bg images/gradients */}
         {typeof background === 'object' &&
           background.kind === 'image' &&
           background.overlay &&
@@ -182,27 +209,19 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
           {header && (
             <header className="section-header" data-align={header.align || 'center'}>
               {header.scriptAccent && (
-                <Typography 
-                  variant="script" 
-                  color="accent" 
-                  align={header.align || 'center'}
-                >
+                <Typography variant="script" color="accent" align={header.align || 'center'}>
                   {header.scriptAccent}
                 </Typography>
               )}
               {header.title && (
-                <Typography 
-                  as="h2" 
-                  variant="h1" 
-                  align={header.align || 'center'}
-                >
+                <Typography as="h2" variant="h1" align={header.align || 'center'}>
                   {header.title}
                 </Typography>
               )}
               {header.lead && (
-                <Text 
-                  size="lg" 
-                  maxWidth="prose" 
+                <Text
+                  size="lg"
+                  maxWidth="prose"
                   align={header.align || 'center'}
                   color="secondary"
                 >
@@ -211,17 +230,11 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
               )}
             </header>
           )}
-          <div className="section-content">
-            {children}
-          </div>
+          <div className="section-content">{children}</div>
         </div>
 
         {divider !== 'none' && (
-          <div
-            className="section-shell__divider"
-            data-divider={divider}
-            aria-hidden="true"
-          />
+          <div className="section-shell__divider" data-divider={divider} aria-hidden="true" />
         )}
       </Comp>
     )
@@ -229,5 +242,65 @@ export const SectionShell = React.forwardRef<HTMLElement, SectionShellProps>(
 )
 
 SectionShell.displayName = 'SectionShell'
+
+// --- Composition Components (for future flexibility) ---
+
+/**
+ * Section content wrapper - just the inner content container
+ * Useful when you need custom header/layout but want consistent content spacing
+ */
+export function SectionBody({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={className ? `section-content ${className}` : 'section-content'}>
+      {children}
+    </div>
+  )
+}
+
+/**
+ * Section header component - the scriptAccent/title/lead orchestration
+ * Useful when you need the header logic outside of SectionShell
+ */
+export function SectionHeader({ 
+  scriptAccent, 
+  title, 
+  lead, 
+  align = 'center',
+  className 
+}: {
+  scriptAccent?: string
+  title?: string
+  lead?: string
+  align?: 'left' | 'center' | 'right'
+  className?: string
+}) {
+  return (
+    <header className={className ? `section-header ${className}` : 'section-header'} data-align={align}>
+      {scriptAccent && (
+        <Typography variant="script" color="accent" align={align}>
+          {scriptAccent}
+        </Typography>
+      )}
+      {title && (
+        <Typography as="h2" variant="h1" align={align}>
+          {title}
+        </Typography>
+      )}
+      {lead && (
+        <Text
+          size="lg"
+          maxWidth="prose"
+          align={align}
+          color="secondary"
+        >
+          {lead}
+        </Text>
+      )}
+    </header>
+  )
+}
+
+SectionBody.displayName = 'SectionBody'
+SectionHeader.displayName = 'SectionHeader'
 
 export default SectionShell

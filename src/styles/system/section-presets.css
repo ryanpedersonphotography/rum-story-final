@@ -1,15 +1,85 @@
 /* ==========================================================================
-   SECTION PRESETS & UTILITIES (scoped to /clean via [data-clean-root="true"])
+   FILE: src/styles/system/section-presets.css
+   LOCATION: /src/styles/system/section-presets.css
+   PURPOSE: SECTION PRESETS & UTILITIES (scoped to /clean via [data-clean-root="true"])
    - Section background utilities for smooth tonal progression
    - Glassmorphism card utility (.card-dark)
    - Section edge gradient utility
    - Uses @layer utilities for predictable specificity
    ========================================================================== */
 
+@layer components {
+  .section.section-shell {
+    background-color: var(--surface-0);
+  }
+
+  .section.section-shell[data-bg="surface"] {
+    background-color: var(--surface-0);
+  }
+
+  .section.section-shell[data-bg="tint-sage"] {
+    /* 8% sage tint over surface-0 */
+    background:
+      linear-gradient(
+        to bottom,
+        color-mix(in oklch, var(--surface-0) 92%, oklch(0.80 0.06 150) 8%),
+        var(--surface-0)
+      );
+  }
+
+  .section.section-shell[data-bg="tint-rose"] {
+    background:
+      linear-gradient(
+        to bottom,
+        color-mix(in oklch, var(--surface-0) 92%, oklch(0.78 0.10 20) 8%),
+        var(--surface-0)
+      );
+  }
+
+  .section.section-shell[data-bg="deep"] {
+    background: 
+      linear-gradient(
+        to bottom,
+        var(--surface-1),
+        var(--surface-0)
+      );
+  }
+
+  .section.section-shell[data-bg="soft"] {
+    background: 
+      linear-gradient(
+        to bottom,
+        var(--surface-2),
+        var(--surface-1)
+      );
+  }
+}
+
 @layer utilities {
   /* ===== Section Background Presets ===== */
 
-  /* Deep gradient (surface-1 → surface-0) - for dramatic contrast */
+  /* Data attribute based backgrounds (new approach) */
+  html[data-theme="dark"] [data-clean-root="true"] [data-bg="deep"] {
+    background: var(--grad-section-deep);
+  }
+
+  html[data-theme="dark"] [data-clean-root="true"] [data-bg="soft"] {
+    background: var(--grad-section-soft);
+  }
+
+  html[data-theme="dark"] [data-clean-root="true"] [data-bg="tint-rose"] {
+    background: var(--rose-veil-8);
+  }
+
+  html[data-theme="dark"] [data-clean-root="true"] [data-bg="tint-sage"] {
+    background: var(--sage-veil-8);
+  }
+
+  html[data-theme="dark"] [data-clean-root="true"] [data-bg="surface"] {
+    background: var(--surface-0);
+  }
+
+  /* Legacy class-based backgrounds (deprecated but maintained for compatibility) */
   html[data-theme="dark"] [data-clean-root="true"] .section--deep {
     background: var(--grad-section-deep);
   }

@@ -1,5 +1,7 @@
 /* ===========================================================================
-   SPACING TOKENS & DENSITY PRESETS
+   FILE: src/styles/tokens/spacing.css
+   LOCATION: /src/styles/tokens/spacing.css
+   PURPOSE: SPACING TOKENS & DENSITY PRESETS
    - Core static scale + fluid scale
    - Semantic aliases (gap/pad)
    - Density switching via data attributes

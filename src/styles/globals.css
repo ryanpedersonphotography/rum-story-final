@@ -1,5 +1,6 @@
 /* ========================================================================== *
    FILE: src/styles/globals.css
+   LOCATION: /src/styles/globals.css
    PURPOSE: Clean global reset + base, no visual mutation of components.
             Loads AFTER theme tokens in your layout.
 
@@ -31,7 +32,7 @@ html {
 
 /* Dark theme fallback background - matches --surface-0 exactly */
 html[data-theme="dark"] {
-  background-color: oklch(0.20 0.03 255); /* Dark theme: var(--n-20) */
+  background-color: oklch(0.16 0.03 252); /* Dark theme: var(--n-16) */
 }
 
 body {

@@ -1,5 +1,7 @@
 /* ==========================================================================
-   THEME PROVIDER — React Context for Theme Management
+   FILE: src/components/ui/ThemeProvider.tsx
+   LOCATION: /src/components/ui/ThemeProvider.tsx
+   PURPOSE: THEME PROVIDER — React Context for Theme Management
    ==========================================================================
    DOM-Driven Theme Synchronization:
    - The pre-paint script in layout.tsx sets data-theme/data-brand before React loads

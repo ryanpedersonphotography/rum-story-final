@@ -1,8 +1,20 @@
 // netlify/edge-functions/theme.ts
 import type { Context } from "https://edge.netlify.com";
 
-const THEME_COOKIE = "theme";
-const BRAND_COOKIE = "brand";
+const THEME_COOKIES = ['rr.theme', 'theme'] as const
+const BRAND_COOKIES = ['rr.brand', 'brand'] as const
+
+function readCookieValue(source: string, keys: readonly string[], fallback: string) {
+  const parts = source.split(';').map((s) => s.trim())
+  for (const key of keys) {
+    const match = parts.find((entry) => entry.startsWith(`${key}=`))
+    if (match) {
+      const value = match.split('=')[1]
+      if (value) return value
+    }
+  }
+  return fallback
+}
 
 export default async (req: Request, ctx: Context) => {
   const url = new URL(req.url);
@@ -14,17 +26,8 @@ export default async (req: Request, ctx: Context) => {
   
   // Get cookies
   const cookies = req.headers.get("cookie") || "";
-  const theme = cookies
-    .split(";")
-    .map(s => s.trim())
-    .find(c => c.startsWith(`${THEME_COOKIE}=`))
-    ?.split("=")[1] || "system";
-    
-  const brand = cookies
-    .split(";")
-    .map(s => s.trim())
-    .find(c => c.startsWith(`${BRAND_COOKIE}=`))
-    ?.split("=")[1] || "romantic";
+  const theme = readCookieValue(cookies, THEME_COOKIES, "light");
+  const brand = readCookieValue(cookies, BRAND_COOKIES, "romantic");
 
   const res = await ctx.next(); // render page
   
@@ -37,12 +40,8 @@ export default async (req: Request, ctx: Context) => {
   // Inject data-theme and data-brand on <html> to prevent FOUC
   const html = await res.text();
   
-  // Determine actual theme if system
-  let actualTheme = theme;
-  if (theme === "system") {
-    // Default to light for SSR, client will adjust based on media query
-    actualTheme = "light";
-  }
+  // Determine actual theme (no system preference handling for simplicity)
+  const actualTheme = theme;
   
   const patched = html.replace(
     /<html([^>]*)>/i,

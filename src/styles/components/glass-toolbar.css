@@ -1,3 +1,9 @@
+/* ===========================================================================
+   FILE: src/styles/components/glass-toolbar.css
+   LOCATION: /src/styles/components/glass-toolbar.css
+   PURPOSE: Glass Toolbar Component - Premium walnut & gold theme
+   =========================================================================== */
+
 :root {
   /* Premium walnut & gold theme colors */
   --walnut-dark: #191410;
@@ -686,4 +692,28 @@ html[data-theme="light"] .glass-toolbar {
     margin-left: 0;
     padding-left: 0;
   }
+}
+
+/* Theme toggle button */
+.glass-toolbar__theme-toggle {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: var(--glass-toolbar-text, hsl(0 0% 100% / 0.8));
+}
+
+.glass-toolbar__theme-toggle:hover {
+  background: var(--glass-toolbar-hover, hsl(0 0% 100% / 0.1));
+  color: var(--glass-toolbar-text, hsl(0 0% 100%));
+}
+
+.glass-toolbar__theme-icon {
+  width: 1.25rem;
+  height: 1.25rem;
 }

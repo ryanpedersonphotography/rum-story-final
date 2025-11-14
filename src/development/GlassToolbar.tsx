@@ -137,6 +137,37 @@ const PANEL_VARIANTS_REDUCED: Variants = {
   },
 }
 
+const THEME_COOKIE_KEYS = ['rr.theme', 'theme'] as const
+const THEME_BACKGROUNDS = {
+  light: 'oklch(0.98 0 255)',
+  dark: 'oklch(0.16 0.03 252)',
+} as const
+
+function readThemeFromCookies() {
+  if (typeof document === 'undefined') return 'light'
+  const entries = document.cookie.split('; ').filter(Boolean)
+  for (const key of THEME_COOKIE_KEYS) {
+    const raw = entries.find((row) => row.startsWith(`${key}=`))?.split('=')[1]
+    if (raw === 'dark' || raw === 'light') return raw
+  }
+  return 'light'
+}
+
+function resolveInitialTheme(): 'light' | 'dark' {
+  if (typeof document === 'undefined') return 'light'
+  const attr = document.documentElement.getAttribute('data-theme')
+  if (attr === 'light' || attr === 'dark') return attr
+  return readThemeFromCookies()
+}
+
+function applyThemeToDocument(theme: 'light' | 'dark') {
+  if (typeof document === 'undefined') return
+  const root = document.documentElement
+  root.setAttribute('data-theme', theme)
+  root.style.colorScheme = theme === 'dark' ? 'dark' : 'light'
+  root.style.backgroundColor = THEME_BACKGROUNDS[theme]
+}
+
 const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(function GlassToolbar(
   {
     sections = DEFAULT_SECTIONS,
@@ -161,6 +192,24 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
   const transientHoverTimeout = React.useRef<number | null>(null)
   const panelId = React.useId()
   const prefersReducedMotion = useReducedMotion()
+
+  // Theme toggle state and logic
+  const [currentTheme, setCurrentTheme] = React.useState<'light' | 'dark'>(() => resolveInitialTheme())
+
+  React.useEffect(() => {
+    applyThemeToDocument(currentTheme)
+  }, [currentTheme])
+
+  const toggleTheme = React.useCallback(() => {
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+    setCurrentTheme(newTheme)
+
+    const expires = new Date()
+    expires.setFullYear(expires.getFullYear() + 1)
+    const cookieFragment = `=${newTheme}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`
+    document.cookie = `rr.theme${cookieFragment}`
+    document.cookie = `theme${cookieFragment}`
+  }, [currentTheme])
 
   const activeSection = React.useMemo(
     () => sections.find((section) => section.id === internalActive) ?? sections[0],
@@ -214,6 +263,17 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
     }, 900)
   }, [allowPersistentHover])
 
+  const expanded = manualPinned || autoExpand
+
+  React.useEffect(() => {
+    const root = document.documentElement
+    const styles = getComputedStyle(root)
+    const railWidth = styles.getPropertyValue('--glass-toolbar-rail-width').trim() || '78px'
+    const panelWidth = styles.getPropertyValue('--glass-toolbar-panel-width').trim() || '320px'
+    const expandedWidth = `calc(${railWidth} + ${panelWidth})`
+    root.style.setProperty('--glass-toolbar-offset', expanded ? expandedWidth : railWidth)
+  }, [expanded])
+
   React.useEffect(() => {
     if (allowPersistentHover) {
       setTransientHover(false)
@@ -229,8 +289,6 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
       }
     }
   }, [allowPersistentHover])
-
-  const expanded = manualPinned || autoExpand
 
   React.useEffect(() => {
     const root = document.documentElement
@@ -424,7 +482,23 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
         </nav>
 
         <div className="glass-toolbar__rail-footer">
-          <div className="theme-toggle-placeholder theme-toggle-placeholder--toolbar glass-toolbar__theme-toggle" />
+          <button
+            type="button"
+            className="glass-toolbar__theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} theme`}
+            title={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} theme`}
+          >
+            {currentTheme === 'light' ? (
+              <svg className="glass-toolbar__theme-icon" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+              </svg>
+            ) : (
+              <svg className="glass-toolbar__theme-icon" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+              </svg>
+            )}
+          </button>
           <button
             type="button"
             className="glass-toolbar__toggle"

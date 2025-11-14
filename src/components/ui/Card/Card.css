@@ -1,3 +1,9 @@
+/* ===========================================================================
+   FILE: src/components/ui/Card/Card.css
+   LOCATION: /src/components/ui/Card/Card.css
+   PURPOSE: Card component styles
+   =========================================================================== */
+
 /* Root defaults (token fallbacks for safety) */
 .card {
   --card-bg: var(--surface-2, oklch(1 0 0 / 0.02));

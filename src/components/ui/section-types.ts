@@ -1,3 +1,9 @@
+/**
+ * FILE: src/components/ui/section-types.ts
+ * LOCATION: /src/components/ui/section-types.ts
+ * PURPOSE: Section component type definitions and layout presets
+ */
+
 import * as React from 'react'
 
 export type Align = 'left' | 'center' | 'right'
