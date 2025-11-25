@@ -1,0 +1,53 @@
+/* ==========================================================================
+   PRIMITIVES (INDEX)
+   Controls the cascade order of primitive modules.
+   
+   Order matters:
+   1. Layout (shell & sections)
+   2. Composition (flow helpers)
+   3. Surface (card physics)
+   4. Media (image physics)
+   5. Typography (text primitives)
+   6. Controls (interactive elements)
+   ========================================================================== */
+
+/* =========================================================================
+   1. Layout shell & sections
+   ========================================================================= */
+@import "./layout/layout.MainCanvas.css";
+@import "./layout/layout.Section.css";
+@import "./layout/layout.EdgeSplit.css";
+@import "./layout/layout.Overlap.css";
+@import "./layout/layout.Positioner.css";
+
+/* =========================================================================
+   2. Composition helpers
+   ========================================================================= */
+@import "./composition/composition.Stack.css";
+@import "./composition/composition.Cluster.css";
+@import "./composition/composition.Center.css";
+@import "./composition/composition.Divider.css";
+
+/* =========================================================================
+   3. Surfaces
+   ========================================================================= */
+@import "./surface/surface.Frame.css";
+@import "./surface/surface.GlassCard.css";
+
+/* =========================================================================
+   4. Media
+   ========================================================================= */
+@import "./media/media.MediaBlock.css";
+
+/* =========================================================================
+   5. Typography
+   ========================================================================= */
+@import "./typography/typography.Display.css";
+@import "./typography/typography.Kicker.css";
+@import "./typography/typography.Body.css";
+@import "./typography/typography.ScriptAccent.css";
+
+/* =========================================================================
+   6. Controls
+   ========================================================================= */
+@import "./controls/controls.CTAButton.css";

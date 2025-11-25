@@ -1,0 +1,14 @@
+/* ==========================================================================
+   DESIGN TOKENS: MAIN ENTRY POINT
+   Single source of truth for all design tokens.
+   Import this file once in your app (globals.css or layout).
+   ========================================================================== */
+
+/* Core: Brand primitives + spacing + typography + layout (theme-agnostic) */
+@import "./tokens/core.css";
+
+/* Theme: Light mode semantic tokens (default) */
+@import "./tokens/theme-light.css";
+
+/* Theme: Dark mode semantic tokens */
+@import "./tokens/theme-dark.css";

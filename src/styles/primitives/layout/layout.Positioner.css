@@ -1,0 +1,45 @@
+/* ==========================================================================
+   LAYOUT PRIMITIVE: POSITIONER
+   Handles absolute positioning for hero overlays and floating elements.
+   ========================================================================== */
+
+.Positioner {
+  position: relative;
+}
+
+/* Absolute Overlay Mode */
+.Positioner[data-position="overlay"] {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+/* Alignment Variants (Flex-based) */
+.Positioner[data-align="center"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Positioner[data-align="top-right"] {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;     /* Pushes content to right */
+  justify-content: flex-start; /* Pushes content to top */
+  
+  /* "Sky" spacing */
+  padding-top: 15vh;
+  padding-right: 8vw;
+}
+
+.Positioner[data-align="bottom-left"] {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-bottom: var(--space-7);
+  padding-left: var(--space-7);
+}

@@ -13,6 +13,7 @@ const nextConfig = {
 			{ protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
 			{ protocol: 'https', hostname: 's3.amazonaws.com', pathname: '/**' },
 			{ protocol: 'https', hostname: 'images.ctfassets.net', pathname: '/**' },
+			{ protocol: 'https', hostname: 'picsum.photos', pathname: '/**' },
 		],
 	},
 	// Disable caching for Visual Editor routes

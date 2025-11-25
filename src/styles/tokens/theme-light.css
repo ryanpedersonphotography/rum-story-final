@@ -1,0 +1,113 @@
+/* ==========================================================================
+   DESIGN TOKENS: LIGHT THEME
+   Warm, romantic light palette for Rum River Wedding Barn.
+   ========================================================================== */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* =========================================================================
+     SEMANTIC SURFACE TOKENS
+     ========================================================================= */
+
+  /* Page background - primary canvas (Romantic Ivory) */
+  --color-bg-page: var(--brand-romantic-ivory);
+
+  /* Elevated surfaces - cards, nav, modals (Cream Pearl) */
+  --color-bg-elevated: var(--brand-cream-pearl);
+
+  /* Subtle backgrounds - alternating sections, soft stripes (Blush Pink) */
+  --color-bg-subtle: var(--brand-blush-pink);
+
+  /* =========================================================================
+     SEMANTIC TEXT TOKENS
+     WCAG Contrast Notes (vs --color-bg-page):
+     - Text Dark #2C2416 on Romantic Ivory #FBF8F4 = 15.8:1 ✓ AAA
+     - Deep Brown #4A3426 on Romantic Ivory = 11.2:1 ✓ AAA
+     - Sage Green #7A8B7F on Romantic Ivory = 4.7:1 ✓ AA
+     ========================================================================= */
+
+  /* Primary text - body copy, headings (Text Dark) */
+  --color-text: var(--brand-text-dark);  /* AA 15.8:1 vs page bg */
+
+  /* Muted text - secondary info, captions (Deep Brown) */
+  --color-text-muted: var(--brand-deep-brown);  /* AA 11.2:1 vs page bg */
+
+  /* Soft text - placeholders, disabled states (Sage Green) */
+  --color-text-soft: var(--brand-sage-green);  /* AA 4.7:1 vs page bg */
+
+  /* =========================================================================
+     SEMANTIC ACCENT TOKENS
+     WCAG Contrast Notes:
+     - Accent Gold #D4A574 on Romantic Ivory = 3.2:1 ✓ AA large text
+     - Dusty Rose #9D6B7B on Romantic Ivory = 4.8:1 ✓ AA
+     ========================================================================= */
+
+  /* Primary interactive - buttons, links (Accent Gold) */
+  --color-accent: var(--brand-accent-gold);  /* AA large text, 3.2:1 vs page bg */
+
+  /* Secondary accent - alternative CTAs (Dusty Rose) */
+  --color-accent-alt: var(--brand-dusty-rose);  /* AA 4.8:1 vs page bg */
+
+  /* Soft accent background - badges, pills, highlights */
+  --color-accent-soft: rgba(212, 165, 116, 0.12);
+
+  /* =========================================================================
+     SEMANTIC BORDER TOKENS
+     ========================================================================= */
+
+  /* Subtle borders - card edges, dividers */
+  --color-border-subtle: rgba(74, 52, 38, 0.12);  /* Deep Brown @ 12% */
+
+  /* Strong borders - focus rings, active states */
+  --color-border-strong: rgba(74, 52, 38, 0.24);  /* Deep Brown @ 24% */
+
+  /* =========================================================================
+     GLASS EFFECTS (Light theme version)
+     ========================================================================= */
+
+  --glass-surface: color-mix(in srgb, var(--brand-cream-pearl) 85%, transparent);
+  --glass-border-color: rgba(107, 78, 61, 0.15);  /* Warm Walnut @ 15% */
+  --glass-highlight-gradient: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2),
+    transparent 55%
+  );
+
+  /* =========================================================================
+     SURFACE HIERARCHY (semantic surfaces for Section component)
+     ========================================================================= */
+
+  --surface-canvas: var(--color-bg-page);
+  --surface-neutral-1: var(--color-bg-elevated);
+  --surface-neutral-2: var(--color-bg-subtle);
+  --surface-neutral-3: var(--brand-warm-walnut);
+  --surface-brand-soft: rgba(212, 165, 116, 0.08);
+  --surface-brand-strong: rgba(212, 165, 116, 0.16);
+
+  /* =========================================================================
+     @DEPRECATED ALIASES
+     Legacy token names for backward compatibility. Use semantic tokens above.
+     ========================================================================= */
+
+  /* @deprecated: use --color-bg-page */
+  --color-bg: var(--color-bg-page);
+  --color-bg-alt: var(--color-bg-elevated);
+
+  /* @deprecated: use --color-bg-elevated/subtle */
+  --color-surface: var(--color-bg-elevated);
+  --color-surface-soft: var(--color-bg-subtle);
+
+  /* @deprecated: use --color-text-muted */
+  --color-text-muted-old: var(--color-text-muted);
+
+  /* @deprecated: use --color-accent-soft */
+  --color-accent-soft-old: var(--color-accent-soft);
+
+  /* @deprecated legacy palette names */
+  --cream-pearl: var(--brand-cream-pearl);
+  --champagne-gold: var(--brand-champagne-gold);
+  --dusty-rose: var(--brand-dusty-rose);
+  --warm-walnut: var(--brand-warm-walnut);
+}

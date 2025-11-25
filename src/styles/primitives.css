@@ -1,0 +1,22 @@
+/* ==========================================================================
+   PRIMITIVES
+   Redirect to modular primitives index.
+   
+   This file maintains backward compatibility while the system uses
+   the new modular structure in ./primitives/
+   ========================================================================== */
+
+/* Base HTML styling */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+/* Import all modular primitives */
+@import "./primitives/index.css";

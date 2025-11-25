@@ -1,0 +1,62 @@
+/* ==========================================================================
+   COMPOSITION: Stack
+   Vertical flow with consistent spacing between children.
+   ========================================================================== */
+
+.Stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* =========================================================================
+   GAP VARIANTS
+   ========================================================================= */
+
+.Stack[data-gap="none"] {
+  gap: 0;
+}
+
+.Stack[data-gap="xs"] {
+  gap: var(--space-1);
+}
+
+.Stack[data-gap="sm"] {
+  gap: var(--space-3);
+}
+
+.Stack[data-gap="md"] {
+  gap: var(--space-4);
+}
+
+.Stack[data-gap="lg"] {
+  gap: var(--space-5);
+}
+
+.Stack[data-gap="xl"] {
+  gap: var(--space-7);
+}
+
+.Stack[data-gap="2xl"] {
+  gap: var(--space-9);
+}
+
+/* =========================================================================
+   ALIGNMENT VARIANTS
+   ========================================================================= */
+
+.Stack[data-align="start"] {
+  align-items: flex-start;
+}
+
+.Stack[data-align="center"] {
+  align-items: center;
+}
+
+.Stack[data-align="end"] {
+  align-items: flex-end;
+}
+
+.Stack[data-align="stretch"] {
+  align-items: stretch;
+}

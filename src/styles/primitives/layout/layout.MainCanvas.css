@@ -1,0 +1,24 @@
+/* ==========================================================================
+   LAYOUT: MainCanvas
+   Main content area that lives to the right of the fixed toolbar.
+   ========================================================================== */
+
+.MainCanvas {
+  min-height: 100vh;
+  margin-left: var(--toolbar-width);
+  overflow-x: hidden;
+  background: var(--color-bg);
+}
+
+@media (max-width: 767px) {
+  .MainCanvas {
+    margin-left: 0;
+  }
+}
+
+/* Optional inner wrapper for constrained content */
+.MainCanvas-inner {
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter-x);
+}

@@ -1,0 +1,159 @@
+/* ==========================================================================
+   LAYOUT: Section
+   Page section primitive with width modes, surfaces, and elevation.
+   ========================================================================== */
+
+.Section {
+  position: relative;
+  padding-block: var(--section-pad-y);
+  background: transparent;
+  box-shadow: var(--elevation-0);
+}
+
+/* =========================================================================
+   SURFACE VARIANTS (Semantic)
+   ========================================================================= */
+
+.Section[data-surface="canvas"] {
+  background: transparent;
+}
+
+.Section[data-surface="neutral-1"] {
+  background: var(--surface-neutral-1);
+}
+
+.Section[data-surface="neutral-2"] {
+  background: var(--surface-neutral-2);
+}
+
+.Section[data-surface="neutral-3"] {
+  background: var(--surface-neutral-3);
+}
+
+.Section[data-surface="brand-soft"] {
+  background: var(--surface-brand-soft);
+}
+
+.Section[data-surface="brand-strong"] {
+  background: var(--surface-brand-strong);
+}
+
+/* =========================================================================
+   ELEVATION VARIANTS (Z-Depth)
+   ========================================================================= */
+
+.Section[data-elevation="0"] {
+  box-shadow: var(--elevation-0);
+}
+
+.Section[data-elevation="1"] {
+  box-shadow: var(--elevation-1);
+}
+
+.Section[data-elevation="2"] {
+  box-shadow: var(--elevation-2);
+}
+
+.Section[data-elevation="3"] {
+  box-shadow: var(--elevation-3);
+}
+
+/* =========================================================================
+   INNER CONTENT RAIL
+   ========================================================================= */
+
+.Section-inner {
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--section-pad-x);
+}
+
+/* =========================================================================
+   SECTION VARIANTS
+   ========================================================================= */
+
+/* Hero variant: more breathing room */
+.Section[data-variant="hero"] {
+  padding-block: calc(var(--section-pad-y) * 1.5);
+}
+
+/* No padding variant */
+.Section[data-variant="flush"] {
+  padding-block: 0;
+}
+
+/* =========================================================================
+   WIDTH MODES
+   ========================================================================= */
+
+/* a) STANDARD (default) */
+.Section:not([data-width]),
+.Section[data-width="standard"] {
+  /* Uses default .Section + .Section-inner behavior */
+}
+
+/* b) WIDE: wider content rail */
+.Section[data-width="wide"] .Section-inner {
+  max-width: var(--page-max-width-wide);
+  padding-inline: calc(var(--section-pad-x) * 0.75);
+}
+
+/* c) FULL: full width of MainCanvas */
+.Section[data-width="full"] {
+  width: 100%;
+}
+
+.Section[data-width="full"] .Section-inner {
+  max-width: none;
+  padding-inline: 0;
+}
+
+.Section[data-width="full"] .Section-content {
+  max-width: var(--page-max-width-wide);
+  margin-inline: auto;
+  padding-inline: var(--section-pad-x);
+}
+
+/* d) FULL-UNDER-TOOLBAR: stretches under toolbar on desktop */
+.Section[data-width="full-under-toolbar"] {
+  position: relative;
+  width: 100%;
+  left: 0;
+  margin-left: 0;
+}
+
+.Section[data-width="full-under-toolbar"] .Section-inner {
+  max-width: none;
+  padding-inline: 0;
+}
+
+.Section[data-width="full-under-toolbar"] .Section-content {
+  max-width: var(--page-max-width-wide);
+  margin-inline: auto;
+  padding-inline: var(--section-pad-x);
+}
+
+@media (min-width: 1024px) {
+  .Section[data-width="full-under-toolbar"] {
+    left: calc(-1 * var(--toolbar-width));
+    width: 100vw;
+  }
+
+  .Section[data-width="full-under-toolbar"] .Section-content {
+    padding-left: calc(var(--section-pad-x) + var(--toolbar-width));
+    padding-right: var(--section-pad-x);
+  }
+}
+
+/* =========================================================================
+   SPECIAL MODIFIERS
+   ========================================================================= */
+
+/* Gradient bleed for couture sections */
+.Section--bleed-bg {
+  background: linear-gradient(
+    135deg,
+    var(--surface-neutral-1),
+    rgba(3, 7, 18, 0.98)
+  );
+}

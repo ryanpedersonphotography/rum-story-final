@@ -1,0 +1,121 @@
+/* ==========================================================================
+   TYPOGRAPHY: Body
+   Body text, lead paragraphs, and prose content.
+   ========================================================================== */
+
+/* =========================================================================
+   BODY (Default paragraph text)
+   ========================================================================= */
+
+.Body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+/* =========================================================================
+   LEAD (Larger introductory text)
+   ========================================================================= */
+
+.Lead {
+  font-family: var(--font-body);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+  max-width: 65ch;
+}
+
+/* =========================================================================
+   PROSE (Constrained reading width)
+   ========================================================================= */
+
+.Prose {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  max-width: 65ch;
+}
+
+.Prose > * + * {
+  margin-top: var(--space-4);
+}
+
+/* =========================================================================
+   SIZE VARIANTS
+   ========================================================================= */
+
+.Body[data-size="sm"],
+.Lead[data-size="sm"],
+.Prose[data-size="sm"] {
+  font-size: var(--font-size-sm);
+}
+
+.Body[data-size="md"],
+.Lead[data-size="md"],
+.Prose[data-size="md"] {
+  font-size: var(--font-size-md);
+}
+
+.Body[data-size="lg"],
+.Lead[data-size="lg"],
+.Prose[data-size="lg"] {
+  font-size: var(--font-size-lg);
+}
+
+.Body[data-size="xl"],
+.Lead[data-size="xl"],
+.Prose[data-size="xl"] {
+  font-size: var(--font-size-xl);
+}
+
+/* =========================================================================
+   COLOR VARIANTS
+   ========================================================================= */
+
+.Body[data-color="default"],
+.Lead[data-color="default"],
+.Prose[data-color="default"] {
+  color: var(--color-text);
+}
+
+.Body[data-color="muted"],
+.Lead[data-color="muted"],
+.Prose[data-color="muted"] {
+  color: var(--color-text-muted);
+}
+
+.Body[data-color="accent"],
+.Lead[data-color="accent"],
+.Prose[data-color="accent"] {
+  color: var(--color-accent);
+}
+
+/* =========================================================================
+   WIDTH CONSTRAINTS
+   ========================================================================= */
+
+.Body[data-width="prose"],
+.Lead[data-width="prose"],
+.Prose[data-width="prose"] {
+  max-width: 65ch;
+}
+
+.Body[data-width="narrow"],
+.Lead[data-width="narrow"],
+.Prose[data-width="narrow"] {
+  max-width: 45ch;
+}
+
+.Body[data-width="wide"],
+.Lead[data-width="wide"],
+.Prose[data-width="wide"] {
+  max-width: 80ch;
+}
+
+.Body[data-width="full"],
+.Lead[data-width="full"],
+.Prose[data-width="full"] {
+  max-width: none;
+}

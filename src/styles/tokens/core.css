@@ -1,0 +1,139 @@
+/* ==========================================================================
+   DESIGN TOKENS: CORE
+   Theme-agnostic foundations: brand primitives, spacing, typography, layout.
+   ========================================================================== */
+
+:root {
+  /* =========================================================================
+     BRAND COLOR PRIMITIVES
+     Raw brand values. Use semantic tokens in components, NOT these directly.
+     ========================================================================= */
+  --brand-warm-walnut: #6B4E3D;
+  --brand-dusty-rose: #9D6B7B;
+  --brand-sage-green: #7A8B7F;
+  --brand-accent-gold: #D4A574;
+  --brand-champagne-gold: #E4C896;
+  --brand-romantic-ivory: #FBF8F4;
+  --brand-cream-pearl: #FFFCF8;
+  --brand-blush-pink: #F4E4E1;
+  --brand-deep-brown: #4A3426;
+  --brand-text-dark: #2C2416;
+
+  /* =========================================================================
+     SPACING SCALE (4px base)
+     ========================================================================= */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.5rem;    /* 24px */
+  --space-6: 2rem;      /* 32px */
+  --space-7: 3rem;      /* 48px */
+  --space-8: 4rem;      /* 64px */
+  --space-9: 5rem;      /* 80px */
+
+  /* =========================================================================
+     LAYOUT TOKENS
+     ========================================================================= */
+  --toolbar-width: 135px;
+  --page-max-width: 74rem;
+  --page-max-width-wide: 88rem;
+  --page-gutter-x: var(--space-7);
+  --section-pad-y: var(--space-7);
+  --section-pad-x: var(--space-6);
+  --section-edge-inset: var(--space-4);
+
+  /* =========================================================================
+     TYPOGRAPHY
+     ========================================================================= */
+  
+  /* Font Families */
+  --font-display: var(--font-playfair-display), "Playfair Display", serif;
+  --font-script: var(--font-dancing-script), "Brush Script MT", cursive;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+
+  /* Type Scale */
+  --font-size-xs:   0.8rem;
+  --font-size-sm:   0.9rem;
+  --font-size-body: 1rem;
+  --font-size-md:   1.125rem;
+  --font-size-lg:   1.25rem;
+  --font-size-xl:   1.5rem;
+  --font-size-2xl:  1.875rem;
+  --font-size-3xl:  2.25rem;
+  --font-size-hero: clamp(2.4rem, 4vw, 3.8rem);
+
+  /* Editorial Display Typography */
+  --font-size-display-sm: clamp(3rem, 6vw, 4rem);
+  --font-size-display:    clamp(4rem, 9vw, 6rem);
+  --font-size-display-lg: clamp(5rem, 14vw, 10rem);
+
+  /* Line Heights */
+  --line-height-body:    1.6;
+  --line-height-heading: 1.15;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+  --font-weight-bold:    700;
+
+  /* =========================================================================
+     RADII
+     ========================================================================= */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --media-radius-lg: var(--radius-xl, 32px);
+
+  /* =========================================================================
+     ELEVATION (Z-Depth Shadows)
+     ========================================================================= */
+  --elevation-0: none;
+  --elevation-1: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --elevation-2: 0 16px 40px rgba(0, 0, 0, 0.35);
+  --elevation-3: 0 24px 60px rgba(0, 0, 0, 0.45);
+
+  /* Legacy shadows */
+  --shadow-soft:   0 18px 45px rgba(0, 0, 0, 0.35);
+  --shadow-subtle: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  /* =========================================================================
+     GLASS EFFECTS
+     ========================================================================= */
+  --glass-shadow-strong: 0 28px 80px rgba(0, 0, 0, 0.75);
+  --glass-shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --glass-backdrop-blur: 22px;
+  --glass-backdrop-saturate: 160%;
+}
+
+/* =========================================================================
+   RESPONSIVE SPACING ADJUSTMENTS
+   ========================================================================= */
+
+@media (min-width: 768px) {
+  :root {
+    --section-pad-y: var(--space-8);
+    --page-max-width: 78rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-pad-y: var(--space-9);
+    --page-gutter-x: var(--space-8);
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --page-max-width: 82rem;
+  }
+}
+
+@media (min-width: 1512px) {
+  :root {
+    --page-max-width: 88rem;
+    --page-max-width-wide: 96rem;
+  }
+}

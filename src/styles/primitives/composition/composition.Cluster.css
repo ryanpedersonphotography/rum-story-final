@@ -1,0 +1,84 @@
+/* ==========================================================================
+   COMPOSITION: Cluster
+   Horizontal flow with wrapping and consistent spacing.
+   Great for tags, buttons, inline elements.
+   ========================================================================== */
+
+.Cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* =========================================================================
+   GAP VARIANTS
+   ========================================================================= */
+
+.Cluster[data-gap="none"] {
+  gap: 0;
+}
+
+.Cluster[data-gap="xs"] {
+  gap: var(--space-1);
+}
+
+.Cluster[data-gap="sm"] {
+  gap: var(--space-2);
+}
+
+.Cluster[data-gap="md"] {
+  gap: var(--space-3);
+}
+
+.Cluster[data-gap="lg"] {
+  gap: var(--space-4);
+}
+
+.Cluster[data-gap="xl"] {
+  gap: var(--space-6);
+}
+
+/* =========================================================================
+   ALIGNMENT VARIANTS
+   ========================================================================= */
+
+.Cluster[data-align="start"] {
+  align-items: flex-start;
+}
+
+.Cluster[data-align="center"] {
+  align-items: center;
+}
+
+.Cluster[data-align="end"] {
+  align-items: flex-end;
+}
+
+.Cluster[data-align="baseline"] {
+  align-items: baseline;
+}
+
+/* =========================================================================
+   JUSTIFY VARIANTS
+   ========================================================================= */
+
+.Cluster[data-justify="start"] {
+  justify-content: flex-start;
+}
+
+.Cluster[data-justify="center"] {
+  justify-content: center;
+}
+
+.Cluster[data-justify="end"] {
+  justify-content: flex-end;
+}
+
+.Cluster[data-justify="between"] {
+  justify-content: space-between;
+}
+
+.Cluster[data-justify="around"] {
+  justify-content: space-around;
+}

@@ -1,0 +1,194 @@
+/* ==========================================================================
+   MEDIA: MediaBlock
+   Image/video presentation primitive with glass effects and edge behaviors.
+   ========================================================================== */
+
+.MediaBlock {
+  display: block;
+  position: relative;
+}
+
+/* =========================================================================
+   MEDIA ELEMENT
+   ========================================================================= */
+
+.MediaBlock-img,
+.MediaBlock-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================================
+   VARIANT: Rounded (Main glass look)
+   ========================================================================= */
+
+.MediaBlock[data-variant="rounded"],
+.MediaBlock--rounded {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+
+  /* Subtle semantic base, then glass */
+  background: color-mix(in srgb, var(--surface-neutral-2) 70%, transparent);
+
+  /* Heavy outer shadow + crisp border */
+  box-shadow:
+    var(--glass-shadow-strong),
+    0 0 0 1px rgba(255, 255, 255, 0.25);
+
+  backdrop-filter: blur(var(--glass-backdrop-blur)) saturate(var(--glass-backdrop-saturate));
+}
+
+/* Strong glass highlight overlay */
+.MediaBlock[data-variant="rounded"]::before,
+.MediaBlock--rounded::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--glass-highlight-gradient);
+  mix-blend-mode: screen;
+  opacity: 0.75;
+  z-index: 1;
+}
+
+/* =========================================================================
+   VARIANT: Full Bleed (No frame styling)
+   ========================================================================= */
+
+.MediaBlock[data-variant="fullBleed"],
+.MediaBlock--fullBleed {
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.MediaBlock[data-variant="fullBleed"]::before,
+.MediaBlock--fullBleed::before {
+  display: none;
+}
+
+/* =========================================================================
+   VARIANT: Soft (Lighter glass effect)
+   ========================================================================= */
+
+.MediaBlock[data-variant="soft"] {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--glass-shadow-soft);
+  background: color-mix(in srgb, var(--surface-neutral-2) 50%, transparent);
+  backdrop-filter: blur(12px) saturate(120%);
+}
+
+.MediaBlock[data-variant="soft"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15),
+    transparent 50%
+  );
+  z-index: 1;
+}
+
+/* =========================================================================
+   EDGE BEHAVIORS (Desktop only)
+   For near-flush and flush positioning against section edges
+   ========================================================================= */
+
+@media (min-width: 1024px) {
+  /* Near-flush right edge */
+  .EdgeSplit[data-edge="right"] .MediaBlock[data-edge="nearFlush"],
+  .EdgeSplit[data-edge="right"] .MediaBlock--nearFlushRight {
+    margin-right: calc(-1 * var(--section-edge-inset));
+    border-radius: var(--radius-xl);
+  }
+
+  /* Flush right edge */
+  .EdgeSplit[data-edge="right"] .MediaBlock[data-edge="flush"],
+  .EdgeSplit[data-edge="right"] .MediaBlock--flushRight {
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  /* Near-flush left edge */
+  .EdgeSplit[data-edge="left"] .MediaBlock[data-edge="nearFlush"],
+  .EdgeSplit[data-edge="left"] .MediaBlock--nearFlushLeft {
+    margin-left: calc(-1 * var(--section-edge-inset));
+    border-radius: var(--radius-xl);
+  }
+
+  /* Flush left edge */
+  .EdgeSplit[data-edge="left"] .MediaBlock[data-edge="flush"],
+  .EdgeSplit[data-edge="left"] .MediaBlock--flushLeft {
+    margin-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+/* =========================================================================
+   ASPECT RATIO PRESETS
+   ========================================================================= */
+
+.MediaBlock[data-ratio="1-1"] {
+  aspect-ratio: 1 / 1;
+}
+
+.MediaBlock[data-ratio="4-3"] {
+  aspect-ratio: 4 / 3;
+}
+
+.MediaBlock[data-ratio="3-2"] {
+  aspect-ratio: 3 / 2;
+}
+
+.MediaBlock[data-ratio="16-9"] {
+  aspect-ratio: 16 / 9;
+}
+
+.MediaBlock[data-ratio="16-10"] {
+  aspect-ratio: 16 / 10;
+}
+
+.MediaBlock[data-ratio="21-9"] {
+  aspect-ratio: 21 / 9;
+}
+
+/* =========================================================================
+   OVERLAY SUPPORT
+   ========================================================================= */
+
+.MediaBlock-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+/* Common overlay presets */
+.MediaBlock-overlay[data-type="darken"] {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.MediaBlock-overlay[data-type="gradient-bottom"] {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.MediaBlock-overlay[data-type="gradient-top"] {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+}
+
+/* Vignette: Bright center, dark edges */
+.MediaBlock-overlay[data-type="vignette"] {
+  background: radial-gradient(
+    circle at center,
+    transparent 25%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
