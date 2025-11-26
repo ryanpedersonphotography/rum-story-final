@@ -1,8 +1,9 @@
-import './globals.css'
-import GlassToolbar from '@/components/GlassToolbar'
-import { Playfair_Display, Dancing_Script } from 'next/font/google'
-import Script from 'next/script'
+import type { Metadata } from 'next'
+import '../styles/tokens/core.css'
+import '../styles/primitives.css'
 import { initThemeScript } from '@/lib/theme-script'
+import Script from 'next/script'
+import { Playfair_Display, Dancing_Script } from 'next/font/google'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -16,28 +17,29 @@ const dancing = Dancing_Script({
   weight: ['400'],
 })
 
-export const metadata = {
-  title: 'Rum River Barn | Wedding Venue',
-  description: 'Experience your dream wedding at Rum River Barn, a romantic venue in Minnesota',
+export const metadata: Metadata = {
+  title: 'Rum River Wedding Barn',
+  description: 'Romantic riverside Minnesota wedding venue.',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html 
       lang="en" 
+      data-theme="light"
       className={`${playfair.variable} ${dancing.variable}`}
-      // Default to light/system, script overrides
       suppressHydrationWarning
     >
       <head>
-        {/* Theme init script - runs before paint to prevent flash */}
         <script dangerouslySetInnerHTML={{ __html: initThemeScript() }} />
       </head>
       <body>
-        <GlassToolbar />
-        
         <div className="MainCanvas">
-          <main>{children}</main>
+          {children}
         </div>
         
         <Script
