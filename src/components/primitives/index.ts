@@ -14,6 +14,7 @@ export { Overlap, OverlapBase, OverlapBaseMedia, OverlapForeground } from './Ove
 // Composition
 export { Stack } from './Stack'
 export { Cluster } from './Cluster'
+export { CopyBlock } from './CopyBlock'
 
 // Media
 export { MediaBlock, MediaBlockImg } from './MediaBlock'
