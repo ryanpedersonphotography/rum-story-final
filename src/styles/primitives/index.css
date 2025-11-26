@@ -42,6 +42,7 @@
 /* =========================================================================
    5. Typography
    ========================================================================= */
+@import "../typography.css"; /* New consolidated primitive */
 @import "./typography/typography.Display.css";
 @import "./typography/typography.Kicker.css";
 @import "./typography/typography.Body.css";
