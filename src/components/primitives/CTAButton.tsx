@@ -1,7 +1,7 @@
 import { ReactNode, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 
-type ButtonVariant = 'primary' | 'ghost' | 'pill' | 'outline'
-type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
+type ButtonVariant = 'primary' | 'ghost' | 'inline'
+type ButtonSize = 'sm' | 'md' | 'lg'
 
 interface CTAButtonBaseProps {
   children: ReactNode
@@ -29,7 +29,7 @@ type CTAButtonProps = CTAButtonAsButton | CTAButtonAsLink
 
 export function CTAButton({
   children,
-  variant,
+  variant = 'primary',
   size,
   fullWidth,
   className = '',
@@ -39,15 +39,16 @@ export function CTAButton({
   ...rest
 }: CTAButtonProps) {
   const classes = [
-    'CTAButton',
-    variant && `CTAButton--${variant}`,
+    'btn',
+    `btn--${variant}`,
     className,
   ].filter(Boolean).join(' ')
 
   const content = (
     <>
-      {icon && <span className="CTAButton-icon">{icon}</span>}
+      {icon && iconPosition === 'left' && <span className="mr-2">{icon}</span>}
       {children}
+      {icon && iconPosition === 'right' && <span className="ml-2">{icon}</span>}
     </>
   )
 
@@ -57,10 +58,7 @@ export function CTAButton({
       <a
         href={href}
         className={classes}
-        data-variant={variant}
-        data-size={size}
-        data-width={fullWidth ? 'full' : undefined}
-        data-icon-position={iconPosition}
+        style={fullWidth ? { width: '100%' } : undefined}
         {...linkRest}
       >
         {content}
@@ -71,10 +69,7 @@ export function CTAButton({
   return (
     <button
       className={classes}
-      data-variant={variant}
-      data-size={size}
-      data-width={fullWidth ? 'full' : undefined}
-      data-icon-position={iconPosition}
+      style={fullWidth ? { width: '100%' } : undefined}
       {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       {content}
