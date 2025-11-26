@@ -1,5 +1,5 @@
-import { Section } from '@/components/primitives'
-import { Stack, ScriptAccent, Display, DisplayAccent, ArchText } from '@/components/primitives'
+import { SectionShell } from '@/components/primitives/SectionShell'
+import { Stack, Display, DisplayAccent, ArchText, CTAButton } from '@/components/primitives'
 
 interface HeroProps {
   tagline?: string
@@ -17,11 +17,12 @@ export function Hero({
   className = '',
 }: HeroProps) {
   return (
-    <Section 
+    <SectionShell 
       width="full-under-toolbar" 
-      variant="flush" 
+      variant="hero" 
+      surface="brand-soft" 
+      elevation={0}
       className={className}
-      elevation="3"
       style={{ zIndex: 10 }}
     >
       <div className="relative" style={{ height: '100vh', width: '100%' }}>
@@ -31,38 +32,51 @@ export function Hero({
             className="MediaBlock-img"
             src={backgroundImage} 
             alt={title}
+            style={{ objectFit: 'cover' }}
           />
-          {/* Dark overlay for text readability */}
           <div className="MediaBlock-overlay" data-type="vignette" />
         </div>
 
         {/* Top-Right Text Content (In the Sky) */}
         <div className="Positioner" data-position="overlay" data-align="top-right">
-          <Stack gap="sm" align="center" className="text-center relative">
+          <Stack gap="lg" align="center" className="text-center relative">
             
-            {/* Arched Text positioned absolutely relative to the stack top */}
-            <div style={{ position: 'absolute', top: '-60px', left: '50%', transform: 'translateX(-50%)', width: '300px' }}>
-              <ArchText text={tagline} color="var(--brand-dusty-rose)" />
+            {/* Title Group */}
+            <div className="relative">
+              <div style={{ position: 'absolute', top: '-70px', left: '50%', transform: 'translateX(-50%)', width: '340px' }}>
+                <ArchText text={tagline} color="var(--brand-dusty-rose)" />
+              </div>
+
+              <Display 
+                as="h1" 
+                size="hero"
+                className="DisplayHeading"
+                style={{ color: 'var(--brand-text-dark)', textShadow: 'none', marginTop: '40px' }}
+              >
+                {title}
+                {titleAccent && (
+                  <>
+                    <br />
+                    <DisplayAccent style={{ color: 'var(--brand-text-dark)' }}>{titleAccent}</DisplayAccent>
+                  </>
+                )}
+              </Display>
             </div>
 
-            <Display 
-              as="h1" 
-              size="hero"
-              className="DisplayHeading"
-              style={{ color: 'var(--brand-text-dark)', textShadow: 'none', marginTop: '40px' }}
-            >
-              {title}
-              {titleAccent && (
-                <>
-                  <br />
-                  <DisplayAccent style={{ color: 'var(--brand-text-dark)' }}>{titleAccent}</DisplayAccent>
-                </>
-              )}
-            </Display>
+            {/* CTAs */}
+            <div className="Cluster" data-gap="md">
+              <CTAButton as="a" href="/contact" variant="primary" size="lg">
+                Schedule a Tour
+              </CTAButton>
+              <CTAButton as="a" href="#spaces" variant="ghost" size="lg">
+                Discover Our Spaces
+              </CTAButton>
+            </div>
+
           </Stack>
         </div>
       </div>
-    </Section>
+    </SectionShell>
   )
 }
 
