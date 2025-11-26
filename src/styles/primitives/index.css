@@ -51,4 +51,5 @@
 /* =========================================================================
    6. Controls
    ========================================================================= */
+@import "../controls.css"; /* New consolidated primitive */
 @import "./controls/controls.CTAButton.css";
