@@ -2,7 +2,7 @@ import './globals.css'
 import GlassToolbar from '@/components/GlassToolbar'
 import { Playfair_Display, Dancing_Script } from 'next/font/google'
 import Script from 'next/script'
-import { initThemeScript } from '@/lib/theme'
+import { initThemeScript } from '@/lib/theme-script'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
