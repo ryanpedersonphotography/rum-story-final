@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from 'react'
 import { SectionShell } from '@/components/primitives/SectionShell'
 import { Stack, Cluster, CopyBlock, MediaBlock, CTAButton } from '@/components/primitives'
