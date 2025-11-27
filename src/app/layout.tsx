@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import '../styles/tokens/core.css'
 import '../styles/primitives.css'
+import '../styles/glass-toolbar.css'
 import { initThemeScript } from '@/lib/theme-script'
 import Script from 'next/script'
 import { Playfair_Display, Dancing_Script } from 'next/font/google'
+import GlassToolbar from '@/components/GlassToolbar'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -38,8 +40,13 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: initThemeScript() }} />
       </head>
       <body>
-        <div className="MainCanvas">
-          {children}
+        <div className="glass-toolbar-layout">
+          <GlassToolbar />
+          <div className="glass-toolbar-layout__content">
+            <div className="MainCanvas">
+              {children}
+            </div>
+          </div>
         </div>
         
         <Script

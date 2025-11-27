@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'

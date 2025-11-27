@@ -84,6 +84,11 @@ All colors, radii, shadows, glass settings, breakpoints, etc., must be defined a
 `src/styles/primitives.css` and `src/styles/tokens.css` act as the **cascade choreography**.
 - **Rule:** If you see weird overrides, fix the import order in these index files. Do NOT add `!important` inside primitive files.
 
+### 4. GLASS TOOLBAR IS SACRED
+- **DO NOT TOUCH:** `src/components/GlassToolbar.tsx` or `src/styles/glass-toolbar.css`.
+- These files are a completed "black box" implementation. Any modifications risk breaking the complex animation state.
+- You may only assume its width (`--toolbar-width`) for layout offsets.
+
 ## Known Issues / Missing Parts
 1.  **Missing Pages:** The sections defined in `GlassToolbar` (Dashboard, Storyboard, etc.) do not have corresponding page routes or components implemented in `src/app`.
 2.  **Missing Build Script:** References were found to a design token system, but the build scripts for generating these tokens appear to be missing or incomplete.
