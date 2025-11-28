@@ -11,6 +11,7 @@ import {
   ChevronDoubleRightIcon,
   QuestionMarkCircleIcon,
   ArrowLeftOnRectangleIcon,
+  XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
@@ -444,7 +445,7 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
             aria-expanded={expanded}
             aria-label={expanded ? 'Collapse toolbar' : 'Expand toolbar'}
           >
-            <ChevronDoubleRightIcon aria-hidden="true" />
+            {expanded ? <XMarkIcon aria-hidden="true" /> : <ChevronDoubleRightIcon aria-hidden="true" />}
           </button>
         </div>
       </div>
@@ -473,7 +474,9 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
                 exit="exit"
                 variants={menuVariants}
               >
-                {activeSection.items.map((item) => (
+                {activeSection.items
+                  .filter((item) => item.id !== 'tour')
+                  .map((item) => (
                   <li key={item.id}>
                     <button
                       type="button"
