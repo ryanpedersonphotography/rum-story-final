@@ -1,0 +1,42 @@
+/**
+ * Section Recipe Styles
+ * Standard narrative section with content constraints
+ */
+
+.inner {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  position: relative;
+}
+
+.dividerBottom {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme='dark'] .dividerBottom {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Variant: default (transparent) */
+.variant-default {
+  background: transparent;
+}
+
+/* Variant: hero-warm gradient */
+.variant-hero-warm {
+  background-image: var(--gradient-hero-warm);
+  color: var(--color-paper-raised);
+}
+
+/* Variant: hero-dusk gradient */
+.variant-hero-dusk {
+  background-image: var(--gradient-hero-dusk);
+  color: var(--color-paper-raised);
+}
+
+/* Variant: hero-sunset gradient */
+.variant-hero-sunset {
+  background-image: var(--gradient-hero-sunset);
+  color: var(--color-paper-raised);
+}

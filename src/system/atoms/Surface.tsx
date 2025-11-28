@@ -31,6 +31,8 @@ interface SurfaceProps {
   className?: string
   /** Inline styles */
   style?: CSSProperties
+  /** HTML id attribute */
+  id?: string
 }
 
 export function Surface({
@@ -42,9 +44,11 @@ export function Surface({
   children,
   className,
   style,
+  id,
 }: SurfaceProps) {
   return (
     <Component
+      id={id}
       className={clsx(
         styles.base,
         styles[`tone-${tone}`],
