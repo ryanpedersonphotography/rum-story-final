@@ -6,6 +6,7 @@
 .Section {
   position: relative;
   padding-block: var(--section-pad-y);
+  padding-left: var(--glass-toolbar-rail-width, 135px);
   background: transparent;
   box-shadow: var(--elevation-0);
 }
@@ -72,9 +73,10 @@
    SECTION VARIANTS
    ========================================================================= */
 
-/* Hero variant: more breathing room */
+/* Hero variant: flush to edges, contains overflow */
 .Section[data-variant="hero"] {
-  padding-block: calc(var(--section-pad-y) * 1.5);
+  padding-block: 0;
+  overflow: hidden;
 }
 
 /* No padding variant */
@@ -142,6 +144,23 @@
   .Section[data-width="full-under-toolbar"] .Section-content {
     padding-left: calc(var(--section-pad-x) + var(--toolbar-width));
     padding-right: var(--section-pad-x);
+  }
+}
+
+/* =========================================================================
+   RESPONSIVE - Adjust for toolbar width
+   ========================================================================= */
+
+@media (max-width: 900px) {
+  .Section {
+    padding-left: var(--glass-toolbar-rail-width, 68px);
+  }
+}
+
+@media (max-width: 768px) {
+  .Section {
+    /* Toolbar hidden on small screens */
+    padding-left: 0;
   }
 }
 

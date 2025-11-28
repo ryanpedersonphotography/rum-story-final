@@ -11,7 +11,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--color-bg);
+  background: var(--color-bg-page);
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: var(--font-size-body);
@@ -20,3 +20,7 @@ body {
 
 /* Import all modular primitives */
 @import "./primitives/index.css";
+
+/* Import block-level components */
+@import "./blocks/blocks.Hero.css";
+@import "./page-shell.css";

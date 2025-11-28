@@ -16,10 +16,8 @@ This project is a **Next.js 15** application serving as a shell for an admin pan
 - **Framer Motion:** For complex animations (likely used in `GlassToolbar`).
 - **Embla Carousel:** Included in dependencies (likely for future photo galleries).
 - **Yet Another React Lightbox:** Included in dependencies.
-- **Tailwind CSS:** Not explicitly seen in standard config, but likely intended or partially used via PostCSS/styling setup.
 
 ### Content & Data
-- **Contentful:** `next.config.mjs` is configured to allow images from Contentful (`images.ctfassets.net`), suggesting this is the intended Headless CMS.
 - **Data Fetching:** Currently unimplemented in the visible source code.
 
 ### Tools & Quality

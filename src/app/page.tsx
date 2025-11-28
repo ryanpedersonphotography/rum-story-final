@@ -11,7 +11,7 @@ import {
 
 export default function Page() {
   return (
-    <main className="MainCanvas">
+    <>
       <Hero 
         tagline="Where Dreams Begin"
         title="Rum River"
@@ -25,6 +25,6 @@ export default function Page() {
       <SocialProof />
       <ScheduleTour />
       <Footer />
-    </main>
+    </>
   )
 }

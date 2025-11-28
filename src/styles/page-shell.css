@@ -1,0 +1,58 @@
+/* ==========================================================================
+   PAGE SHELL - For full-bleed hero behind toolbar
+   
+   Works within the existing glass-toolbar-layout structure.
+   The hero breaks out to span full viewport, while other content
+   respects the toolbar padding.
+   ========================================================================== */
+
+.page-shell {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Ghost column is just a semantic marker, not needed for layout */
+.page-shell__ghost {
+  display: none;
+}
+
+/* Content area - main wraps all page content */
+.page-shell__content {
+  position: relative;
+  min-width: 0;
+}
+
+/* =========================================================================
+   HERO FULL-BLEED - Breaks out of parent padding
+   
+   The Hero uses negative margin and width: 100vw to span the full
+   viewport width, appearing behind the glass toolbar.
+   ========================================================================= */
+
+/* Hero inside page-shell breaks out of parent container */
+.page-shell__content > .Hero {
+  /* Pull back to left edge of viewport (undo parent padding) */
+  margin-left: calc(-1 * var(--glass-toolbar-rail-width, 135px));
+  /* Span full viewport width */
+  width: 100vw;
+  /* Remove any max-width constraints */
+  max-width: none;
+}
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+
+@media (max-width: 900px) {
+  .page-shell__content > .Hero {
+    margin-left: calc(-1 * var(--glass-toolbar-rail-width, 68px));
+  }
+}
+
+@media (max-width: 768px) {
+  /* Toolbar hidden on small screens, no need for breakout */
+  .page-shell__content > .Hero {
+    margin-left: 0;
+    width: 100%;
+  }
+}

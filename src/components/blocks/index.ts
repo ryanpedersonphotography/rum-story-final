@@ -4,6 +4,7 @@
 // ==========================================================================
 
 export { Hero } from './Hero'
+export { HomePageShell } from './HomePageShell'
 export { DiscoverSpaces } from './DiscoverSpaces'
 export { WhyChoose } from './WhyChoose'
 export { MoreThanVenue } from './MoreThanVenue'
