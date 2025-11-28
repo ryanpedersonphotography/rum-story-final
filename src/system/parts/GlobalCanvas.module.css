@@ -1,0 +1,43 @@
+/**
+ * GlobalCanvas - App Shell Layout
+ * 
+ * Uses CSS Grid to create a two-column layout:
+ * - Column 1: Ghost column that reserves space for fixed sidebar
+ * - Column 2: Main content area
+ * 
+ * On mobile, collapses to single column.
+ */
+
+.canvas {
+  display: grid;
+  grid-template-columns: var(--sidebar-width, 135px) minmax(0, 1fr);
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+.sidebarGhost {
+  grid-column: 1;
+  /* Ghost column - content inside (GlassToolbar) is position: fixed */
+}
+
+.content {
+  grid-column: 2;
+  position: relative;
+  min-width: 0;
+  z-index: var(--z-base);
+}
+
+/* Mobile: hide sidebar, single column */
+@media (max-width: 768px) {
+  .canvas {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebarGhost {
+    display: none;
+  }
+
+  .content {
+    grid-column: 1;
+  }
+}

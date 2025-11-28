@@ -15,7 +15,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
-import '../styles/glass-toolbar.css'
+import '../../styles/glass-toolbar.css'
 import { ThemeToggle } from './ThemeToggle'
 
 function cx(...parts: Array<string | undefined | false | null>) {

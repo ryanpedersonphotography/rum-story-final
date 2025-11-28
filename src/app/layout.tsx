@@ -7,7 +7,8 @@ import './globals.css'
 import Script from 'next/script'
 import { Playfair_Display, Dancing_Script } from 'next/font/google'
 import { initThemeScript } from '@/system/theme/initThemeScript'
-import GlassToolbar from '@/components/GlassToolbar'
+import { GlobalCanvas } from '@/system/parts/GlobalCanvas'
+import GlassToolbar from '@/components/legacy/GlassToolbar'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -47,12 +48,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="glass-toolbar-layout">
-          <GlassToolbar />
-          <div className="glass-toolbar-layout__content">
-            {children}
-          </div>
-        </div>
+        <GlobalCanvas sidebar={<GlassToolbar />}>
+          {children}
+        </GlobalCanvas>
       </body>
     </html>
   )
