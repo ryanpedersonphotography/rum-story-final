@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
-import '../styles/tokens/core.css'
-import '../styles/primitives.css'
-import '../styles/glass-toolbar.css'
+import './globals.css'
 import { initThemeScript } from '@/lib/theme-script'
 import Script from 'next/script'
 import { Playfair_Display, Dancing_Script } from 'next/font/google'
@@ -43,9 +41,7 @@ export default function RootLayout({
         <div className="glass-toolbar-layout">
           <GlassToolbar />
           <div className="glass-toolbar-layout__content">
-            <div className="MainCanvas">
-              {children}
-            </div>
+            {children}
           </div>
         </div>
         

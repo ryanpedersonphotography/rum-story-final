@@ -1,294 +1,34 @@
 /* ==========================================================================
-   GLOBAL STYLES
-   Master stylesheet with proper cascade order.
-   
-   Order:
-   1. Reset (normalize browser defaults)
-   2. Tokens (design system values)
-   3. Primitives (composable CSS classes)
-   4. Utilities (escape hatches, last for override power)
-   5. Base semantic styles (use tokens, not raw hex)
+   GLOBAL STYLES - Blank Slate
+   Only the glass toolbar remains. Ready for primitive redesign.
    ========================================================================== */
 
-/* Google Fonts (loaded before everything else) */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+/* Glass Toolbar - DO NOT TOUCH */
+@import '../styles/glass-toolbar.css';
 
-/* 1. Reset */
-@import "../styles/reset.css";
+/* Minimal reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* 2. Tokens (core + light/dark themes) */
-@import "../styles/tokens.css";
-
-/* 3. Primitives */
-@import "../styles/primitives.css";
-
-/* 4. Utilities (lowest specificity by design, but loaded last) */
-@import "../styles/utilities.css";
-
-/* ==========================================================================
-   5. BASE SEMANTIC STYLES
-   All styles use semantic tokens, NO raw hex values.
-   ========================================================================== */
-
-/* Root element - inherits theme from data-theme attribute */
 html {
-  background: var(--color-bg-page);
-  color: var(--color-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Body - page canvas */
 body {
-  background: var(--color-bg-page);
-  color: var(--color-text);
-  font-family: var(--font-body);
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  background: #fff;
+  color: #1a1a1a;
 }
 
-/* Headings - using display font */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  line-height: var(--line-height-heading);
-  color: var(--color-text);
-}
-
-/* Links - interactive accent color */
-a {
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-a:hover,
-a:focus {
-  color: var(--color-accent-alt);
-}
-
-/* Focus visible - strong border for accessibility */
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-/* Muted text helper */
-.text-muted {
-  color: var(--color-text-muted);
-}
-
-.text-soft {
-  color: var(--color-text-soft);
-}
-
-/* Selection styling */
-::selection {
-  background: var(--color-accent-soft);
-  color: var(--color-text);
-}
-
-/* ==========================================================================
-   EXAMPLE COMPONENT STYLES (using semantic tokens)
-   ========================================================================== */
-
-/* Card component example */
-.card {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  border-color: var(--color-border-strong);
-}
-
-/* Primary button example */
-.button-primary {
-  background: var(--color-accent);
-  color: var(--color-bg-page);
-  border: none;
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-5);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.15s ease;
-}
-
-.button-primary:hover {
-  background: var(--color-accent-alt);
-}
-
-.button-primary:active {
-  transform: scale(0.98);
-}
-
-/* Ghost button example */
-.button-ghost {
-  background: transparent;
-  color: var(--color-accent);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-5);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.button-ghost:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent-alt);
-}
-
-/* Subtle section background */
-.section-subtle {
-  background: var(--color-bg-subtle);
-}
-
-/* Badge / pill with soft accent */
-.badge {
-  display: inline-block;
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-}
-
-/* ==========================================================================
-   HERO GLASSMORPHIC BOX
-   Used for hero title positioning on desktop
-   ========================================================================== */
-
-/* Container for the desktop hero top-right positioning */
-.hero-title-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-/* Desktop: top-right positioned glass box */
-@media (min-width: 900px) {
-  .hero-title-container--desktop {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: var(--space-7);
-    padding-top: calc(var(--space-7) + var(--space-8)); /* Account for toolbar overflow */
-  }
-}
-
-/* Mobile: centered positioning (fallback) */
-@media (max-width: 899px) {
-  .hero-title-container--desktop {
-    display: none;
-  }
-}
-
-/* The script accent positioned above the glass box */
-.hero-script-above {
-  text-align: center;
-  margin-bottom: var(--space-3);
-}
-
-/* Glassmorphic box container - Ultra translucent, glass-like */
-.hero-glass-box {
-  position: relative;
-  padding: var(--space-5) var(--space-7);
-  border-radius: var(--radius-xl);
-  
-  /* Ultra translucent glass effect */
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  
-  /* Glass-like border with highlight */
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  
-  /* Raised, glass-like shadows with inner glow */
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.2),
-    0 4px 16px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 0 rgba(0, 0, 0, 0.05);
-  
-  /* Text alignment */
-  text-align: center;
-}
-
-/* Subtle inner glow for raised glass effect */
-.hero-glass-box::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 40%,
-    transparent 60%,
-    rgba(0, 0, 0, 0.02) 100%
-  );
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Text styling inside glass box - smaller, glassy, raised */
-.hero-glass-box .DisplayHeading {
-  font-size: var(--font-size-display-sm);
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.3),
-    0 4px 12px rgba(0, 0, 0, 0.2);
-  letter-spacing: 0.02em;
-}
-
-.hero-glass-box .DisplayHeading-accent {
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.25),
-    0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Light theme adjustments for glass box */
-:root:not([data-theme="dark"]) .hero-glass-box,
-html[data-theme="light"] .hero-glass-box {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.1),
-    0 4px 16px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
-    inset 0 -1px 0 0 rgba(0, 0, 0, 0.02);
-}
-
-:root:not([data-theme="dark"]) .hero-glass-box .DisplayHeading,
-html[data-theme="light"] .hero-glass-box .DisplayHeading {
-  color: var(--brand-text-dark);
-  text-shadow: 
-    0 1px 2px rgba(255, 255, 255, 0.5),
-    0 2px 8px rgba(255, 255, 255, 0.3);
-}
-
-/* Mobile centered container (shows on mobile only) */
-.hero-title-container--mobile {
-  display: none;
-}
-
-@media (max-width: 899px) {
-  .hero-title-container--mobile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-}
-
-@media (min-width: 900px) {
-  .hero-title-container--mobile {
-    display: none;
-  }
+/* Dark mode support for glass toolbar */
+[data-theme="dark"] body {
+  background: #0a0a0a;
+  color: #f0f0f0;
 }
