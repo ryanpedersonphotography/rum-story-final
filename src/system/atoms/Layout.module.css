@@ -1,0 +1,66 @@
+/**
+ * Layout Atom Styles
+ * Geometry primitives: stack, cluster, grid
+ */
+
+.base {
+  box-sizing: border-box;
+  padding: var(--pad);
+  min-width: 0;
+}
+
+/* Stack: vertical flex column */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* Cluster: horizontal flex row with wrap */
+.cluster {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+/* Grid: CSS grid with configurable columns */
+.grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(var(--cols), 1fr);
+}
+
+/* Alignment modifiers (cross-axis) */
+.align-start {
+  align-items: flex-start;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+/* Justification modifiers (main-axis) */
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
+}

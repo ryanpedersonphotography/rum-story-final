@@ -1,0 +1,85 @@
+/**
+ * Type Atom Styles
+ * Typography primitives: sizes, tones, fonts
+ */
+
+.base {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Font family variants */
+.serif {
+  font-family: var(--font-serif);
+}
+
+.sans {
+  font-family: var(--font-sans);
+}
+
+.script {
+  font-family: var(--font-script);
+}
+
+/* Size variants */
+.size-hero {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.size-display {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.size-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.size-body {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.size-caption {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* Tone variants (color) */
+.tone-ink {
+  color: var(--color-ink);
+}
+
+.tone-muted {
+  color: var(--color-muted);
+}
+
+.tone-accent {
+  color: var(--color-accent);
+}
+
+.tone-inherit {
+  color: inherit;
+}
+
+/* Weight variants */
+.weight-normal {
+  font-weight: 400;
+}
+
+.weight-medium {
+  font-weight: 500;
+}
+
+.weight-semibold {
+  font-weight: 600;
+}
+
+.weight-bold {
+  font-weight: 700;
+}
