@@ -1,20 +1,26 @@
 import type { Metadata } from 'next'
+// CSS imports in correct order: 1) tokens, 2) mode overrides, 3) globals
+import './theme.css'
+import './theme-modes.css'
 import './globals.css'
-import { initThemeScript } from '@/lib/theme-script'
+
 import Script from 'next/script'
 import { Playfair_Display, Dancing_Script } from 'next/font/google'
+import { initThemeScript } from '@/system/theme/initThemeScript'
 import GlassToolbar from '@/components/GlassToolbar'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-playfair-display',
+  variable: '--font-serif',
   weight: ['400', '600'],
+  display: 'swap',
 })
 
 const dancing = Dancing_Script({
   subsets: ['latin'],
-  variable: '--font-dancing-script',
+  variable: '--font-script',
   weight: ['400'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -30,12 +36,15 @@ export default function RootLayout({
   return (
     <html 
       lang="en" 
-      data-theme="light"
-      className={`${playfair.variable} ${dancing.variable}`}
       suppressHydrationWarning
+      className={`${playfair.variable} ${dancing.variable}`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: initThemeScript() }} />
+        <Script
+          id="zen-theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: initThemeScript }}
+        />
       </head>
       <body>
         <div className="glass-toolbar-layout">
@@ -44,12 +53,6 @@ export default function RootLayout({
             {children}
           </div>
         </div>
-        
-        <Script
-          src="//instant.page/5.2.0"
-          strategy="lazyOnload"
-          integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"
-        />
       </body>
     </html>
   )
