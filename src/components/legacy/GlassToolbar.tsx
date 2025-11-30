@@ -1,8 +1,8 @@
 "use client"
 
-import * as React from 'react'
-import { usePathname } from 'next/navigation'
-import Image from 'next/image'
+import * as React from "react"
+import { usePathname } from "next/navigation"
+import Image from "next/image"
 import {
   HomeIcon,
   BuildingStorefrontIcon,
@@ -12,14 +12,14 @@ import {
   QuestionMarkCircleIcon,
   ArrowLeftOnRectangleIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import type { Variants } from 'framer-motion'
-import '../../styles/glass-toolbar.css'
-import { ThemeToggle } from './ThemeToggle'
+} from "@heroicons/react/24/outline"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import type { Variants } from "framer-motion"
+import "@/styles/glass-toolbar.css"
+import { ThemeToggle } from "./ThemeToggle"
 
 function cx(...parts: Array<string | undefined | false | null>) {
-  return parts.filter(Boolean).join(' ')
+  return parts.filter(Boolean).join(" ")
 }
 
 type ToolbarItem = {
@@ -49,67 +49,67 @@ type GlassToolbarProps = {
 
 const DEFAULT_SECTIONS: ToolbarSection[] = [
   {
-    id: 'home',
-    label: 'Home',
-    description: 'Welcome',
+    id: "home",
+    label: "Home",
+    description: "Welcome",
     icon: HomeIcon,
   },
   {
-    id: 'spaces',
-    label: 'Spaces',
-    description: 'Explore our venues',
+    id: "spaces",
+    label: "Spaces",
+    description: "Explore our venues",
     icon: BuildingStorefrontIcon,
     items: [
-      { id: 'barn', label: 'The Barn', description: 'Main reception space' },
-      { id: 'lawn', label: 'The Lawn', description: 'Ceremony & games' },
-      { id: 'loft', label: 'The Loft', description: 'Bridal suite & prep' },
+      { id: "barn", label: "The Barn", description: "Main reception space" },
+      { id: "lawn", label: "The Lawn", description: "Ceremony & games" },
+      { id: "loft", label: "The Loft", description: "Bridal suite & prep" },
     ],
   },
   {
-    id: 'weddings',
-    label: 'Weddings',
-    description: 'Real love stories',
+    id: "weddings",
+    label: "Weddings",
+    description: "Real love stories",
     icon: HeartIcon,
     items: [
-      { id: 'gallery', label: 'Gallery' },
-      { id: 'stories', label: 'Real Weddings' },
+      { id: "gallery", label: "Gallery" },
+      { id: "stories", label: "Real Weddings" },
     ],
   },
   {
-    id: 'contact',
-    label: 'Contact',
-    description: 'Plan your visit',
+    id: "contact",
+    label: "Contact",
+    description: "Plan your visit",
     icon: EnvelopeIcon,
     items: [
-      { id: 'tour', label: 'Schedule Tour' },
-      { id: 'pricing', label: 'Pricing' },
-      { id: 'faq', label: 'FAQ' },
+      { id: "tour", label: "Schedule Tour" },
+      { id: "pricing", label: "Pricing" },
+      { id: "faq", label: "FAQ" },
     ],
   },
 ]
 
 const PANEL_VARIANTS_EXPRESSIVE: Variants = {
   collapsed: {
-    x: '-100%',
+    x: "-100%",
     opacity: 0,
-    boxShadow: 'none',
-    pointerEvents: 'none',
+    boxShadow: "none",
+    pointerEvents: "none",
     transition: {
-      type: 'tween',
+      type: "tween",
       ease: [0.4, 0.0, 0.2, 1.0],
       duration: 0.335,
       delay: 0.04,
       opacity: { ease: [0.4, 0.0, 0.2, 1.0], duration: 0.23, delay: 0.085 },
     },
-    transitionEnd: { pointerEvents: 'none' },
+    transitionEnd: { pointerEvents: "none" },
   },
   expanded: {
-    x: '0%',
+    x: "0%",
     opacity: 1,
-    boxShadow: 'var(--glass-toolbar-shadow)',
-    pointerEvents: 'auto',
+    boxShadow: "var(--glass-toolbar-shadow)",
+    pointerEvents: "auto",
     transition: {
-      type: 'spring',
+      type: "spring",
       stiffness: 308,
       damping: 43,
       bounce: 0,
@@ -117,26 +117,26 @@ const PANEL_VARIANTS_EXPRESSIVE: Variants = {
       restSpeed: 0.5,
       delay: 0.06,
     },
-    transitionEnd: { pointerEvents: 'auto' },
+    transitionEnd: { pointerEvents: "auto" },
   },
 }
 
 const PANEL_VARIANTS_REDUCED: Variants = {
   collapsed: {
-    x: '-100%',
+    x: "-100%",
     opacity: 0,
-    boxShadow: 'none',
-    pointerEvents: 'none',
+    boxShadow: "none",
+    pointerEvents: "none",
     transition: { duration: 0.01 },
-    transitionEnd: { pointerEvents: 'none' },
+    transitionEnd: { pointerEvents: "none" },
   },
   expanded: {
-    x: '0%',
+    x: "0%",
     opacity: 1,
-    boxShadow: 'var(--glass-toolbar-shadow)',
-    pointerEvents: 'auto',
+    boxShadow: "var(--glass-toolbar-shadow)",
+    pointerEvents: "auto",
     transition: { duration: 0.01 },
-    transitionEnd: { pointerEvents: 'auto' },
+    transitionEnd: { pointerEvents: "auto" },
   },
 }
 
@@ -154,12 +154,13 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
 ) {
   const pathname = usePathname()
   const [manualPinned, setManualPinned] = React.useState(initialExpanded)
-  const [internalActive, setInternalActive] = React.useState(() => activeSectionId ?? sections[0]?.id ?? '')
+  const [internalActive, setInternalActive] = React.useState(
+    () => activeSectionId ?? sections[0]?.id ?? "",
+  )
   const [pointerInside, setPointerInside] = React.useState(false)
   const [focusInside, setFocusInside] = React.useState(false)
   const [hoverLock, setHoverLock] = React.useState(false)
   const [transientHover, setTransientHover] = React.useState(false)
-  // Use a pointer gate so keyboard focus can expand the panel without pointer clicks keeping it open.
   const pointerFocusGate = React.useRef(false)
   const transientHoverTimeout = React.useRef<number | null>(null)
   const panelId = React.useId()
@@ -170,7 +171,10 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
     [internalActive, sections],
   )
 
-  const pathSegments = React.useMemo(() => pathname?.split('/').filter(Boolean) ?? [], [pathname])
+  const pathSegments = React.useMemo(
+    () => pathname?.split("/").filter(Boolean) ?? [],
+    [pathname],
+  )
   const allowPersistentHover = pathSegments.length > 0
 
   const updateHoverLock = React.useCallback(
@@ -189,7 +193,7 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
   React.useEffect(() => {
     const root = document.documentElement
     return () => {
-      root.style.removeProperty('--glass-toolbar-offset')
+      root.style.removeProperty("--glass-toolbar-offset")
     }
   }, [])
 
@@ -203,10 +207,9 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
     () => pointerInside || focusInside || hoverLock || transientHover,
     [pointerInside, focusInside, hoverLock, transientHover],
   )
+
   const primeTransientHover = React.useCallback(() => {
-    if (allowPersistentHover) {
-      return
-    }
+    if (allowPersistentHover) return
     if (transientHoverTimeout.current) {
       window.clearTimeout(transientHoverTimeout.current)
     }
@@ -222,10 +225,10 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
   React.useEffect(() => {
     const root = document.documentElement
     const styles = getComputedStyle(root)
-    const railWidth = styles.getPropertyValue('--glass-toolbar-rail-width').trim() || '78px'
-    const panelWidth = styles.getPropertyValue('--glass-toolbar-panel-width').trim() || '320px'
+    const railWidth = styles.getPropertyValue("--glass-toolbar-rail-width").trim() || "78px"
+    const panelWidth = styles.getPropertyValue("--glass-toolbar-panel-width").trim() || "320px"
     const expandedWidth = `calc(${railWidth} + ${panelWidth})`
-    root.style.setProperty('--glass-toolbar-offset', expanded ? expandedWidth : railWidth)
+    root.style.setProperty("--glass-toolbar-offset", expanded ? expandedWidth : railWidth)
   }, [expanded])
 
   React.useEffect(() => {
@@ -244,16 +247,8 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
     }
   }, [allowPersistentHover])
 
-  React.useEffect(() => {
-    const root = document.documentElement
-    const styles = getComputedStyle(root)
-    const railWidth = styles.getPropertyValue('--glass-toolbar-rail-width').trim() || '78px'
-    const panelWidth = styles.getPropertyValue('--glass-toolbar-panel-width').trim() || '320px'
-    const expandedWidth = `calc(${railWidth} + ${panelWidth})`
-    root.style.setProperty('--glass-toolbar-offset', expanded ? expandedWidth : railWidth)
-  }, [expanded])
-
   const panelVariants = prefersReducedMotion ? PANEL_VARIANTS_REDUCED : PANEL_VARIANTS_EXPRESSIVE
+
   const menuVariants = React.useMemo<Variants>(() => {
     if (prefersReducedMotion) {
       return {
@@ -262,7 +257,6 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
         exit: { opacity: 1 },
       }
     }
-
     return {
       hidden: { opacity: 0 },
       enter: {
@@ -340,8 +334,8 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
   return (
     <aside
       ref={ref}
-      className={cx('glass-toolbar', className)}
-      data-expanded={expanded ? 'true' : 'false'}
+      className={cx("glass-toolbar", className)}
+      data-expanded={expanded ? "true" : "false"}
       style={style}
       onPointerLeave={() => {
         setPointerInside(false)
@@ -360,13 +354,11 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
       }}
       onPointerDownCapture={(event) => {
         pointerFocusGate.current = true
-        if (manualPinned) {
-          return
-        }
+        if (manualPinned) return
         const target = event.target as HTMLElement | null
-        const isActivator = Boolean(target?.closest('.glass-toolbar__pill'))
-        const isPanel = Boolean(target?.closest('.glass-toolbar__panel'))
-        const isUtility = Boolean(target?.closest('.glass-toolbar__rail-footer'))
+        const isActivator = Boolean(target?.closest(".glass-toolbar__pill"))
+        const isPanel = Boolean(target?.closest(".glass-toolbar__panel"))
+        const isUtility = Boolean(target?.closest(".glass-toolbar__rail-footer"))
         if (isActivator || isPanel || isUtility) {
           setPointerInside(true)
         } else {
@@ -390,9 +382,7 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
         }
       }}
     >
-      <div
-        className="glass-toolbar__rail"
-      >
+      <div className="glass-toolbar__rail">
         <div className="glass-toolbar__rail-top">
           <div className="glass-toolbar__logo" aria-hidden="true">
             <Image
@@ -406,10 +396,7 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
           <span className="glass-toolbar__rail-label">HOME</span>
         </div>
 
-        <nav
-          className="glass-toolbar__primary"
-          aria-label="Primary navigation"
-        >
+        <nav className="glass-toolbar__primary" aria-label="Primary navigation">
           {sections.map((section) => {
             const Icon = section.icon
             const isActive = activeSection?.id === section.id
@@ -418,13 +405,13 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
               <button
                 key={section.id}
                 type="button"
-                className={cx('glass-toolbar__pill', isActive && 'is-active')}
+                className={cx("glass-toolbar__pill", isActive && "is-active")}
                 onClick={() => handleSectionClick(section.id, hasChildren)}
                 onPointerEnter={() => handleSectionPointerEnter(section.id, hasChildren)}
                 aria-pressed={isActive}
                 aria-label={section.label}
                 title={section.label}
-                data-has-children={hasChildren ? 'true' : 'false'}
+                data-has-children={hasChildren ? "true" : "false"}
               >
                 <div className="glass-toolbar__pill-icon-wrapper">
                   <Icon aria-hidden="true" />
@@ -443,7 +430,7 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
             onClick={() => setManualPinned((prev) => !prev)}
             aria-controls={panelId}
             aria-expanded={expanded}
-            aria-label={expanded ? 'Collapse toolbar' : 'Expand toolbar'}
+            aria-label={expanded ? "Collapse toolbar" : "Expand toolbar"}
           >
             {expanded ? <XMarkIcon aria-hidden="true" /> : <ChevronDoubleRightIcon aria-hidden="true" />}
           </button>
@@ -454,8 +441,8 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
         className="glass-toolbar__panel"
         id={panelId}
         aria-hidden={!expanded}
-        initial={expanded ? 'expanded' : 'collapsed'}
-        animate={expanded ? 'expanded' : 'collapsed'}
+        initial={expanded ? "expanded" : "collapsed"}
+        animate={expanded ? "expanded" : "collapsed"}
         variants={panelVariants}
         onPointerEnter={() => {
           setPointerInside(true)
@@ -475,32 +462,32 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
                 variants={menuVariants}
               >
                 {activeSection.items
-                  .filter((item) => item.id !== 'tour')
+                  .filter((item) => item.id !== "tour")
                   .map((item) => (
-                  <li key={item.id}>
-                    <button
-                      type="button"
-                      onPointerEnter={() => {
-                        setPointerInside(true)
-                        updateHoverLock(true)
-                        primeTransientHover()
-                      }}
-                      onFocus={() => {
-                        setPointerInside(true)
-                        updateHoverLock(true)
-                        primeTransientHover()
-                      }}
-                      onClick={() => handleItemClick(item.id)}
-                    >
-                      <span>{item.label}</span>
-                      {item.description ? <small>{item.description}</small> : null}
-                    </button>
-                  </li>
-                ))}
+                    <li key={item.id}>
+                      <button
+                        type="button"
+                        onPointerEnter={() => {
+                          setPointerInside(true)
+                          updateHoverLock(true)
+                          primeTransientHover()
+                        }}
+                        onFocus={() => {
+                          setPointerInside(true)
+                          updateHoverLock(true)
+                          primeTransientHover()
+                        }}
+                        onClick={() => handleItemClick(item.id)}
+                      >
+                        <span>{item.label}</span>
+                        {item.description ? <small>{item.description}</small> : null}
+                      </button>
+                    </li>
+                  ))}
               </motion.ul>
             ) : (
               <motion.p
-                key={`${activeSection?.id ?? 'none'}-empty`}
+                key={`${activeSection?.id ?? "none"}-empty`}
                 className="glass-toolbar__empty"
                 initial="hidden"
                 animate="enter"
@@ -514,10 +501,12 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
         </div>
 
         <footer className="glass-toolbar__footer">
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="glass-toolbar__footer-cta"
-            onClick={() => window.location.href = '/faq'}
+            onClick={() => {
+              window.location.href = "/faq"
+            }}
           >
             <QuestionMarkCircleIcon aria-hidden="true" />
             <span>FAQ</span>
@@ -532,7 +521,7 @@ const GlassToolbar = React.forwardRef<HTMLDivElement, GlassToolbarProps>(functio
   )
 })
 
-GlassToolbar.displayName = 'GlassToolbar'
+GlassToolbar.displayName = "GlassToolbar"
 
 export type { ToolbarSection }
 export default GlassToolbar

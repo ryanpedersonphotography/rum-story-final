@@ -33,6 +33,15 @@
    - Content area respects `--sidebar-width` without padding-left tricks
    - Sections, heroes, and cards all use the same max-width token
 
+6. **Sidebar Width is Single Source of Truth**
+   - `--sidebar-width` is defined in `theme.css` (from tokens) and controls BOTH:
+     - The GlobalCanvas grid column width
+     - The GlassToolbar rail width
+   - `--glass-toolbar-rail-width` is a legacy alias: `var(--sidebar-width)`
+   - **Never hardcode pixel widths** for toolbar or layout in `glass-toolbar.css` or elsewhere
+   - Mobile override: change `--sidebar-width` in ONE media query (768px), both layout and toolbar update automatically
+   - Breakpoint must match: GlobalCanvas and glass-toolbar.css both use `@media (max-width: 768px)`
+
 ### Naming Conventions
 
 | Layer | Location | Example |

@@ -5,9 +5,12 @@
   "scripts": {
     "generate:tokens": "tsx scripts/generate-tokens.ts",
     "dev": "npm run generate:tokens && next dev --experimental-https -p 9999",
+    "dev:strict": "npm run generate:tokens && npm run check && next dev --experimental-https -p 9999",
     "build": "npm run generate:tokens && next build",
     "start": "next start -p 6666",
     "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck",
     "lint:css": "stylelint 'src/**/*.css'",
     "lint:css:fix": "stylelint 'src/**/*.css' --fix",
     "tokens:build": "node scripts/build-tokens.js",
@@ -29,6 +32,7 @@
     "lucide-react": "^0.546.0",
     "mime-types": "^3.0.1",
     "next": "15.3.0",
+    "next-themes": "^0.4.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "yet-another-react-lightbox": "^3.25.0"

@@ -7,7 +7,7 @@ export function useRevealOnScroll(ref: RefObject<HTMLElement>, threshold = 0.1) 
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry && entry.isIntersecting) {
           element.classList.add('is-visible')
           observer.unobserve(element) // Only reveal once
         }

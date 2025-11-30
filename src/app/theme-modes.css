@@ -3,16 +3,23 @@
    Uses [data-theme] attribute on <html> element
    ============================================================ */
 
-/* Base fallback if JS fails */
+/* Fallback baseline for very early paints / no JS */
 :root {
-  color-scheme: light;
+  /* Browsers can use either; next-themes will refine it */
+  color-scheme: light dark;
 }
 
-/* Light mode */
-:root[data-theme='light'] {
-  color-scheme: light;
+/* Optional: bias toward dark for system-preference BEFORE JS runs */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
 
-  /* Override semantic colors for light mode */
+/* Light mode overrides */
+:root[data-theme='light'] {
+  /* ONLY token overrides here – let next-themes handle color-scheme */
+
   --color-paper: #F4F4F0;
   --color-ink: #1a1a1a;
   --color-muted: #888888;
@@ -21,11 +28,10 @@
   --color-paper-raised: #ffffff;
 }
 
-/* Dark mode */
+/* Dark mode overrides */
 :root[data-theme='dark'] {
-  color-scheme: dark;
+  /* ONLY token overrides here – let next-themes handle color-scheme */
 
-  /* Override semantic colors for dark mode */
   --color-paper: #050816;
   --color-ink: #F9FAFB;
   --color-muted: #9CA3AF;
