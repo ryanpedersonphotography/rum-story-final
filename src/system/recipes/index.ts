@@ -9,3 +9,4 @@
 export { Section } from './Section'
 export { AutoGrid } from './AutoGrid'
 export { HeroSection } from './HeroSection'
+export { EdgeSplit } from './EdgeSplit'
