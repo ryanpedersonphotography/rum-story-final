@@ -1,0 +1,176 @@
+/* LIGHT THEME (default) */
+:root {
+  /* Core brand cores */
+  --rr-color-forest-ink:    #1A281F;
+  --rr-color-ivory-canvas:  #F7F5F1;
+  --rr-color-sage:          #8FA093;
+  --rr-color-gold:          #C5A059;
+  --rr-color-rose:          #D8A7B1;
+  --rr-color-charcoal:      #22201F;
+  --rr-color-line-greige:   #D7D2C9;
+  --rr-color-overlay-ink:   #101613;
+  --rr-color-error:         #B4443A;
+  --rr-color-success:       #3D6A4D;
+
+  /* Light variants */
+  --rr-color-ivory-strong:  #F1EEE7;
+  --rr-color-sage-soft:     #A4B2A6;
+  --rr-color-sage-deep:     #6F8478;
+  --rr-color-gold-soft:     rgba(197, 160, 89, 0.18);
+  --rr-color-ink-soft:      rgba(26, 40, 31, 0.85);
+
+  /* Semantic: light */
+  --rr-bg-page:        var(--rr-color-ivory-canvas);
+  --rr-bg-canvas-soft: #FBFAF7;
+  --rr-bg-surface:     var(--rr-color-ivory-strong);
+  --rr-bg-surface-alt: var(--rr-color-sage-soft);
+  --rr-bg-hero:        var(--rr-color-ivory-canvas);
+  --rr-bg-footer:      #141915;
+
+  --rr-text-main:      var(--rr-color-forest-ink);
+  --rr-text-soft:      rgba(26, 40, 31, 0.72);
+  --rr-text-on-dark:   #FDFBF7;
+  --rr-text-accent:    var(--rr-color-gold);
+  --rr-text-meta:      rgba(26, 40, 31, 0.55);
+  --rr-text-error:     var(--rr-color-error);
+
+  --rr-border-subtle:  var(--rr-color-line-greige);
+  --rr-border-strong:  rgba(26, 40, 31, 0.28);
+
+  --rr-accent-primary:     var(--rr-color-gold);
+  --rr-accent-secondary:   var(--rr-color-sage);
+  --rr-accent-tertiary:    var(--rr-color-rose);
+  --rr-accent-focus-ring:  rgba(197, 160, 89, 0.75);
+
+  --rr-state-hover:        rgba(26, 40, 31, 0.04);
+  --rr-state-pressed:      rgba(26, 40, 31, 0.08);
+  --rr-state-selected:     rgba(143, 160, 147, 0.18);
+  --rr-state-disabled:     rgba(26, 40, 31, 0.28);
+
+  --rr-overlay-scrim:      rgba(16, 22, 19, 0.58);
+
+  /* Component-level helpers used by recipes */
+  --hero-bg-warm: linear-gradient(
+    135deg,
+    rgba(16, 22, 19, 0.75) 0%,
+    rgba(16, 22, 19, 0.35) 40%,
+    rgba(247, 245, 241, 0.0) 100%
+  );
+  --hero-bg-glass-light: rgba(247, 245, 241, 0.7);
+  --hero-bg-glass-dark:  rgba(26, 40, 31, 0.5);
+
+  --overlay-card-bottom: linear-gradient(
+    180deg,
+    rgba(16, 22, 19, 0.0) 0%,
+    rgba(16, 22, 19, 0.6) 100%
+  );
+
+  --mosaic-highlight: linear-gradient(
+    120deg,
+    rgba(16, 22, 19, 0.05),
+    rgba(16, 22, 19, 0.0)
+  );
+
+  --feature-shell-spotlight: radial-gradient(
+    circle at top,
+    rgba(247, 245, 241, 0.35),
+    rgba(16, 22, 19, 0.65)
+  );
+
+  --feature-shell-outline: rgba(247, 245, 241, 0.2);
+  
+  /* ADDED: Default hero gradient for legacy support */
+  --rr-hero-gradient: var(--hero-bg-warm);
+}
+
+/* DARK THEME OVERRIDES */
+:root[data-theme='dark'] {
+  /* Dark backgrounds flip: page is deep forest, surfaces are dark-sage/charcoal */
+  --rr-bg-page:        #050806;              /* almost-black green */
+  --rr-bg-canvas-soft: #0C110E;
+  --rr-bg-surface:     #141915;              /* dark footer tone reused */
+  --rr-bg-surface-alt: #1E2721;              /* dark sage-leaning surface */
+  --rr-bg-hero:        #050806;
+  --rr-bg-footer:      #020404;
+
+  /* Text in dark: mostly ivory with softer variants */
+  --rr-text-main:      #F7F5F1;
+  --rr-text-soft:      rgba(247, 245, 241, 0.78);
+  --rr-text-on-dark:   #FDFBF7;
+  --rr-text-accent:    var(--rr-color-gold);  /* gold still works on dark */
+  --rr-text-meta:      rgba(247, 245, 241, 0.62);
+  --rr-text-error:     #F9A59A;              /* lighter red on dark */
+
+  /* Borders in dark: lighter than bg, low-contrast */
+  --rr-border-subtle:  rgba(247, 245, 241, 0.12);
+  --rr-border-strong:  rgba(247, 245, 241, 0.22);
+
+  /* Accents: same hues, slightly stronger use allowed */
+  --rr-accent-primary:     var(--rr-color-gold);
+  --rr-accent-secondary:   #A8B9AC;          /* slightly lighter sage for contrast */
+  --rr-accent-tertiary:    #E0B4C0;          /* brighter rose */
+  --rr-accent-focus-ring:  rgba(197, 160, 89, 0.85);
+
+  /* States in dark: light-on-dark washes */
+  --rr-state-hover:        rgba(247, 245, 241, 0.06);
+  --rr-state-pressed:      rgba(247, 245, 241, 0.10);
+  --rr-state-selected:     rgba(143, 160, 147, 0.25);
+  --rr-state-disabled:     rgba(247, 245, 241, 0.35);
+
+  --rr-overlay-scrim:      rgba(5, 8, 6, 0.82);
+
+  /* Component-level dark variants */
+  --hero-bg-warm: linear-gradient(
+    135deg,
+    rgba(5, 8, 6, 0.95) 0%,
+    rgba(5, 8, 6, 0.78) 40%,
+    rgba(5, 8, 6, 0.0) 100%
+  );
+
+  --hero-bg-glass-light: rgba(20, 25, 21, 0.8);
+  --hero-bg-glass-dark:  rgba(5, 8, 6, 0.85);
+
+  --overlay-card-bottom: linear-gradient(
+    180deg,
+    rgba(5, 8, 6, 0.0) 0%,
+    rgba(5, 8, 6, 0.9) 100%
+  );
+
+  --mosaic-highlight: linear-gradient(
+    120deg,
+    rgba(247, 245, 241, 0.06),
+    rgba(247, 245, 241, 0.0)
+  );
+
+  --feature-shell-spotlight: radial-gradient(
+    circle at top,
+    rgba(247, 245, 241, 0.12),
+    rgba(5, 8, 6, 0.95)
+  );
+
+  --feature-shell-outline: rgba(247, 245, 241, 0.26);
+
+  /* ADDED: Default hero gradient for legacy support */
+  --rr-hero-gradient: var(--hero-bg-warm);
+}
+
+/* Bridge to your existing generic tokens that recipes use */
+:root,
+:root[data-theme='dark'] {
+  --color-bg-page:      var(--rr-bg-page);
+  --color-bg-surface:   var(--rr-bg-surface);
+  --color-paper:        var(--rr-bg-page);
+  --color-paper-raised: var(--rr-bg-surface);
+
+  --color-text-main:     var(--rr-text-main);
+  --color-text-soft:     var(--rr-text-soft);
+  --color-text-on-dark:  var(--rr-text-on-dark);
+  --color-muted:         var(--rr-text-meta);
+  --color-ink:           var(--rr-text-main);
+
+  --color-accent:        var(--rr-accent-primary);
+  --color-accent-soft:   var(--rr-accent-secondary);
+
+  --color-border-subtle:        var(--rr-border-subtle);
+  --color-border-subtle-strong: var(--rr-border-strong);
+}

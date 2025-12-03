@@ -20,22 +20,22 @@
 :root[data-theme='light'] {
   /* ONLY token overrides here – let next-themes handle color-scheme */
 
-  --color-paper: #F4F4F0;
-  --color-ink: #1a1a1a;
-  --color-muted: #888888;
-  --color-accent: #3d5a45;
-  --color-accent-contrast: #ffffff;
-  --color-paper-raised: #ffffff;
+  --color-paper: var(--color-bg-page);
+  --color-ink: var(--color-text-main);
+  --color-muted: var(--color-accent-secondary);
+  --color-accent: var(--color-accent-primary);
+  --color-accent-contrast: var(--color-text-on-dark);
+  --color-paper-raised: var(--color-bg-surface);
 }
 
 /* Dark mode overrides */
 :root[data-theme='dark'] {
   /* ONLY token overrides here – let next-themes handle color-scheme */
 
-  --color-paper: #050816;
-  --color-ink: #F9FAFB;
-  --color-muted: #9CA3AF;
-  --color-accent: #a88a5b;
-  --color-accent-contrast: #050816;
-  --color-paper-raised: #111827;
+  --color-paper: var(--color-bg-footer);
+  --color-ink: var(--color-text-on-dark);
+  --color-muted: var(--color-sage-soft);
+  --color-accent: var(--color-antique-gold);
+  --color-accent-contrast: var(--color-forest-ink);
+  --color-paper-raised: var(--color-forest-ink);
 }

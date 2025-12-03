@@ -21,6 +21,7 @@
     "lighthouse": "lighthouse http://localhost:6666 --only-categories=accessibility --output=html --output-path=./lighthouse-report.html"
   },
   "dependencies": {
+    "@bedrock-layout/primitives": "^3.0.47",
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-slot": "^1.2.3",
     "clsx": "^2.1.1",

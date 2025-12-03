@@ -60,16 +60,51 @@ Object.entries(tokens.fonts).forEach(([key, value]) => {
 
 cssContent += '\n';
 
-// 6. Motion tokens
+// 6. Font Size tokens
+Object.entries(tokens.fontSize).forEach(([key, value]) => {
+  cssContent += `  --text-${key}: ${value};\n`;
+});
+
+cssContent += '\n';
+
+// 7. Font Weight tokens
+Object.entries(tokens.fontWeight).forEach(([key, value]) => {
+  cssContent += `  --weight-${key}: ${value};\n`;
+});
+
+cssContent += '\n';
+
+// 8. Motion tokens
 Object.entries(tokens.motion).forEach(([key, value]) => {
   cssContent += `  --motion-${toKebabCase(key)}: ${value};\n`;
 });
 
 cssContent += '\n';
 
-// 7. Gradient tokens
+// 9. Gradient tokens
 Object.entries(tokens.gradients).forEach(([key, value]) => {
   cssContent += `  --gradient-${toKebabCase(key)}: ${value};\n`;
+});
+
+cssContent += '\n';
+
+// 10. Shadow tokens
+Object.entries(tokens.shadows).forEach(([key, value]) => {
+  cssContent += `  --shadow-${toKebabCase(key)}: ${value};\n`;
+});
+
+cssContent += '\n';
+
+// 11. Radius tokens
+Object.entries(tokens.radius).forEach(([key, value]) => {
+  cssContent += `  --radius-${toKebabCase(key)}: ${value};\n`;
+});
+
+cssContent += '\n';
+
+// 12. Breakpoint tokens
+Object.entries(tokens.breakpoints).forEach(([key, value]) => {
+  cssContent += `  --breakpoint-${toKebabCase(key)}: ${value};\n`;
 });
 
 cssContent += '}\n';
